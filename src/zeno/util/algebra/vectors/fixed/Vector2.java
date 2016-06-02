@@ -1,6 +1,6 @@
 package zeno.util.algebra.vectors.fixed;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.Vector;
@@ -35,7 +35,7 @@ public class Vector2 extends Vector
 	 */
 	public static boolean isColinear(Vector2 a, Vector2 b, Vector2 c)
 	{		
-		return FMath.isZero(getRotation(a, b, c));
+		return Floats.isZero(getRotation(a, b, c));
 	}
 	
 	/**
@@ -70,8 +70,8 @@ public class Vector2 extends Vector
 	 */
 	public static Vector2 fromPolar(float len, float ang)
 	{
-		float x = len * FMath.cos(ang);
-		float y = len * FMath.sin(ang);
+		float x = len * Floats.cos(ang);
+		float y = len * Floats.sin(ang);
 		return new Vector2(x, y);
 	}
 		
@@ -146,7 +146,7 @@ public class Vector2 extends Vector
 	 */
 	public float getAngle()
 	{
-		return FMath.atan2(X(), Y());
+		return Floats.atan2(X(), Y());
 	}
 	
 	/**
@@ -187,7 +187,7 @@ public class Vector2 extends Vector
 		float a = a1 * (1 - alpha) + a2 * alpha;
 		float r = r1 * (1 - alpha) + r2 * alpha;
 	
-		return new Vector2(r * FMath.cos(a), r * FMath.sin(a));
+		return new Vector2(r * Floats.cos(a), r * Floats.sin(a));
     }
 	
 	@Override

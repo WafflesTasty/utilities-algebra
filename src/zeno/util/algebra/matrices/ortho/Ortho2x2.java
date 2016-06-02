@@ -1,6 +1,6 @@
 package zeno.util.algebra.matrices.ortho;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.fixed.Matrix2x2;
 import zeno.util.algebra.vectors.fixed.Vector2;
@@ -95,8 +95,8 @@ public class Ortho2x2 extends IMatrix
 	 */
 	public void rotateTo(float rad)
 	{
-		float cos = FMath.cos(rad);
-		float sin = FMath.sin(rad);
+		float cos = Floats.cos(rad);
+		float sin = Floats.sin(rad);
 		
 		rotateTo(new Vector2(cos, sin));
 	}
@@ -108,8 +108,8 @@ public class Ortho2x2 extends IMatrix
 	 */
 	public void rotateFor(float rad)
 	{
-		float sin = FMath.sin(rad);
-		float cos = FMath.cos(rad);
+		float sin = Floats.sin(rad);
+		float cos = Floats.cos(rad);
 		
 		float rx = matrix.get(0, 0);
 		float ry = matrix.get(0, 1);
@@ -132,7 +132,7 @@ public class Ortho2x2 extends IMatrix
 	public void rotateTo(Vector2 right)
 	{
 		Vector2 rwd = right.normalize();
-		Matrix2x2 rot = Matrix2x2.getRotate2D(0.5f * FMath.PI);
+		Matrix2x2 rot = Matrix2x2.getRotate2D(0.5f * Floats.PI);
 		Vector2 uwd = rot.times(rwd).normalize();
 		
 		setRight(rwd);

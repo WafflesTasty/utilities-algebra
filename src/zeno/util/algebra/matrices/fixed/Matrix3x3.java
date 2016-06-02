@@ -1,6 +1,6 @@
 package zeno.util.algebra.matrices.fixed;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.Matrix;
 import zeno.util.algebra.vectors.fixed.Vector2;
@@ -101,8 +101,8 @@ public class Matrix3x3 extends Matrix
 	 */
 	public static Matrix3x3 getRotate3D(Vector3 v, float theta)
 	{
-		float sin = FMath.sin(theta);
-		float cos = FMath.cos(theta);
+		float sin = Floats.sin(theta);
+		float cos = Floats.cos(theta);
 		
 		float x = v.X();
 		float y = v.Y();
@@ -134,8 +134,8 @@ public class Matrix3x3 extends Matrix
 	 */
 	public static Matrix3x3 getRotate2D(float theta)
 	{	
-		float sin = FMath.sin(theta);
-		float cos = FMath.cos(theta);
+		float sin = Floats.sin(theta);
+		float cos = Floats.cos(theta);
 		
 		Matrix3x3 m = createIdentity();
 						

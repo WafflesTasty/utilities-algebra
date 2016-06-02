@@ -1,6 +1,6 @@
 package zeno.util.algebra.matrices.fixed;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.Matrix;
 import zeno.util.algebra.vectors.fixed.Vector2;
@@ -61,8 +61,8 @@ public class Matrix2x2 extends Matrix
 	 */
 	public static Matrix2x2 getRotate2D(float theta)
 	{	
-		float sin = FMath.sin(theta);
-		float cos = FMath.cos(theta);
+		float sin = Floats.sin(theta);
+		float cos = Floats.cos(theta);
 		
 		Matrix2x2 m = createIdentity();
 						

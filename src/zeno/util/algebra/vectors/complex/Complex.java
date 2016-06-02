@@ -1,6 +1,6 @@
 package zeno.util.algebra.vectors.complex;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.fixed.Vector2;
@@ -164,10 +164,10 @@ public class Complex extends Vector2
 		float y = Y();
 		
 		String txt = "";
-		txt += (FMath.isZero(x) ? "" : x < 0 ? " - " : " + ");
-		txt += (FMath.isZero(x) ? "" : Math.abs(x));
-		txt += (FMath.isZero(y) ? "" : y < 0 ? " - " : " + ");
-		txt += (FMath.isZero(y) ? "" : Math.abs(y) + "i");
+		txt += (Floats.isZero(x) ? "" : x < 0 ? " - " : " + ");
+		txt += (Floats.isZero(x) ? "" : Floats.abs(x));
+		txt += (Floats.isZero(y) ? "" : y < 0 ? " - " : " + ");
+		txt += (Floats.isZero(y) ? "" : Floats.abs(y) + "i");
 		txt += (txt.equals("") ? " + " + x : "");
 		
 		return txt;

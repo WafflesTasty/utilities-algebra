@@ -1,6 +1,6 @@
 package zeno.util.algebra.matrices.fixed;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.Matrix;
 import zeno.util.algebra.vectors.fixed.Vector3;
@@ -26,8 +26,8 @@ public class Matrix4x4 extends Matrix
 	 */
 	public static Matrix4x4 getRotate3D(Vector3 v, float theta)
 	{
-		float sin = FMath.sin(theta);
-		float cos = FMath.cos(theta);
+		float sin = Floats.sin(theta);
+		float cos = Floats.cos(theta);
 		
 		float x = v.X();
 		float y = v.Y();
@@ -99,8 +99,8 @@ public class Matrix4x4 extends Matrix
 	 */
 	public static Matrix4x4 getRotate3DX(float theta)
 	{	
-		float sin = FMath.sin(theta);
-		float cos = FMath.cos(theta);
+		float sin = Floats.sin(theta);
+		float cos = Floats.cos(theta);
 		
 		Matrix4x4 m = createIdentity();
 						
@@ -120,8 +120,8 @@ public class Matrix4x4 extends Matrix
 	 */
 	public static Matrix4x4 getRotate3DY(float theta)
 	{
-		float sin = FMath.sin(theta);
-		float cos = FMath.cos(theta);
+		float sin = Floats.sin(theta);
+		float cos = Floats.cos(theta);
 		
 		Matrix4x4 m = createIdentity();
 				
@@ -141,8 +141,8 @@ public class Matrix4x4 extends Matrix
 	 */
 	public static Matrix4x4 getRotate3DZ(float theta)
 	{
-		float sin = FMath.sin(theta);
-		float cos = FMath.cos(theta);
+		float sin = Floats.sin(theta);
+		float cos = Floats.cos(theta);
 		
 		Matrix4x4 m = createIdentity();
 		

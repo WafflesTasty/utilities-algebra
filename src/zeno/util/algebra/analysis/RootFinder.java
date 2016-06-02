@@ -3,7 +3,7 @@ package zeno.util.algebra.analysis;
 import java.util.ArrayList;
 import java.util.List;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.vectors.complex.Complex;
 import zeno.util.tools.Messenger;
 import zeno.util.tools.sorting.ArraySort;
@@ -108,10 +108,10 @@ public class RootFinder extends Messenger
 		float coef2 = p.getValue(2);
 		
 		
-		float disc = FMath.pow(coef1, 2) - 4 * coef2 * coef0;
+		float disc = Floats.pow(coef1, 2) - 4 * coef2 * coef0;
 		sendMessage("Discriminant: " + disc);
 		
-		if(FMath.isZero(disc))
+		if(Floats.isZero(disc))
 		{
 			float val = - coef1 / (2 * coef2);
 			
@@ -123,7 +123,7 @@ public class RootFinder extends Messenger
 		
 		if(disc > 0)
 		{
-			float sqrt = FMath.sqrt(disc);
+			float sqrt = Floats.sqrt(disc);
 			float val1 = (- coef1 - sqrt) / (2 * coef2);
 			float val2 = (- coef1 + sqrt) / (2 * coef2);
 			
@@ -136,7 +136,7 @@ public class RootFinder extends Messenger
 			return;
 		}
 				
-		float sqrt = FMath.sqrt(-disc);
+		float sqrt = Floats.sqrt(-disc);
 		float real = - coef1 / (2 * coef2);
 		float ima1 = - sqrt / (2 * coef2);
 		float ima2 = + sqrt / (2 * coef2);
@@ -217,7 +217,7 @@ public class RootFinder extends Messenger
 			v += vErr;
 
 			// Check last error margin.
-			if(FMath.isZero(uErr) && FMath.isZero(vErr))
+			if(Floats.isZero(uErr) && Floats.isZero(vErr))
 			{
 				sendMessage("Iterations: " + i);
 				break;

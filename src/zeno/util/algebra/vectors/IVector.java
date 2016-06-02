@@ -1,6 +1,6 @@
 package zeno.util.algebra.vectors;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.fixed.Vector2;
 import zeno.util.algebra.vectors.fixed.Vector3;
@@ -162,7 +162,7 @@ public abstract class IVector extends IMatrix
 		int size = getSize();
 		if(size != v.getSize())
 		{
-			return Float.NaN;
+			return Floats.NaN;
 		}
 		
 		float prod = 0;
@@ -181,7 +181,7 @@ public abstract class IVector extends IMatrix
 	 */
 	public float getLength()
 	{
-		return FMath.sqrt(getLengthSquared());
+		return Floats.sqrt(getLengthSquared());
 	}
 	
 	/**

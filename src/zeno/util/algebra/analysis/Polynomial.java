@@ -3,8 +3,8 @@ package zeno.util.algebra.analysis;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import zeno.util.algebra.FMath;
-import zeno.util.algebra.IMath;
+import zeno.util.algebra.Floats;
+import zeno.util.algebra.Integers;
 import zeno.util.algebra.vectors.complex.Complex;
 import zeno.util.tools.generic.properties.Copyable;
 
@@ -64,13 +64,13 @@ public class Polynomial implements Copyable<Polynomial>
 			if(!split[0].isEmpty())
 			{
 				if(!split[0].equals("-"))
-					val = FMath.parse(split[0].trim());
+					val = Floats.parse(split[0].trim());
 				else
 					val = -1.0f;
 			}
 			
 			// Parse the degree.
-			int deg = IMath.parse(split[1].trim());
+			int deg = Integers.parse(split[1].trim());
 			
 			// Add the parsed term.
 			poly.add(deg, val);
@@ -249,7 +249,7 @@ public class Polynomial implements Copyable<Polynomial>
 	 */
 	public void set(int deg, float val)
 	{
-		if(!FMath.isZero(val))
+		if(!Floats.isZero(val))
 			terms.put(deg, val);
 		else if(deg != 0)
 			terms.remove(deg);
@@ -270,7 +270,7 @@ public class Polynomial implements Copyable<Polynomial>
 
 		for(int deg : terms.navigableKeySet())
 		{
-			power = FMath.pow(val, deg);
+			power = Floats.pow(val, deg);
 			result += terms.get(deg) * power;
 		}
 		

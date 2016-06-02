@@ -1,12 +1,12 @@
 package zeno.util.algebra;
 
 /**
- * The {@code BMath} class defines basic math for boolean values.
+ * The {@code Booleans} class defines basic math for boolean values.
  *
  * @author Zeno
  * @since May 4, 2016
  */
-public final class BMath
+public final class Booleans
 {
 	// Parsing
 	
@@ -23,7 +23,7 @@ public final class BMath
 	}
 		
 	
-	private BMath()
+	private Booleans()
 	{
 		// NOT APPLICABLE
 	}

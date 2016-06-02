@@ -1,6 +1,6 @@
 package zeno.util.algebra.interfaces;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 
 /**
  * The {@code Interpolation} interface interpolates a value along a curve between 0 and 1.
@@ -22,7 +22,7 @@ public interface Interpolation
 	 */
 	public static float linear(float val, float min, float max)
 	{
-		return FMath.clamp((val - min) / (max - min), 0f, 1f);
+		return Floats.clamp((val - min) / (max - min), 0f, 1f);
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public interface Interpolation
 	 */
 	public static float sinusoidal(float val, float min, float max)
 	{
-		return FMath.clamp(FMath.sin(0.5f * FMath.PI * (val - min) / (max - min)), 0f, 1f);
+		return Floats.clamp(Floats.sin(0.5f * Floats.PI * (val - min) / (max - min)), 0f, 1f);
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public interface Interpolation
 	 */
 	public static float cosinusoidal(float val, float min, float max)
 	{
-		return FMath.clamp(1 - FMath.cos(0.5f * FMath.PI * (val - min) / (max - min)), 0f, 1f);
+		return Floats.clamp(1 - Floats.cos(0.5f * Floats.PI * (val - min) / (max - min)), 0f, 1f);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public interface Interpolation
 	 */
 	public static float logarithmic(float val, float min, float max)
 	{
-		return FMath.clamp(FMath.ln(val - min + 1) / FMath.ln(max - min + 1), 0f, 1f);
+		return Floats.clamp(Floats.ln(val - min + 1) / Floats.ln(max - min + 1), 0f, 1f);
 	}
 		
 	

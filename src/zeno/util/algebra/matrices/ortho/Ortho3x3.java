@@ -1,6 +1,6 @@
 package zeno.util.algebra.matrices.ortho;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.fixed.Matrix3x3;
 import zeno.util.algebra.vectors.fixed.Vector3;
@@ -115,8 +115,8 @@ public class Ortho3x3 extends IMatrix
 	{
 		if(rad == 0) return;
 		
-		float cos = FMath.cos(rad);
-		float sin = FMath.sin(rad);
+		float cos = Floats.cos(rad);
+		float sin = Floats.sin(rad);
 		
 		Vector3 fwd0 = forward();
 		Vector3 uwd0 = up();
@@ -138,8 +138,8 @@ public class Ortho3x3 extends IMatrix
 	{
 		if(rad == 0) return;
 		
-		float cos = FMath.cos(rad);
-		float sin = FMath.sin(rad);
+		float cos = Floats.cos(rad);
+		float sin = Floats.sin(rad);
 		
 		Vector3 rwd0 = right();
 		Vector3 uwd0 = up();
@@ -161,8 +161,8 @@ public class Ortho3x3 extends IMatrix
 	{
 		if(rad == 0) return;
 		
-		float cos = FMath.cos(rad);
-		float sin = FMath.sin(rad);
+		float cos = Floats.cos(rad);
+		float sin = Floats.sin(rad);
 		
 		Vector3 fwd0 = forward();
 		Vector3 rwd0 = right();

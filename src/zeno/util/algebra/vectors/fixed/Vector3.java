@@ -1,6 +1,6 @@
 package zeno.util.algebra.vectors.fixed;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.Vector;
@@ -88,7 +88,7 @@ public class Vector3 extends Vector
 	 */
 	public float angle(Vector3 v)
 	{
-		return FMath.acos(dot(v));
+		return Floats.acos(dot(v));
 	}
 	
 	
@@ -130,7 +130,7 @@ public class Vector3 extends Vector
 	 */
 	public float XAngle()
 	{
-		return FMath.atan2(X(), Y());
+		return Floats.atan2(X(), Y());
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public class Vector3 extends Vector
 	 */
 	public float YAngle()
 	{
-		return FMath.atan2(Y(), Z());
+		return Floats.atan2(Y(), Z());
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class Vector3 extends Vector
 	 */
 	public float ZAngle()
 	{
-		return FMath.atan2(Z(), X());
+		return Floats.atan2(Z(), X());
 	}
 	
 	/**

@@ -1,6 +1,6 @@
 package zeno.util.algebra.vectors.complex;
 
-import zeno.util.algebra.FMath;
+import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.fixed.Vector3;
@@ -46,8 +46,8 @@ public class Quaternion extends Vector4
 		super(4);
 		
 		Vector3 norm = axis.normalize();
-        float sin = FMath.sin(angle / 2);
-        float cos = FMath.cos(angle / 2);
+        float sin = Floats.sin(angle / 2);
+        float cos = Floats.cos(angle / 2);
 
         setX(norm.X() * sin);
         setY(norm.Y() * sin);
@@ -213,14 +213,14 @@ public class Quaternion extends Vector4
 		float w = W();
 		
 		String txt = "";
-		txt += (FMath.isZero(w) ? "" : w < 0 ? " - " : " + ");
-		txt += (FMath.isZero(w) ? "" : Math.abs(w));
-		txt += (FMath.isZero(x) ? "" : x < 0 ? " - " : " + ");
-		txt += (FMath.isZero(x) ? "" : Math.abs(x) + "i");
-		txt += (FMath.isZero(y) ? "" : y < 0 ? " - " : " + ");
-		txt += (FMath.isZero(y) ? "" : Math.abs(y) + "j");
-		txt += (FMath.isZero(z) ? "" : z < 0 ? " - " : " + ");
-		txt += (FMath.isZero(z) ? "" : Math.abs(z) + "k");
+		txt += (Floats.isZero(w) ? "" : w < 0 ? " - " : " + ");
+		txt += (Floats.isZero(w) ? "" : Math.abs(w));
+		txt += (Floats.isZero(x) ? "" : x < 0 ? " - " : " + ");
+		txt += (Floats.isZero(x) ? "" : Math.abs(x) + "i");
+		txt += (Floats.isZero(y) ? "" : y < 0 ? " - " : " + ");
+		txt += (Floats.isZero(y) ? "" : Math.abs(y) + "j");
+		txt += (Floats.isZero(z) ? "" : z < 0 ? " - " : " + ");
+		txt += (Floats.isZero(z) ? "" : Math.abs(z) + "k");
 		txt += (txt.equals("") ? " + " + w : "");
 		
 		return txt;
