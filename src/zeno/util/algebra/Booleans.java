@@ -21,7 +21,7 @@ public final class Booleans
 	{
 		return Boolean.parseBoolean(text);
 	}
-		
+	
 	
 	private Booleans()
 	{
