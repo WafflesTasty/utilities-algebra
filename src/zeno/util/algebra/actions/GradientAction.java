@@ -94,6 +94,7 @@ public class GradientAction extends TimedAction
 		return curve.interpolate(step, 0, maxstep);
 	}
 	
+	
 	@Override
 	public void onTick()
 	{
