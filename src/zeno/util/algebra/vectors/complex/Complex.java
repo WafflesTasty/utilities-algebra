@@ -51,7 +51,7 @@ public class Complex extends Vector2
 	 */
 	public Complex conjugate()
     {
-        return new Complex(-X(), -Y());
+        return new Complex(X(), -Y());
     }
 		
 	/**
