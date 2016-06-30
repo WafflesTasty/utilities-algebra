@@ -1,31 +1,31 @@
-package zeno.util.algebra.actions;
+package zeno.util.algebra.interpolate;
 
-import zeno.util.algebra.interfaces.Interpolation;
 import zeno.util.tools.actions.TimedAction;
 
 /**
- * The {@code GradientAction} class defines an action that gradually interpolates a value.
+ * The {@code Interpolation} class defines an action that gradually interpolates a value.
+ * Use the {@link #getValue()} method to get the current value.
  *
  * @author Zeno
  * @since Apr 7, 2016
  * @see TimedAction
  */
-public class GradientAction extends TimedAction
+public class Interpolation extends TimedAction
 {		
+	private Curve curve;
 	private int step, maxstep;
-	private Interpolation curve;
 	
 	/**
 	 * Creates a new {@code GradientAction}.
 	 * 
 	 * @param ival  an update interval
 	 */
-	public GradientAction(long ival)
+	public Interpolation(long ival)
 	{
 		super(ival);
 		curve = (val, min, max) ->
 		{
-			return Interpolation.linear(val, min, max);
+			return Curve.linear(val, min, max);
 		};
 	}
 	
@@ -33,12 +33,12 @@ public class GradientAction extends TimedAction
 	 * Creates a new {@code GradientAction}.
 	 * <br> The default interval is 16ms.
 	 */
-	public GradientAction()
+	public Interpolation()
 	{
 		super();
 		curve = (val, min, max) ->
 		{
-			return Interpolation.linear(val, min, max);
+			return Curve.linear(val, min, max);
 		};
 	}
 
@@ -47,9 +47,9 @@ public class GradientAction extends TimedAction
 	 * Changes the {@code Interpolation} curve.
 	 * 
 	 * @param curve  a new curve
-	 * @see Interpolation
+	 * @see Curve
 	 */
-	public void setCurve(Interpolation curve)
+	public void setCurve(Curve curve)
 	{
 		this.curve = curve;
 	}
@@ -89,9 +89,9 @@ public class GradientAction extends TimedAction
 	 * 
 	 * @return  the current gradient
 	 */
-	public float getGradient()
+	public float getValue()
 	{
-		return curve.interpolate(step, 0, maxstep);
+		return curve.valueAt(step, 0, maxstep);
 	}
 	
 	

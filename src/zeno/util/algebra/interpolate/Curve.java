@@ -1,16 +1,16 @@
-package zeno.util.algebra.interfaces;
+package zeno.util.algebra.interpolate;
 
 import zeno.util.algebra.Floats;
 
 /**
- * The {@code Interpolation} interface interpolates a value along a curve between 0 and 1.
+ * The {@code Curve} interface interpolates a value along a curve between 0 and 1.
  * <br> The input value is handled between a predetermined minimum and maximum.
  *
  * @author Zeno
  * @since Apr 6, 2016
  */
 @FunctionalInterface
-public interface Interpolation
+public interface Curve
 {	
 	/**
 	 * Interpolates a value along a linear path.
@@ -73,5 +73,5 @@ public interface Interpolation
 	 * @param max  the maximum x-coördinate
 	 * @return  a value between 0 and 1
 	 */
-	public abstract float interpolate(float val, float min, float max);
+	public abstract float valueAt(float val, float min, float max);
 }
