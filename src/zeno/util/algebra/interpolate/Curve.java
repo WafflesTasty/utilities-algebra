@@ -13,65 +13,50 @@ import zeno.util.algebra.Floats;
 public interface Curve
 {	
 	/**
-	 * Interpolates a value along a linear path.
-	 * 
-	 * @param val  the x-coördinate of the value
-	 * @param min  the minimum x-coördinate
-	 * @param max  the maximum x-coördinate
-	 * @return  a value between 0 and 1
-	 */
-	public static float linear(float val, float min, float max)
-	{
-		return Floats.clamp((val - min) / (max - min), 0f, 1f);
-	}
-	
-	/**
 	 * Interpolates a value along a sinusoidal path.
 	 * 
-	 * @param val  the x-coördinate of the value
-	 * @param min  the minimum x-coördinate
-	 * @param max  the maximum x-coördinate
-	 * @return  a value between 0 and 1
+	 * @param lambda  a value between 0 and 1
+	 * @param amp  a sinusoidal amplitude
+	 * @return  an interpolated value
 	 */
-	public static float sinusoidal(float val, float min, float max)
+	public static float sinusoidal(float lambda, float amp)
 	{
-		return Floats.clamp(Floats.sin(0.5f * Floats.PI * (val - min) / (max - min)), 0f, 1f);
-	}
-	
-	/**
-	 * Interpolates a value along a cosinusoidal path.
-	 * 
-	 * @param val  the x-coördinate of the value
-	 * @param min  the minimum x-coördinate
-	 * @param max  the maximum x-coördinate
-	 * @return  a value between 0 and 1
-	 */
-	public static float cosinusoidal(float val, float min, float max)
-	{
-		return Floats.clamp(1 - Floats.cos(0.5f * Floats.PI * (val - min) / (max - min)), 0f, 1f);
+		
+		return Floats.clamp(Floats.sin(0.5f * Floats.PI * lambda) * amp, -amp, amp);
 	}
 	
 	/**
 	 * Interpolates a value along a logarithmic path.
 	 * 
-	 * @param val  the x-coördinate of the value
-	 * @param min  the minimum x-coördinate
-	 * @param max  the maximum x-coördinate
-	 * @return  a value between 0 and 1
+	 * @param lambda  a value between 0 and 1
+	 * @param min  a minimum interpolation value
+	 * @param max  a maximum interpolation value
+	 * @return  an interpolated value
 	 */
-	public static float logarithmic(float val, float min, float max)
+	public static float logarithmic(float lambda, float min, float max)
 	{
-		return Floats.clamp(Floats.ln(val - min + 1) / Floats.ln(max - min + 1), 0f, 1f);
+		return linear(Floats.ln(lambda + 1) / Floats.ln(2), min, max);
+	}
+	
+	/**
+	 * Interpolates a value along a linear path.
+	 * 
+	 * @param lambda  a value between 0 and 1
+	 * @param min  a minimum interpolation value
+	 * @param max  a maximum interpolation value
+	 * @return  an interpolated value
+	 */
+	public static float linear(float lambda, float min, float max)
+	{
+		return Floats.clamp(min + lambda * (max - min), min, max);
 	}
 		
 	
 	/**
-	 * Interpolates a value along this {@code Interpolation}.
+	 * Interpolates a value along this {@code Curve}.
 	 * 
-	 * @param val  the x-coördinate of the value
-	 * @param min  the minimum x-coördinate
-	 * @param max  the maximum x-coördinate
-	 * @return  a value between 0 and 1
+	 * @param lambda  a value between 0 and 1
+	 * @return  an interpolated value
 	 */
-	public abstract float valueAt(float val, float min, float max);
+	public abstract float getValue(float lambda);
 }

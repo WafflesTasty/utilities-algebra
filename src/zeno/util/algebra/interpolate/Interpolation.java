@@ -13,32 +13,32 @@ import zeno.util.tools.actions.TimedAction;
 public class Interpolation extends TimedAction
 {		
 	private Curve curve;
-	private int step, maxstep;
+	private float step, maxstep;
 	
 	/**
-	 * Creates a new {@code GradientAction}.
+	 * Creates a new {@code Interpolation}.
 	 * 
 	 * @param ival  an update interval
 	 */
 	public Interpolation(long ival)
 	{
 		super(ival);
-		curve = (val, min, max) ->
+		curve = (lambda) ->
 		{
-			return Curve.linear(val, min, max);
+			return Curve.linear(lambda, 0, 1);
 		};
 	}
 	
 	/**
-	 * Creates a new {@code GradientAction}.
+	 * Creates a new {@code Interpolation}.
 	 * <br> The default interval is 16ms.
 	 */
 	public Interpolation()
 	{
 		super();
-		curve = (val, min, max) ->
+		curve = (lambda) ->
 		{
-			return Curve.linear(val, min, max);
+			return Curve.linear(lambda, 0, 1);
 		};
 	}
 
@@ -66,7 +66,7 @@ public class Interpolation extends TimedAction
 	}
 	
 	/**
-	 * Starts the {@code GradientAction}.
+	 * Starts the {@code Interpolation}.
 	 */
 	public void startAction()
 	{
@@ -91,7 +91,7 @@ public class Interpolation extends TimedAction
 	 */
 	public float getValue()
 	{
-		return curve.valueAt(step, 0, maxstep);
+		return curve.getValue(step / maxstep);
 	}
 	
 	
