@@ -1,5 +1,6 @@
 package zeno.util.algebra.interpolate;
 
+import zeno.util.algebra.interpolate.curves.LinearCurve;
 import zeno.util.tools.actions.TimedAction;
 
 /**
@@ -22,11 +23,7 @@ public class Interpolation extends TimedAction
 	 */
 	public Interpolation(long ival)
 	{
-		super(ival);
-		curve = (lambda) ->
-		{
-			return Curve.linear(lambda, 0, 1);
-		};
+		super(ival); curve = new LinearCurve();
 	}
 	
 	/**
@@ -35,11 +32,7 @@ public class Interpolation extends TimedAction
 	 */
 	public Interpolation()
 	{
-		super();
-		curve = (lambda) ->
-		{
-			return Curve.linear(lambda, 0, 1);
-		};
+		super(); curve = new LinearCurve();
 	}
 
 
