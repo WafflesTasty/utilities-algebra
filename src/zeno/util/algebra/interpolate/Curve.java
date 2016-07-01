@@ -22,7 +22,7 @@ public interface Curve
 	public static float sinusoidal(float lambda, float amp)
 	{
 		
-		return Floats.clamp(Floats.sin(0.5f * Floats.PI * lambda) * amp, -amp, amp);
+		return Floats.clamp(Floats.sin(2 * Floats.PI * lambda) * amp, -amp, amp);
 	}
 	
 	/**
