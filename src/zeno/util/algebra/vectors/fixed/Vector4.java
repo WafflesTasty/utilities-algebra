@@ -14,6 +14,24 @@ import zeno.util.algebra.vectors.Vector;
 public class Vector4 extends Vector
 {
 	/**
+	 * Contains the four-dimensional x-axis unit vector.
+	 */
+    public static final Vector4 X_AXIS = new Vector4(1, 0, 0, 0);
+    /**
+     * Contains the four-dimensional y-axis unit vector.
+     */
+    public static final Vector4 Y_AXIS = new Vector4(0, 1, 0, 0);
+    /**
+     * Contains the four-dimensional z-axis unit vector.
+     */
+    public static final Vector4 Z_AXIS = new Vector4(0, 0, 1, 0);
+    /**
+     * Contains the four-dimensional w-axis unit vector.
+     */
+    public static final Vector4 W_AXIS = new Vector4(0, 0, 0, 1);
+	
+	
+	/**
 	 * Creates a new {@code Vector4}.
 	 */
 	public Vector4()
