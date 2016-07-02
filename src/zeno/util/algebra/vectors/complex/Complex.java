@@ -17,7 +17,7 @@ public class Complex extends Vector2
 	/**
 	 * Casts a {@code Vector2} to a {@code Complex}.
 	 * 
-	 * @param vec  a two dimensional vector
+	 * @param vec  a two-dimensional vector
 	 * @return  a complex number
 	 * @see Vector2
 	 */

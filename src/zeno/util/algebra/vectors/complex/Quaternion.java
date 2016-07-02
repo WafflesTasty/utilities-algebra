@@ -19,7 +19,7 @@ public class Quaternion extends Vector4
 	/**
 	 * Casts a {@code Vector4} to a {@code Quaternion}.
 	 * 
-	 * @param vec  a four dimensional vector
+	 * @param vec  a four-dimensional vector
 	 * @return  a complex number
 	 * @see Vector4
 	 */
