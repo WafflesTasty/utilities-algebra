@@ -17,6 +17,19 @@ import zeno.util.algebra.vectors.fixed.Vector4;
 public class Quaternion extends Vector4
 {
 	/**
+	 * Casts a {@code Vector4} to a {@code Quaternion}.
+	 * 
+	 * @param vec  a four dimensional vector
+	 * @return  a complex number
+	 * @see Vector4
+	 */
+	public static Quaternion from(Vector4 vec)
+	{
+		return new Quaternion(vec.X(), vec.Y(), vec.Z(), vec.W());
+	}
+	
+	
+	/**
 	 * Creates a new {@code Quaternion}.
 	 */
 	public Quaternion()

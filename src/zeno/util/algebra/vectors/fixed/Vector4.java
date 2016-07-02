@@ -3,7 +3,6 @@ package zeno.util.algebra.vectors.fixed;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.Vector;
-import zeno.util.algebra.vectors.complex.Quaternion;
 
 /**
  * The {@code Vector4} class defines a four-dimensional vector.
@@ -48,18 +47,7 @@ public class Vector4 extends Vector
 		setZ(z);
 		setW(w);
 	}
-		
-	/**
-	 * Converts the values to a {@code Quaternion}.
-	 * 
-	 * @return  a quaternion
-	 * @see Quaternion
-	 */
-	public Quaternion toQuaternion()
-	{
-		return new Quaternion(X(), Y(), Z(), W());
-	}
-	
+			
 	
 	/**
 	 * Changes the x-coördinate of the {@code Vector4}.

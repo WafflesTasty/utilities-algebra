@@ -4,7 +4,6 @@ import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.Vector;
-import zeno.util.algebra.vectors.complex.Complex;
 
 /**
  * The {@code Vector2} class defines a two-dimensional vector.
@@ -126,17 +125,6 @@ public class Vector2 extends Vector
 	public void setY(float y)
 	{
 		set(1, y);
-	}
-	
-	/**
-	 * Casts the {@code Vector2} to a {@code Complex}.
-	 * 
-	 * @return  a complex number
-	 * @see Complex
-	 */
-	public Complex toComplex()
-	{
-		return new Complex(X(), Y());
 	}
 	
 	/**

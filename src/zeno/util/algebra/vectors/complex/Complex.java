@@ -15,6 +15,19 @@ import zeno.util.algebra.vectors.fixed.Vector2;
 public class Complex extends Vector2
 {
 	/**
+	 * Casts a {@code Vector2} to a {@code Complex}.
+	 * 
+	 * @param vec  a two dimensional vector
+	 * @return  a complex number
+	 * @see Vector2
+	 */
+	public static Complex from(Vector2 vec)
+	{
+		return new Complex(vec.X(), vec.Y());
+	}
+	
+	
+	/**
 	 * Creates a new {@code Complex}.
 	 */
 	public Complex()
@@ -142,7 +155,7 @@ public class Complex extends Vector2
 	@Override
 	public Complex alerp(Vector2 v, float alpha)
 	{
-		return super.alerp(v, alpha).toComplex();
+		return from(super.alerp(v, alpha));
 	}
 	
 	@Override
