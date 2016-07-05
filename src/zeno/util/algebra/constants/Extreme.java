@@ -1,7 +1,7 @@
 package zeno.util.algebra.constants;
 
 /**
- * The {@code Extreme} enumeration defines the two numerical extremes.
+ * The {@code Extreme} enumeration defines two numerical extremes.
  * 
  * @author Zeno
  * @since Oct 16, 2104
