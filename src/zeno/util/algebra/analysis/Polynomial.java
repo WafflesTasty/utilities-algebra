@@ -359,7 +359,7 @@ public class Polynomial implements Copyable<Polynomial>
 		for(int deg : terms.descendingKeySet())
 		{
 			float val = terms.get(deg);
-			float abs = Math.abs(val);
+			float abs = Floats.abs(val);
 			if(val != 0)
 			{
 				poly += (val < 0 ? " - " : (isFirst ? "" : " + "));

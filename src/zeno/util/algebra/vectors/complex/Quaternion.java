@@ -227,13 +227,13 @@ public class Quaternion extends Vector4
 		
 		String txt = "";
 		txt += (Floats.isZero(w) ? "" : w < 0 ? " - " : " + ");
-		txt += (Floats.isZero(w) ? "" : Math.abs(w));
+		txt += (Floats.isZero(w) ? "" : Floats.abs(w));
 		txt += (Floats.isZero(x) ? "" : x < 0 ? " - " : " + ");
-		txt += (Floats.isZero(x) ? "" : Math.abs(x) + "i");
+		txt += (Floats.isZero(x) ? "" : Floats.abs(x) + "i");
 		txt += (Floats.isZero(y) ? "" : y < 0 ? " - " : " + ");
-		txt += (Floats.isZero(y) ? "" : Math.abs(y) + "j");
+		txt += (Floats.isZero(y) ? "" : Floats.abs(y) + "j");
 		txt += (Floats.isZero(z) ? "" : z < 0 ? " - " : " + ");
-		txt += (Floats.isZero(z) ? "" : Math.abs(z) + "k");
+		txt += (Floats.isZero(z) ? "" : Floats.abs(z) + "k");
 		txt += (txt.equals("") ? " + " + w : "");
 		
 		return txt;

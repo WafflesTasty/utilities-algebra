@@ -208,6 +208,41 @@ public final class Longs
 	}
 	
 	
+	// Rounding
+	
+	/**
+	 * Returns the integer closest to a value.
+	 * 
+	 * @param val  a value to use
+	 * @return  a rounded value
+	 */
+	public static long round(double val)
+	{
+		return Math.round(val);
+	}
+	
+	/**
+	 * Returns the lower integer closest to a value.
+	 * 
+	 * @param val  a value to round
+	 * @return  a rounded value
+	 */
+	public static long floor(double val)
+	{
+		return (long) Math.floor(val);
+	}
+
+	/**
+	 * Returns the higher integer closest to a value.
+	 * 
+	 * @param val  a value to round
+	 * @return  a rounded value
+	 */
+	public static long ceil(double val)
+	{
+		return (long) Math.ceil(val);
+	}	
+	
 	private Longs()
 	{
 		// NOT APPLICABLE

@@ -208,6 +208,42 @@ public final class Integers
 	}
 	
 	
+	// Rounding
+	
+	/**
+	 * Returns the integer closest to a value.
+	 * 
+	 * @param val  a value to use
+	 * @return  a rounded value
+	 */
+	public static int round(float val)
+	{
+		return Math.round(val);
+	}
+	
+	/**
+	 * Returns the lower integer closest to a value.
+	 * 
+	 * @param val  a value to round
+	 * @return  a rounded value
+	 */
+	public static int floor(float val)
+	{
+		return (int) Math.floor(val);
+	}
+
+	/**
+	 * Returns the higher integer closest to a value.
+	 * 
+	 * @param val  a value to round
+	 * @return  a rounded value
+	 */
+	public static int ceil(float val)
+	{
+		return (int) Math.ceil(val);
+	}
+	
+	
 	private Integers()
 	{
 		// NOT APPLICABLE
