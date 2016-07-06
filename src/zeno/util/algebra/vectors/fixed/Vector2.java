@@ -23,7 +23,7 @@ public class Vector2 extends Vector
      */
     public static final Vector2 Y_AXIS = new Vector2(0, 1);
 	
-    
+        
     /**
 	 * Checks whether three {@code Vector2}'s are colinear.
 	 * 
@@ -52,12 +52,7 @@ public class Vector2 extends Vector
 	 */
 	public static float getRotation(Vector2 a, Vector2 b, Vector2 c)
 	{	
-		float dx1 = b.X() - a.X();
-		float dy1 = b.Y() - a.Y();
-		float dx2 = c.X() - a.X();
-		float dy2 = c.Y() - a.Y();
-
-		return dx1 * dy2 - dx2 * dy1;
+		return getRotation(a.X(), a.Y(), b.X(), b.Y(), c.X(), c.Y());
 	}
     	
 	/**
@@ -73,7 +68,28 @@ public class Vector2 extends Vector
 		float y = len * Floats.sin(ang);
 		return new Vector2(x, y);
 	}
-		
+	
+	/**
+	 * Calculates the rotation between three points.
+	 * <br> Depending on the return value, the following holds true:
+	 * <ul>
+	 * <li> Positive: the points turn counter-clockwise </li>
+	 * <li> Negative: the points turn clockwise </li>
+	 * <li> Zero: the points are colinear
+	 * </ul> 
+	 * @param val  an array of six coördinates for three points
+	 * @return  the points' rotation
+	 */
+	public static float getRotation(float... val)
+	{
+		float dx1 = val[2] - val[0];
+		float dy1 = val[3] - val[1];
+		float dx2 = val[4] - val[0];
+		float dy2 = val[5] - val[1];
+
+		return dx1 * dy2 - dx2 * dy1;
+	}
+	
 	
 	/**
 	 * Creates a new {@code Vector2}.
@@ -106,7 +122,7 @@ public class Vector2 extends Vector
 		super(2);
 	}
 	
-	
+		
 	/**
 	 * Changes the x-coördinate of the {@code Vector2}.
 	 * 
@@ -125,6 +141,20 @@ public class Vector2 extends Vector
 	public void setY(float y)
 	{
 		set(1, y);
+	}
+	
+	
+	/**
+	 * Returns the perpdot product with a {@code Vector2}.
+	 * </br> This value equals the z-coördinate of the cross
+	 * product between the two vectors.
+	 * 
+	 * @param v  a vector to use
+	 * @return  the perpdot product
+	 */
+	public float perpdot(Vector2 v)
+	{
+		return X() * v.Y() - Y() * v.X();
 	}
 	
 	/**
