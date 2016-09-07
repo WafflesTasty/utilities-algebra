@@ -3,8 +3,8 @@ package zeno.util.algebra.constants;
 /**
  * The {@code Extreme} enumeration defines two numerical extremes.
  * 
+ * @since Oct 16, 2014
  * @author Zeno
- * @since Oct 16, 2104
  */
 public enum Extreme
 {

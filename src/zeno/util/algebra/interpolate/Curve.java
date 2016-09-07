@@ -4,8 +4,8 @@ package zeno.util.algebra.interpolate;
  * The {@code Curve} interface interpolates a value along a curve between 0 and 1.
  * <br> The input value is handled between a predetermined minimum and maximum.
  *
- * @author Zeno
  * @since Apr 6, 2016
+ * @author Zeno
  */
 @FunctionalInterface
 public interface Curve

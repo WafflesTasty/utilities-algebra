@@ -8,8 +8,9 @@ import zeno.util.algebra.vectors.Vector;
 /**
  * The {@code Vector3} class defines a three-dimensional vector.
  *
- * @author Zeno
  * @since Mar 21, 2016
+ * @author Zeno
+ * 
  * @see Vector
  */
 public class Vector3 extends Vector

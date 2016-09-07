@@ -3,8 +3,8 @@ package zeno.util.algebra;
 /**
  * The {@code Booleans} class defines basic math for boolean values.
  *
- * @author Zeno
  * @since May 4, 2016
+ * @author Zeno
  */
 public final class Booleans
 {

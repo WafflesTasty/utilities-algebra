@@ -3,8 +3,8 @@ package zeno.util.algebra;
 /**
  * The {@code Floats} class defines basic math for {@link Float} values.
  *
- * @author Zeno
  * @since Dec 9, 2014
+ * @author Zeno
  */
 public final class Floats
 {

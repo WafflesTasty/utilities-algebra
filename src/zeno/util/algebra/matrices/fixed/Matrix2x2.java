@@ -8,8 +8,9 @@ import zeno.util.algebra.vectors.fixed.Vector2;
 /**
  * The {@code Matrix2x2} class defines a 2x2 square matrix.
  *
- * @author Zeno
  * @since Mar 22, 2016
+ * @author Zeno
+ * 
  * @see Matrix
  */
 public class Matrix2x2 extends Matrix

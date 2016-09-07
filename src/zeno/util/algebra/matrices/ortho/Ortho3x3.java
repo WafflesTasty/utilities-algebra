@@ -8,8 +8,9 @@ import zeno.util.algebra.vectors.fixed.Vector3;
 /**
  * The {@code Ortho3x3} class represents a 3D orthogonal basis in matrix form.
  *
- * @author Zeno
  * @since Apr 21, 2016
+ * @author Zeno
+ * 
  * @see IMatrix
  */
 public class Ortho3x3 extends IMatrix

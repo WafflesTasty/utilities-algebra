@@ -12,8 +12,9 @@ import zeno.util.tools.generic.properties.Copyable;
  * The {@code Polynomial} class defines a univariate (having only one variable) polynomial.
  * <br> The polynomial is of the form {@code a.x^n + b.x^(n-1) + ... + c.x^2 + d.x + e}.
  * 
+ * @since Oct 27, 2014
  * @author Zeno
- * @since Oct 27, 2104
+ * 
  * @see Copyable
  */
 public class Polynomial implements Copyable<Polynomial>

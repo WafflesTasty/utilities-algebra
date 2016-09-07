@@ -11,8 +11,9 @@ import zeno.util.algebra.vectors.fixed.Vector4;
  * <br> Static methods are provided to quickly generate various
  * three-dimensional transformation matrices.
  *
- * @author Zeno
  * @since Mar 22, 2016
+ * @author Zeno
+ * 
  * @see Matrix
  */
 public class Matrix4x4 extends Matrix

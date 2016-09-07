@@ -8,8 +8,9 @@ import zeno.util.algebra.vectors.fixed.Vector2;
 /**
  * The {@code Complex} class defies a complex number in two dimensions.
  * 
- * @author Zeno
  * @since Apr 30, 2016
+ * @author Zeno
+ *  
  * @see Vector2
  */
 public class Complex extends Vector2

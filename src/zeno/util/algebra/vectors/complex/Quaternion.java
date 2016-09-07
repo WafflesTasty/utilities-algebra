@@ -10,8 +10,9 @@ import zeno.util.algebra.vectors.fixed.Vector4;
  * The {@code Quaternion} class extends complex numbers to four dimensions.
  * <br> They are useful in representing 3D space rotations.
  * 
- * @author Zeno
  * @since Apr 30, 2016
+ * @author Zeno
+ * 
  * @see Vector4
  */
 public class Quaternion extends Vector4

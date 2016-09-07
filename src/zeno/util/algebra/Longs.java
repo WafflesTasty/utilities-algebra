@@ -3,8 +3,8 @@ package zeno.util.algebra;
 /**
  * The {@code Longs} class defines basic math for {@link Long} values.
  * 
- * @author Zeno
  * @since Jun 3, 2016
+ * @author Zeno
  */
 public final class Longs
 {

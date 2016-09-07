@@ -3,8 +3,8 @@ package zeno.util.algebra;
 /**
  * The {@code Integers} class defines basic math for {@link Integer} values.
  * 
- * @author Zeno
  * @since Jun 3, 2016
+ * @author Zeno
  */
 public final class Integers
 {

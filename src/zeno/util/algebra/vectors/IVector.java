@@ -10,8 +10,9 @@ import zeno.util.tools.Randomizer;
 /**
  * The {@code IVector} class defines the base of a floating-point vector.
  *
- * @author Zeno
  * @since Mar 16, 2016
+ * @author Zeno
+ * 
  * @see IMatrix
  */
 public abstract class IVector extends IMatrix

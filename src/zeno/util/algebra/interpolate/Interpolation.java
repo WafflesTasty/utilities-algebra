@@ -7,8 +7,9 @@ import zeno.util.tools.actions.TimedAction;
  * The {@code Interpolation} class defines an action that gradually interpolates a value.
  * Use the {@link #getValue()} method to get the current value.
  *
- * @author Zeno
  * @since Apr 7, 2016
+ * @author Zeno
+ * 
  * @see TimedAction
  */
 public class Interpolation extends TimedAction

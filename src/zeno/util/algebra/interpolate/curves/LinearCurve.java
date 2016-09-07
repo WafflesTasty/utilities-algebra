@@ -6,8 +6,9 @@ import zeno.util.algebra.interpolate.Curve;
 /**
  * The {@code LinearCurve} class interpolates along a straight line.
  * 
- * @author Zeno
  * @since Jul 1, 2016
+ * @author Zeno
+ * 
  * @see Curve
  */
 public class LinearCurve implements Curve

@@ -8,8 +8,9 @@ import zeno.util.algebra.vectors.fixed.Vector2;
 /**
  * The {@code Ortho2x2} class represents a 2D orthogonal basis in matrix form.
  *
- * @author Zeno
  * @since Apr 21, 2016
+ * @author Zeno
+ * 
  * @see IMatrix
  */
 public class Ortho2x2 extends IMatrix

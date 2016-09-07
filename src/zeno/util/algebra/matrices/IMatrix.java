@@ -9,8 +9,9 @@ import zeno.util.tools.generic.properties.Copyable;
 /**
  * The {@code IMatrix} class defines the base for a floating-point matrix.
  *
- * @author Zeno
  * @since Mar 16, 2016
+ * @author Zeno
+ * 
  * @see Copyable
  */
 public abstract class IMatrix implements Copyable<IMatrix>

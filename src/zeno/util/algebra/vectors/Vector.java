@@ -8,8 +8,9 @@ import zeno.util.algebra.matrices.Matrix;
 /**
  * The {@code Vector} class implements a generic floating-point vector.
  *
- * @author Zeno
  * @since Mar 16, 2016
+ * @author Zeno
+ * 
  * @see IVector
  */
 public class Vector extends IVector

@@ -11,8 +11,9 @@ import zeno.util.algebra.vectors.fixed.Vector3;
  * <br> Static methods are provided to quickly generate various
  * two-dimensional transformation matrices.
  *
- * @author Zeno
  * @since Mar 22, 2016
+ * @author Zeno
+ * 
  * @see Matrix
  */
 public class Matrix3x3 extends Matrix

@@ -7,8 +7,9 @@ import zeno.util.algebra.vectors.Vector;
 /**
  * The {@code Vector4} class defines a four-dimensional vector.
  *
- * @author Zeno
  * @since Mar 21, 2016
+ * @author Zeno
+ * 
  * @see Vector
  */
 public class Vector4 extends Vector

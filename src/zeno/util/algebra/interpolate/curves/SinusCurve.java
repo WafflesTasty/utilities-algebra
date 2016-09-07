@@ -6,8 +6,9 @@ import zeno.util.algebra.interpolate.Curve;
 /**
  * The {@code SinusCurve} class interpolates along a sinusoid.
  * 
- * @author Zeno
  * @since Jul 1, 2016
+ * @author Zeno
+ * 
  * @see Curve
  */
 public class SinusCurve implements Curve

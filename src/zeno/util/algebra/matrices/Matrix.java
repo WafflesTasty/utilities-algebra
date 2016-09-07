@@ -5,8 +5,9 @@ import java.util.Arrays;
 /**
  * The {@code Matrix} class implements a generic floating-point matrix.
  *
- * @author Zeno
  * @since Mar 16, 2016
+ * @author Zeno
+ * 
  * @see IMatrix
  */
 public class Matrix extends IMatrix

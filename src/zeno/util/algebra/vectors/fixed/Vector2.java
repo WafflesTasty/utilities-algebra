@@ -8,8 +8,9 @@ import zeno.util.algebra.vectors.Vector;
 /**
  * The {@code Vector2} class defines a two-dimensional vector.
  *
- * @author Zeno
  * @since Mar 21, 2016
+ * @author Zeno
+ * 
  * @see Vector
  */
 public class Vector2 extends Vector

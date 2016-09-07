@@ -3,8 +3,8 @@ package zeno.util.algebra;
 /**
  * The {@code Doubles} class defines basic math for {@link Double} values.
  *
- * @author Zeno
  * @since Dec 9, 2014
+ * @author Zeno
  */
 public final class Doubles
 {

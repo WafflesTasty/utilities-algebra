@@ -12,8 +12,9 @@ import zeno.util.tools.Messenger;
  * The {@code RootFinder} class uses {@code Bairstow's method}
  * to calculate roots of a {@code Polynomial}.
  *
- * @author Zeno
  * @since May 5, 2016
+ * @author Zeno
+ * 
  * @see <a href="https://en.wikipedia.org/wiki/Bairstow's_method">Bairstow&rsquo;s Method</a>
  * @see Messenger
  */

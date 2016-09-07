@@ -6,8 +6,9 @@ import zeno.util.algebra.interpolate.Curve;
 /**
  * The {@code LogarithmCurve} class interpolates along a logarithmic line.
  * 
- * @author Zeno
  * @since Jul 1, 2016
+ * @author Zeno
+ * 
  * @see Curve
  */
 public class LogarithmCurve implements Curve
