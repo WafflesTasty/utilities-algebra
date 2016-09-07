@@ -5,8 +5,8 @@ import java.util.List;
 
 import zeno.util.algebra.Floats;
 import zeno.util.algebra.vectors.complex.Complex;
+import zeno.util.tools.ArrayUtil;
 import zeno.util.tools.Messenger;
-import zeno.util.tools.sorting.ArraySort;
 
 /**
  * The {@code RootFinder} class uses {@code Bairstow's method}
@@ -226,7 +226,7 @@ public class RootFinder extends Messenger
 
 		
 		Polynomial result = new Polynomial(1, u, v);
-		poly = new Polynomial(ArraySort.reverse(bArr));
+		poly = new Polynomial(ArrayUtil.reverse(bArr));
 		
 		sendMessage("Divisor: " + result);
 		sendMessage("Remainder: " + poly);
