@@ -196,10 +196,40 @@ public final class Integers
 	// Parsing
 	
 	/**
-	 * Parses a string to a float value.
+	 * Converts an integer into a string value.
+	 * <br> This methods can return strings for
+	 * integers in any base radix.
+	 * 
+	 * @param val  a value to convert
+	 * @param rad  a base radix
+	 * @return  an integer string
+	 * @see String
+	 */
+	public static String toString(int val, int rad)
+	{
+		return Integer.toString(val, rad);
+	}
+	
+	/**
+	 * Parses a string into an integer value.
+	 * <br> This methods can return unsigned
+	 * integers in any base radix.
 	 * 
 	 * @param text  a string to parse
-	 * @return  a parsed float
+	 * @param rad  a base radix
+	 * @return  a parsed integer
+	 * @see String
+	 */
+	public static int parse(String text, int rad)
+	{
+		return Integer.parseUnsignedInt(text, rad);
+	}
+	
+	/**
+	 * Parses a string to an integer value.
+	 * 
+	 * @param text  a string to parse
+	 * @return  a parsed integer
 	 * @see String
 	 */
 	public static int parse(String text)
@@ -208,7 +238,7 @@ public final class Integers
 	}
 	
 	/**
-	 * Returns a hash code of an integer value.
+	 * Returns a hash code of an integer.
 	 * 
 	 * @param val  a value to hash
 	 * @return  a hash code
