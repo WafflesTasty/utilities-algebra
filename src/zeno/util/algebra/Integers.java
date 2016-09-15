@@ -207,6 +207,17 @@ public final class Integers
 		return Integer.parseInt(text);
 	}
 	
+	/**
+	 * Returns a hash code of an integer value.
+	 * 
+	 * @param val  a value to hash
+	 * @return  a hash code
+	 */
+	public static int hashCode(int val)
+	{
+		return Integer.hashCode(val);
+	}
+	
 	
 	// Rounding
 	

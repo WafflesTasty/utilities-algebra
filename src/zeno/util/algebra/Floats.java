@@ -287,6 +287,17 @@ public final class Floats
 	}
 	
 	/**
+	 * Returns a hash code of a float value.
+	 * 
+	 * @param val  a value to hash
+	 * @return  a hash code
+	 */
+	public static int hashCode(float val)
+	{
+		return Float.hashCode(val);
+	}
+	
+	/**
 	 * Parses a float value to a bit code.
 	 * 
 	 * @param val  a value to use
@@ -296,7 +307,7 @@ public final class Floats
 	{
 		return Float.floatToIntBits(val);
 	}
-	
+		
 	
 	// Roots
 		

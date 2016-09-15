@@ -286,6 +286,17 @@ public final class Doubles
 	}
 	
 	/**
+	 * Returns a hash code of a double value.
+	 * 
+	 * @param val  a value to hash
+	 * @return  a hash code
+	 */
+	public static int hashCode(double val)
+	{
+		return Double.hashCode(val);
+	}
+	
+	/**
 	 * Parses a double value to a bit code.
 	 * 
 	 * @param val  a value to use
@@ -295,7 +306,7 @@ public final class Doubles
 	{
 		return Double.doubleToLongBits(val);
 	}
-	
+		
 	
 	// Roots
 		

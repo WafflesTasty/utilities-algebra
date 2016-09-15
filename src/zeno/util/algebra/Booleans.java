@@ -22,6 +22,17 @@ public final class Booleans
 		return Boolean.parseBoolean(text);
 	}
 	
+	/**
+	 * Returns a hash code of a boolean value.
+	 * 
+	 * @param val  a value to hash
+	 * @return  a hash code
+	 */
+	public static int hashCode(boolean val)
+	{
+		return Boolean.hashCode(val);
+	}
+	
 	
 	private Booleans()
 	{

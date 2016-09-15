@@ -207,6 +207,17 @@ public final class Longs
 		return Long.parseLong(text);
 	}
 	
+	/**
+	 * Returns a hash code of an integer value.
+	 * 
+	 * @param val  a value to hash
+	 * @return  a hash code
+	 */
+	public static int hashCode(long val)
+	{
+		return Long.hashCode(val);
+	}
+	
 	
 	// Rounding
 	
