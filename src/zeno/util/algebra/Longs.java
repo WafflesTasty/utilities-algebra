@@ -20,9 +20,9 @@ public final class Longs
 	public static final long MAX_VALUE = Long.MAX_VALUE;
 	
 	/**
-	 * Defines the byte count of a single long number.
+	 * Defines the byte size of a single long number.
 	 */
-	public static final long BYTECOUNT = Long.BYTES;
+	public static final long BYTE_SIZE = Long.BYTES;
 	/**
 	 * Defines the bit size of a single long number.
 	 */

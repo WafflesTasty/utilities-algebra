@@ -42,9 +42,9 @@ public final class Floats
 	public static final float MAX_VALUE = Float.MAX_VALUE;
 	
 	/**
-	 * Defines the byte count of a single floating point number.
+	 * Defines the byte size of a single floating point number.
 	 */
-	public static final int BYTECOUNT = Float.BYTES;
+	public static final int BYTE_SIZE = Float.BYTES;
 	/**
 	 * Defines the bit size of a single floating point number.
 	 */

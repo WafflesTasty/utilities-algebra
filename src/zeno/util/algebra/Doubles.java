@@ -42,9 +42,9 @@ public final class Doubles
 	public static final double MAX_VALUE = Double.MAX_VALUE;
 	
 	/**
-	 * Defines the byte count of a single double number.
+	 * Defines the byte size of a single double number.
 	 */
-	public static final int BYTECOUNT = Double.BYTES;
+	public static final int BYTE_SIZE = Double.BYTES;
 	/**
 	 * Defines the bit size of a single double number.
 	 */

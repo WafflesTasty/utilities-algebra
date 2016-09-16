@@ -20,9 +20,9 @@ public final class Integers
 	public static final int MAX_VALUE = Integer.MAX_VALUE;
 	
 	/**
-	 * Defines the byte count of a single integer number.
+	 * Defines the byte size of a single integer number.
 	 */
-	public static final int BYTECOUNT = Integer.BYTES;
+	public static final int BYTE_SIZE = Integer.BYTES;
 	/**
 	 * Defines the bit size of a single integer number.
 	 */
