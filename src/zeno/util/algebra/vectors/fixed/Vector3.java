@@ -1,9 +1,9 @@
 package zeno.util.algebra.vectors.fixed;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.Vector;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Vector3} class defines a three-dimensional vector.

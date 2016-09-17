@@ -1,10 +1,10 @@
 package zeno.util.algebra.matrices.fixed;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.Matrix;
 import zeno.util.algebra.vectors.fixed.Vector2;
 import zeno.util.algebra.vectors.fixed.Vector3;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Matrix3x3} class defines a 3x3 square matrix.

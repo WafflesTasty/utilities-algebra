@@ -3,10 +3,10 @@ package zeno.util.algebra.analysis;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import zeno.util.algebra.Floats;
-import zeno.util.algebra.Integers;
 import zeno.util.algebra.vectors.complex.Complex;
 import zeno.util.tools.generic.properties.Copyable;
+import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.primitives.Integers;
 
 /**
  * The {@code Polynomial} class defines a univariate (having only one variable) polynomial.

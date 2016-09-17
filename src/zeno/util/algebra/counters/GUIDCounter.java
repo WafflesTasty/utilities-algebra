@@ -2,7 +2,7 @@ package zeno.util.algebra.counters;
 
 import java.util.Iterator;
 
-import zeno.util.algebra.Longs;
+import zeno.util.tools.primitives.Longs;
 
 /**
  * The {@code GUIDCounter} class creates a counter for prefixed long values.

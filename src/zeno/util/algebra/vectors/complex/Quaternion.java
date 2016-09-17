@@ -1,10 +1,10 @@
 package zeno.util.algebra.vectors.complex;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.fixed.Vector3;
 import zeno.util.algebra.vectors.fixed.Vector4;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Quaternion} class extends complex numbers to four dimensions.

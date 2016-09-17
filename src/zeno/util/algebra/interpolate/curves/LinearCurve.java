@@ -1,7 +1,7 @@
 package zeno.util.algebra.interpolate.curves;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.interpolate.Curve;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code LinearCurve} class interpolates along a straight line.

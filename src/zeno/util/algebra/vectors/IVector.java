@@ -1,11 +1,11 @@
 package zeno.util.algebra.vectors;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.fixed.Vector2;
 import zeno.util.algebra.vectors.fixed.Vector3;
 import zeno.util.algebra.vectors.fixed.Vector4;
 import zeno.util.tools.Randomizer;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code IVector} class defines the base of a floating-point vector.

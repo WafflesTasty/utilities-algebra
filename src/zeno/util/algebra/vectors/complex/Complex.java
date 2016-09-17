@@ -1,9 +1,9 @@
 package zeno.util.algebra.vectors.complex;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.vectors.IVector;
 import zeno.util.algebra.vectors.fixed.Vector2;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Complex} class defies a complex number in two dimensions.

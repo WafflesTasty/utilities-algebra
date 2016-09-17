@@ -2,7 +2,7 @@ package zeno.util.algebra.counters;
 
 import java.util.Iterator;
 
-import zeno.util.algebra.Integers;
+import zeno.util.tools.primitives.Integers;
 
 /**
  * The {@code IntegerCounter} class creates a counter for integer values.

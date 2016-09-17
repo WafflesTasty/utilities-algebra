@@ -1,9 +1,9 @@
 package zeno.util.algebra.matrices.ortho;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.fixed.Matrix2x2;
 import zeno.util.algebra.vectors.fixed.Vector2;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Ortho2x2} class represents a 2D orthogonal basis in matrix form.

@@ -3,10 +3,10 @@ package zeno.util.algebra.analysis;
 import java.util.ArrayList;
 import java.util.List;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.vectors.complex.Complex;
 import zeno.util.tools.ArrayUtil;
 import zeno.util.tools.Messenger;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code RootFinder} class uses {@code Bairstow's method}

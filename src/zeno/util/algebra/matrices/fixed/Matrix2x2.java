@@ -1,9 +1,9 @@
 package zeno.util.algebra.matrices.fixed;
 
-import zeno.util.algebra.Floats;
 import zeno.util.algebra.matrices.IMatrix;
 import zeno.util.algebra.matrices.Matrix;
 import zeno.util.algebra.vectors.fixed.Vector2;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Matrix2x2} class defines a 2x2 square matrix.
