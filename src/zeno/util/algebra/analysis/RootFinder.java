@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zeno.util.algebra.vectors.complex.Complex;
-import zeno.util.tools.ArrayUtil;
+import zeno.util.tools.ArrayTo;
 import zeno.util.tools.Messenger;
 import zeno.util.tools.primitives.Floats;
 
@@ -227,7 +227,7 @@ public class RootFinder extends Messenger
 
 		
 		Polynomial result = new Polynomial(1, u, v);
-		poly = new Polynomial(ArrayUtil.reverse(bArr));
+		poly = new Polynomial(ArrayTo.reverse(bArr));
 		
 		sendMessage("Divisor: " + result);
 		sendMessage("Remainder: " + poly);
