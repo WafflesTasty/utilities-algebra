@@ -1,6 +1,6 @@
-package zeno.util.algebra.curves.curves;
+package zeno.util.algebra.analysis.curves.curves;
 
-import zeno.util.algebra.curves.Curve;
+import zeno.util.algebra.analysis.curves.Curve;
 import zeno.util.tools.primitives.Floats;
 
 /**

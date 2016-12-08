@@ -1,6 +1,6 @@
-package zeno.util.algebra.curves;
+package zeno.util.algebra.analysis.curves;
 
-import zeno.util.algebra.curves.curves.LinearCurve;
+import zeno.util.algebra.analysis.curves.curves.LinearCurve;
 import zeno.util.tools.actions.TimedAction;
 
 /**
