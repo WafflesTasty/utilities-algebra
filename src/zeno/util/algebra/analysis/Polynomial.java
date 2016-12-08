@@ -3,7 +3,7 @@ package zeno.util.algebra.analysis;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import zeno.util.algebra.vectors.complex.Complex;
+import zeno.util.algebra.tensors.vectors.complex.Complex;
 import zeno.util.tools.generic.properties.Copyable;
 import zeno.util.tools.primitives.Floats;
 import zeno.util.tools.primitives.Integers;

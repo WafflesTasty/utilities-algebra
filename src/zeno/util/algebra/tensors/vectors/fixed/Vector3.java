@@ -1,8 +1,6 @@
-package zeno.util.algebra.vectors.fixed;
+package zeno.util.algebra.tensors.vectors.fixed;
 
-import zeno.util.algebra.matrices.IMatrix;
-import zeno.util.algebra.vectors.IVector;
-import zeno.util.algebra.vectors.Vector;
+import zeno.util.algebra.tensors.vectors.Vector;
 import zeno.util.tools.primitives.Floats;
 
 /**
@@ -27,14 +25,21 @@ public class Vector3 extends Vector
      * Contains the three-dimensional z-axis unit vector.
      */
     public static final Vector3 Z_AXIS = new Vector3(0, 0, 1);
-	
-	
-	/**
+    
+    
+    /**
 	 * Creates a new {@code Vector3}.
+	 * 
+	 * @param x  the vector's x-coördinate
+	 * @param y  the vector's y-coördinate
+	 * @param z  the vector's z-coördinate
 	 */
-	public Vector3()
+	public Vector3(float x, float y, float z)
 	{
 		super(3);
+		setX(x);
+		setY(y);
+		setZ(z);
 	}
 	
 	/**
@@ -49,48 +54,12 @@ public class Vector3 extends Vector
 	
 	/**
 	 * Creates a new {@code Vector3}.
-	 * 
-	 * @param x  the vector's x-coördinate
-	 * @param y  the vector's y-coördinate
-	 * @param z  the vector's z-coördinate
 	 */
-	public Vector3(float x, float y, float z)
+	public Vector3()
 	{
 		super(3);
-		setX(x);
-		setY(y);
-		setZ(z);
 	}
 		
-	
-
-	/**
-	 * Returns the cross product with a {@code Vector3}.
-	 * 
-	 * @param v  a vector to multiply
-	 * @return  a cross product
-	 */
-	public Vector3 cross(Vector3 v)
-	{
-		Vector3 cross = new Vector3();
-		
-		cross.setX(Y() * v.Z() - Z() * v.Y());
-		cross.setY(Z() * v.X() - X() * v.Z());
-		cross.setZ(X() * v.Y() - Y() * v.X());
-		
-		return cross;
-	}
-	
-	/**
-	 * Returns the angle with another {@code Vector3}.
-	 * 
-	 * @param v  a vector to calculate the angle for
-	 * @return  the angle between two vectors
-	 */
-	public float angle(Vector3 v)
-	{
-		return Floats.acos(dot(v));
-	}
 	
 	
 	/**
@@ -100,7 +69,7 @@ public class Vector3 extends Vector
 	 */
 	public void setX(float x)
 	{
-		set(0, x);
+		set(x, 0);
 	}
 	
 	/**
@@ -110,7 +79,7 @@ public class Vector3 extends Vector
 	 */
 	public void setY(float y)
 	{
-		set(1, y);
+		set(y, 1);
 	}
 	
 	/**
@@ -120,9 +89,8 @@ public class Vector3 extends Vector
 	 */
 	public void setZ(float z)
 	{
-		set(2, z);
+		set(z, 2);
 	}
-	
 			
 	/**
 	 * Returns the z-axis angle of the {@code Vector3}.
@@ -185,23 +153,69 @@ public class Vector3 extends Vector
 	}
 
 	
-	@Override
-	public Vector3 lerp(IVector v, float alpha)
-	{
+	
+	/**
+	 * Performs linear interpolation on the {@code Vector}.
+	 * 
+	 * @param v  a vector to interpolate to
+	 * @param alpha  an interpolation alpha
+	 * @return  an interpolated vector
+	 */
+	public Vector3 lerp(Vector3 v, float alpha)
+    {
 		return (Vector3) super.lerp(v, alpha);
+    }
+
+	/**
+	 * Projects the {@code Vector} to a hyperplane.
+	 * 
+	 * @param plane  a plane to project to
+	 * @return  the projected vector
+	 */
+	public Vector3 projectTo(Vector3 plane)
+	{
+		return (Vector3) super.projectTo(plane);
 	}
 	
-	@Override
-	public Vector3 projectTo(IVector norm)
+	/**
+	 * Returns the {@code Vector}'s cross product.
+	 * 
+	 * @param v  a vector to multiply
+	 * @return  the cross product
+	 */
+	public Vector3 cross(Vector3 v)
 	{
-		return (Vector3) super.projectTo(norm);
-	}
+		Vector3 cross = new Vector3();
 		
-	@Override
-	public Vector3 add(IMatrix m)
-	{
-		return (Vector3) super.add(m);
+		cross.setX(Y() * v.Z() - Z() * v.Y());
+		cross.setY(Z() * v.X() - X() * v.Z());
+		cross.setZ(X() * v.Y() - Y() * v.X());
+		
+		return cross;
 	}
+	
+	/**
+	 * Returns the {@code Vector}'s subtraction.
+	 * 
+	 * @param v  a vector to subtract
+	 * @return  the difference vector
+	 */
+	public Vector3 minus(Vector3 v)
+	{
+		return (Vector3) super.minus(v);
+	}
+	
+	/**
+	 * Returns the {@code Vector}'s sum.
+	 * 
+	 * @param v  a vector to add
+	 * @return  the sum vector
+	 */
+	public Vector3 plus(Vector3 v)
+	{
+		return (Vector3) super.plus(v);
+	}
+	
 	
 	@Override
 	public Vector3 times(float s)

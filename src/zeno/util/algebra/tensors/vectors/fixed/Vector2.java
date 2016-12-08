@@ -1,8 +1,6 @@
-package zeno.util.algebra.vectors.fixed;
+package zeno.util.algebra.tensors.vectors.fixed;
 
-import zeno.util.algebra.matrices.IMatrix;
-import zeno.util.algebra.vectors.IVector;
-import zeno.util.algebra.vectors.Vector;
+import zeno.util.algebra.tensors.vectors.Vector;
 import zeno.util.tools.primitives.Floats;
 
 /**
@@ -23,8 +21,8 @@ public class Vector2 extends Vector
      * Contains the two-dimensional y-axis unit vector.
      */
     public static final Vector2 Y_AXIS = new Vector2(0, 1);
-	
-        
+
+    
     /**
 	 * Checks whether three {@code Vector2}'s are colinear.
 	 * 
@@ -91,7 +89,6 @@ public class Vector2 extends Vector
 		return dx1 * dy2 - dx2 * dy1;
 	}
 	
-	
 	/**
 	 * Creates a new {@code Vector2}.
 	 * 
@@ -123,6 +120,7 @@ public class Vector2 extends Vector
 		super(2);
 	}
 	
+	
 		
 	/**
 	 * Changes the x-coördinate of the {@code Vector2}.
@@ -131,7 +129,7 @@ public class Vector2 extends Vector
 	 */
 	public void setX(float x)
 	{
-		set(0, x);
+		set(x, 0);
 	}
 	
 	/**
@@ -141,29 +139,15 @@ public class Vector2 extends Vector
 	 */
 	public void setY(float y)
 	{
-		set(1, y);
+		set(y, 1);
 	}
-	
-	
-	/**
-	 * Returns the perpdot product with a {@code Vector2}.
-	 * </br> This value equals the z-coördinate of the cross
-	 * product between the two vectors.
-	 * 
-	 * @param v  a vector to use
-	 * @return  the perpdot product
-	 */
-	public float perpdot(Vector2 v)
-	{
-		return X() * v.Y() - Y() * v.X();
-	}
-	
+		
 	/**
 	 * Returns the x-axis angle of the {@code Vector2}.
 	 * 
 	 * @return  the vector's angle
 	 */
-	public float getAngle()
+	public float XAngle()
 	{
 		return Floats.atan2(X(), Y());
 	}
@@ -188,44 +172,84 @@ public class Vector2 extends Vector
 		return get(1);
 	}
 
-		
+	
+	
 	/**
-	 * Performs angular interpolation with a {@code Vector2}.
+	 * Performs angular interpolation with a {@code Vector}.
 	 * 
-	 * @param v  a vector to interpolate with
+	 * @param v  a vector to interpolate to
 	 * @param alpha  an interpolation alpha
 	 * @return an interpolated vector
 	 */
 	public Vector2 alerp(Vector2 v, float alpha)
     {
-		float a1 = getAngle();
-		float r1 = getLength();
-		float a2 = v.getAngle();
-		float r2 = v.getLength();
-		
+		float r1 = norm(); float a2 = v.XAngle();
+		float r2 = v.norm(); float a1 = XAngle();
+			
 		float a = a1 * (1 - alpha) + a2 * alpha;
 		float r = r1 * (1 - alpha) + r2 * alpha;
 	
 		return new Vector2(r * Floats.cos(a), r * Floats.sin(a));
     }
 	
-	@Override
-	public Vector2 lerp(IVector v, float alpha)
-	{
+	/**
+	 * Performs linear interpolation on the {@code Vector}.
+	 * 
+	 * @param v  a vector to interpolate to
+	 * @param alpha  an interpolation alpha
+	 * @return  an interpolated vector
+	 */
+	public Vector2 lerp(Vector2 v, float alpha)
+    {
 		return (Vector2) super.lerp(v, alpha);
+    }
+
+	/**
+	 * Projects the {@code Vector} to a hyperplane.
+	 * 
+	 * @param plane  a plane to project to
+	 * @return  the projected vector
+	 */
+	public Vector2 projectTo(Vector2 plane)
+	{
+		return (Vector2) super.projectTo(plane);
+	}
+
+	/**
+	 * Returns the {@code Vector}'s perpdot product.
+	 * This value equals the z-coördinate of the cross
+	 * product between the two vectors.
+	 * 
+	 * @param v  a vector to multiply
+	 * @return  the perpdot product
+	 */
+	public float perpdot(Vector2 v)
+	{
+		return X() * v.Y() - Y() * v.X();
 	}
 	
-	@Override
-	public Vector2 projectTo(IVector norm)
+	/**
+	 * Returns the {@code Vector}'s subtraction.
+	 * 
+	 * @param v  a vector to subtract
+	 * @return  the difference vector
+	 */
+	public Vector2 minus(Vector2 v)
 	{
-		return (Vector2) super.projectTo(norm);
+		return (Vector2) super.minus(v);
 	}
-		
-	@Override
-	public Vector2 add(IMatrix m)
+	
+	/**
+	 * Returns the {@code Vector}'s sum.
+	 * 
+	 * @param v  a vector to add
+	 * @return  the sum vector
+	 */
+	public Vector2 plus(Vector2 v)
 	{
-		return (Vector2) super.add(m);
+		return (Vector2) super.plus(v);
 	}
+	
 	
 	@Override
 	public Vector2 times(float s)

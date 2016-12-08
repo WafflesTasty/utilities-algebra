@@ -1,8 +1,6 @@
-package zeno.util.algebra.vectors.fixed;
+package zeno.util.algebra.tensors.vectors.fixed;
 
-import zeno.util.algebra.matrices.IMatrix;
-import zeno.util.algebra.vectors.IVector;
-import zeno.util.algebra.vectors.Vector;
+import zeno.util.algebra.tensors.vectors.Vector;
 
 /**
  * The {@code Vector4} class defines a four-dimensional vector.
@@ -31,26 +29,9 @@ public class Vector4 extends Vector
      */
     public static final Vector4 W_AXIS = new Vector4(0, 0, 0, 1);
 	
-	
-	/**
-	 * Creates a new {@code Vector4}.
-	 */
-	public Vector4()
-	{
-		super(4);
-	}
-	
-	/**
-	 * Creates a new {@code Vector4}.
-	 * 
-	 * @param val  a coördinate value
-	 */
-	public Vector4(float val)
-	{
-		this(val, val, val, val);
-	}
-	
-	/**
+    
+    
+    /**
 	 * Creates a new {@code Vector4}.
 	 * 
 	 * @param x  the vector's x-coördinate
@@ -66,7 +47,26 @@ public class Vector4 extends Vector
 		setZ(z);
 		setW(w);
 	}
-			
+		
+	/**
+	 * Creates a new {@code Vector4}.
+	 * 
+	 * @param val  a coördinate value
+	 */
+	public Vector4(float val)
+	{
+		this(val, val, val, val);
+	}
+	
+	/**
+	 * Creates a new {@code Vector4}.
+	 */
+	public Vector4()
+	{
+		super(4);
+	}
+
+	
 	
 	/**
 	 * Changes the x-coördinate of the {@code Vector4}.
@@ -75,7 +75,7 @@ public class Vector4 extends Vector
 	 */
 	public void setX(float x)
 	{
-		set(0, x);
+		set(x, 0);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class Vector4 extends Vector
 	 */
 	public void setY(float y)
 	{
-		set(1, y);
+		set(y, 1);
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class Vector4 extends Vector
 	 */
 	public void setZ(float z)
 	{
-		set(2, z);
+		set(z, 2);
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class Vector4 extends Vector
 	 */
 	public void setW(float w)
 	{
-		set(3, w);
+		set(w, 3);
 	}
 		
 	/**
@@ -149,23 +149,52 @@ public class Vector4 extends Vector
 	}
 
 	
-	@Override
-	public Vector4 lerp(IVector v, float alpha)
-	{
+	
+	/**
+	 * Performs linear interpolation on the {@code Vector}.
+	 * 
+	 * @param v  a vector to interpolate to
+	 * @param alpha  an interpolation alpha
+	 * @return  an interpolated vector
+	 */
+	public Vector4 lerp(Vector4 v, float alpha)
+    {
 		return (Vector4) super.lerp(v, alpha);
+    }
+
+	/**
+	 * Projects the {@code Vector} to a hyperplane.
+	 * 
+	 * @param plane  a plane to project to
+	 * @return  the projected vector
+	 */
+	public Vector4 projectTo(Vector4 plane)
+	{
+		return (Vector4) super.projectTo(plane);
 	}
 	
-	@Override
-	public Vector4 projectTo(IVector norm)
+	/**
+	 * Returns the {@code Vector}'s subtraction.
+	 * 
+	 * @param v  a vector to subtract
+	 * @return  the difference vector
+	 */
+	public Vector4 minus(Vector4 v)
 	{
-		return (Vector4) super.projectTo(norm);
+		return (Vector4) super.minus(v);
 	}
 	
-	@Override
-	public Vector4 add(IMatrix m)
+	/**
+	 * Returns the {@code Vector}'s sum.
+	 * 
+	 * @param v  a vector to add
+	 * @return  the sum vector
+	 */
+	public Vector4 plus(Vector4 v)
 	{
-		return (Vector4) super.add(m);
+		return (Vector4) super.plus(v);
 	}
+	
 	
 	@Override
 	public Vector4 times(float s)
