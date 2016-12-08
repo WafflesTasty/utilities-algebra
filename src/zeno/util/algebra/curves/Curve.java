@@ -1,4 +1,4 @@
-package zeno.util.algebra.interpolate;
+package zeno.util.algebra.curves;
 
 /**
  * The {@code Curve} interface interpolates a value along a curve between 0 and 1.
