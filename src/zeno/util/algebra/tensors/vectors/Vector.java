@@ -4,6 +4,7 @@ import zeno.util.algebra.tensors.Tensor;
 import zeno.util.algebra.tensors.vectors.fixed.Vector2;
 import zeno.util.algebra.tensors.vectors.fixed.Vector3;
 import zeno.util.algebra.tensors.vectors.fixed.Vector4;
+import zeno.util.tools.Array;
 
 /**
  * The {@code Vector} class provides a default implementation for
@@ -18,7 +19,27 @@ import zeno.util.algebra.tensors.vectors.fixed.Vector4;
 public class Vector extends Tensor
 {
 	/**
-	 * Creates a {@code Vector} with the specified size.
+	 * Splits a value array into equal size {@code Vectors}.
+	 * 
+	 * @param count  the amount of vectors to create
+	 * @param vals  the values to split
+	 * @return  a list of vectors
+	 */
+	public static Vector[] split(int count, float... vals)
+	{
+		Vector[] result = new Vector[count];
+		
+		int size = vals.length / count;
+		for(int i = 0; i < count; i++)
+		{
+			result[i] = new Vector(Array.copy.of(vals, size * i, size * (i + 1)));
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Creates a zero {@code Vector} with the specified size.
 	 * <br> Depending on dimensions, a subclass may be used:
 	 * <ul>
 	 * <li> (2) returns a {@code Vector2}. </li>
