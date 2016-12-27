@@ -49,9 +49,8 @@ public class Vector extends Tensor
 	 * 
 	 * @param size  the size of the vector
 	 * @return  a new vector
-	 * @see Tensor
 	 */
-	public static Tensor create(int size)
+	public static Vector create(int size)
 	{
 		if(size == 4)
 		{
@@ -77,9 +76,9 @@ public class Vector extends Tensor
 	 * @param size  the size of the vector
 	 * @return  a random vector
 	 */
-	public static Tensor random(int size)
+	public static Vector random(int size)
 	{
-		return Tensor.random(size);
+		return (Vector) Tensor.random(size);
 	}
 	
 	/**
@@ -120,7 +119,7 @@ public class Vector extends Tensor
 	}
 	
 	/**
-	 * Changes a {@code Vector} value.
+	 * Sets a new {@code Vector} value.
 	 * 
 	 * @param val  a component value
 	 * @param i  the component index
@@ -130,6 +129,28 @@ public class Vector extends Tensor
 		super.set(val, i);
 	}
 		
+	/**
+	 * Multiplies a {@code Vector} value.
+	 * 
+	 * @param val  a component value
+	 * @param i  the component index
+	 */
+	public void times(float val, int i)
+	{
+		super.times(val, i);
+	}
+	
+	/**
+	 * Adds a {@code Vector} value.
+	 * 
+	 * @param val  a component value
+	 * @param i  the component index
+	 */
+	public void plus(float val, int i)
+	{
+		super.plus(val, i);
+	}
+	
 	
 	/**
 	 * Performs linear interpolation on the {@code Vector}.

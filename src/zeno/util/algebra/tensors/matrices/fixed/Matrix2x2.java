@@ -152,6 +152,18 @@ public class Matrix2x2 extends Matrix
 	}
 	
 	/**
+	 * Solves a {@code Matrix} equation.
+	 * 
+	 * @param v  a parameter vector
+	 * @return  a result vector
+	 * @see Vector2
+	 */
+	public Vector2 solve(Vector2 v)
+	{
+		return (Vector2) super.solve(v);
+	}
+	
+	/**
 	 * Multiplies with a {@code Vector}.
 	 * 
 	 * @param v  a vector to multiply with
@@ -191,5 +203,11 @@ public class Matrix2x2 extends Matrix
 	public Matrix2x2 copy()
 	{
 		return (Matrix2x2) super.copy();
+	}
+
+	@Override
+	public Vector2 solve()
+	{
+		return (Vector2) super.solve();
 	}
 }

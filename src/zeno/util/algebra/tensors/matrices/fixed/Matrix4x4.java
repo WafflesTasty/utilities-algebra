@@ -295,6 +295,18 @@ public class Matrix4x4 extends Matrix
 	}
 	
 	/**
+	 * Solves a {@code Matrix} equation.
+	 * 
+	 * @param v  a parameter vector
+	 * @return  a result vector
+	 * @see Vector4
+	 */
+	public Vector4 solve(Vector4 v)
+	{
+		return (Vector4) super.solve(v);
+	}
+	
+	/**
 	 * Multiplies with a {@code Vector}.
 	 * 
 	 * @param v  a vector to multiply with
@@ -334,5 +346,11 @@ public class Matrix4x4 extends Matrix
 	public Matrix4x4 copy()
 	{
 		return (Matrix4x4) super.copy();
+	}
+
+	@Override
+	public Vector4 solve()
+	{
+		return (Vector4) super.solve();
 	}
 }

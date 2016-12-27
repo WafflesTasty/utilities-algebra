@@ -1,6 +1,8 @@
 package zeno.util.algebra.tensors.matrices;
 
 import zeno.util.algebra.tensors.vectors.Vector;
+import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.primitives.Integers;
 import zeno.util.algebra.tensors.Tensor;
 import zeno.util.algebra.tensors.matrices.fixed.Matrix2x2;
 import zeno.util.algebra.tensors.matrices.fixed.Matrix3x3;
@@ -17,7 +19,7 @@ import zeno.util.algebra.tensors.matrices.fixed.Matrix4x4;
  * @see Tensor
  */
 public class Matrix extends Tensor
-{
+{	
 	/**
 	 * Creates a {@code Matrix} with the specified dimensions.
 	 * <br> Depending on dimensions, a subclass may be used:
@@ -122,6 +124,32 @@ public class Matrix extends Tensor
 	}
 	
 	/**
+	 * Returns the trace of the {@code Matrix}.
+	 * 
+	 * @return  the matrix trace
+	 */
+	public float trace()
+	{
+		float trc = 0;
+		for(int i = 0; i < Integers.min(columns(), rows()); i++)
+		{
+			trc += get(i, i);
+		}
+		
+		return trc;
+	}
+	
+	/**
+	 * Returns the determinant of the {@code Matrix}.
+	 * 
+	 * @return  the matrix determinant
+	 */
+	public float determinant()
+	{
+		return copy().gauss();
+	}
+	
+	/**
 	 * Returns a {@code Matrix} value at an index.
 	 * 
 	 * @param c  a value column index
@@ -144,6 +172,30 @@ public class Matrix extends Tensor
 	{
 		super.set(val, c, r);
 	}
+	
+	/**
+	 * Multiplies a {@code Matrix} value at an index.
+	 * 
+	 * @param val  a matrix value to multiply
+	 * @param c  a value column index
+	 * @param r  a value row index
+	 */
+	public void times(float val, int c, int r)
+	{
+		super.times(val, c, r);
+	}
+	
+	/**
+	 * Adds a {@code Matrix} value at an index.
+	 * 
+	 * @param val  a matrix value to add
+	 * @param c  a value column index
+	 * @param r  a value row index
+	 */
+	public void plus(float val, int c, int r)
+	{
+		super.plus(val, c, r);
+	}
 
 	
 	/**
@@ -158,19 +210,19 @@ public class Matrix extends Tensor
 		return (Matrix) super.lerp(v, alpha);
     }
 
-//	/**
-//	 * Projects the {@code Matrix} to a hyperplane.
-//	 * 
-//	 * @param plane  a plane to project to
-//	 * @return  the projected matrix
-//	 */
-//	public Matrix projectTo(Matrix plane)
-//	{
-//		return (Matrix) super.projectTo(plane);
-//	}
-	
-	
-	
+	/**
+	 * Solves a linear system on the {@code Matrix}.
+	 * 
+	 * @param v  a parameter vector
+	 * @return  a result vector
+	 * @see Vector
+	 */
+	public Vector solve(Vector v)
+	{
+		Matrix copy = add(v); copy.gauss();
+		return copy.substitute();
+	}
+		
 	/**
 	 * Returns the {@code Matrix} multiplication.
 	 * 
@@ -180,18 +232,17 @@ public class Matrix extends Tensor
 	 */
 	public Vector times(Vector v)
 	{
-		int col1 = dimensions()[0];
-		int row1 = dimensions()[1];
-		
-		int row2 = v.dimensions()[0];
-	
-		if(col1 != row2)
+		int col1 = columns();
+		int col2 = v.size();
+		int row1 = rows();
+			
+		if(col1 != col2)
 		{
 			return null;
 		}
 		
 		
-		Tensor result = create(1, row1);
+		Vector result = Vector.create(row1);
 		for(int r = 0; r < row1; r++)
 		{
 			float val = 0;
@@ -203,7 +254,7 @@ public class Matrix extends Tensor
 			result.set(val, r);
 		}
 		
-		return (Vector) result;
+		return result;
 	}
 	
 	/**
@@ -214,25 +265,24 @@ public class Matrix extends Tensor
 	 */
 	public Matrix times(Matrix m)
 	{
-		int col1 = dimensions()[0];
-		int row1 = dimensions()[1];
-		
-		int col2 = m.dimensions()[0];
-		int row2 = m.dimensions()[1];
+		int col1 = m.columns();
+		int col2 = columns();
+		int row1 = m.rows();
+		int row2 = rows();
 	
-		if(col1 != row2)
+		if(row1 != col2)
 		{
 			return null;
 		}
 		
 		
-		Tensor result = create(col2, row1);
-		for(int c = 0; c < col2; c++)
+		Tensor result = create(col1, row2);
+		for(int c = 0; c < col1; c++)
 		{
-			for(int r = 0; r < row1; r++)
+			for(int r = 0; r < row2; r++)
 			{
 				float val = 0;
-				for(int d = 0; d < col1; d++)
+				for(int d = 0; d < col2; d++)
 				{
 					val += get(d, r) * m.get(c, d);
 				}
@@ -243,29 +293,7 @@ public class Matrix extends Tensor
 		
 		return (Matrix) result;
 	}
-			
-//	/**
-//	 * Returns the {@code Matrix}'s subtraction.
-//	 * 
-//	 * @param v  a matrix to subtract
-//	 * @return  the difference matrix
-//	 */
-//	public Matrix minus(Matrix v)
-//	{
-//		return (Matrix) super.minus(v);
-//	}
-//	
-//	/**
-//	 * Returns the {@code Matrix}'s summation.
-//	 * 
-//	 * @param v  a matrix to add
-//	 * @return  the sum matrix
-//	 */
-//	public Matrix plus(Matrix v)
-//	{
-//		return (Matrix) super.plus(v);
-//	}
-//	
+
 	/**
 	 * Returns the {@code Matrix} transpose.
 	 * 
@@ -289,6 +317,123 @@ public class Matrix extends Tensor
 		return (Matrix) result;
 	}
 	
+	/**
+	 * Solves the {@code Matrix} system.
+	 * 
+	 * @return  a result vector
+	 * @see Vector
+	 */
+	public Vector solve()
+	{
+		Matrix copy = copy(); copy.gauss();
+		return copy.substitute();
+	}
+	
+	
+	private float gauss()
+	{		
+		float det = 1;
+		for(int p = 0; p < rows(); p++)
+		{
+			if(pivot(p))
+			{
+				det = -det;
+			}
+
+			float val = get(p, p);
+			for(int r = p + 1; r < rows(); r++)
+			{
+				float m = -get(p, r) / val;
+				for(int c = 0; c < columns(); c++)
+				{
+					if(c < p + 1)
+					{
+						set(0, c, r);
+						continue;
+					}
+					
+					plus(m * get(c, p), c, r);
+				}
+			}
+			
+			det *= val;
+		}
+		
+		return det;
+	}
+	
+	private Vector substitute()
+	{
+		Vector result = Vector.create(rows());
+		for(int r = rows() - 1; r >= 0; r--)
+		{
+			result.set(get(columns() - 1, r), r);
+			for(int c = r + 1; c < rows(); c++)
+			{
+				float m = -result.get(c);
+				result.plus(m * get(c, r), r);
+			}
+
+			result.times(1 / get(r, r), r);
+		}
+		
+		return result;
+	}
+	
+	private boolean pivot(int p)
+	{
+		// Find highest pivot for best stability.
+
+		int q = p; float cur = 0;
+		for(int i = p; i < rows(); i++)
+		{
+			float val = Floats.abs(get(p, i));
+			if(cur < val)
+			{
+				cur = val;
+				q = i;
+			}
+		}
+		
+		
+		if(p == q) return false;
+		
+		// Switch the rows p and q.
+		
+		for(int c = 0; c < columns(); c++)
+		{
+			cur = get(c, p);
+			set(get(c, q), c, p);
+			set(cur, c, q);
+		}
+		
+		return true;
+	}
+	
+	private Matrix add(Vector v)
+	{
+		int col1 = columns();
+		int row2 = v.size();
+		int row1 = rows();
+			
+		if(row1 != row2)
+		{
+			return null;
+		}
+		
+		
+		Matrix result = (Matrix) create(col1 + 1, row1);
+		for(int r = 0; r < row1; r++)
+		{
+			result.set(v.get(r), col1, r);
+			for(int c = 0; c < col1; c++)
+			{
+				result.set(get(c, r), c, r);
+			}
+		}
+		
+		return result;
+	}
 	
 	
 	@Override

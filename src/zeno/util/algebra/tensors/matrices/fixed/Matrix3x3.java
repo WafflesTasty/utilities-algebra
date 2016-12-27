@@ -345,6 +345,18 @@ public class Matrix3x3 extends Matrix
 	}
 	
 	/**
+	 * Solves a {@code Matrix} equation.
+	 * 
+	 * @param v  a parameter vector
+	 * @return  a result vector
+	 * @see Vector3
+	 */
+	public Vector3 solve(Vector3 v)
+	{
+		return (Vector3) super.solve(v);
+	}
+	
+	/**
 	 * Multiplies with a {@code Vector}.
 	 * 
 	 * @param v  a vector to multiply
@@ -385,5 +397,11 @@ public class Matrix3x3 extends Matrix
 	public Matrix3x3 copy()
 	{
 		return (Matrix3x3) super.copy();
+	}
+
+	@Override
+	public Vector3 solve()
+	{
+		return (Vector3) super.solve();
 	}
 }

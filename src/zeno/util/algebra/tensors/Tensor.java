@@ -121,7 +121,7 @@ public class Tensor implements ITensor
 	}
 	
 	/**
-	 * Changes a {@code Tensor} value at an index.
+	 * Sets a new {@code Tensor} value at an index.
 	 * 
 	 * @param val  a matrix value
 	 * @param coords  a value coördinate
@@ -131,6 +131,27 @@ public class Tensor implements ITensor
 		values[toIndex(coords)] = val;
 	}
 	
+	/**
+	 * Multiplies a {@code Tensor} value at an index.
+	 * 
+	 * @param val  a matrix value to multiply
+	 * @param coords  a value coördinate
+	 */
+	public void times(float val, int... coords)
+	{
+		set(get(coords) * val, coords);
+	}
+	
+	/**
+	 * Adds a {@code Tensor} value at an index.
+	 * 
+	 * @param val  a matrix value to add
+	 * @param coords  a value coördinate
+	 */
+	public void plus(float val, int... coords)
+	{
+		set(get(coords) + val, coords);
+	}
 	
 	
 	@Override
