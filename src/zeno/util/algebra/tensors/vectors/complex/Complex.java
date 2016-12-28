@@ -28,8 +28,8 @@ public class Complex extends Vector2
 	/**
 	 * Creates a new {@code Complex}.
 	 * 
-	 * @param x  the quaternion's x-coördinate
-	 * @param y  the quaternion's y-coördinate
+	 * @param x  the complex's x-coördinate
+	 * @param y  the complex's y-coördinate
 	 */
 	public Complex(float x, float y)
 	{
@@ -221,10 +221,10 @@ public class Complex extends Vector2
 		float y = Y();
 		
 		String txt = "";
-		txt += (Floats.isZero(x) ? "" : x < 0 ? " - " : " + ");
-		txt += (Floats.isZero(x) ? "" : Floats.abs(x));
-		txt += (Floats.isZero(y) ? "" : y < 0 ? " - " : " + ");
-		txt += (Floats.isZero(y) ? "" : Floats.abs(y) + "i");
+		txt += (x == 0 ? "" : x < 0 ? " - " : " + ");
+		txt += (x == 0 ? "" : Floats.abs(x)			);
+		txt += (y == 0 ? "" : y < 0 ? " - " : " + ");
+		txt += (y == 0 ? "" : Floats.abs(y) + "i");
 		txt += (txt.equals("") ? " + " + x : "");
 		
 		return txt;

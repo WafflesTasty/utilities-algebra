@@ -46,28 +46,6 @@ public class RootFinder extends Messenger
 	}
 	
 	
-
-	/**
-	 * Finds the complex roots of a {@code Polynomial}.
-	 * 
-	 * @param p  a polynomial to check
-	 * @return  the polynomial's complex roots
-	 * @see Polynomial
-	 * @see Complex
-	 */
-	public Complex[] findComplexRoots(Polynomial p)
-	{
-		findRoots(p);
-		
-		Complex[] array = new Complex[roots.size()];
-		for(int i = 0; i < roots.size(); i++)
-		{
-			array[i] = roots.get(i);
-		}
-		
-		return array;
-	}
-	
 	/**
 	 * Finds the real roots of a {@code Polynomial}.
 	 * 
@@ -98,23 +76,92 @@ public class RootFinder extends Messenger
 		
 		return array;
 	}
+
+	/**
+	 * Finds the complex roots of a {@code Polynomial}.
+	 * 
+	 * @param p  a polynomial to check
+	 * @return  the polynomial's complex roots
+	 * @see Polynomial
+	 * @see Complex
+	 */
+	public Complex[] findComplexRoots(Polynomial p)
+	{
+		findRoots(p);
+		
+		Complex[] array = new Complex[roots.size()];
+		for(int i = 0; i < roots.size(); i++)
+		{
+			array[i] = roots.get(i);
+		}
+		
+		return array;
+	}
+		
 	
+	private float disc(double a, double b, double c)
+	{
+		return (float) (b * b - 4 * a * c);
+	}
 	
 	private void findQuadratic(Polynomial p)
 	{
 		sendMessage("Solving a second degree polynomial: " + p);
 		
-		float coef0 = p.getValue(0);
-		float coef1 = p.getValue(1);
-		float coef2 = p.getValue(2);
+		float c = p.getValue(0);
+		float b = p.getValue(1);
+		float a = p.getValue(2);
 		
 		
-		float disc = Floats.pow(coef1, 2) - 4 * coef2 * coef0;
+		// Special case: b = 0.
+		
+		if(b == 0)
+		{
+			if(a == 0)
+			{
+				// Either no or infinite solutions.
+				
+				return;
+			}
+			
+			// Pure real roots.
+			
+			float val = -c / a;
+			if(val > 0)
+			{
+				float val1 = -Floats.sqrt(val);
+				float val2 =  Floats.sqrt(val);
+				
+				Complex root1 = new Complex(val1, 0);
+				Complex root2 = new Complex(val2, 0);
+				sendMessage("Found root: " + root1);
+				sendMessage("Found root: " + root2);
+				roots.add(root1);
+				roots.add(root2);
+				return;
+			}
+			
+			// Pure imaginary roots.
+			
+			float val1 = -Floats.sqrt(-val);
+			float val2 =  Floats.sqrt(-val);
+			
+			Complex root1 = new Complex(0, val1);
+			Complex root2 = new Complex(0, val2);
+			sendMessage("Found root: " + root1);
+			sendMessage("Found root: " + root2);
+			roots.add(root1);
+			roots.add(root2);
+			return;
+		}
+		
+				
+		float disc = disc(a, b, c);
 		sendMessage("Discriminant: " + disc);
 		
-		if(Floats.isZero(disc))
+		if(disc == 0)
 		{
-			float val = - coef1 / (2 * coef2);
+			float val = - b / (2 * a);
 			
 			Complex root = new Complex(val, 0);
 			sendMessage("Found root: " + root);
@@ -124,9 +171,9 @@ public class RootFinder extends Messenger
 		
 		if(disc > 0)
 		{
-			float sqrt = Floats.sqrt(disc);
-			float val1 = (- coef1 - sqrt) / (2 * coef2);
-			float val2 = (- coef1 + sqrt) / (2 * coef2);
+			float sqrt = Floats.sign(b) * Floats.sqrt(disc);
+			float val1 = -(b + sqrt) / (2 * a);
+			float val2 = c / (a * val1);
 			
 			Complex root1 = new Complex(val1, 0);
 			Complex root2 = new Complex(val2, 0);
@@ -136,11 +183,11 @@ public class RootFinder extends Messenger
 			roots.add(root2);
 			return;
 		}
-				
+		
 		float sqrt = Floats.sqrt(-disc);
-		float real = - coef1 / (2 * coef2);
-		float ima1 = - sqrt / (2 * coef2);
-		float ima2 = + sqrt / (2 * coef2);
+		float ima1 = - sqrt / (2 * a);
+		float ima2 = + sqrt / (2 * a);
+		float real = - b / (2 * a);
 		
 		Complex root1 = new Complex(real, ima1);
 		Complex root2 = new Complex(real, ima2);
@@ -218,7 +265,7 @@ public class RootFinder extends Messenger
 			v += vErr;
 
 			// Check last error margin.
-			if(Floats.isZero(uErr) && Floats.isZero(vErr))
+			if(uErr == 0 && vErr == 0)
 			{
 				sendMessage("Iterations: " + i);
 				break;

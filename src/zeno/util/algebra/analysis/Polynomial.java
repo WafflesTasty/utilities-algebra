@@ -250,7 +250,7 @@ public class Polynomial implements Copyable<Polynomial>
 	 */
 	public void set(int deg, float val)
 	{
-		if(!Floats.isZero(val))
+		if(val != 0)
 			terms.put(deg, val);
 		else if(deg != 0)
 			terms.remove(deg);
