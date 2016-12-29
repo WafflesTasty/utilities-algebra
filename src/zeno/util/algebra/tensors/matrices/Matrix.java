@@ -245,13 +245,15 @@ public class Matrix extends Tensor
 		Vector result = Vector.create(row1);
 		for(int r = 0; r < row1; r++)
 		{
-			float val = 0;
+			double val = 0;
 			for(int d = 0; d < col1; d++)
 			{
-				val += get(d, r) * v.get(d);
+				double v1 = get(d, r);
+				double v2 = v.get(d);
+				val += v1 * v2;
 			}
 			
-			result.set(val, r);
+			result.set((float) val, r);
 		}
 		
 		return result;
@@ -281,13 +283,15 @@ public class Matrix extends Tensor
 		{
 			for(int r = 0; r < row2; r++)
 			{
-				float val = 0;
+				double val = 0;
 				for(int d = 0; d < col2; d++)
 				{
-					val += get(d, r) * m.get(c, d);
+					double v1 = m.get(c, d);
+					double v2 = get(d, r);
+					val += v1 * v2;
 				}
 				
-				result.set(val, c, r);
+				result.set((float) val, c, r);
 			}
 		}
 		
@@ -332,7 +336,7 @@ public class Matrix extends Tensor
 	
 	private float gauss()
 	{		
-		float det = 1;
+		double det = 1;
 		for(int p = 0; p < rows(); p++)
 		{
 			if(pivot(p))
@@ -359,7 +363,7 @@ public class Matrix extends Tensor
 			det *= val;
 		}
 		
-		return det;
+		return (float) det;
 	}
 	
 	private Vector substitute()
@@ -367,14 +371,14 @@ public class Matrix extends Tensor
 		Vector result = Vector.create(rows());
 		for(int r = rows() - 1; r >= 0; r--)
 		{
-			result.set(get(columns() - 1, r), r);
+			double val = get(columns() - 1, r);
 			for(int c = r + 1; c < rows(); c++)
 			{
-				float m = -result.get(c);
-				result.plus(m * get(c, r), r);
+				double m = -result.get(c);
+				val += m * get(c, r);
 			}
-
-			result.times(1 / get(r, r), r);
+			
+			result.set((float) (val / get(r, r)), r);
 		}
 		
 		return result;
