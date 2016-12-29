@@ -188,13 +188,15 @@ public class Tensor implements ITensor
 	{
 		if(hasSameDimension(t))
 		{
-			float product = 0;
+			double product = 0;
 			for(int i = 0; i < size(); i++)
 			{
-				product += values[i] * t.values()[i];
+				double v1 = t.values()[i];
+				double v2 = values()[i];
+				product += v1 * v2;
 			}
 			
-			return product;
+			return (float) product;
 		}
 		
 		return Floats.NaN;
