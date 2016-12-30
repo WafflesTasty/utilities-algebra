@@ -219,8 +219,13 @@ public class Matrix extends Tensor
 	 */
 	public Vector solve(Vector v)
 	{
-		Matrix copy = add(v); copy.gauss();
-		return copy.substitute();
+		Matrix copy = add(v);
+		if(copy.gauss() != 0)
+		{
+			return copy.substitute();
+		}
+		
+		return null;
 	}
 		
 	/**
@@ -329,8 +334,13 @@ public class Matrix extends Tensor
 	 */
 	public Vector solve()
 	{
-		Matrix copy = copy(); copy.gauss();
-		return copy.substitute();
+		Matrix copy = copy();
+		if(copy.gauss() != 0)
+		{
+			return copy.substitute();
+		}
+		
+		return null;
 	}
 	
 	
@@ -361,6 +371,10 @@ public class Matrix extends Tensor
 			}
 			
 			det *= val;
+			if(det == 0)
+			{
+				break;
+			}
 		}
 		
 		return (float) det;
