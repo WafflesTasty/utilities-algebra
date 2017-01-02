@@ -161,6 +161,7 @@ public class Matrix extends Tensor
 		return super.get(c, r);
 	}
 	
+	
 	/**
 	 * Changes a {@code Matrix} value at an index.
 	 * 
