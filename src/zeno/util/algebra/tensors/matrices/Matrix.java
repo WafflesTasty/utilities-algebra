@@ -355,10 +355,10 @@ public class Matrix extends Tensor
 				det = -det;
 			}
 
-			float val = get(p, p);
+			double val = get(p, p);
 			for(int r = p + 1; r < rows(); r++)
 			{
-				float m = -get(p, r) / val;
+				double m = -get(p, r) / val;
 				for(int c = 0; c < columns(); c++)
 				{
 					if(c < p + 1)
@@ -367,7 +367,7 @@ public class Matrix extends Tensor
 						continue;
 					}
 					
-					plus(m * get(c, p), c, r);
+					plus((float) (m * get(c, p)), c, r);
 				}
 			}
 			
