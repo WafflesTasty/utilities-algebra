@@ -81,6 +81,7 @@ public class Vector extends Tensor
 		return (Vector) Tensor.random(size);
 	}
 	
+	
 	/**
 	 * Creates a new {@code Vector}.
 	 * 
