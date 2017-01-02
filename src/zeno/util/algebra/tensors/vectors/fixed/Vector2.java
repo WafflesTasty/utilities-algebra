@@ -33,7 +33,7 @@ public class Vector2 extends Vector
 	 */
 	public static boolean isColinear(Vector2 a, Vector2 b, Vector2 c)
 	{		
-		return Floats.isZero(getRotation(a, b, c), 22);
+		return Floats.isZero(getRotation(a, b, c), 4);
 	}
 	
 	/**
