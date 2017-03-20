@@ -453,7 +453,13 @@ public class Matrix extends Tensor
 		
 		return result;
 	}
+
 	
+	@Override
+	public Matrix absolute()
+	{
+		return (Matrix) super.absolute();
+	}
 	
 	@Override
 	public Matrix times(float s)

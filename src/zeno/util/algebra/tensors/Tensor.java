@@ -155,15 +155,11 @@ public class Tensor implements ITensor
 	
 	
 	@Override
-	public Tensor times(float val)
+	public Tensor absolute()
 	{
-		Tensor result = copy();
-		for(int i = 0; i < size(); i++)
-		{
-			result.values[i] *= val;
-		}
-		
-		return result;
+		Tensor copy = (Tensor) ITensor.super.copy();
+		copy.values = Floats.abs(values);
+		return copy;
 	}
 
 	@Override
@@ -181,6 +177,18 @@ public class Tensor implements ITensor
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public Tensor times(float val)
+	{
+		Tensor result = copy();
+		for(int i = 0; i < size(); i++)
+		{
+			result.values[i] *= val;
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -213,7 +221,7 @@ public class Tensor implements ITensor
 	{
 		return values;
 	}
-	
+		
 	
 	@Override
 	public String toString()
@@ -226,7 +234,7 @@ public class Tensor implements ITensor
 	{
 		return Tensor.create(dimensions);
 	}
-	
+		
 	@Override
 	public Tensor copy()
 	{
@@ -235,8 +243,7 @@ public class Tensor implements ITensor
 		return copy;
 	}
 	
-	
-	
+		
 	private boolean hasSameDimension(ITensor t)
 	{
 		return Array.equals.of(dimensions, t.dimensions());

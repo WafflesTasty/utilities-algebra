@@ -17,6 +17,14 @@ import zeno.util.tools.primitives.Floats;
 public interface ITensor extends Copyable<ITensor>
 {
 	/**
+	 * Returns the {@code Tensor}'s inproduct with another.
+	 * 
+	 * @param t  a tensor to multiply
+	 * @return  the dot product
+	 */
+	public abstract float dot(ITensor t);
+	
+	/**
 	 * Returns the {@code Tensor}'s product with a scalar value.
 	 * 
 	 * @param val  a value to multiply
@@ -31,15 +39,14 @@ public interface ITensor extends Copyable<ITensor>
 	 * @return  the sum tensor
 	 */
 	public abstract ITensor plus(ITensor t);
-	
+			
 	/**
-	 * Returns the {@code Tensor}'s inproduct with another.
+	 * Returns the absolute of the {@code Tensor}.
 	 * 
-	 * @param t  a tensor to multiply
-	 * @return  the dot product
+	 * @return  the tensor absolute
 	 */
-	public abstract float dot(ITensor t);
-		
+	public abstract ITensor absolute();
+	
 	
 	/**
 	 * Returns the {@code Tensor}'s list of dimensions.
@@ -108,7 +115,7 @@ public interface ITensor extends Copyable<ITensor>
 		
 		return times(1f / norm);
 	}
-	
+		
 		
 	/**
 	 * Returns the {@code Tensor}'s distance to another.

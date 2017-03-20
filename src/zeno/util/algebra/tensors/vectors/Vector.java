@@ -197,8 +197,14 @@ public class Vector extends Tensor
 	{
 		return (Vector) super.plus(v);
 	}
+
 	
-	
+	@Override
+	public Vector absolute()
+	{
+		return (Vector) super.absolute();
+	}
+		
 	@Override
 	public Vector times(float s)
 	{
