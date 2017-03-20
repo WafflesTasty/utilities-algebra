@@ -47,6 +47,24 @@ public class Vector extends Tensor
 	 * <li> (4) returns a {@code Vector4}. </li>
 	 * </ul>
 	 * 
+	 * @param val  an initial vector value
+	 * @param size  the size of the vector
+	 * @return  a new vector
+	 */
+	public static Vector create(float val, int size)
+	{
+		return (Vector) Tensor.create(val, size);
+	}
+	
+	/**
+	 * Creates a zero {@code Vector} with the specified size.
+	 * <br> Depending on dimensions, a subclass may be used:
+	 * <ul>
+	 * <li> (2) returns a {@code Vector2}. </li>
+	 * <li> (3) returns a {@code Vector3}. </li>
+	 * <li> (4) returns a {@code Vector4}. </li>
+	 * </ul>
+	 * 
 	 * @param size  the size of the vector
 	 * @return  a new vector
 	 */

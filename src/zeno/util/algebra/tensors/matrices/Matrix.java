@@ -65,6 +65,30 @@ public class Matrix extends Tensor
 		
 		return new Matrix(col, row);
 	}
+	
+	/**
+	 * Creates a {@code Matrix} with the specified dimensions.
+	 * <br> Depending on dimensions, a subclass may be used:
+	 * <ul>
+	 * <li> (2,2) returns a {@code Matrix2x2}. </li>
+	 * <li> (3,3) returns a {@code Matrix3x3}. </li>
+	 * <li> (4,4) returns a {@code Matrix4x4}. </li>
+	 * <li> (R) returns a {@code Vector}. </li>
+	 * <li> (2) returns a {@code Vector2}. </li>
+	 * <li> (3) returns a {@code Vector3}. </li>
+	 * <li> (4) returns a {@code Vector4}. </li>
+	 * </ul>
+	 * 
+	 * @param val  an initial matrix value
+	 * @param col  a matrix column count
+	 * @param row  a matrix row count
+	 * @return  a new matrix
+	 * @see Tensor
+	 */
+	public static Tensor create(float val, int col, int row)
+	{
+		return Tensor.create(val, col, row);
+	}
 		
 	/**
 	 * Returns a random value {@code Matrix} of the specified size.

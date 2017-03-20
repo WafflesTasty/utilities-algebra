@@ -1,5 +1,7 @@
 package zeno.util.algebra.tensors;
 
+import java.util.Arrays;
+
 import zeno.util.algebra.tensors.matrices.Matrix;
 import zeno.util.algebra.tensors.vectors.Vector;
 import zeno.util.tools.Array;
@@ -49,6 +51,33 @@ public class Tensor implements ITensor
 		}
 		
 		return new Tensor(dims);
+	}
+	
+	/**
+	 * Creates a {@code Tensor} with the specified dimensions.
+	 * <br> Depending on dimensions, a subclass may be used:
+	 * <ul>
+	 * <li> (C,R) returns a {@code Matrix2}. </li>
+	 * <li> (2,2) returns a {@code Matrix2x2}. </li>
+	 * <li> (3,3) returns a {@code Matrix3x3}. </li>
+	 * <li> (4,4) returns a {@code Matrix4x4}. </li>
+	 * <li> (R) returns a {@code Vector}. </li>
+	 * <li> (2) returns a {@code Vector2}. </li>
+	 * <li> (3) returns a {@code Vector3}. </li>
+	 * <li> (4) returns a {@code Vector4}. </li>
+	 * </ul>
+	 * 
+	 * @param val  an initial value for the tensor
+	 * @param dims  the dimensions of the tensor
+	 * @return  a new tensor
+	 * @see Tensor
+	 */
+	public static Tensor create(float val, int... dims)
+	{
+		Tensor t = create(dims);
+		Arrays.fill(t.values, val);
+		
+		return t;
 	}
 	
 	/**
