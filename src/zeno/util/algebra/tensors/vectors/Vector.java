@@ -32,7 +32,7 @@ public class Vector extends Tensor
 		int size = vals.length / count;
 		for(int i = 0; i < count; i++)
 		{
-			result[i] = new Vector(Array.copy.of(vals, size * i, size * (i + 1)));
+			result[i] = Vector.create(Array.copy.of(vals, size * i, size * (i + 1)));
 		}
 		
 		return result;
@@ -54,6 +54,23 @@ public class Vector extends Tensor
 	public static Vector create(float val, int size)
 	{
 		return (Vector) Tensor.create(val, size);
+	}
+	
+	/**
+	 * Creates a new {@code Vector} with the specified values.
+	 * 
+	 * @param vals  the values of the vector
+	 * @return  a new vector
+	 */
+	public static Vector create(float... vals)
+	{
+		Vector v = create(vals.length);
+		for(int i = 0; i < vals.length; i++)
+		{
+			v.set(vals[i], i);
+		}
+		
+		return v;
 	}
 	
 	/**
