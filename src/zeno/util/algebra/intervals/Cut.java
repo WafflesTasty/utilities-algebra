@@ -91,14 +91,25 @@ public abstract class Cut implements Comparable<Cut>
 		}
 			
 		@Override
-		public int compareTo(Cut c)
+		public int compareTo(float val)
 		{
-			if(c == this)
+			if(Floats.isFinite(val))
 			{
-				return 0;
+				return -1;
 			}
 			
-			return -1;
+			return 0;
+		}
+		
+		@Override
+		public int compareTo(Cut c)
+		{
+			if(c != this)
+			{
+				return -1;
+			}
+			
+			return 0;
 		}
 	}
 		
@@ -123,10 +134,27 @@ public abstract class Cut implements Comparable<Cut>
 		}
 		
 		@Override
+		public int compareTo(float val)
+		{
+			int comp = super.compareTo(val);
+			if(comp == 0)
+			{
+				if(isAbove(val))
+				{
+					return 1;
+				}
+				
+				return -1;
+			}
+			
+			return comp;
+		}
+		
+		@Override
 		public int compareTo(Cut c)
 		{
-			int compare = super.compareTo(c);
-			if(compare == 0)
+			int comp = super.compareTo(c);
+			if(comp == 0)
 			{
 				if(c.isAbove(value()))
 				{
@@ -136,7 +164,7 @@ public abstract class Cut implements Comparable<Cut>
 				return 0;
 			}
 			
-			return compare;
+			return comp;
 		}
 	}
 	
@@ -158,6 +186,23 @@ public abstract class Cut implements Comparable<Cut>
 		public boolean isBelow(float v)
 		{
 			return v > value();
+		}
+		
+		@Override
+		public int compareTo(float val)
+		{
+			int comp = super.compareTo(val);
+			if(comp == 0)
+			{
+				if(isAbove(val))
+				{
+					return 1;
+				}
+				
+				return -1;
+			}
+			
+			return comp;
 		}
 		
 		@Override
@@ -208,6 +253,17 @@ public abstract class Cut implements Comparable<Cut>
 		public boolean isBelow(float v)
 		{
 			return false;
+		}
+		
+		@Override
+		public int compareTo(float val)
+		{
+			if(Floats.isFinite(val))
+			{
+				return 1;
+			}
+			
+			return 0;
 		}
 		
 		@Override
@@ -309,7 +365,7 @@ public abstract class Cut implements Comparable<Cut>
 		return value;
 	}
 	
-	
+		
 	/**
 	 * Checks if the {@code Cut} is above a value.
 	 * 
@@ -325,6 +381,19 @@ public abstract class Cut implements Comparable<Cut>
 	 * @return  {@code true} if the cut is below
 	 */
 	public abstract boolean isBelow(float v);
+		
+	/**
+	 * Compares the {@code Cut} to a value.
+	 * 
+	 * @param val  a value to compare
+	 * @return  a comparative integer
+	 */
+	public int compareTo(float val)
+	{
+		if(value < val) return -1;
+		if(value > val) return  1;
+		return 0;
+	}
 	
 	
 	@Override
@@ -341,9 +410,7 @@ public abstract class Cut implements Comparable<Cut>
 	@Override
 	public int compareTo(Cut o)
 	{
-		if(value < o.value) return -1;
-		if(value > o.value) return  1;
-		return 0;
+		return compareTo(o.value);
 	}
 	
 	@Override
