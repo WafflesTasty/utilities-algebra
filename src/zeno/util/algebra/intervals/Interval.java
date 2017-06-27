@@ -534,7 +534,7 @@ public class Interval implements Comparable<Interval>
 	}
 	
 	/**
-	 * Compares a value to the {@code Interval}.
+	 * Compares a value relative to the {@code Interval}.
 	 * If -1, the value is higher than the range;
 	 * if 1, the value is lower than the range;
 	 * otherwise, the value is contained.
@@ -547,6 +547,21 @@ public class Interval implements Comparable<Interval>
 		if(min.isAbove(val)) return  1;
 		if(max.isBelow(val)) return -1;
 		return 0;
+	}
+	
+	/**
+	 * Checks if the {@code Interval} is a singleton.
+	 * 
+	 * @return  {@code true} if the interval is a singleton
+	 */
+	public boolean isSingleton()
+	{
+		if(!isEmpty())
+		{
+			return min.value() == max.value();
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -592,4 +607,5 @@ public class Interval implements Comparable<Interval>
 		return 443 * min.hashCode()
 			 + 881 * max.hashCode();
 	}
+
 }
