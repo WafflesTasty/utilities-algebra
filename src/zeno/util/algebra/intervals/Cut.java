@@ -136,18 +136,9 @@ public abstract class Cut implements Comparable<Cut>
 		@Override
 		public int compareTo(float val)
 		{
-			int comp = super.compareTo(val);
-			if(comp == 0)
-			{
-				if(isAbove(val))
-				{
-					return 1;
-				}
-				
-				return -1;
-			}
-			
-			return comp;
+			if(isAbove(val))
+				return 1;
+			return -1;
 		}
 		
 		@Override
@@ -191,18 +182,9 @@ public abstract class Cut implements Comparable<Cut>
 		@Override
 		public int compareTo(float val)
 		{
-			int comp = super.compareTo(val);
-			if(comp == 0)
-			{
-				if(isAbove(val))
-				{
-					return 1;
-				}
-				
-				return -1;
-			}
-			
-			return comp;
+			if(isAbove(val))
+				return 1;
+			return -1;
 		}
 		
 		@Override
@@ -388,12 +370,7 @@ public abstract class Cut implements Comparable<Cut>
 	 * @param val  a value to compare
 	 * @return  a comparative integer
 	 */
-	public int compareTo(float val)
-	{
-		if(value < val) return -1;
-		if(value > val) return  1;
-		return 0;
-	}
+	public abstract int compareTo(float val);
 	
 	
 	@Override
