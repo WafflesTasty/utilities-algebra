@@ -1,6 +1,7 @@
 package zeno.util.algebra.intervals;
 
 import zeno.util.tools.Array;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Interval} class defines a single range of real numbers.
@@ -18,10 +19,50 @@ public class Interval implements Comparable<Interval>
 	public static Interval ALL = new All();
 	
 	/**
+	 * Returns a radian angle {@code Interval}.
+	 * <br> The interval spans from {@code -PI}
+	 * to {@code PI}.
+	 */
+	public static Interval RADIANS = new Radians();
+	
+	/**
 	 * Returns the empty {@code Interval}.
 	 */
-	public static Interval EMPTY = new Empty();
-	
+	public static Interval EMPTY = new Empty();	
+		
+				
+	/**
+	 * Creates a new {@code Interval} from a string.
+	 * <br> The format of the string follows the example (0.0, 10.5].
+	 * The boundaries of the interval are denoted by '(' and ')' for
+	 * an open cut, or '[' and ']' for a closed cut.
+	 * 
+	 * @param format  an interval format
+	 * @return  a new interval
+	 * @see String
+	 */
+	public static Interval create(String format)
+	{
+		String[] split = format.split(",");
+		
+		int len0 = split[0].length();
+		int len1 = split[1].length();
+		
+		
+		char bmin = split[0].charAt(0);
+		char bmax = split[1].charAt(len1 - 1);
+		
+		float min = Floats.parse(split[0].substring(1, len0));
+		float max = Floats.parse(split[1].substring(0, len1 - 1));
+		
+		if(bmin != '(' && bmin != '[') return null;
+		if(bmax != ')' && bmax != ']') return null;
+		
+		Cut cmin = (bmin == '(' ? Cut.Above(min) : Cut.Below(min));
+		Cut cmax = (bmax == ')' ? Cut.Below(max) : Cut.Above(max));
+		
+		return create(cmin, cmax);
+	}
 	
 	/**
 	 * Creates a new {@code Interval} from two cuts.
@@ -70,30 +111,53 @@ public class Interval implements Comparable<Interval>
 		// Return doublebounded range.
 		return new Interval(cMin, cMax);
 	}
-	
+		
 	/**
-	 * Creates a new {@code Interval} from two cuts.
-	 * The range boundaries are given by '[' or '(' for a
-	 * closed or open lower bound respectively, and ']' or ')'
-	 * for a closed or open upper bound respectively.
+	 * Normalizes an interval into radian angle values.
+	 * <br> The resulting intervals cover the same angle as the
+	 * original in the range of {@code -PI} to {@code PI}.
 	 * 
-	 * @param bmin  a minimum boundary
-	 * @param min   a minimum value
-	 * @param max   a maximum value
-	 * @param bmax  a maximum boundary
-	 * @return  a new range
+	 * @param ival  an interval to normalize
+	 * @return  the normalized intervals
 	 */
-	public static Interval create(char bmin, float min, float max, char bmax)
+	public static Interval[] toRadians(Interval ival)
 	{
-		if(bmin != '(' && bmin != '[') return null;
-		if(bmax != ')' && bmax != ']') return null;
+		// If the interval's length is more than 2 * PI...
+		if(ival.length().isAbove(2 * Floats.PI))
+		{
+			// Return the full range.
+			return new Interval[]{Interval.RADIANS};
+		}
 		
-		Cut cmin = (bmin == '(' ? Cut.Above(min) : Cut.Below(min));
-		Cut cmax = (bmax == ')' ? Cut.Below(max) : Cut.Above(max));
 		
-		return create(cmin, cmax);
+		Cut min = ival.min();
+		Cut max = ival.max();
+				
+		float vmin = Floats.normrad(min.value());
+		float vmax = Floats.normrad(max.value());
+		
+		// Create normalized cuts of the original interval.
+		min = (min.isAbove(min.value()) ? Cut.Above(vmin) : Cut.Below(vmin));
+		max = (max.isAbove(max.value()) ? Cut.Above(vmax) : Cut.Below(vmax));
+		
+		// If the minimum is above the maximum...
+		if(min.compareTo(max) > 0)
+		{
+			// Split the result into two intervals.
+			return new Interval[]
+			{
+				Interval.create(Cut.Below(-Floats.PI), max),
+				Interval.create(min, Cut.Below(Floats.PI))
+			};
+		}
+		
+		// Otherwise, return the interval.
+		return new Interval[]
+		{
+			Interval.create(min, max)
+		};		
 	}
-		
+	
 	/**
 	 * Creates a new singleton {@code Interval}.
 	 * 
@@ -102,7 +166,7 @@ public class Interval implements Comparable<Interval>
 	 */
 	public static Interval singleton(float val)
 	{
-		return create('[', val, val, ']');
+		return create("[" + val + ", " + val + "]");
 	}
 	
 	
@@ -232,6 +296,14 @@ public class Interval implements Comparable<Interval>
 		{
 			return false;
 		}
+	}
+	
+	private static class Radians extends Interval
+	{
+		protected Radians()
+		{
+			super(Cut.Below(-Floats.PI), Cut.Below(Floats.PI));
+		}	
 	}
 	
 	private static class Empty extends Interval
@@ -565,13 +637,24 @@ public class Interval implements Comparable<Interval>
 	}
 	
 	/**
-	 * Checks if the {@code Interval} is empty.
+	 * Checks whether the {@code Interval} is empty.
 	 * 
 	 * @return  {@code true} if the range is empty
 	 */
 	public boolean isEmpty()
 	{
 		return min.equals(max);
+	}
+	
+	/**
+	 * Returns the length of the {@code Interval}.
+	 * 
+	 * @return  the interval's length
+	 * @see Cut
+	 */
+	public Cut length()
+	{
+		return max.minus(min);
 	}
 	
 			

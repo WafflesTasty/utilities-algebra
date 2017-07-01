@@ -33,12 +33,12 @@ public abstract class Cut implements Comparable<Cut>
 	 */
 	public static Cut Above(float value)
 	{
-		if(value != Floats.POS_INFINITY)
-		{
-			return new AboveValue(value);
-		}
+		if(value == Floats.NEG_INFINITY)
+			return BELOW_ALL;
+		if(value == Floats.POS_INFINITY)
+			return ABOVE_ALL;
 		
-		return ABOVE_ALL;
+		return new AboveValue(value);
 	}
 	
 	/**
@@ -49,12 +49,12 @@ public abstract class Cut implements Comparable<Cut>
 	 */
 	public static Cut Below(float value)
 	{
-		if(value != Floats.NEG_INFINITY)
-		{
-			return new BelowValue(value);
-		}
+		if(value == Floats.NEG_INFINITY)
+			return BELOW_ALL;
+		if(value == Floats.POS_INFINITY)
+			return ABOVE_ALL;
 		
-		 return BELOW_ALL;
+		return new BelowValue(value);
 	}
 	
 	
@@ -327,6 +327,21 @@ public abstract class Cut implements Comparable<Cut>
 		}
 		
 		return Below(value + val);
+	}
+	
+	/**
+	 * Subtracts from this {@code Cut}.
+	 * 
+	 * @param cut  a cut to subtract
+	 * @return  a subtracted cut
+	 * @see Cut
+	 */
+	public Cut minus(Cut cut)
+	{
+		float val = value - cut.value;
+		if(cut.isBelow(cut.value())) return Above(val);
+		if(isAbove(value())) return Above(val);
+		return Below(val);
 	}
 	
 	/**
