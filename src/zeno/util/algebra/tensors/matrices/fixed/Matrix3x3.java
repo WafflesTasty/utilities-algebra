@@ -101,12 +101,14 @@ public class Matrix3x3 extends Matrix
 	 */
 	public static Matrix3x3 rotate3D(Vector3 v, float theta)
 	{
+		Vector3 w = v.normalize();
+		
 		float sin = Floats.sin(theta);
 		float cos = Floats.cos(theta);
-		
-		float x = v.X();
-		float y = v.Y();
-		float z = v.Z();
+				
+		float x = w.X();
+		float y = w.Y();
+		float z = w.Z();
 		
 		
 		Matrix3x3 m = identity();
@@ -115,12 +117,12 @@ public class Matrix3x3 extends Matrix
         m.set(x * y * (1 - cos) + z * sin, 0, 1);
         m.set(x * z * (1 - cos) - y * sin, 0, 2);
 
-        m.set(x * y * (1 - cos) - z * sin, 1, 0);
+        m.set(y * x * (1 - cos) - z * sin, 1, 0);
         m.set(y * y * (1 - cos) +     cos, 1, 1);
         m.set(y * z * (1 - cos) + x * sin, 1, 2);
 
-        m.set(x * z * (1 - cos) + y * sin, 2, 0);
-        m.set(y * z * (1 - cos) - x * sin, 2, 1);
+        m.set(z * x * (1 - cos) + y * sin, 2, 0);
+        m.set(z * y * (1 - cos) - x * sin, 2, 1);
         m.set(z * z * (1 - cos) +     cos, 2, 2);
         
         return m;
@@ -300,14 +302,14 @@ public class Matrix3x3 extends Matrix
     }
 
 	/**
-	 * Projects the {@code Matrix} to a hyperplane.
+	 * Projects the {@code Matrix} to a {@code Matrix}.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param m  a matrix to project to
 	 * @return  the projected matrix
 	 */
-	public Matrix3x3 projectTo(Matrix3x3 plane)
+	public Matrix3x3 projectTo(Matrix3x3 m)
 	{
-		return (Matrix3x3) super.projectTo(plane);
+		return (Matrix3x3) super.projectTo(m);
 	}
 
 	

@@ -63,7 +63,7 @@ public interface ITensor extends Copyable<ITensor>
 	public abstract float[] values();
 
 	
-	
+			
 	/**
 	 * Performs linear interpolation on the {@code Tensor}.
 	 * 
@@ -79,14 +79,25 @@ public interface ITensor extends Copyable<ITensor>
     }
 
 	/**
-	 * Projects the {@code Tensor} to a hyperplane.
+	 * Returns the value of the {@code Tensor} projection.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param t  a tensor to project to
+	 * @return  the value of the projection
+	 */
+	public default float projectToValue(ITensor t)
+	{
+		return dot(t) / t.norm();
+	}
+	
+	/**
+	 * Projects the {@code Tensor} to a {@code Tensor}.
+	 * 
+	 * @param t  a tensor to project to
 	 * @return  the projected tensor
 	 */
-	public default ITensor projectTo(ITensor plane)
+	public default ITensor projectTo(ITensor t)
 	{
-		return plus(plane.times(-dot(plane) / plane.normsqr()));
+		return t.times(dot(t) / t.normsqr());
 	}
 	
 	/**

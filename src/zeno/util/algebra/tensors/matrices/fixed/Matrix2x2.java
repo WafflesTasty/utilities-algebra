@@ -107,14 +107,14 @@ public class Matrix2x2 extends Matrix
     }
 
 	/**
-	 * Projects the {@code Matrix} to a hyperplane.
+	 * Projects the {@code Matrix} to a {@code Matrix}.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param m  a matrix to project to
 	 * @return  the projected matrix
 	 */
-	public Matrix2x2 projectTo(Matrix2x2 plane)
+	public Matrix2x2 projectTo(Matrix2x2 m)
 	{
-		return (Matrix2x2) super.projectTo(plane);
+		return (Matrix2x2) super.projectTo(m);
 	}
 	
 	

@@ -193,14 +193,14 @@ public class Quaternion extends Vector4
     }
 
 	/**
-	 * Projects the {@code Quaternion} to a hyperplane.
+	 * Projects the {@code Quaternion} to a {@code Quaternion}.
 	 * 
-	 * @param plane  a plane to project to
-	 * @return  the projected vector
+	 * @param q  a quaternion to project to
+	 * @return  the projected quaternion
 	 */
-	public Quaternion projectTo(Quaternion plane)
+	public Quaternion projectTo(Quaternion q)
 	{
-		return from(super.projectTo(plane));
+		return from(super.projectTo(q));
 	}
 	
 	/**

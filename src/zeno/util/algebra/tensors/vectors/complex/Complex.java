@@ -169,14 +169,14 @@ public class Complex extends Vector2
     }
 
 	/**
-	 * Projects the {@code Complex} to a hyperplane.
+	 * Projects the {@code Complex} to a {@code Complex}.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param c  a complex to project to
 	 * @return  the projected complex
 	 */
-	public Complex projectTo(Complex plane)
+	public Complex projectTo(Complex c)
 	{
-		return from(super.projectTo(plane));
+		return from(super.projectTo(c));
 	}
 	
 	/**

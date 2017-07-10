@@ -163,14 +163,14 @@ public class Vector4 extends Vector
     }
 
 	/**
-	 * Projects the {@code Vector} to a hyperplane.
+	 * Projects the {@code Vector} to a {@code Vector}.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param v  a vector to project to
 	 * @return  the projected vector
 	 */
-	public Vector4 projectTo(Vector4 plane)
+	public Vector4 projectTo(Vector4 v)
 	{
-		return (Vector4) super.projectTo(plane);
+		return (Vector4) super.projectTo(v);
 	}
 	
 	/**

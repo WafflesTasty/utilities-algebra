@@ -27,12 +27,14 @@ public class Matrix4x4 extends Matrix
 	 */
 	public static Matrix4x4 rotate3D(Vector3 v, float theta)
 	{
+		Vector3 w = v.normalize();
+		
 		float sin = Floats.sin(theta);
 		float cos = Floats.cos(theta);
 		
-		float x = v.X();
-		float y = v.Y();
-		float z = v.Z();
+		float x = w.X();
+		float y = w.Y();
+		float z = w.Z();
 		
 		
 		Matrix4x4 m = identity();
@@ -250,14 +252,14 @@ public class Matrix4x4 extends Matrix
     }
 
 	/**
-	 * Projects the {@code Matrix} to a hyperplane.
+	 * Projects the {@code Matrix} to a {@code Matrix}.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param m  a matrix to project to
 	 * @return  the projected matrix
 	 */
-	public Matrix4x4 projectTo(Matrix4x4 plane)
+	public Matrix4x4 projectTo(Matrix4x4 m)
 	{
-		return (Matrix4x4) super.projectTo(plane);
+		return (Matrix4x4) super.projectTo(m);
 	}
 	
 	

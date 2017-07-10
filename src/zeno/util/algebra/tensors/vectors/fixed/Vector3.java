@@ -167,14 +167,14 @@ public class Vector3 extends Vector
     }
 
 	/**
-	 * Projects the {@code Vector} to a hyperplane.
+	 * Projects the {@code Vector} to a {@code Vector}.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param v  a vector to project to
 	 * @return  the projected vector
 	 */
-	public Vector3 projectTo(Vector3 plane)
+	public Vector3 projectTo(Vector3 v)
 	{
-		return (Vector3) super.projectTo(plane);
+		return (Vector3) super.projectTo(v);
 	}
 	
 	/**
@@ -190,7 +190,7 @@ public class Vector3 extends Vector
 		cross.setX(Y() * v.Z() - Z() * v.Y());
 		cross.setY(Z() * v.X() - X() * v.Z());
 		cross.setZ(X() * v.Y() - Y() * v.X());
-		
+
 		return cross;
 	}
 	

@@ -201,14 +201,14 @@ public class Vector extends Tensor
     }
 
 	/**
-	 * Projects the {@code Vector} to a hyperplane.
+	 * Projects the {@code Vector} to a {@code Vector}.
 	 * 
-	 * @param plane  a plane to project to
+	 * @param v  a vector to project to
 	 * @return  the projected vector
 	 */
-	public Vector projectTo(Vector plane)
+	public Vector projectTo(Vector v)
 	{
-		return (Vector) super.projectTo(plane);
+		return (Vector) super.projectTo(v);
 	}
 	
 	/**
