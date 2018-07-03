@@ -40,18 +40,9 @@ public interface Measurable<M extends Measurable<M>> extends Spatial<M>
 	}
 	
 	/**
-	 * Returns the {@code Measurable}'s norm squared.
-	 * 
-	 * @return  the element's squared norm
-	 */
-	public default float normSqr()
-	{
-		return dot((M) this);
-	}
-	
-	/**
 	 * Returns the {@code Measurable}'s angle to another element.
 	 * 
+	 * @see <a href="https://people.eecs.berkeley.edu/~wkahan/Mindless.pdf">Prof. W. Kahan - Mindless Assessments of Roundoff in Floating-Point Computation</a>
 	 * @param element  an element to measure to
 	 * @return  the element angle
 	 */
@@ -75,6 +66,16 @@ public interface Measurable<M extends Measurable<M>> extends Spatial<M>
 	public default float distSqr(M element)
 	{
 		return minus(element).normSqr();
+	}
+	
+	/**
+	 * Returns the {@code Measurable}'s norm squared.
+	 * 
+	 * @return  the element's squared norm
+	 */
+	public default float normSqr()
+	{
+		return dot((M) this);
 	}
 	
 	/**
