@@ -31,9 +31,7 @@ public interface Dimensional
 	{
 		return Dimensions().length;
 	}
-	
-	
-	
+		
 	/**
 	 * Returns the size of the {@code Dimensional}.
 	 * The size represents how many values are stored
