@@ -1,5 +1,6 @@
 package zeno.util.algebra.linear.systems.slv;
 
+import zeno.util.algebra.attempt4.linear.data.Type;
 import zeno.util.algebra.attempt4.linear.mat.Matrices;
 import zeno.util.algebra.attempt4.linear.mat.Matrix;
 import zeno.util.algebra.linear.systems.LinearSolver;
@@ -40,12 +41,8 @@ public class SLVTriangular implements LinearSolver
 	
 	/**
 	 * Creates a new {@code SLVTriangular}.
-	 * The following types have an influence on the solver:
-	 * <ul>
-	 * <li> {@code Unknown matrix}: The matrix is checked for triangular type. If it isn't, an exception will be thrown.</li>
-	 * <li> {@code Lower triangular}: The matrix is automatically processed as a lower triangular matrix, skipping checks.</li>
-	 * <li> {@code Upper triangular}: The matrix is automatically processed as an upper triangular matrix, skipping checks.</li>
-	 * </ul>
+	 * A triangular matrix needs to be provided.
+	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @see Matrix
@@ -57,12 +54,8 @@ public class SLVTriangular implements LinearSolver
 	
 	/**
 	 * Creates a new {@code SLVTriangular}.
-	 * The following types have an influence on the solver:
-	 * <ul>
-	 * <li> {@code Unknown matrix}: The matrix is checked for triangular type. If it isn't, an exception will be thrown.</li>
-	 * <li> {@code Lower triangular}: The matrix is automatically processed as a lower triangular matrix, skipping checks.</li>
-	 * <li> {@code Upper triangular}: The matrix is automatically processed as an upper triangular matrix, skipping checks.</li>
-	 * </ul>
+	 * A triangular matrix needs to be provided.
+	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
@@ -90,6 +83,17 @@ public class SLVTriangular implements LinearSolver
 	@Override
 	public Matrix solve(Matrix b)
 	{
+		// Matrix dimensions.
+		int mRows = mat.Rows();
+		int bRows = b.Rows();
+				
+		// Check dimension compatibility.
+		if(mRows != bRows)
+		{
+			throw new Matrices.DimensionException(mat, b);
+		}
+		
+		
 		// Perform direct scaling on diagonal matrices.
 		if(Matrices.isDiagonal(mat, iError))
 		{
@@ -108,6 +112,7 @@ public class SLVTriangular implements LinearSolver
 			return backward(b);
 		}
 		
+		
 		// Other matrices are invalid for this operation.
 		throw new Matrices.TriangularException();
 	}
@@ -115,6 +120,7 @@ public class SLVTriangular implements LinearSolver
 	@Override
 	public float determinant()
 	{
+		// If no determinant has been computed yet...
 		if(det == null)
 		{
 			double val = 1d;
@@ -139,8 +145,18 @@ public class SLVTriangular implements LinearSolver
 	@Override
 	public Matrix inverse()
 	{
+		// If no inverse has been computed yet...
 		if(needsUpdate())
 		{
+			// If the matrix is orthogonal...
+			if(Matrices.isOrthogonal(mat, iError))
+			{
+				// Provide the inverse through transposition.
+				inv = mat.transpose();
+				inv.setType(Type.ORTHOGONAL);
+				return inv;
+			}
+			
 			// Compute the inverse through substitution.
 			inv = solve(Matrices.identity(mat.Columns()));
 		}
@@ -158,14 +174,8 @@ public class SLVTriangular implements LinearSolver
 		// Right-hand side dimensions.
 		int bRows = b.Rows();
 		int bCols = b.Columns();
-		
-		// Check dimension compatibility.
-		if(mCols != bRows)
-		{
-			throw new Matrices.DimensionException(mat, b);
-		}
-		
-		
+
+
 		Matrix x = Matrices.create(bRows, bCols);
 		// For each column in the solution matrix...
 		for(int k = 0; k < bCols; k++)
@@ -198,17 +208,11 @@ public class SLVTriangular implements LinearSolver
 	{
 		// Left-hand side dimensions.
 		int mRows = mat.Rows();
-		int mCols = mat.Columns();	
 		
 		// Right-hand side dimensions.
 		int bRows = b.Rows();
 		int bCols = b.Columns();
-		
-		// Check dimension compatibility.
-		if(mCols != bRows)
-		{
-			throw new Matrices.DimensionException(mat, b);
-		}
+
 		
 		Matrix x = Matrices.create(bRows, bCols);
 		// For each column in the solution matrix...
@@ -242,18 +246,12 @@ public class SLVTriangular implements LinearSolver
 	{
 		// Left-hand side dimensions.
 		int mRows = mat.Rows();
-		int mCols = mat.Columns();	
 		
 		// Right-hand side dimensions.
 		int bRows = b.Rows();
 		int bCols = b.Columns();
-		
-		// Check dimension compatibility.
-		if(mCols != bRows)
-		{
-			throw new Matrices.DimensionException(mat, b);
-		}
-		
+
+
 		Matrix x = Matrices.create(bRows, bCols);
 		// For each column in the solution matrix...
 		for(int k = 0; k < bCols; k++)

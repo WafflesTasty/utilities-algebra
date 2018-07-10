@@ -10,7 +10,7 @@ import zeno.util.tools.primitives.Floats;
 /**
  * The {@code SLVCholesky} class solves exact linear systems using {@code Cholesky's method}.
  * This method is a variant of {@code Gauss elimination} that takes advantage of symmetric matrices
- * to cut computation time roughly in half. It decomposes a matrix {@code M = R^TR}, where R
+ * to cut computation time roughly in half. It decomposes a matrix {@code M = R*R}, where R
  * is an upper triangular matrix.
  * 
  * @author Zeno
@@ -66,12 +66,14 @@ public class SLVCholesky implements LinearSolver
 	 */
 	public Matrix R()
 	{
+		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{
 			// Perform Cholesky's method.
 			decompose();
 		}
 		
+		// If matrix R hasn't been computed yet...
 		if(r == null)
 		{
 			// Matrix dimensions.
@@ -115,12 +117,24 @@ public class SLVCholesky implements LinearSolver
 	
 	@Override
 	public Matrix solve(Matrix b)
-	{
-		if(needsUpdate())
+	{		
+		// Matrix dimensions.
+		int mRows = mat.Rows();
+		int bRows = b.Rows();
+				
+		// Check dimension compatibility.
+		if(mRows != bRows)
 		{
+			throw new Matrices.DimensionException(mat, b);
+		}
+		
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{			
 			// Perform Cholesky's method.
 			decompose();
 		}
+		
 		
 		// Compute the result through substitution.
 		Matrix x = b.copy();
@@ -132,6 +146,7 @@ public class SLVCholesky implements LinearSolver
 	@Override
 	public float determinant()
 	{
+		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{
 			// Perform Cholesky's method.
@@ -144,16 +159,20 @@ public class SLVCholesky implements LinearSolver
 	@Override
 	public Matrix inverse()
 	{
-		if(needsUpdate())
-		{
-			// Perform Cholesky's method.
-			decompose();
-		}
-		
+		// If no inverse has been computed yet...
 		if(inv == null)
 		{
+			// If the matrix is orthogonal...
+			if(Matrices.isOrthogonal(mat, iError))
+			{
+				// Provide the inverse through transposition.
+				inv = mat.transpose();
+				inv.setType(Type.ORTHOGONAL);
+				return inv;
+			}
+			
 			// Compute the inverse through substitution.
-			inv = solve(Matrices.identity(c.Rows()));
+			inv = solve(Matrices.identity(mat.Rows()));
 			inv.setType(Type.SYMMETRIC);
 		}
 		
@@ -235,7 +254,6 @@ public class SLVCholesky implements LinearSolver
 			choleskySimplified();
 			return;
 		}
-		
 		
 		// If the matrix is symmetric...
 		if(Matrices.isSymmetric(mat, iError))

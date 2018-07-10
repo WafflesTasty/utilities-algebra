@@ -12,10 +12,7 @@ import zeno.util.tools.primitives.Integers;
  * The {@code SLVCrout} class solves exact linear systems using {@code Crout's method}.
  * This method is a variant of {@code Gauss elimination} that decomposes a matrix {@code M = PLU},
  * where P is a permutation matrix, L a lower triangular matrix, and U an upper triangular matrix.
- * 
- * This decomposition breaks a matrix M down in a permutation matrix P, a lower triangular
- * matrix L, and an upper triangular matrix U such that PM = LU. The method of Crout is used to
- * compute the decomposition, which is designed to leave the matrix U with a unit diagonal.
+ * {@code Crout's method} is designed to leave the matrix U with a unit diagonal.
  * 
  * @author Zeno
  * @since Jul 6, 2018
@@ -200,12 +197,23 @@ public class SLVCrout implements LinearSolver
 	@Override
 	public Matrix solve(Matrix b)
 	{
-		if(needsUpdate())
+		// Matrix dimensions.
+		int mRows = mat.Rows();
+		int bRows = b.Rows();
+				
+		// Check dimension compatibility.
+		if(mRows != bRows)
 		{
-			// Only square matrices are solvable.
+			throw new Matrices.DimensionException(mat, b);
+		}
+		
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{			
+			// Check matrix dimensions.
 			if(!Matrices.isSquare(mat))
 			{
-				// Other matrices are invalid for this operation.
+				// Non-square matrices are invalid for this operation.
 				throw new Matrices.SquareException();
 			}
 			
@@ -223,11 +231,13 @@ public class SLVCrout implements LinearSolver
 	@Override
 	public float determinant()
 	{
+		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{
-			// Only square matrices have a determinant.
+			// Check matrix dimensions.
 			if(!Matrices.isSquare(mat))
 			{
+				// Non-square matrices don't have a determinant.
 				throw new Matrices.SquareException();
 			}
 						
@@ -241,22 +251,20 @@ public class SLVCrout implements LinearSolver
 	@Override
 	public Matrix inverse()
 	{
-		if(needsUpdate())
-		{
-			// Only square matrices are invertible.
-			if(!Matrices.isSquare(mat))
-			{
-				throw new Matrices.SquareException();
-			}
-			
-			// Perform Crout's method.
-			decompose();
-		}
-		
+		// If no inverse has been computed yet...
 		if(inv == null)
 		{
+			// If the matrix is orthogonal...
+			if(Matrices.isOrthogonal(mat, iError))
+			{
+				// Provide the inverse through transposition.
+				inv = mat.transpose();
+				inv.setType(Type.ORTHOGONAL);
+				return inv;
+			}
+			
 			// Compute the inverse through substitution.
-			inv = solve(Matrices.identity(c.Rows()));
+			inv = solve(Matrices.identity(mat.Rows()));
 		}
 		
 		return inv;
