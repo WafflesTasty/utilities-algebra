@@ -14,14 +14,13 @@ import zeno.util.tools.generic.properties.Updateable;
  * @see Updateable
  */
 public interface LinearSolver extends Updateable
-{
+{	
 	/**
-	 * Computes the inverse matrix in the {@code LinearSolver}.
+	 * Computes the determinant in the {@code LinearSolver}.
 	 * 
-	 * @return  an inverse matrix
-	 * @see Matrix
+	 * @return  a matrix determinant
 	 */
-	public abstract Matrix inverse();
+	public abstract float determinant();
 	
 	/**
 	 * Solves an exact linear system in the {@code LinearSolver}.
@@ -33,9 +32,10 @@ public interface LinearSolver extends Updateable
 	public abstract Matrix solve(Matrix b);
 	
 	/**
-	 * Computes the determinant in the {@code LinearSolver}.
+	 * Computes the inverse matrix in the {@code LinearSolver}.
 	 * 
-	 * @return  a matrix determinant
+	 * @return  an inverse matrix
+	 * @see Matrix
 	 */
-	public abstract float determinant();
+	public abstract Matrix inverse();
 }
