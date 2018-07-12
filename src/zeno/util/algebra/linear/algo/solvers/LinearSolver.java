@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear.systems;
+package zeno.util.algebra.linear.algo.solvers;
 
 import zeno.util.algebra.attempt4.linear.mat.Matrix;
 import zeno.util.tools.generic.properties.Updateable;
