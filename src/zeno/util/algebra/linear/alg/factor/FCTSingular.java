@@ -2,7 +2,7 @@ package zeno.util.algebra.linear.alg.factor;
 
 import zeno.util.algebra.attempt4.linear.mat.Matrix;
 import zeno.util.algebra.attempt4.linear.vec.Vector;
-import zeno.util.algebra.linear.alg.Condition;
+import zeno.util.algebra.linear.alg.Spectral;
 
 /**
  * The {@code FCTSingular} interface defines an algorithm that performs SVD factorization.
@@ -13,9 +13,9 @@ import zeno.util.algebra.linear.alg.Condition;
  * @since Jul 10, 2018
  * @version 1.0
  * 
- * @see Condition
+ * @see Spectral
  */
-public interface FCTSingular extends Condition
+public interface FCTSingular extends Spectral
 {
 	/**
 	 * Returns the diagonal matrix E from the {@code FCTSingular}.

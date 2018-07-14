@@ -11,6 +11,7 @@ import zeno.util.algebra.linear.alg.factor.FCTSingular;
 import zeno.util.algebra.linear.alg.factor.hh.FCTBidiagonalHH;
 import zeno.util.algebra.linear.alg.solvers.SLVTriangular;
 import zeno.util.algebra.linear.error.DimensionError;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code LSQSVD} class solves least squares linear systems using {@code SVD factorization}.
@@ -163,6 +164,23 @@ public class LSQSVD implements FCTSingular, LeastSquares
 				break;
 			}
 		}
+		
+		
+		// Matrix dimensions.
+		int size = mat.Columns();
+		// The singular values have to be positive.
+		Matrix mSign = Matrices.identity(size);
+		mSign.setType(Diagonal.Type());
+		for(int i = 0; i < size; i++)
+		{
+			if(c.get(i, i) < 0)
+			{
+				mSign.set(-1f, i, i);
+			}
+		}
+		
+		c = c.times(mSign);
+		v = v.times(mSign);
 	}
 	
 
@@ -191,7 +209,8 @@ public class LSQSVD implements FCTSingular, LeastSquares
 			// Copy the elements from the decomposed matrix.
 			for(int i = 0; i < cols; i++)
 			{
-				e.set(c.get(i, i), i, i);
+				float val = Floats.abs(c.get(i, i));
+				e.set(val, i, i);
 			}	
 		}
 		
