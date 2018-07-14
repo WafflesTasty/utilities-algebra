@@ -1,12 +1,12 @@
-package zeno.util.algebra.linear.algo.factor;
+package zeno.util.algebra.linear.alg.factor;
 
 import zeno.util.algebra.attempt4.linear.mat.Matrix;
 import zeno.util.tools.generic.properties.Updateable;
 
 /**
  * The {@code FCTBidiagonal} interface defines an algorithm that performs bidiagonal factorization.
- * Every matrix can be decomposed as {@code M = UBV*} where U is an orthogonal matrix,
- * B is an (upper) bidiagonal matrix, and V is an orthogonal matrix.
+ * Every matrix can be decomposed as {@code M = UBV*} where U is a matrix of orthogonal columns,
+ * B is an upper bidiagonal matrix, and V is an orthogonal matrix.
  *
  * @author Zeno
  * @since Jul 10, 2018
@@ -25,7 +25,7 @@ public interface FCTBidiagonal extends Updateable
 	public abstract Matrix B();
 	
 	/**
-	 * Returns the orthogonal matrix U from the {@code FCTBidiagonal}.
+	 * Returns the reduced orthogonal matrix U from the {@code FCTBidiagonal}.
 	 * 
 	 * @return  the orthogonal matrix U
 	 * @see Matrix

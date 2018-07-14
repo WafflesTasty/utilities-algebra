@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear.algo.solvers;
+package zeno.util.algebra.linear.alg;
 
 import zeno.util.algebra.attempt4.linear.mat.Matrix;
 import zeno.util.tools.generic.properties.Updateable;
@@ -23,7 +23,7 @@ public interface LeastSquares extends Updateable
 	 * @return  a matrix of unknowns
 	 * @see Matrix
 	 */
-	public abstract Matrix approx(Matrix b);
+	public abstract <M extends Matrix> M approx(M b);
 	
 	/**
 	 * Computes the pseudoinverse in the {@code LeastSquares}.

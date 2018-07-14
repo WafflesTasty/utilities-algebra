@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear.algo.solvers;
+package zeno.util.algebra.linear.alg;
 
 import zeno.util.algebra.attempt4.linear.mat.Matrix;
 import zeno.util.tools.generic.properties.Updateable;
@@ -29,7 +29,7 @@ public interface LinearSolver extends Updateable
 	 * @return  a matrix of unknowns
 	 * @see Matrix
 	 */
-	public abstract Matrix solve(Matrix b);
+	public abstract <M extends Matrix> M solve(M b);
 	
 	/**
 	 * Computes the inverse matrix in the {@code LinearSolver}.

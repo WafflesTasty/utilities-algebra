@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear.algo.factor;
+package zeno.util.algebra.linear.alg.factor;
 
 import zeno.util.algebra.attempt4.linear.mat.Matrices;
 import zeno.util.algebra.attempt4.linear.mat.Matrix;
