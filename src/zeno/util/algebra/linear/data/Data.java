@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear.matrix.data;
+package zeno.util.algebra.linear.data;
 
 import zeno.util.algebra.Dimensional;
 import zeno.util.algebra.attempt4.Algebra;

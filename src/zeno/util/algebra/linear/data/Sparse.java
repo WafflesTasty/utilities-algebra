@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear.matrix.data;
+package zeno.util.algebra.linear.data;
 
 import java.util.Map.Entry;
 
