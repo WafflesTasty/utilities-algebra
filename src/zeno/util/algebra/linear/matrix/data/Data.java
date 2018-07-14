@@ -1,7 +1,7 @@
 package zeno.util.algebra.linear.matrix.data;
 
+import zeno.util.algebra.Dimensional;
 import zeno.util.algebra.attempt4.Algebra;
-import zeno.util.algebra.linear.Dimensional;
 import zeno.util.tools.Array;
 import zeno.util.tools.generic.properties.Copyable;
 import zeno.util.tools.primitives.Integers;

@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear;
+package zeno.util.algebra;
 
 import zeno.util.tools.Array;
 
