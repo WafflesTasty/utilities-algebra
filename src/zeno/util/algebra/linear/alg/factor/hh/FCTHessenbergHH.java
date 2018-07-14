@@ -73,7 +73,6 @@ public class FCTHessenbergHH implements FCTHessenberg
 		c = q = h = null;
 	}
 		
-	
 	private void houseHolder()
 	{
 		// Copy the target matrix.

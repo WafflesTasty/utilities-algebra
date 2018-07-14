@@ -91,19 +91,7 @@ public class LSQHouseHolder implements FCTOrthogonal, LeastSquares
 		return x;
 	}
 	
-
-	@Override
-	public void requestUpdate()
-	{
-		c = q = r = inv = null;
-	}
 	
-	@Override
-	public boolean needsUpdate()
-	{
-		return c == null;
-	}
-				
 	@Override
 	public Matrix pseudoinverse()
 	{
@@ -116,7 +104,18 @@ public class LSQHouseHolder implements FCTOrthogonal, LeastSquares
 		
 		return inv;
 	}
+	
+	@Override
+	public boolean needsUpdate()
+	{
+		return c == null;
+	}
 
+	@Override
+	public void requestUpdate()
+	{
+		c = q = r = inv = null;
+	}
 	
 	private void houseHolder()
 	{

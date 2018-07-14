@@ -94,19 +94,7 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		return (M) V().times(x);
 	}
 	
-	
-	@Override
-	public void requestUpdate()
-	{
-		c = e = u = v = inv = null;
-	}
-	
-	@Override
-	public boolean needsUpdate()
-	{
-		return c == null;
-	}
-	
+			
 	@Override
 	public Matrix pseudoinverse()
 	{
@@ -120,7 +108,18 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		return inv;
 	}
 	
-		
+	@Override
+	public boolean needsUpdate()
+	{
+		return c == null;
+	}
+	
+	@Override
+	public void requestUpdate()
+	{
+		c = e = u = v = inv = null;
+	}
+
 	private void decompose()
 	{
 		// If the matrix is not tall...
@@ -238,5 +237,4 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		
 		return v;
 	}
-
 }

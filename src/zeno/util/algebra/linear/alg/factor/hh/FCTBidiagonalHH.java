@@ -72,7 +72,6 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 		b = c = u = v = null;
 	}
 	
-	
 	private void houseHolder()
 	{
 		// Copy the target matrix.
