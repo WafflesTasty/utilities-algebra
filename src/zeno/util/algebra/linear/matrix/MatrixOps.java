@@ -1,6 +1,7 @@
 package zeno.util.algebra.linear.matrix;
 
 import zeno.util.algebra.algorithms.lsquares.LSQHouseHolder;
+import zeno.util.algebra.algorithms.solvers.SLVCrout;
 import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.attempt4.linear.Tensor;
 import zeno.util.algebra.linear.matrix.operations.MatrixProduct;
@@ -124,6 +125,6 @@ public interface MatrixOps<M extends Matrix> extends TensorOps<M>
 	 */
 	public default M inverse()
 	{
-		return null;
+		return (M) new SLVCrout(Operable()).inverse();
 	}
 }

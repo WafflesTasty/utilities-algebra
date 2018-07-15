@@ -1,6 +1,6 @@
 package zeno.util.algebra.algorithms;
 
-import zeno.util.algebra.attempt4.linear.vec.Vector;
+import zeno.util.algebra.attempt4.linear.Vector;
 import zeno.util.tools.generic.properties.Updateable;
 import zeno.util.tools.primitives.Floats;
 

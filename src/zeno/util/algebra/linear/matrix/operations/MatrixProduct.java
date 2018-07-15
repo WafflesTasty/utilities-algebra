@@ -2,6 +2,7 @@ package zeno.util.algebra.linear.matrix.operations;
 
 import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.linear.matrix.Matrices;
+import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.tools.patterns.Operation;
 import zeno.util.tools.primitives.Integers;
 
@@ -46,7 +47,7 @@ public class MatrixProduct<M extends Matrix> implements Operation<M>
 	
 		if(col1 != row2)
 		{
-			return null;
+			throw new Tensors.DimensionError("Computing a matrix product requires compatible dimensions: ", m1, m2);
 		}
 		
 		

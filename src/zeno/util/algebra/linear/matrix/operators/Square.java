@@ -1,6 +1,5 @@
 package zeno.util.algebra.linear.matrix.operators;
 
-import zeno.util.algebra.algorithms.solvers.SLVCrout;
 import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.attempt4.linear.Tensor;
 import zeno.util.algebra.linear.matrix.MatrixOps;
@@ -62,11 +61,5 @@ public interface Square<M extends Matrix> extends Tall<M>, Wide<M>
 		{
 			return (M) t;
 		};
-	}
-
-	@Override
-	public default M inverse()
-	{
-		return (M) new SLVCrout(Operable()).inverse();
 	}
 }

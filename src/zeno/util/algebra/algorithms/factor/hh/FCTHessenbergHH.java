@@ -2,7 +2,7 @@ package zeno.util.algebra.algorithms.factor.hh;
 
 import zeno.util.algebra.algorithms.factor.FCTHessenberg;
 import zeno.util.algebra.attempt4.linear.Matrix;
-import zeno.util.algebra.attempt4.linear.vec.Vector;
+import zeno.util.algebra.attempt4.linear.Vector;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.operators.Square;
 import zeno.util.algebra.linear.matrix.operators.banded.Tridiagonal;

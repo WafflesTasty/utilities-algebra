@@ -4,7 +4,7 @@ import zeno.util.algebra.algorithms.LeastSquares;
 import zeno.util.algebra.algorithms.factor.FCTOrthogonal;
 import zeno.util.algebra.algorithms.solvers.SLVTriangular;
 import zeno.util.algebra.attempt4.linear.Matrix;
-import zeno.util.algebra.attempt4.linear.vec.Vector;
+import zeno.util.algebra.attempt4.linear.Vector;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.operators.Square;
 import zeno.util.algebra.linear.matrix.operators.Tall;

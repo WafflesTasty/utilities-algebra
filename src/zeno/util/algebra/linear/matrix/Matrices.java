@@ -1,11 +1,11 @@
 package zeno.util.algebra.linear.matrix;
 
 import zeno.util.algebra.attempt4.linear.Matrix;
+import zeno.util.algebra.attempt4.linear.Vector;
+import zeno.util.algebra.attempt4.linear.Vectors;
 import zeno.util.algebra.attempt4.linear.mat.fixed.Matrix2x2;
 import zeno.util.algebra.attempt4.linear.mat.fixed.Matrix3x3;
 import zeno.util.algebra.attempt4.linear.mat.fixed.Matrix4x4;
-import zeno.util.algebra.attempt4.linear.vec.Vector;
-import zeno.util.algebra.attempt4.linear.vec.Vectors;
 import zeno.util.algebra.linear.matrix.operators.orthogonal.Reflection;
 import zeno.util.algebra.linear.matrix.operators.square.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
