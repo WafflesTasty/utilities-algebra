@@ -4,13 +4,13 @@ import zeno.util.algebra.algorithms.LeastSquares;
 import zeno.util.algebra.algorithms.factor.FCTOrthogonal;
 import zeno.util.algebra.algorithms.solvers.SLVTriangular;
 import zeno.util.algebra.attempt4.linear.Matrix;
-import zeno.util.algebra.attempt4.linear.Vector;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.operators.Square;
 import zeno.util.algebra.linear.matrix.operators.Tall;
 import zeno.util.algebra.linear.matrix.operators.banded.upper.UpperTriangular;
 import zeno.util.algebra.linear.matrix.operators.square.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
+import zeno.util.algebra.linear.vector.Vector;
 
 /**
  * The {@code LSQGramSchmidt} class solves least squares linear systems using {@code Gram-Schmidt orthogonalization}.

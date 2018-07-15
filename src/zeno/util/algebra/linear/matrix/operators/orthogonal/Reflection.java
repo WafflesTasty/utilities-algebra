@@ -2,10 +2,10 @@ package zeno.util.algebra.linear.matrix.operators.orthogonal;
 
 import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.attempt4.linear.Tensor;
-import zeno.util.algebra.attempt4.linear.Vector;
 import zeno.util.algebra.linear.matrix.operators.square.Involutory;
 import zeno.util.algebra.linear.matrix.operators.square.Orthogonal;
 import zeno.util.algebra.linear.matrix.operators.square.Symmetric;
+import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.tools.patterns.Operator;
 import zeno.util.tools.primitives.Floats;
 

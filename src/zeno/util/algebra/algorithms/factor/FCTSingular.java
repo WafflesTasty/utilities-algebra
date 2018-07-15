@@ -2,7 +2,7 @@ package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.algorithms.Spectral;
 import zeno.util.algebra.attempt4.linear.Matrix;
-import zeno.util.algebra.attempt4.linear.Vector;
+import zeno.util.algebra.linear.vector.Vector;
 
 /**
  * The {@code FCTSingular} interface defines an algorithm that performs SVD factorization.
