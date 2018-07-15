@@ -1,6 +1,7 @@
 package zeno.util.algebra;
 
 import zeno.util.tools.Array;
+import zeno.util.tools.generic.properties.Approximate;
 
 /**
  * The {@code Dimensional} interface defines an object represented by
@@ -9,15 +10,26 @@ import zeno.util.tools.Array;
  * @author Zeno
  * @since Jul 5, 2018
  * @version 1.0
+ * 
+ * 
+ * @param <O>  the type of the object
+ * @see Approximate
  */
-public interface Dimensional
-{
+public interface Dimensional<O> extends Approximate<O>
+{	
 	/**
 	 * Returns the dimensions of the {@code Dimensional}.
 	 * 
 	 * @return  the object dimensions
 	 */
 	public abstract int[] Dimensions();
+	
+	/**
+	 * Returns the values of the {@code Dimensional}.
+	 * 
+	 * @return  the object values
+	 */
+	public abstract float[] Values();
 	
 	
 	/**

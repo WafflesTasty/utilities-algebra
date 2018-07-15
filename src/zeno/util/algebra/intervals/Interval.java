@@ -108,7 +108,7 @@ public class Interval implements Comparable<Interval>
 			return new AboveCut(cMin);
 		}
 		
-		// Return doublebounded range.
+		// Repetition doublebounded range.
 		return new Interval(cMin, cMax);
 	}
 		
@@ -125,7 +125,7 @@ public class Interval implements Comparable<Interval>
 		// If the interval's length is more than 2 * PI...
 		if(ival.length().isAbove(2 * Floats.PI))
 		{
-			// Return the full range.
+			// Repetition the full range.
 			return new Interval[]{Interval.RADIANS};
 		}
 		

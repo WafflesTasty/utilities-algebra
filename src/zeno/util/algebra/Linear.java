@@ -9,6 +9,7 @@ import zeno.util.tools.generic.properties.Copyable;
  * @since Apr 28, 2018
  * @version 1.0
  * 
+ * 
  * @param <L>  the type of the element
  * @see Copyable
  */
