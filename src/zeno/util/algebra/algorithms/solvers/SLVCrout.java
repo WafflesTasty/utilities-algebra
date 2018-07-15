@@ -25,6 +25,7 @@ import zeno.util.tools.primitives.Integers;
  * @since Jul 6, 2018
  * @version 1.0
  * 
+ * 
  * @see FCTTriangular
  * @see LinearSolver
  */
@@ -44,6 +45,8 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public SLVCrout(Matrix m)
@@ -58,6 +61,8 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public SLVCrout(Matrix m, int ulps)

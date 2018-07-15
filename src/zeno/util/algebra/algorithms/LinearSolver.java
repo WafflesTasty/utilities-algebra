@@ -11,6 +11,7 @@ import zeno.util.tools.generic.properties.Updateable;
  * @since Jul 9, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface LinearSolver extends Updateable
@@ -27,6 +28,8 @@ public interface LinearSolver extends Updateable
 	 * 
 	 * @param b  a right-hand side matrix
 	 * @return  a matrix of unknowns
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract <M extends Matrix> M solve(M b);
@@ -35,6 +38,8 @@ public interface LinearSolver extends Updateable
 	 * Computes the inverse matrix in the {@code LinearSolver}.
 	 * 
 	 * @return  an inverse matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix inverse();

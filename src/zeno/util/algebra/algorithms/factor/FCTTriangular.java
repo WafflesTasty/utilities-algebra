@@ -12,6 +12,7 @@ import zeno.util.tools.generic.properties.Updateable;
  * @since Jul 10, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface FCTTriangular extends Updateable
@@ -20,6 +21,8 @@ public interface FCTTriangular extends Updateable
 	 * Returns the permutation matrix P from the {@code FCTTriangular}.
 	 * 
 	 * @return  the permutation matrix P
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix P();
@@ -28,6 +31,8 @@ public interface FCTTriangular extends Updateable
 	 * Returns the lower triangular matrix L from the {@code FCTTriangular}.
 	 * 
 	 * @return  the lower triangular matrix L
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix L();
@@ -36,6 +41,8 @@ public interface FCTTriangular extends Updateable
 	 * Returns the upper triangular matrix U from the {@code FCTTriangular}.
 	 * 
 	 * @return  the upper triangular matrix U
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix U();

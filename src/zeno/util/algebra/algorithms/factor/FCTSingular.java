@@ -13,6 +13,7 @@ import zeno.util.algebra.attempt4.linear.vec.Vector;
  * @since Jul 10, 2018
  * @version 1.0
  * 
+ * 
  * @see Spectral
  */
 public interface FCTSingular extends Spectral
@@ -21,6 +22,8 @@ public interface FCTSingular extends Spectral
 	 * Returns the diagonal matrix E from the {@code FCTSingular}.
 	 * 
 	 * @return  the diagonal matrix E
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix E();
@@ -29,6 +32,8 @@ public interface FCTSingular extends Spectral
 	 * Returns the reduced orthogonal matrix U from the {@code FCTSingular}.
 	 * 
 	 * @return  the orthogonal matrix U
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix U();
@@ -37,6 +42,8 @@ public interface FCTSingular extends Spectral
 	 * Returns the orthogonal matrix V from the {@code FCTSingular}.
 	 * 
 	 * @return  the orthogonal matrix V
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix V();

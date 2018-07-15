@@ -10,6 +10,7 @@ import zeno.util.tools.primitives.Longs;
  * @since May 5, 2016
  * @author Zeno
  * 
+ * 
  * @see Iterator
  * @see String
  */
@@ -22,6 +23,8 @@ public class GUIDCounter implements Iterator<String>
 	 * Creates a new {@code GUIDCounter}.
 	 * 
 	 * @param pref  a string prefix
+	 * 
+	 * 
 	 * @see String
 	 */
 	public GUIDCounter(String pref)

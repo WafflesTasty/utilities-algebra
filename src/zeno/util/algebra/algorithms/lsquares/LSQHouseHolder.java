@@ -20,7 +20,8 @@ import zeno.util.algebra.linear.tensor.Tensors;
  *
  * @author Zeno
  * @since Jul 10, 2018
- * @version 1.0 
+ * @version 1.0
+ * 
  * 
  * @see FCTOrthogonal
  * @see LeastSquares
@@ -40,6 +41,8 @@ public class LSQHouseHolder implements FCTOrthogonal, LeastSquares
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public LSQHouseHolder(Matrix m)
@@ -54,6 +57,8 @@ public class LSQHouseHolder implements FCTOrthogonal, LeastSquares
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public LSQHouseHolder(Matrix m, int ulps)

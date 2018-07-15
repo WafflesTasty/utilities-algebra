@@ -12,6 +12,7 @@ import zeno.util.tools.generic.properties.Updateable;
  * @since Jul 9, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface LeastSquares extends Updateable
@@ -21,6 +22,8 @@ public interface LeastSquares extends Updateable
 	 * 
 	 * @param b  a right-hand side matrix
 	 * @return  a matrix of unknowns
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract <M extends Matrix> M approx(M b);
@@ -29,6 +32,8 @@ public interface LeastSquares extends Updateable
 	 * Computes the pseudoinverse in the {@code LeastSquares}.
 	 * 
 	 * @return  a pseudoinverse matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix pseudoinverse();

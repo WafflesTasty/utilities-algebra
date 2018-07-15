@@ -21,6 +21,7 @@ import zeno.util.tools.primitives.Floats;
  * @since Jul 6, 2018
  * @version 1.0
  * 
+ * 
  * @see LinearSolver
  * @see FCTCholesky
  */
@@ -40,6 +41,8 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public SLVCholesky(Matrix m)
@@ -54,6 +57,8 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public SLVCholesky(Matrix m, int ulps)

@@ -21,6 +21,7 @@ import zeno.util.tools.primitives.Integers;
  * @since Jul 10, 2018
  * @version 1.0 
  * 
+ * 
  * @see FCTHessenberg
  */
 public class FCTHessenbergHH implements FCTHessenberg
@@ -38,6 +39,8 @@ public class FCTHessenbergHH implements FCTHessenberg
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public FCTHessenbergHH(Matrix m)
@@ -52,6 +55,8 @@ public class FCTHessenbergHH implements FCTHessenberg
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public FCTHessenbergHH(Matrix m, int ulps)

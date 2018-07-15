@@ -13,6 +13,7 @@ import zeno.util.algebra.linear.matrix.Matrices;
  * @since Jul 10, 2018
  * @version 1.0
  * 
+ * 
  * @see FCTTriangular
  */
 public interface FCTCholesky extends FCTTriangular

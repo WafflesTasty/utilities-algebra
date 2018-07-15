@@ -12,6 +12,7 @@ import zeno.util.tools.generic.properties.Updateable;
  * @since Jul 10, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface FCTBidiagonal extends Updateable
@@ -20,6 +21,8 @@ public interface FCTBidiagonal extends Updateable
 	 * Returns the bidiagonal matrix B from the {@code FCTBidiagonal}.
 	 * 
 	 * @return  the bidiagonal matrix B
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix B();
@@ -28,6 +31,8 @@ public interface FCTBidiagonal extends Updateable
 	 * Returns the reduced orthogonal matrix U from the {@code FCTBidiagonal}.
 	 * 
 	 * @return  the orthogonal matrix U
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix U();
@@ -36,6 +41,8 @@ public interface FCTBidiagonal extends Updateable
 	 * Returns the orthogonal matrix V from the {@code FCTBidiagonal}.
 	 * 
 	 * @return  the orthogonal matrix V
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix V();

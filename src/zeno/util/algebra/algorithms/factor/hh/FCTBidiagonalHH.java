@@ -20,6 +20,7 @@ import zeno.util.tools.primitives.Integers;
  * @since Jul 10, 2018
  * @version 1.0 
  * 
+ * 
  * @see FCTBidiagonal
  */
 public class FCTBidiagonalHH implements FCTBidiagonal
@@ -37,6 +38,8 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public FCTBidiagonalHH(Matrix m)
@@ -51,6 +54,8 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public FCTBidiagonalHH(Matrix m, int ulps)

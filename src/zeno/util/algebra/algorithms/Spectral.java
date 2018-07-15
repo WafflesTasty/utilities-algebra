@@ -11,6 +11,7 @@ import zeno.util.tools.primitives.Floats;
  * @since Jul 14, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface Spectral extends Updateable
@@ -19,6 +20,8 @@ public interface Spectral extends Updateable
 	 * Returns the singular values of the {@code Spectral}.
 	 * 
 	 * @return  the singular values
+	 * 
+	 * 
 	 * @see Vector
 	 */
 	public abstract Vector SingularValues();

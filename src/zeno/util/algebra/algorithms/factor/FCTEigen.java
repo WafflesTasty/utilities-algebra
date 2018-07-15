@@ -12,6 +12,7 @@ import zeno.util.tools.generic.properties.Updateable;
  * @since Jul 10, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface FCTEigen extends Updateable
@@ -20,6 +21,8 @@ public interface FCTEigen extends Updateable
 	 * Returns the diagonal matrix E from the {@code FCTEigen}.
 	 * 
 	 * @return  the diagonal matrix E
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix E();
@@ -28,6 +31,8 @@ public interface FCTEigen extends Updateable
 	 * Returns the orthogonal matrix Q from the {@code FCTEigen}.
 	 * 
 	 * @return  the orthogonal matrix Q
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix Q();

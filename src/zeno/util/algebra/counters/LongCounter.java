@@ -10,6 +10,7 @@ import zeno.util.tools.primitives.Longs;
  * @since May 5, 2016
  * @author Zeno
  * 
+ * 
  * @see Iterator
  * @see Long
  */

@@ -12,6 +12,7 @@ import zeno.util.tools.generic.properties.Updateable;
  * @since Jul 10, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface FCTOrthogonal extends Updateable
@@ -20,6 +21,8 @@ public interface FCTOrthogonal extends Updateable
 	 * Returns the reduced orthogonal matrix Q from the {@code FCTOrthogonal}.
 	 * 
 	 * @return  the reduced orthogonal matrix Q
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix Q();
@@ -28,6 +31,8 @@ public interface FCTOrthogonal extends Updateable
 	 * Returns the upper triangular matrix R from the {@code FCTOrthogonal}.
 	 * 
 	 * @return  the upper triangular matrix R
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix R();

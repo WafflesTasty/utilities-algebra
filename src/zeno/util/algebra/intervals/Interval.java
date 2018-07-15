@@ -9,6 +9,7 @@ import zeno.util.tools.primitives.Floats;
  * @since Apr 25, 2017
  * @author Zeno
  * 
+ * 
  * @see Comparable
  */
 public class Interval implements Comparable<Interval>
@@ -39,6 +40,8 @@ public class Interval implements Comparable<Interval>
 	 * 
 	 * @param format  an interval format
 	 * @return  a new interval
+	 * 
+	 * 
 	 * @see String
 	 */
 	public static Interval create(String format)
@@ -72,6 +75,8 @@ public class Interval implements Comparable<Interval>
 	 * @param min  a minimum cut
 	 * @param max  a maximum cut
 	 * @return  a new range
+	 * 
+	 * 
 	 * @see Cut
 	 */
 	public static Interval create(Cut min, Cut max)
@@ -444,6 +449,8 @@ public class Interval implements Comparable<Interval>
 	 * 
 	 * @param min  the range minimum
 	 * @param max  the range maximum
+	 * 
+	 * 
 	 * @see Cut
 	 */
 	protected Interval(Cut min, Cut max)
@@ -457,6 +464,8 @@ public class Interval implements Comparable<Interval>
 	 * Returns the minimum of the {@code Interval}.
 	 * 
 	 * @return  the range's minimum
+	 * 
+	 * 
 	 * @see Cut
 	 */
 	public Cut min()
@@ -468,6 +477,8 @@ public class Interval implements Comparable<Interval>
 	 * Returns the maximum of the {@code Interval}.
 	 * 
 	 * @return  the range's maximum
+	 * 
+	 * 
 	 * @see Cut
 	 */
 	public Cut max()
@@ -650,6 +661,8 @@ public class Interval implements Comparable<Interval>
 	 * Returns the length of the {@code Interval}.
 	 * 
 	 * @return  the interval's length
+	 * 
+	 * 
 	 * @see Cut
 	 */
 	public Cut length()
@@ -690,5 +703,4 @@ public class Interval implements Comparable<Interval>
 		return 443 * min.hashCode()
 			 + 881 * max.hashCode();
 	}
-
 }

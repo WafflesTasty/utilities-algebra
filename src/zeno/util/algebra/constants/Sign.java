@@ -3,8 +3,9 @@ package zeno.util.algebra.constants;
 /**
  * The {@code Sign} enum defines the three possible signs of a numerical value.
  * 
- * @since Oct 16, 2014
  * @author Zeno
+ * @since Oct 16, 2014
+ * @version 1.0
  */
 public enum Sign
 {

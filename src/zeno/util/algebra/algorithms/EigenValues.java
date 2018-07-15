@@ -26,6 +26,8 @@ public class EigenValues
 	 * @param m  a matrix to use
 	 * @param v  a vector to use
 	 * @return  the rayleigh coëfficient
+	 * 
+	 * 
 	 * @see Matrix
 	 * @see Vector
 	 */
@@ -49,6 +51,8 @@ public class EigenValues
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public EigenValues(Matrix m)
@@ -63,6 +67,8 @@ public class EigenValues
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public EigenValues(Matrix m, int ulps)
@@ -77,6 +83,8 @@ public class EigenValues
 	 * 
 	 * @param x  an initial vector guess
 	 * @return  an eigenvector
+	 * 
+	 * 
 	 * @see Vector
 	 */
 	public Vector rayleighIteration(Vector x)
@@ -134,6 +142,8 @@ public class EigenValues
 	 * @param val  an initial value guess
 	 * @param x  an initial vector guess
 	 * @return  an eigenvector
+	 * 
+	 * 
 	 * @see Vector
 	 */
 	public Vector inverseIteration(Vector x, float val)
@@ -179,6 +189,8 @@ public class EigenValues
 	 * 
 	 * @param x  an initial vector guess
 	 * @return  a dominant eigenvector
+	 * 
+	 * 
 	 * @see Vector
 	 */
 	public Vector powerIteration(Vector x)

@@ -23,6 +23,7 @@ import zeno.util.algebra.linear.tensor.Tensors;
  * @since Jul 10, 2018
  * @version 1.0 
  * 
+ * 
  * @see FCTOrthogonal
  * @see LeastSquares
  */
@@ -42,6 +43,8 @@ public class LSQNormal implements FCTOrthogonal, LeastSquares
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public LSQNormal(Matrix m)
@@ -56,6 +59,8 @@ public class LSQNormal implements FCTOrthogonal, LeastSquares
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public LSQNormal(Matrix m, int ulps)

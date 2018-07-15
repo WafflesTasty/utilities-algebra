@@ -12,6 +12,7 @@ import zeno.util.tools.generic.properties.Updateable;
  * @since Jul 10, 2018
  * @version 1.0
  * 
+ * 
  * @see Updateable
  */
 public interface FCTHessenberg extends Updateable
@@ -20,6 +21,8 @@ public interface FCTHessenberg extends Updateable
 	 * Returns the Hessenberg matrix H from the {@code FCTHessenberg}.
 	 * 
 	 * @return  the hessenberg matrix H
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix H();
@@ -28,6 +31,8 @@ public interface FCTHessenberg extends Updateable
 	 * Returns the orthogonal matrix Q from the {@code FCTHessenberg}.
 	 * 
 	 * @return  the orthogonal matrix Q
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix Q();

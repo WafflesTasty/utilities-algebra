@@ -11,6 +11,7 @@ import zeno.util.tools.primitives.Floats;
  * @since Apr 25, 2017
  * @author Zeno
  * 
+ * 
  * @see Comparable
  */
 public abstract class Cut implements Comparable<Cut>
@@ -269,6 +270,8 @@ public abstract class Cut implements Comparable<Cut>
 	 * Represents the {@code Cut} as a lower bound.
 	 * 
 	 * @return  a lower bound string
+	 * 
+	 * 
 	 * @see String
 	 */
 	public String toLowerBound()
@@ -285,6 +288,8 @@ public abstract class Cut implements Comparable<Cut>
 	 * Represents the {@code Cut} as an upper bound.
 	 * 
 	 * @return  an upper bound string
+	 * 
+	 * 
 	 * @see String
 	 */
 	public String toUpperBound()

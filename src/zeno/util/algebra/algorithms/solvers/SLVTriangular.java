@@ -17,6 +17,7 @@ import zeno.util.tools.primitives.Floats;
  * @since Jul 9, 2018
  * @version 1.0
  * 
+ * 
  * @see LinearSolver
  */
 public class SLVTriangular implements LinearSolver
@@ -27,6 +28,8 @@ public class SLVTriangular implements LinearSolver
 	 * @param m  a matrix to check
 	 * @param ulps  an error margin
 	 * @return  {@code true} if the matrix can be solved
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public static boolean canSolve(Matrix m, int ulps)
@@ -49,6 +52,8 @@ public class SLVTriangular implements LinearSolver
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public SLVTriangular(Matrix m)
@@ -63,6 +68,8 @@ public class SLVTriangular implements LinearSolver
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public SLVTriangular(Matrix m, int ulps)

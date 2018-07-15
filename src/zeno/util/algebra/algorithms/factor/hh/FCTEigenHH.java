@@ -17,6 +17,7 @@ import zeno.util.algebra.linear.matrix.operators.square.Symmetric;
  * @since Jul 10, 2018
  * @version 1.0 
  * 
+ * 
  * @see FCTEigen
  */
 public class FCTEigenHH implements FCTEigen
@@ -35,6 +36,8 @@ public class FCTEigenHH implements FCTEigen
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public FCTEigenHH(Matrix m)
@@ -49,6 +52,8 @@ public class FCTEigenHH implements FCTEigen
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
+	 * 
+	 * 
 	 * @see Matrix
 	 */
 	public FCTEigenHH(Matrix m, int ulps)
