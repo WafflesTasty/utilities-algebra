@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.generic.properties.Updateable;
+import zeno.util.tools.patterns.properties.Updateable;
 
 /**
  * The {@code FCTBidiagonal} interface defines an algorithm that performs bidiagonal factorization.

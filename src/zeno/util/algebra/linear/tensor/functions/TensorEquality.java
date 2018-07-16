@@ -2,7 +2,7 @@ package zeno.util.algebra.linear.tensor.functions;
 
 import zeno.util.algebra.linear.tensor.Tensor;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.patterns.Operation;
+import zeno.util.tools.patterns.properties.operable.Operation;
 import zeno.util.tools.primitives.Floats;
 import zeno.util.tools.primitives.Integers;
 

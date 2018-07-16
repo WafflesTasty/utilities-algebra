@@ -2,7 +2,7 @@ package zeno.util.algebra.linear.matrix.functions.banded;
 
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.Operation;
+import zeno.util.tools.patterns.properties.operable.Operation;
 import zeno.util.tools.primitives.Integers;
 
 /**

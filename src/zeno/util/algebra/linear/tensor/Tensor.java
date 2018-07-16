@@ -7,9 +7,9 @@ import zeno.util.algebra.linear.tensor.data.Dense;
 import zeno.util.algebra.linear.tensor.types.TensorOps;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.tools.patterns.Operable;
-import zeno.util.tools.patterns.Operation;
-import zeno.util.tools.patterns.Operator;
+import zeno.util.tools.patterns.properties.Operable;
+import zeno.util.tools.patterns.properties.operable.Operation;
+import zeno.util.tools.patterns.properties.operable.Operator;
 import zeno.util.tools.primitives.Integers;
 
 /**

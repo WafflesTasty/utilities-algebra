@@ -7,7 +7,7 @@ import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.tensor.data.Data;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.tools.patterns.Operation;
+import zeno.util.tools.patterns.properties.operable.Operation;
 
 /**
  * The {@code Matrix} class provides a default implementation for

@@ -4,7 +4,7 @@ import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
 import zeno.util.algebra.linear.matrix.types.dimensions.Wide;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.Operator;
+import zeno.util.tools.patterns.properties.operable.Operator;
 
 /**
  * The {@code Square} interface defines an operator for square matrices.

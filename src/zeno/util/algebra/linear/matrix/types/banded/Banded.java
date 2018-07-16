@@ -9,8 +9,8 @@ import zeno.util.algebra.linear.matrix.functions.banded.BandedLProduct;
 import zeno.util.algebra.linear.matrix.functions.banded.BandedRProduct;
 import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.Operation;
-import zeno.util.tools.patterns.Operator;
+import zeno.util.tools.patterns.properties.operable.Operation;
+import zeno.util.tools.patterns.properties.operable.Operator;
 import zeno.util.tools.primitives.Floats;
 import zeno.util.tools.primitives.Integers;
 

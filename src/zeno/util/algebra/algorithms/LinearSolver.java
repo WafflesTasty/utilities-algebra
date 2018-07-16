@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.generic.properties.Updateable;
+import zeno.util.tools.patterns.properties.Updateable;
 
 /**
  * The {@code LinearSolver} interface defines a solver for exact linear systems.

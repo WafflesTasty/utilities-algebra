@@ -5,9 +5,9 @@ import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.functions.identity.IdentityDotProduct;
 import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.Operation;
-import zeno.util.tools.patterns.Operator;
-import zeno.util.tools.patterns.functions.Repetition;
+import zeno.util.tools.patterns.properties.operable.Operation;
+import zeno.util.tools.patterns.properties.operable.Operator;
+import zeno.util.tools.patterns.properties.operable.Repetition;
 
 /**
  * The {@code Identity} interface defines an operator for identity matrices.

@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms;
 
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.tools.generic.properties.Updateable;
+import zeno.util.tools.patterns.properties.Updateable;
 import zeno.util.tools.primitives.Floats;
 
 /**

@@ -3,7 +3,7 @@ package zeno.util.algebra.linear.matrix.types.dimensions;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.MatrixOps;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.Operator;
+import zeno.util.tools.patterns.properties.operable.Operator;
 
 /**
  * The {@code Wide} interface defines an operator for wide matrices.

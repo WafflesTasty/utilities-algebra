@@ -4,7 +4,7 @@ import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Identity;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.Operator;
+import zeno.util.tools.patterns.properties.operable.Operator;
 
 /**
  * The {@code Involutory} interface defines an operator for involutory matrices.

@@ -3,7 +3,7 @@ package zeno.util.algebra.linear.tensor.data;
 import zeno.util.algebra.Dimensional;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.tools.Array;
-import zeno.util.tools.generic.properties.Copyable;
+import zeno.util.tools.patterns.properties.Copyable;
 import zeno.util.tools.primitives.Integers;
 
 /**
