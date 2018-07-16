@@ -9,8 +9,10 @@ import zeno.util.tools.primitives.Floats;
  * The {@code Quaternion} class extends complex numbers to four dimensions.
  * <br> They are useful in representing 3D space rotations.
  * 
- * @since Apr 30, 2016
  * @author Zeno
+ * @since Apr 30, 2016
+ * @version 1.0
+ * 
  * 
  * @see Vector4
  */
@@ -20,13 +22,54 @@ public class Quaternion extends Vector4
 	 * Casts a {@code Vector4} to a {@code Quaternion}.
 	 * 
 	 * @param vec  a four-dimensional vector
-	 * @return  a complex number
+	 * @return  a complex quaternion
+	 * 
+	 * 
 	 * @see Vector4
 	 */
 	public static Quaternion from(Vector4 vec)
 	{
 		return new Quaternion(vec.X(), vec.Y(), vec.Z(), vec.W());
 	}
+	
+	/**
+	 * Creates a rotation matrix from a {@code Quaternion}.
+	 * 
+	 * @param q  a rotation quaternion
+	 * @return   a rotation matrix
+	 * 
+	 * 
+	 * @see Matrix3x3
+	 */
+	public static Matrix3x3 rotate3D(Quaternion q)
+	{
+		Quaternion p = q.normalize();
+		
+		float x = p.X();
+		float y = p.Y();
+		float z = p.Z();
+		float w = p.W();
+		
+		
+		Matrix3x3 m = Matrix3x3.identity();
+		
+		m.set(1 - 2 * (y * y + z * z), 0, 0);
+		m.set(0 + 2 * (x * y - z * w), 0, 1);
+		m.set(0 + 2 * (x * z + y * w), 0, 2);
+		
+		m.set(0 + 2 * (x * y + z * w), 1, 0);
+		m.set(1 - 2 * (x * x + z * z), 1, 1);
+		m.set(0 + 2 * (y * z - x * w), 1, 2);
+		
+		m.set(0 + 2 * (x * z - y * w), 2, 0);
+		m.set(0 + 2 * (x * w + y * z), 2, 1);
+		m.set(1 - 2 * (x * x + y * y), 2, 2);
+		
+		
+		return m;
+	}
+	
+	
 	
 	/**
 	 * Creates a new {@code Quaternion}.
@@ -83,10 +126,42 @@ public class Quaternion extends Vector4
 	
 	
 	/**
-	 * Returns the {@code Quaternion} multiplication.
+	 * Returns a {@code Quaternion} conjugate.
+	 * 
+	 * @return  a conjugate quaternion
+	 */
+	public Quaternion conjugate()
+    {
+		 return new Quaternion(-X(), -Y(), -Z(), W());
+    }
+	
+	/**
+	 * Returns a {@code Quaternion} element sum.
+	 * 
+	 * @param q  a quaternion to add
+	 * @return   a sum quaternion
+	 */
+	public Quaternion plus(Quaternion q)
+	{
+		return from(super.plus(q));
+	}
+	
+	/**
+	 * Returns a {@code Quaternion} difference.
+	 * 
+	 * @param v  a quaternion to subtract
+	 * @return   a quaternion difference
+	 */
+	public Quaternion minus(Quaternion v)
+	{
+		return from(super.minus(v));
+	}
+	
+	/**
+	 * Returns a {@code Quaternion} product.
 	 * 
 	 * @param q  a quaternion to multiply
-	 * @return  the quaternion product
+	 * @return   a quaternion product
 	 */
 	public Quaternion times(Quaternion q)
     {
@@ -107,32 +182,9 @@ public class Quaternion extends Vector4
 
         return new Quaternion(x, y, z, w);
     }
-	
+
 	/**
-	 * Returns the {@code Complex} multiplication.
-	 * 
-	 * @param c  a complex to multiply
-	 * @return  the complex product
-	 * @see Complex
-	 */
-	public Quaternion times(Complex c)
-    {
-		return c.times(this);
-    }
-		
-	/**
-	 * Returns the {@code Quaternion}'s conjugate.
-	 * 
-	 * @return  the quaternion conjugate
-	 */
-	public Quaternion conjugate()
-    {
-		 return new Quaternion(-X(), -Y(), -Z(), W());
-    }
-		
-	
-	/**
-	 * Checks if the {@code Quaternion} is a real number.
+	 * Checks if this number is real.
 	 * 
 	 * @return  {@code true} if the quaternion is real
 	 */
@@ -143,65 +195,11 @@ public class Quaternion extends Vector4
 			&& Z() == 0;
 	}
 	
-	/**
-	 * Returns the real part of the {@code Quaternion}.
-	 * 
-	 * @return  the quaternion's real part
-	 */
-	public float Real()
-	{
-		return W();
-	}
-	
-	
-	public Matrix3x3 matrix()
-	{
-		Matrix3x3 mat = Matrix3x3.identity();
-		
-		mat.set(1 - 2 * (Y() * Y() + Z() * Z()), 0, 0);
-		mat.set(0 + 2 * (X() * Y() - Z() * W()), 0, 1);
-		mat.set(0 + 2 * (X() * Z() + Y() * W()), 0, 2);
-		
-		mat.set(0 + 2 * (X() * Y() + Z() * W()), 1, 0);
-		mat.set(1 - 2 * (X() * X() + Z() * Z()), 1, 1);
-		mat.set(0 + 2 * (Y() * Z() - X() * W()), 1, 2);
-		
-		mat.set(0 + 2 * (X() * Z() - Y() * W()), 2, 0);
-		mat.set(0 + 2 * (X() * W() + Y() * Z()), 2, 1);
-		mat.set(1 - 2 * (X() * X() + Y() * Y()), 2, 2);
-		
-		
-		return mat;
-	}
-	
-	
-	/**
-	 * Returns the {@code Quaternion}'s subtraction.
-	 * 
-	 * @param v  a vector to subtract
-	 * @return  the difference vector
-	 */
-	public Quaternion minus(Quaternion v)
-	{
-		return from(super.minus(v));
-	}
-	
-	/**
-	 * Returns the {@code Quaternion}'s sum.
-	 * 
-	 * @param v  a vector to add
-	 * @return  the sum vector
-	 */
-	public Quaternion plus(Quaternion v)
-	{
-		return from(super.plus(v));
-	}
-	
-	
+
 	@Override
-	public Quaternion times(float s)
+	public Quaternion times(float v)
 	{
-		return from(super.times(s));
+		return from(super.times(v));
 	}
 	
 	@Override

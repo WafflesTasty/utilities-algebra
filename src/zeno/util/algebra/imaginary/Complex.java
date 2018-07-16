@@ -6,8 +6,10 @@ import zeno.util.tools.primitives.Floats;
 /**
  * The {@code Complex} class defines a complex number in two dimensions.
  * 
- * @since Apr 30, 2016
  * @author Zeno
+ * @since Apr 30, 2016
+ * @version 1.0
+ *  
  *  
  * @see Vector2
  */
@@ -46,34 +48,40 @@ public class Complex extends Vector2
 	}
 	
 	
+	/**
+	 * Returns a {@code Complex} conjugate.
+	 * 
+	 * @return  the complex conjugate
+	 */
+	public Complex conjugate()
+    {
+        return new Complex(X(), -Y());
+    }
 		
 	/**
-	 * Returns the {@code Quaternion} multiplication.
+	 * Returns a {@code Complex} element sum.
 	 * 
-	 * @param q  a quaternion to multiply
-	 * @return  the quaternion product
-	 * @see Quaternion
+	 * @param v  a complex to add
+	 * @return  the sum complex
 	 */
-	public Quaternion times(Quaternion q)
-    {
-		float x1 = X();
-		float y1 = Y();
-		
-		float x2 = q.X();
-		float y2 = q.Y();
-		float z2 = q.Z();
-		float w2 = q.W();
+	public Complex plus(Complex v)
+	{
+		return from(super.plus(v));
+	}
 
-		float x = x1 * x2 - y1 * y2;
-		float y = x1 * y2 + y1 * x2;
-		float z = x1 * z2 - y1 * w2;
-		float w = x1 * w2 + y1 * z2;
-		
-        return new Quaternion(x, y, z, w);
-    }
+	/**
+	 * Returns a {@code Complex} difference.
+	 * 
+	 * @param v  a complex to subtract
+	 * @return  the difference complex
+	 */
+	public Complex minus(Complex v)
+	{
+		return from(super.minus(v));
+	}
 	
 	/**
-	 * Returns the {@code Complex} multiplication.
+	 * Returns a {@code Complex} product.
 	 * 
 	 * @param c  a complex to multiply
 	 * @return  the complex product
@@ -91,77 +99,22 @@ public class Complex extends Vector2
 
         return new Complex(x, y);
     }
-		
-	/**
-	 * Returns the {@code Complex}'s conjugate.
-	 * 
-	 * @return  the complex conjugate
-	 */
-	public Complex conjugate()
-    {
-        return new Complex(X(), -Y());
-    }
-	
 	
 	/**
-	 * Returns the imaginary part of the {@code Complex}.
+	 * Checks if this number is real.
 	 * 
-	 * @return  the complex's imaginary part
-	 */
-	public float Imaginary()
-	{
-		return Y();
-	}
-	
-	/**
-	 * Checks if the {@code Complex} is a real number.
-	 * 
-	 * @return  {@code true} if the complex is real
+	 * @return  {@code true} if the number is real
 	 */
 	public boolean isReal()
 	{
 		return Y() == 0;
 	}
-		
-	/**
-	 * Returns the real part of the {@code Complex}.
-	 * 
-	 * @return  the complex's real part
-	 */
-	public float Real()
-	{
-		return X();
-	}
-	
 
-	
-	/**
-	 * Returns the {@code Complex}'s subtraction.
-	 * 
-	 * @param v  a complex to subtract
-	 * @return  the difference complex
-	 */
-	public Complex minus(Complex v)
-	{
-		return from(super.minus(v));
-	}
-	
-	/**
-	 * Returns the {@code Complex}'s sum.
-	 * 
-	 * @param v  a complex to add
-	 * @return  the sum complex
-	 */
-	public Complex plus(Complex v)
-	{
-		return from(super.plus(v));
-	}
-		
-	
+
 	@Override
-	public Complex times(float s)
+	public Complex times(float v)
 	{
-		return from(super.times(s));
+		return from(super.times(v));
 	}
 	
 	@Override
