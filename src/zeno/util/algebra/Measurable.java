@@ -1,4 +1,4 @@
-package zeno.util.algebra.linear;
+package zeno.util.algebra;
 
 import zeno.util.tools.generic.properties.Approximate;
 import zeno.util.tools.primitives.Floats;

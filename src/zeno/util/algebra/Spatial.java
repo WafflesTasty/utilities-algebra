@@ -1,5 +1,6 @@
-package zeno.util.algebra.linear;
+package zeno.util.algebra;
 
+import zeno.util.algebra.linear.Linear;
 import zeno.util.tools.primitives.Floats;
 
 /**

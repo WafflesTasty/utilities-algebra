@@ -1,7 +1,7 @@
 package zeno.util.algebra.linear.tensor;
 
 import zeno.util.algebra.Dimensional;
-import zeno.util.algebra.linear.Measurable;
+import zeno.util.algebra.Measurable;
 import zeno.util.algebra.linear.tensor.data.Data;
 import zeno.util.algebra.linear.tensor.data.Dense;
 import zeno.util.algebra.linear.tensor.types.TensorOps;
