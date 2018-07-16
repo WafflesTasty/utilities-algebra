@@ -1,5 +1,9 @@
 package zeno.util.algebra.intervals;
 
+import zeno.util.algebra.intervals.cuts.AboveAll;
+import zeno.util.algebra.intervals.cuts.AboveValue;
+import zeno.util.algebra.intervals.cuts.BelowAll;
+import zeno.util.algebra.intervals.cuts.BelowValue;
 import zeno.util.tools.primitives.Booleans;
 import zeno.util.tools.primitives.Floats;
 
@@ -8,8 +12,9 @@ import zeno.util.tools.primitives.Floats;
  * It neatly separates the real numbers into two intervals.
  * One of the intervals is possibly empty.
  * 
- * @since Apr 25, 2017
  * @author Zeno
+ * @since Apr 25, 2017
+ * @version 1.0
  * 
  * 
  * @see Comparable
@@ -59,200 +64,6 @@ public abstract class Cut implements Comparable<Cut>
 	}
 	
 	
-	private static class BelowAll extends Cut
-	{
-		public BelowAll()
-		{
-			super(Floats.NEG_INFINITY);
-		}
-
-	
-		@Override
-		public String toLowerBound()
-		{
-			return "(\u221E";
-		}
-		
-		@Override
-		public String toUpperBound()
-		{
-			return null;
-		}
-		
-		@Override
-		public boolean isAbove(float v)
-		{
-			return false;
-		}
-		
-		@Override
-		public boolean isBelow(float v)
-		{
-			return true;
-		}
-			
-		@Override
-		public int compareTo(float val)
-		{
-			if(Floats.isFinite(val))
-			{
-				return -1;
-			}
-			
-			return 0;
-		}
-		
-		@Override
-		public int compareTo(Cut c)
-		{
-			if(c != this)
-			{
-				return -1;
-			}
-			
-			return 0;
-		}
-	}
-		
-	private static class BelowValue extends Cut
-	{
-		public BelowValue(float value)
-		{
-			super(value);
-		}
-		
-
-		@Override
-		public boolean isAbove(float v)
-		{
-			return v < value();
-		}
-		
-		@Override
-		public boolean isBelow(float v)
-		{
-			return v >= value();
-		}
-		
-		@Override
-		public int compareTo(float val)
-		{
-			if(isAbove(val))
-				return 1;
-			return -1;
-		}
-		
-		@Override
-		public int compareTo(Cut c)
-		{
-			if(isBelow(c.value()))
-			{
-				if(c.isBelow(value()))
-					return 0;
-				return -1;
-			}
-			
-			return 1;
-		}
-	}
-	
-	private static class AboveValue extends Cut
-	{
-		public AboveValue(float value)
-		{
-			super(value);
-		}
-
-		
-		@Override
-		public boolean isAbove(float v)
-		{
-			return v <= value();
-		}
-		
-		@Override
-		public boolean isBelow(float v)
-		{
-			return v > value();
-		}
-		
-		@Override
-		public int compareTo(float val)
-		{
-			if(isAbove(val))
-				return 1;
-			return -1;
-		}
-		
-		@Override
-		public int compareTo(Cut c)
-		{
-			if(isAbove(c.value()))
-			{
-				if(c.isAbove(value()))
-					return 0;
-				return 1;
-			}
-			
-			return -1;
-		}
-	}
-	
-	private static class AboveAll extends Cut
-	{
-		public AboveAll()
-		{
-			super(Floats.POS_INFINITY);
-		}
-
-		
-		@Override
-		public String toLowerBound()
-		{
-			return null;
-		}
-		
-		@Override
-		public String toUpperBound()
-		{
-			return "\u221E)";
-		}
-		
-		@Override
-		public boolean isAbove(float v)
-		{
-			return true;
-		}
-		
-		@Override
-		public boolean isBelow(float v)
-		{
-			return false;
-		}
-		
-		@Override
-		public int compareTo(float val)
-		{
-			if(Floats.isFinite(val))
-			{
-				return 1;
-			}
-			
-			return 0;
-		}
-		
-		@Override
-		public int compareTo(Cut c)
-		{
-			if(c == this)
-			{
-				return 0;
-			}
-			
-			return 1;
-		}
-	}
-	
 	
 	private float value;
 	
@@ -261,7 +72,7 @@ public abstract class Cut implements Comparable<Cut>
 	 * 
 	 * @param value  a value to cut at
 	 */
-	protected Cut(float value)
+	public Cut(float value)
 	{
 		this.value = value;
 	}
@@ -310,12 +121,10 @@ public abstract class Cut implements Comparable<Cut>
 	 */
 	public Cut times(float val)
 	{
-		if(isAbove(value))
-		{
-			return Above(value * val);
-		}
-		
-		return Below(value * val);
+		// If the value is negative, the cut gets switched.
+		return (val > 0 == isAbove(value))
+			 ? Above(value * val)
+			 : Below(value * val);
 	}
 	
 	/**
@@ -383,6 +192,7 @@ public abstract class Cut implements Comparable<Cut>
 	 * @return  a comparative integer
 	 */
 	public abstract int compareTo(float val);
+	
 	
 	
 	@Override

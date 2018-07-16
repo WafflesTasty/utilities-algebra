@@ -1,5 +1,10 @@
 package zeno.util.algebra.intervals;
 
+import zeno.util.algebra.intervals.types.AboveCut;
+import zeno.util.algebra.intervals.types.All;
+import zeno.util.algebra.intervals.types.BelowCut;
+import zeno.util.algebra.intervals.types.Empty;
+import zeno.util.algebra.intervals.types.Radians;
 import zeno.util.tools.Array;
 import zeno.util.tools.primitives.Floats;
 
@@ -175,272 +180,6 @@ public class Interval implements Comparable<Interval>
 	}
 	
 	
-	private static class AboveCut extends Interval
-	{
-		public AboveCut(Cut min)
-		{
-			super(min, Cut.ABOVE_ALL);
-		}
-		
-		
-		@Override
-		public Interval span(Interval range)
-		{
-			int cmin = min().compareTo(range.min());
-			if(cmin < 0)
-			{
-				return new Interval(range.min(), max());
-			}
-			
-			return this;
-		}
-		
-		@Override
-		public Interval intersection(Interval range)
-		{
-			if(isDisjoint(range))
-			{
-				return null;
-			}
-			
-			
-			int cmin = min().compareTo(range.min());
-			if(cmin < 0)
-			{
-				return new Interval(min(), range.max());
-			}
-			
-			return range;
-		}
-		
-		
-		@Override
-		public boolean contains(Interval range)
-		{
-			return min().compareTo(range.min()) <= 0;
-		}
-		
-		@Override
-		public boolean contains(float val)
-		{
-			return min().isBelow(val);
-		}
-		
-		@Override
-		public int compareTo(Interval r)
-		{
-			return (min().compareTo(r.max()) > 0 ? 1 : 0);
-		}
-		
-		@Override
-		public boolean isEmpty()
-		{
-			return false;
-		}
-	}
-	
-	private static class BelowCut extends Interval
-	{
-		public BelowCut(Cut max)
-		{
-			super(Cut.BELOW_ALL, max);
-		}
-
-				
-		@Override
-		public Interval span(Interval range)
-		{
-			int cmax = max().compareTo(range.max());
-			if(cmax < 0)
-			{
-				return new Interval(min(), range.max());
-			}
-			
-			return this;
-		}
-		
-		@Override
-		public Interval intersection(Interval range)
-		{
-			if(isDisjoint(range))
-			{
-				return null;
-			}
-			
-			
-			int cmax = max().compareTo(range.max());
-			if(cmax < 0)
-			{
-				return new Interval(range.min(), max());
-			}
-			
-			return range;
-		}
-		
-		
-		@Override
-		public boolean contains(Interval range)
-		{
-			return max().compareTo(range.max()) >= 0;
-		}
-		
-		@Override
-		public boolean contains(float val)
-		{
-			return max().isAbove(val);
-		}
-		
-		@Override
-		public int compareTo(Interval r)
-		{
-			return (max().compareTo(r.min()) < 0 ? -1 : 0);
-		}
-		
-		@Override
-		public boolean isEmpty()
-		{
-			return false;
-		}
-	}
-	
-	private static class Radians extends Interval
-	{
-		protected Radians()
-		{
-			super(Cut.Below(-Floats.PI), Cut.Below(Floats.PI));
-		}	
-	}
-	
-	private static class Empty extends Interval
-	{
-		public Empty()
-		{
-			super(Cut.Below(0), Cut.Below(0));
-		}
-		
-		
-		@Override
-		public Interval span(Interval range)
-		{
-			return range;
-		}
-		
-		@Override
-		public Interval intersection(Interval range)
-		{
-			return this;
-		}
-		
-
-		@Override
-		public boolean isDisjoint(Interval range)
-		{
-			return true;
-		}
-		
-		@Override
-		public boolean contains(Interval range)
-		{
-			return equals(range);
-		}
-		
-		@Override
-		public boolean contains(float val)
-		{
-			return false;
-		}
-		
-		@Override
-		public boolean isEmpty()
-		{
-			return true;
-		}
-	
-		
-		@Override
-		public int compareTo(Interval range)
-		{
-			return 0;
-		}
-			
-		@Override
-		public boolean equals(Object o)
-		{
-			return o == this;
-		}
-		
-		@Override
-		public int hashCode()
-		{
-			return 2017;
-		}
-	}
-	
-	private static class All extends Interval
-	{
-		public All()
-		{
-			super(Cut.BELOW_ALL, Cut.ABOVE_ALL);
-		}
-		
-		
-		@Override
-		public Interval span(Interval range)
-		{
-			return this;
-		}
-				
-		@Override
-		public Interval intersection(Interval range)
-		{
-			return range;
-		}
-		
-				
-		@Override
-		public boolean isDisjoint(Interval range)
-		{
-			return false;
-		}
-		
-		@Override
-		public boolean contains(Interval range)
-		{
-			return true;
-		}
-		
-		@Override
-		public boolean contains(float val)
-		{
-			return true;
-		}
-				
-		@Override
-		public boolean isEmpty()
-		{
-			return false;
-		}
-
-		
-		@Override
-		public int compareTo(Interval range)
-		{
-			return 0;
-		}
-			
-		@Override
-		public boolean equals(Object o)
-		{
-			return o == this;
-		}
-		
-		@Override
-		public int hashCode()
-		{
-			return 2111;
-		}
-	}
-	
 	
 	private Cut min, max;
 		
@@ -453,37 +192,10 @@ public class Interval implements Comparable<Interval>
 	 * 
 	 * @see Cut
 	 */
-	protected Interval(Cut min, Cut max)
+	public Interval(Cut min, Cut max)
 	{
 		this.min = min;
 		this.max = max;
-	}
-
-	
-	/**
-	 * Returns the minimum of the {@code Interval}.
-	 * 
-	 * @return  the range's minimum
-	 * 
-	 * 
-	 * @see Cut
-	 */
-	public Cut min()
-	{
-		return min;
-	}
-	
-	/**
-	 * Returns the maximum of the {@code Interval}.
-	 * 
-	 * @return  the range's maximum
-	 * 
-	 * 
-	 * @see Cut
-	 */
-	public Cut max()
-	{
-		return max;
 	}
 	
 	
@@ -671,6 +383,42 @@ public class Interval implements Comparable<Interval>
 	}
 	
 			
+	/**
+	 * Returns the minimum of the {@code Interval}.
+	 * 
+	 * @return  the range's minimum
+	 * 
+	 * 
+	 * @see Cut
+	 */
+	public Cut min()
+	{
+		return min;
+	}
+	
+	/**
+	 * Returns the maximum of the {@code Interval}.
+	 * 
+	 * @return  the range's maximum
+	 * 
+	 * 
+	 * @see Cut
+	 */
+	public Cut max()
+	{
+		return max;
+	}
+	
+	
+	
+	@Override
+	public int compareTo(Interval r)
+	{
+		if(max.compareTo(r.min) < 0) return -1;
+		if(min.compareTo(r.max) > 0) return  1;
+		return 0;
+	}
+	
 	@Override
 	public boolean equals(Object o)
 	{
@@ -682,15 +430,7 @@ public class Interval implements Comparable<Interval>
 		
 		return false;
 	}
-	
-	@Override
-	public int compareTo(Interval r)
-	{
-		if(max.compareTo(r.min) < 0) return -1;
-		if(min.compareTo(r.max) > 0) return  1;
-		return 0;
-	}
-	
+		
 	@Override
 	public String toString()
 	{
