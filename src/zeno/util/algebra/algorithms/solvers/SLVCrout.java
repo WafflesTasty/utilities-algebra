@@ -2,14 +2,14 @@ package zeno.util.algebra.algorithms.solvers;
 
 import zeno.util.algebra.algorithms.LinearSolver;
 import zeno.util.algebra.algorithms.factor.FCTTriangular;
-import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.linear.matrix.Matrices;
-import zeno.util.algebra.linear.matrix.operators.Square;
-import zeno.util.algebra.linear.matrix.operators.Tall;
-import zeno.util.algebra.linear.matrix.operators.Wide;
-import zeno.util.algebra.linear.matrix.operators.banded.lower.LowerTriangular;
-import zeno.util.algebra.linear.matrix.operators.banded.upper.UpperTriangular;
-import zeno.util.algebra.linear.matrix.operators.square.Orthogonal;
+import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.algebra.linear.matrix.types.Square;
+import zeno.util.algebra.linear.matrix.types.banded.lower.LowerTriangular;
+import zeno.util.algebra.linear.matrix.types.banded.upper.UpperTriangular;
+import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
+import zeno.util.algebra.linear.matrix.types.dimensions.Wide;
+import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.tools.primitives.Doubles;
 import zeno.util.tools.primitives.Floats;
@@ -214,15 +214,11 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		int rows = mat.Rows();
 		int cols = mat.Columns();
 		
-		// Extend the matrix with a permutation column.		
-		c = new Matrix(rows, cols + 1);
+		// Extend the matrix with a permutation column.	
+		c = Matrices.resize(mat, rows, cols + 1);
 		for(int i = 0; i < rows; i++)
 		{
 			c.set(i, i, cols);
-			for(int j = 0; j < cols; j++)
-			{
-				c.set(mat.get(i, j), i, j);
-			}
 		}
 				
 				

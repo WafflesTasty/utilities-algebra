@@ -1,8 +1,7 @@
 package zeno.util.algebra.linear.tensor;
 
-import zeno.util.algebra.attempt4.linear.Tensor;
-import zeno.util.algebra.attempt4.linear.Vectors;
 import zeno.util.algebra.linear.matrix.Matrices;
+import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.tools.Array;
 import zeno.util.tools.Randomizer;
 
@@ -171,7 +170,7 @@ public final class Tensors
 				coords[j] = i;
 			}
 			
-			t.Data().set(1f, coords);
+			t.set(1f, coords);
 		}
 		
 		return (T) t;

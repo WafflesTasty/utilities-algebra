@@ -1,8 +1,8 @@
 package zeno.util.algebra.linear.vector;
 
-import zeno.util.algebra.attempt4.linear.Matrix;
-import zeno.util.algebra.attempt4.linear.Tensor;
-import zeno.util.algebra.attempt4.linear.Vectors;
+import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.algebra.linear.tensor.Tensor;
+import zeno.util.tools.primitives.Floats;
 
 /**
  * The {@code Vector} class defines an algebraic vector using the standard dot product.
@@ -17,20 +17,6 @@ import zeno.util.algebra.attempt4.linear.Vectors;
  */
 public class Vector extends Matrix
 {
-	/**
-	 * Creates a new {@code Vector}.
-	 * 
-	 * @param values  a value array
-	 */
-	public Vector(float... values)
-	{
-		this(values.length);
-		for(int i = 0; i < values.length; i++)
-		{
-			set(values[i], i);
-		}
-	}
-	
 	/**
 	 * Creates a new {@code Vector}.
 	 * 
@@ -71,7 +57,14 @@ public class Vector extends Matrix
 	 */
 	public Vector Absolute()
 	{
-		return Vectors.absolute(this);
+		Vector abs = Vectors.create(Size());
+		for(int i = 0; i < Size(); i++)
+		{
+			float val = Floats.abs(get(i));
+			abs.set(val, i);
+		}
+		
+		return abs;
 	}
 
 	

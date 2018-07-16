@@ -1,6 +1,6 @@
 package zeno.util.algebra.algorithms;
 
-import zeno.util.algebra.attempt4.linear.Matrix;
+import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.tools.generic.properties.Updateable;
 
 /**

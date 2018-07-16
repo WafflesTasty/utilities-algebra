@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
-import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.linear.matrix.Matrices;
+import zeno.util.algebra.linear.matrix.Matrix;
 
 /**
  * The {@code FCTCholesky} interface defines an algorithm that performs Cholesky factorization.

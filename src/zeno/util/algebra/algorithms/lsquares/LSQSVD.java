@@ -4,12 +4,12 @@ import zeno.util.algebra.algorithms.LeastSquares;
 import zeno.util.algebra.algorithms.factor.FCTSingular;
 import zeno.util.algebra.algorithms.factor.hh.FCTBidiagonalHH;
 import zeno.util.algebra.algorithms.solvers.SLVTriangular;
-import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.linear.matrix.Matrices;
-import zeno.util.algebra.linear.matrix.operators.Square;
-import zeno.util.algebra.linear.matrix.operators.Tall;
-import zeno.util.algebra.linear.matrix.operators.banded.Diagonal;
-import zeno.util.algebra.linear.matrix.operators.square.Orthogonal;
+import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.algebra.linear.matrix.types.Square;
+import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
+import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
+import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.tools.primitives.Floats;
 

@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.algorithms.Spectral;
-import zeno.util.algebra.attempt4.linear.Matrix;
+import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.vector.Vector;
 
 /**

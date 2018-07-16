@@ -1,9 +1,9 @@
 package zeno.util.algebra.algorithms;
 
 import zeno.util.algebra.algorithms.solvers.SLVCrout;
-import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.linear.matrix.Matrices;
-import zeno.util.algebra.linear.matrix.operators.Square;
+import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.tools.primitives.Floats;

@@ -1,14 +1,13 @@
 package zeno.util.algebra.linear.matrix;
 
-import zeno.util.algebra.attempt4.linear.Matrix;
-import zeno.util.algebra.attempt4.linear.Vectors;
-import zeno.util.algebra.attempt4.linear.mat.fixed.Matrix2x2;
-import zeno.util.algebra.attempt4.linear.mat.fixed.Matrix3x3;
-import zeno.util.algebra.attempt4.linear.mat.fixed.Matrix4x4;
-import zeno.util.algebra.linear.matrix.operators.orthogonal.Reflection;
-import zeno.util.algebra.linear.matrix.operators.square.Orthogonal;
+import zeno.util.algebra.linear.matrix.fixed.Matrix2x2;
+import zeno.util.algebra.linear.matrix.fixed.Matrix3x3;
+import zeno.util.algebra.linear.matrix.fixed.Matrix4x4;
+import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
+import zeno.util.algebra.linear.matrix.types.orthogonal.Reflection;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.Vector;
+import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.tools.primitives.Floats;
 
 /**
@@ -324,6 +323,27 @@ public class Matrices
 		ref = identity(v.Size()).minus(ref);
 		ref.setOperator(Reflection.Type());
 		return ref;
+	}
+	
+	/**
+	 * Creates a generic diagonal {@code Matrix}.
+	 * 
+	 * @param v  a diagonal vector
+	 * @return  a diagonal matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 * @see Vector
+	 */
+	public static Matrix diagonal(Vector v)
+	{
+		Matrix dia = Matrices.create(v.Size(), v.Size());
+		for(int i = 0; i < v.Size(); i++)
+		{
+			dia.set(v.get(i), i, i);
+		}
+		
+		return dia;
 	}
 	
 

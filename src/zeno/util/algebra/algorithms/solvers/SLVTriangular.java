@@ -1,11 +1,11 @@
 package zeno.util.algebra.algorithms.solvers;
 
 import zeno.util.algebra.algorithms.LinearSolver;
-import zeno.util.algebra.attempt4.linear.Matrix;
 import zeno.util.algebra.linear.matrix.Matrices;
-import zeno.util.algebra.linear.matrix.operators.banded.Diagonal;
-import zeno.util.algebra.linear.matrix.operators.banded.lower.LowerTriangular;
-import zeno.util.algebra.linear.matrix.operators.banded.upper.UpperTriangular;
+import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
+import zeno.util.algebra.linear.matrix.types.banded.lower.LowerTriangular;
+import zeno.util.algebra.linear.matrix.types.banded.upper.UpperTriangular;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.tools.primitives.Floats;
 

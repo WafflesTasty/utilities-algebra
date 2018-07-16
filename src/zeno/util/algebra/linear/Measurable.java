@@ -1,5 +1,6 @@
 package zeno.util.algebra.linear;
 
+import zeno.util.tools.generic.properties.Approximate;
 import zeno.util.tools.primitives.Floats;
 
 /**
@@ -11,9 +12,10 @@ import zeno.util.tools.primitives.Floats;
  * 
  * 
  * @param <M>  the type of the element
+ * @see Approximate
  * @see Spatial
  */
-public interface Measurable<M extends Measurable<M>> extends Spatial<M>
+public interface Measurable<M extends Measurable<M>> extends Approximate<M>, Spatial<M>
 {
 	/**
 	 * Returns the {@code Measurable}'s inner product with another element.
@@ -41,7 +43,7 @@ public interface Measurable<M extends Measurable<M>> extends Spatial<M>
 	}
 	
 	/**
-	 * Returns the {@code Measurable}'s angle to another element.
+	 * Returns the element's angle to another {@code Measurable}.
 	 * 
 	 * @see <a href="https://people.eecs.berkeley.edu/~wkahan/Mindless.pdf">Prof. W. Kahan - Mindless Assessments of Roundoff in Floating-Point Computation</a>
 	 * @param element  an element to measure to
@@ -58,7 +60,7 @@ public interface Measurable<M extends Measurable<M>> extends Spatial<M>
 	}
 		
 	/**
-	 * Returns the {@code Measurable}'s square distance to another element.
+	 * Returns the element's square distance to a {@code Measurable}.
 	 * 
 	 * @param element  an element to measure to
 	 * @return  the element distance
@@ -68,6 +70,7 @@ public interface Measurable<M extends Measurable<M>> extends Spatial<M>
 	{
 		return minus(element).normSqr();
 	}
+	
 	
 	/**
 	 * Returns the {@code Measurable}'s norm squared.
