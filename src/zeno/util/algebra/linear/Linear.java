@@ -1,4 +1,4 @@
-package zeno.util.algebra;
+package zeno.util.algebra.linear;
 
 import zeno.util.tools.generic.properties.Copyable;
 
