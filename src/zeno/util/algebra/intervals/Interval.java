@@ -5,8 +5,8 @@ import zeno.util.algebra.intervals.types.All;
 import zeno.util.algebra.intervals.types.BelowCut;
 import zeno.util.algebra.intervals.types.Empty;
 import zeno.util.algebra.intervals.types.Radians;
-import zeno.util.tools.Array;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
+import zeno.util.tools.helper.Array;
 
 /**
  * The {@code Interval} class defines a single range of real numbers.

@@ -6,7 +6,7 @@ import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code EigenValues} class provides algorithms to compute eigenvectors.

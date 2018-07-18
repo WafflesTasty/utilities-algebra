@@ -1,8 +1,8 @@
 package zeno.util.algebra.linear.matrix.functions.banded;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code BandedDotProduct} class defines the dot product with a banded matrix.

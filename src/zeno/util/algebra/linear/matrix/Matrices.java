@@ -8,7 +8,7 @@ import zeno.util.algebra.linear.matrix.types.orthogonal.Reflection;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Matrices} class defines basic {@code Matrix} operations.

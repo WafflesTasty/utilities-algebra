@@ -4,9 +4,9 @@ import zeno.util.algebra.linear.tensor.Tensor;
 import zeno.util.algebra.linear.tensor.functions.TensorAddition;
 import zeno.util.algebra.linear.tensor.functions.TensorDotProduct;
 import zeno.util.algebra.linear.tensor.functions.TensorEquality;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.patterns.properties.operable.Operator;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
+import zeno.util.tools.patterns.properties.operator.Operator;
 
 /**
  * The {@code TensorOps} implements {@code Operations} for tensors.

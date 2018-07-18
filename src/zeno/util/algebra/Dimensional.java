@@ -1,6 +1,6 @@
 package zeno.util.algebra;
 
-import zeno.util.tools.Array;
+import zeno.util.tools.helper.Array;
 
 /**
  * The {@code Dimensional} interface defines an object represented by

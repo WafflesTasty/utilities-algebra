@@ -5,8 +5,8 @@ import zeno.util.algebra.linear.matrix.types.square.Involutory;
 import zeno.util.algebra.linear.matrix.types.square.Symmetric;
 import zeno.util.algebra.linear.tensor.Tensor;
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.tools.patterns.properties.operable.Operator;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
+import zeno.util.tools.patterns.properties.operator.Operator;
 
 /**
  * The {@code Reflection} interface defines an operator for reflection matrices.

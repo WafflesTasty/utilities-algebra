@@ -1,7 +1,7 @@
 package zeno.util.algebra.intervals.cuts;
 
 import zeno.util.algebra.intervals.Cut;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code AboveAll} class defines a {@code Cut} above all real numbers.

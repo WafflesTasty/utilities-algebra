@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.properties.Updateable;
+import zeno.util.tools.patterns.manipulators.Correctable;
 
 /**
  * The {@code LeastSquares} interface defines a solver for least squares linear systems.
@@ -13,9 +13,9 @@ import zeno.util.tools.patterns.properties.Updateable;
  * @version 1.0
  * 
  * 
- * @see Updateable
+ * @see Correctable
  */
-public interface LeastSquares extends Updateable
+public interface LeastSquares extends Correctable
 {
 	/**
 	 * Approximates a linear system in {@code LeastSquares}.

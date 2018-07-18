@@ -1,7 +1,7 @@
 package zeno.util.algebra.imaginary;
 
 import zeno.util.algebra.linear.vector.fixed.Vector2;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Complex} class defines a complex number in two dimensions.

@@ -1,6 +1,6 @@
 package zeno.util.algebra.linear.tensor.data;
 
-import zeno.util.tools.Array;
+import zeno.util.tools.helper.Array;
 
 /**
  * The {@code Dense} class stores tensor data in a dense array.

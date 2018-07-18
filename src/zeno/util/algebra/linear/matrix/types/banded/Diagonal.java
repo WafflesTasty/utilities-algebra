@@ -6,8 +6,8 @@ import zeno.util.algebra.linear.matrix.types.banded.lower.LowerBidiagonal;
 import zeno.util.algebra.linear.matrix.types.banded.upper.UpperBidiagonal;
 import zeno.util.algebra.linear.matrix.types.square.Symmetric;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.properties.operable.Operator;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
+import zeno.util.tools.patterns.properties.operator.Operator;
 
 /**
  * The {@code Diagonal} interface defines an operator for diagonal matrices.

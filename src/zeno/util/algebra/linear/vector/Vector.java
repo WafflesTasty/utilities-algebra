@@ -2,7 +2,7 @@ package zeno.util.algebra.linear.vector;
 
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Vector} class defines an algebraic vector using the standard dot product.

@@ -11,7 +11,7 @@ import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
 import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code LSQSVD} class solves least squares linear systems using {@code SVD factorization}.

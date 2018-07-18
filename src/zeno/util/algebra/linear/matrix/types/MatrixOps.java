@@ -7,7 +7,7 @@ import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.functions.MatrixProduct;
 import zeno.util.algebra.linear.tensor.Tensor;
 import zeno.util.algebra.linear.tensor.types.TensorOps;
-import zeno.util.tools.patterns.properties.operable.Operation;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code MatrixOps} implements {@code Operations} for matrices.

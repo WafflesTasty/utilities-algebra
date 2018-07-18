@@ -2,8 +2,8 @@ package zeno.util.algebra.linear.matrix.functions.banded;
 
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code BandedAddition} class defines the banded matrix sum.

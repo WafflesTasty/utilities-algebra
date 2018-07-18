@@ -8,8 +8,8 @@ import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
 import zeno.util.algebra.linear.matrix.types.banded.upper.UpperTriangular;
 import zeno.util.algebra.linear.matrix.types.square.Symmetric;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.primitives.Doubles;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Doubles;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code SLVCholesky} class solves exact linear systems using {@code Cholesky's method}.

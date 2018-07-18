@@ -7,10 +7,10 @@ import zeno.util.algebra.linear.tensor.data.Dense;
 import zeno.util.algebra.linear.tensor.types.TensorOps;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.tools.patterns.properties.Operable;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.patterns.properties.operable.Operator;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operable;
+import zeno.util.tools.patterns.properties.operator.Operation;
+import zeno.util.tools.patterns.properties.operator.Operator;
 
 /**
  * The {@code Tensor} class defines an algebraic tensor using the standard dot product.

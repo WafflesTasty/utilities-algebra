@@ -11,7 +11,7 @@ import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.matrix.types.square.Symmetric;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
 
 /**
  * The {@code FCTHessenbergHH} class performs a {@code Hessenberg} factorization.

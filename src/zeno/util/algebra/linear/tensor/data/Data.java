@@ -2,9 +2,9 @@ package zeno.util.algebra.linear.tensor.data;
 
 import zeno.util.algebra.Dimensional;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.Array;
-import zeno.util.tools.patterns.properties.Copyable;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.helper.Array;
+import zeno.util.tools.patterns.manipulators.Copyable;
 
 /**
  * The {@code Data} class defines how values are stored in a {@code Tensor}.

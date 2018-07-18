@@ -3,7 +3,7 @@ package zeno.util.algebra.imaginary;
 import zeno.util.algebra.linear.matrix.fixed.Matrix3x3;
 import zeno.util.algebra.linear.vector.fixed.Vector3;
 import zeno.util.algebra.linear.vector.fixed.Vector4;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Quaternion} class extends complex numbers to four dimensions.

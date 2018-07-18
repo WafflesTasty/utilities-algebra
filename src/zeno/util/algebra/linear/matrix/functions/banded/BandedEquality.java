@@ -1,9 +1,9 @@
 package zeno.util.algebra.linear.matrix.functions.banded;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.primitives.Floats;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Floats;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code BandedEquality} class defines the banded matrix equality.

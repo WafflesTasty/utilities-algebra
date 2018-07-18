@@ -4,7 +4,7 @@ import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.vector.fixed.Vector2;
 import zeno.util.algebra.linear.vector.fixed.Vector3;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Matrix3x3} class defines a 3x3 square matrix.

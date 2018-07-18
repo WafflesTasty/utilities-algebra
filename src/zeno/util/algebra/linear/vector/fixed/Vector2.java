@@ -1,7 +1,7 @@
 package zeno.util.algebra.linear.vector.fixed;
 
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Vector2} class defines a two-dimensional vector.

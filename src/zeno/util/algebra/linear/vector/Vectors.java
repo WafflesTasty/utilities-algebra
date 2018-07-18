@@ -5,7 +5,7 @@ import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.fixed.Vector2;
 import zeno.util.algebra.linear.vector.fixed.Vector3;
 import zeno.util.algebra.linear.vector.fixed.Vector4;
-import zeno.util.tools.Array;
+import zeno.util.tools.helper.Array;
 
 /**
  * The {@code Vectors} class defines basic {@code Vector} operations.

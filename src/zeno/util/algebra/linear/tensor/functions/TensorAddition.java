@@ -2,8 +2,8 @@ package zeno.util.algebra.linear.tensor.functions;
 
 import zeno.util.algebra.linear.tensor.Tensor;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code TensorAddition} class defines the standard tensor sum operation.

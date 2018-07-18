@@ -1,7 +1,7 @@
 package zeno.util.algebra;
 
-import zeno.util.tools.patterns.properties.Approximate;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
+import zeno.util.tools.patterns.properties.Inaccurate;
 
 /**
  * The {@code Measurable} interface defines an element in an inner product space.
@@ -12,10 +12,10 @@ import zeno.util.tools.primitives.Floats;
  * 
  * 
  * @param <M>  the type of the element
- * @see Approximate
+ * @see Inaccurate
  * @see Spatial
  */
-public interface Measurable<M extends Measurable<M>> extends Approximate<M>, Spatial<M>
+public interface Measurable<M extends Measurable<M>> extends Inaccurate<M>, Spatial<M>
 {
 	/**
 	 * Returns the {@code Measurable}'s inner product with another element.

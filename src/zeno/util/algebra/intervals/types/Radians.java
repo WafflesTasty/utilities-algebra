@@ -2,7 +2,7 @@ package zeno.util.algebra.intervals.types;
 
 import zeno.util.algebra.intervals.Cut;
 import zeno.util.algebra.intervals.Interval;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Radians} class defines an interval across all radian values.

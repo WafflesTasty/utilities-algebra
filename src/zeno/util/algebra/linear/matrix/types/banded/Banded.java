@@ -9,10 +9,10 @@ import zeno.util.algebra.linear.matrix.functions.banded.BandedLProduct;
 import zeno.util.algebra.linear.matrix.functions.banded.BandedRProduct;
 import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.tensor.Tensor;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.patterns.properties.operable.Operator;
-import zeno.util.tools.primitives.Floats;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Floats;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
+import zeno.util.tools.patterns.properties.operator.Operator;
 
 /**
  * The {@code Banded} interface defines an operator for banded matrices.

@@ -5,7 +5,7 @@ import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.algebra.linear.vector.fixed.Vector3;
 import zeno.util.algebra.linear.vector.fixed.Vector4;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Matrix4x4} class defines a 4x4 square matrix.

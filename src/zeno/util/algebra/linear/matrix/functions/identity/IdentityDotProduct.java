@@ -1,8 +1,8 @@
 package zeno.util.algebra.linear.matrix.functions.identity;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code IdentityDotProduct} class defines the identity dot product.

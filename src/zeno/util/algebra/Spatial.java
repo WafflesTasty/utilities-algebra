@@ -1,7 +1,7 @@
 package zeno.util.algebra;
 
 import zeno.util.algebra.linear.Linear;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Spatial} interface defines an element in a metric space.

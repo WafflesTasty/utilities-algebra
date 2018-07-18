@@ -4,8 +4,8 @@ import zeno.util.algebra.intervals.cuts.AboveAll;
 import zeno.util.algebra.intervals.cuts.AboveValue;
 import zeno.util.algebra.intervals.cuts.BelowAll;
 import zeno.util.algebra.intervals.cuts.BelowValue;
-import zeno.util.tools.primitives.Booleans;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Booleans;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Cut} class defines a cut in the real numbers.

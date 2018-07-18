@@ -4,7 +4,7 @@ import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.vector.fixed.Vector2;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code Matrix2x2} class defines a 2x2 square matrix.

@@ -7,7 +7,7 @@ import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
 import zeno.util.algebra.linear.matrix.types.banded.lower.LowerTriangular;
 import zeno.util.algebra.linear.matrix.types.banded.upper.UpperTriangular;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
 
 /**
  * The {@code SLVTriangular} class solves exact linear systems through substitution.

@@ -2,8 +2,8 @@ package zeno.util.algebra.linear.tensor;
 
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.tools.Array;
-import zeno.util.tools.Randomizer;
+import zeno.util.tools.helper.Array;
+import zeno.util.tools.helper.Randomizer;
 
 /**
  * The {@code Tensors} class defines basic {@code Tensor} operations.

@@ -2,9 +2,9 @@ package zeno.util.algebra.linear.tensor.functions;
 
 import zeno.util.algebra.linear.tensor.Tensor;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.primitives.Floats;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Floats;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code TensorEquality} class defines the standard tensor equality operation.

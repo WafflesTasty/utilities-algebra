@@ -1,8 +1,8 @@
 package zeno.util.algebra.algorithms;
 
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.tools.patterns.properties.Updateable;
-import zeno.util.tools.primitives.Floats;
+import zeno.util.tools.Floats;
+import zeno.util.tools.patterns.manipulators.Correctable;
 
 /**
  * The {@code Spectral} interface defines a solver for matrix singular values.
@@ -12,9 +12,9 @@ import zeno.util.tools.primitives.Floats;
  * @version 1.0
  * 
  * 
- * @see Updateable
+ * @see Correctable
  */
-public interface Spectral extends Updateable
+public interface Spectral extends Correctable
 {	
 	/**
 	 * Returns the singular values of the {@code Spectral}.

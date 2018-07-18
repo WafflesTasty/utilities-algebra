@@ -10,7 +10,7 @@ import zeno.util.algebra.linear.matrix.types.orthogonal.Identity;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
 
 /**
  * The {@code FCTBidiagonalHH} class performs a {@code Bidiagonal} factorization.

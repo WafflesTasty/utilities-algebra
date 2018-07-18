@@ -11,9 +11,9 @@ import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
 import zeno.util.algebra.linear.matrix.types.dimensions.Wide;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.primitives.Doubles;
-import zeno.util.tools.primitives.Floats;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Doubles;
+import zeno.util.tools.Floats;
+import zeno.util.tools.Integers;
 
 /**
  * The {@code SLVCrout} class solves exact linear systems using {@code Crout's method}.

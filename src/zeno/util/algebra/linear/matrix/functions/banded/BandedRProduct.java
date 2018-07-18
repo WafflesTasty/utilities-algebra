@@ -2,8 +2,8 @@ package zeno.util.algebra.linear.matrix.functions.banded;
 
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.properties.operable.Operation;
-import zeno.util.tools.primitives.Integers;
+import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.operator.Operation;
 
 /**
  * The {@code BandedLProduct} class defines the banded matrix multiplication on the right.
