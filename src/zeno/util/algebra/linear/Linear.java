@@ -1,6 +1,6 @@
 package zeno.util.algebra.linear;
 
-import zeno.util.tools.patterns.manipulators.Copyable;
+import zeno.util.tools.patterns.properties.Copyable;
 
 /**
  * The {@code Linear} interface defines an element in a linear space.

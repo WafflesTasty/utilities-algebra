@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.manipulators.Correctable;
+import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
  * The {@code FCTTriangular} interface defines an algorithm that performs PLU factorization.
@@ -13,9 +13,9 @@ import zeno.util.tools.patterns.manipulators.Correctable;
  * @version 1.0
  * 
  * 
- * @see Correctable
+ * @see Adaptable
  */
-public interface FCTTriangular extends Correctable
+public interface FCTTriangular extends Adaptable
 {
 	/**
 	 * Returns the permutation matrix P from the {@code FCTTriangular}.

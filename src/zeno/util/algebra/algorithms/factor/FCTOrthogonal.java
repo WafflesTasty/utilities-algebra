@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.manipulators.Correctable;
+import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
  * The {@code FCTOrthogonal} interface defines an algorithm that performs QR factorization.
@@ -13,9 +13,9 @@ import zeno.util.tools.patterns.manipulators.Correctable;
  * @version 1.0
  * 
  * 
- * @see Correctable
+ * @see Adaptable
  */
-public interface FCTOrthogonal extends Correctable
+public interface FCTOrthogonal extends Adaptable
 {
 	/**
 	 * Returns the reduced orthogonal matrix Q from the {@code FCTOrthogonal}.

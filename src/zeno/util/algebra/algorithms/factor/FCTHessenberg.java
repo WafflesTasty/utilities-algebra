@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.manipulators.Correctable;
+import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
  * The {@code FCTHessenberg} interface defines an algorithm that performs Hessenberg factorization.
@@ -13,9 +13,9 @@ import zeno.util.tools.patterns.manipulators.Correctable;
  * @version 1.0
  * 
  * 
- * @see Correctable
+ * @see Adaptable
  */
-public interface FCTHessenberg extends Correctable
+public interface FCTHessenberg extends Adaptable
 {
 	/**
 	 * Returns the Hessenberg matrix H from the {@code FCTHessenberg}.

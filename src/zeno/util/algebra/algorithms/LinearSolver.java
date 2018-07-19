@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.manipulators.Correctable;
+import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
  * The {@code LinearSolver} interface defines a solver for exact linear systems.
@@ -12,9 +12,9 @@ import zeno.util.tools.patterns.manipulators.Correctable;
  * @version 1.0
  * 
  * 
- * @see Correctable
+ * @see Adaptable
  */
-public interface LinearSolver extends Correctable
+public interface LinearSolver extends Adaptable
 {	
 	/**
 	 * Computes the determinant in the {@code LinearSolver}.

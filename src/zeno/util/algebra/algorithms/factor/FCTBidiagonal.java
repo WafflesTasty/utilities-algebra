@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.manipulators.Correctable;
+import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
  * The {@code FCTBidiagonal} interface defines an algorithm that performs bidiagonal factorization.
@@ -13,9 +13,9 @@ import zeno.util.tools.patterns.manipulators.Correctable;
  * @version 1.0
  * 
  * 
- * @see Correctable
+ * @see Adaptable
  */
-public interface FCTBidiagonal extends Correctable
+public interface FCTBidiagonal extends Adaptable
 {
 	/**
 	 * Returns the bidiagonal matrix B from the {@code FCTBidiagonal}.

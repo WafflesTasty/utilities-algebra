@@ -1,7 +1,7 @@
 package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.manipulators.Correctable;
+import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
  * The {@code FCTEigen} interface defines an algorithm that performs eigenvalue factorization.
@@ -13,9 +13,9 @@ import zeno.util.tools.patterns.manipulators.Correctable;
  * @version 1.0
  * 
  * 
- * @see Correctable
+ * @see Adaptable
  */
-public interface FCTEigen extends Correctable
+public interface FCTEigen extends Adaptable
 {
 	/**
 	 * Returns the diagonal matrix E from the {@code FCTEigen}.
