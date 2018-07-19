@@ -4,6 +4,7 @@ import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.functions.identity.IdentityDotProduct;
 import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
+import zeno.util.algebra.linear.matrix.types.square.Involutory;
 import zeno.util.algebra.linear.tensor.Tensor;
 import zeno.util.tools.patterns.properties.operator.Operation;
 import zeno.util.tools.patterns.properties.operator.Operator;
@@ -19,10 +20,11 @@ import zeno.util.tools.patterns.properties.operator.functions.Repetition;
  * @version 1.0
  * 
  *
+ * @see Involutory
  * @see Orthogonal
  * @see Diagonal
  */
-public interface Identity extends Orthogonal, Diagonal
+public interface Identity extends Orthogonal, Diagonal, Involutory
 {
 	/**
 	 * Returns the abstract type of the {@code Identity Operator}.
