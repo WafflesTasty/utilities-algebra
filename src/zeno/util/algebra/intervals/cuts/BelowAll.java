@@ -27,7 +27,7 @@ public class BelowAll extends Cut
 	@Override
 	public String toLowerBound()
 	{
-		return "(\u221E";
+		return "(-\u221E";
 	}
 	
 	@Override
