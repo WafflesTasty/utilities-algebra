@@ -213,8 +213,10 @@ public class EigenValues
 		float err = Floats.MAX_VALUE;
 		while(!Floats.isZero(err, iError * iError))
 		{
+			// Iterate the vector.
 			v = w.normalize();
-			w = (Vector) mat.times(v);
+			w = mat.times(v);
+			
 			// Calculate the error value.
 			err = w.minus(v.times(v.dot(w))).norm();
 			
