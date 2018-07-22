@@ -64,6 +64,18 @@ public class Matrix extends Tensor
 	}
 
 	/**
+	 * Returns a vector product of the {@code Matrix}.
+	 * 
+	 * @param v  a vector to multiply with
+	 * @return  a vector multiplication
+	 * @see Vector
+	 */
+	public Vector times(Vector v)
+	{
+		return (Vector) times((Matrix) v);
+	}
+	
+	/**
 	 * Returns a matrix product of the {@code Matrix}.
 	 * 
 	 * @param m  a matrix to multiply with
