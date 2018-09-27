@@ -32,7 +32,6 @@ public class Matrix extends Tensor
 	public Matrix(Data d)
 	{
 		super(d); setOperator(MatrixOps.Type());
-//		ops = Generic.Type();
 	}
 	
 	/**
@@ -44,7 +43,6 @@ public class Matrix extends Tensor
 	public Matrix(int rows, int cols)
 	{
 		super(rows, cols); setOperator(MatrixOps.Type());
-//		ops = Generic.Type();
 	}
 
 	

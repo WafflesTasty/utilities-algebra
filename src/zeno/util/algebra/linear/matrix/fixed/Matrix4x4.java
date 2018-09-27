@@ -73,7 +73,7 @@ public class Matrix4x4 extends Matrix
 	 */
 	public static Matrix4x4 scale3D(float x, float y, float z)
 	{
-		return scale4D(new Vector4(x, y, z, 0f));
+		return scale4D(new Vector4(x, y, z, 1f));
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class Matrix4x4 extends Matrix
 	 */
 	public static Matrix4x4 scale3D(Vector3 v)
 	{
-		return scale4D(Vectors.resize(v, 4));
+		return scale3D(v.X(), v.Y(), v.Z());
 	}
 	
 	/**
