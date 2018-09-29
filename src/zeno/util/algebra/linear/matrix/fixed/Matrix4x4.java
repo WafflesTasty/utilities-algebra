@@ -249,10 +249,23 @@ public class Matrix4x4 extends Matrix
 
 	
 	@Override
+	public Vector4 Row(int i)
+	{
+		return (Vector4) super.Row(i);
+	}
+	
+	@Override
+	public Vector4 Column(int j)
+	{
+		return (Vector4) super.Column(j);
+	}
+		
+	@Override
 	public Matrix4x4 times(float v)
 	{
 		return (Matrix4x4) super.times(v);
 	}
+	
 	
 	@Override
 	public Matrix4x4 normalize()

@@ -164,12 +164,25 @@ public class Matrix2x2 extends Matrix
 		return (Matrix2x2) super.plus(m);
 	}
 		
+	
+	@Override
+	public Vector2 Row(int i)
+	{
+		return (Vector2) super.Row(i);
+	}
+	
+	@Override
+	public Vector2 Column(int j)
+	{
+		return (Vector2) super.Column(j);
+	}
 		
 	@Override
 	public Matrix2x2 times(float v)
 	{
 		return (Matrix2x2) super.times(v);
 	}
+	
 	
 	@Override
 	public Matrix2x2 normalize()

@@ -221,10 +221,23 @@ public class Matrix3x3 extends Matrix
 	
 	
 	@Override
+	public Vector3 Row(int i)
+	{
+		return (Vector3) super.Row(i);
+	}
+	
+	@Override
+	public Vector3 Column(int j)
+	{
+		return (Vector3) super.Column(j);
+	}
+	
+	@Override
 	public Matrix3x3 times(float v)
 	{
 		return (Matrix3x3) super.times(v);
 	}
+	
 	
 	@Override
 	public Matrix3x3 normalize()
