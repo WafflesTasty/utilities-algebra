@@ -106,6 +106,31 @@ public class Matrix3x3 extends Matrix
 	
 	
 	/**
+	 * Creates a 3x3 matrix that rotates to a new basis.
+	 * </ br> This matrix is generated from basis vectors.
+	 * 
+	 * @param rhv  a right-handed vector
+	 * @param uhv  an up-handed vector
+	 * @return  a rotation matrix
+	 */
+	public static Matrix3x3 rotate3D(Vector3 rhv, Vector3 uhv)
+	{
+		Vector3 fwd = uhv.cross(rhv).normalize();
+		Vector3 uwd = rhv.cross(fwd).normalize();
+		Vector3 rwd = rhv.normalize();
+		
+		Matrix3x3 m = identity();
+		for(int r = 0; r < 3; r++)
+		{
+			m.set(rwd.get(r), r, 0);
+			m.set(uwd.get(r), r, 1);
+			m.set(fwd.get(r), r, 2);
+		}
+		
+		return m;
+	}
+	
+	/**
 	 * Creates a 3x3 matrix that rotates around an arbitrary vector.
 	 * </ br> This matrix is generated using Rodrigues' formula.
 	 * 
@@ -262,4 +287,5 @@ public class Matrix3x3 extends Matrix
 	{
 		return (Matrix3x3) super.copy();
 	}
+
 }
