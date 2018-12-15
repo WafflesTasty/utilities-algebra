@@ -60,7 +60,7 @@ public interface Orthogonal extends Square
 		};
 	}
 	
-	
+
 	@Override
 	public default Matrix pseudoinverse()
 	{
