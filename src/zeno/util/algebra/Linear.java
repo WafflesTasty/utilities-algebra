@@ -1,7 +1,6 @@
-package zeno.util.algebra.linear;
+package zeno.util.algebra;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.Function;
 import zeno.util.tools.patterns.properties.Copyable;
 
 /**

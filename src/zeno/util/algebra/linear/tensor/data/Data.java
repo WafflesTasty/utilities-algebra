@@ -1,6 +1,6 @@
 package zeno.util.algebra.linear.tensor.data;
 
-import zeno.util.algebra.Dimensional;
+import zeno.util.algebra.linear.Dimensional;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.tools.Integers;
 import zeno.util.tools.helper.Array;
