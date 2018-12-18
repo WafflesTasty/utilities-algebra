@@ -1,5 +1,7 @@
 package zeno.util.algebra.linear;
 
+import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.tools.patterns.Function;
 import zeno.util.tools.patterns.properties.Copyable;
 
 /**
@@ -16,13 +18,52 @@ import zeno.util.tools.patterns.properties.Copyable;
 public interface Linear<L extends Linear<L>> extends Copyable<L>
 {	
 	/**
-	 * Returns the {@code Linear}'s sum with an element.
+	 * The {@code Map} interface defines an abstract linear map.
+	 * It is represented by a matrix multiplication, and optionally its inverse.
+	 *
+	 * @author Zeno
+	 * @since Dec 18, 2018
+	 * @version 1.0
 	 * 
-	 * @param element  an element to add
-	 * @return  the sum element
+	 *
+	 * @param <X>  a source type
+	 * @param <Y>  a target type
+	 * @see Function
+	 * @see Matrix
 	 */
-	public abstract L plus(L element);
-
+	public static interface Map<X extends Matrix, Y extends Matrix> extends Function<X, Y>
+	{
+		/**
+		 * Returns the inverse of the {@code Linear Map}.
+		 * 
+		 * @return  a transformation inverse
+		 * @see Matrix
+		 */
+		public abstract Matrix Inverse();
+		
+		/**
+		 * Returns the matrix of the {@code Linear Map}.
+		 * 
+		 * @return  a transformation matrix
+		 * @see Matrix
+		 */
+		public abstract Matrix Matrix();
+		
+		
+		@Override
+		public default X unmap(Y val)
+		{
+			return (X) Inverse().times(val);
+		}
+		
+		@Override
+		public default Y map(X val)
+		{
+			return (Y) Matrix().times(val);
+		}
+	}
+	
+	
 	/**
 	 * Returns the {@code Linear}'s product with a scalar value.
 	 * 
@@ -31,6 +72,13 @@ public interface Linear<L extends Linear<L>> extends Copyable<L>
 	 */
 	public abstract L times(float val);
 	
+	/**
+	 * Returns the {@code Linear}'s addition with another element.
+	 * 
+	 * @param element  an element to add
+	 * @return  the sum element
+	 */
+	public abstract L plus(L element);
 	
 	/**
 	 * Returns the {@code Linear}'s difference with an element.
