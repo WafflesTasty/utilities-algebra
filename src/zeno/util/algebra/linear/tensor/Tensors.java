@@ -143,6 +143,33 @@ public final class Tensors
 	}
 
 	/**
+	 * Calculates the elementwise multiplication {@code Tensor}.
+	 * 
+	 * @param t1  a first  tensor to use
+	 * @param t2  a second tensor to use
+	 * @return  an elementwise multiplication tensor
+	 * @see Tensor
+	 */
+	public static <T extends Tensor> T eMult(Tensor t1, Tensor t2)
+	{
+		if(!isomorph(t1, t2))
+		{
+			throw new DimensionError("Elementwise multiplication requires tensors of equal dimension: ", t1, t2);
+		}
+		
+		Tensor t = create(t1.Dimensions());
+		for(int i = 0; i < t.Size(); i++)
+		{
+			float v1 = t1.Data().get(i);
+			float v2 = t2.Data().get(i);
+			
+			t.Data().set(i, v1 * v2);
+		}
+		
+		return (T) t;
+	}
+	
+	/**
 	 * Creates an identity {@code Tensor} of the specified size.
 	 * 
 	 * @param size   the size of the tensor
@@ -219,7 +246,7 @@ public final class Tensors
 		
 		return (T) t;
 	}
-		
+
 	
 	/**
 	 * Initializes the {@code Tensors} library.

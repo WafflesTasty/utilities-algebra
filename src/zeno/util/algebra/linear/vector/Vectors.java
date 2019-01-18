@@ -44,6 +44,19 @@ public class Vectors
 	}
 	
 	/**
+	 * Calculates the elementwise multiplication {@code Vector}.
+	 * 
+	 * @param v1  a first  vector to use
+	 * @param v2  a second vector to use
+	 * @return  an elementwise multiplication vector
+	 * @see Vector
+	 */
+	public static <V extends Vector> V eMult(Vector v1, Vector v2)
+	{
+		return Tensors.eMult(v1, v2);
+	}
+	
+	/**
 	 * Resizes a {@code Vector} to the specified size.
 	 * 
 	 * @param v  a vector to resize

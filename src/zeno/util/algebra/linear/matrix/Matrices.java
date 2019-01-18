@@ -130,6 +130,19 @@ public class Matrices
 	
 	
 	/**
+	 * Calculates the elementwise multiplication {@code Matrix}.
+	 * 
+	 * @param m1  a first  matrix to use
+	 * @param m2  a second matrix to use
+	 * @return  an elementwise multiplication matrix
+	 * @see Matrix
+	 */
+	public static <M extends Matrix> M eMult(Matrix m1, Matrix m2)
+	{
+		return Tensors.eMult(m1, m2);
+	}
+	
+	/**
 	 * Resizes a {@code Matrix} to the specified dimensions.
 	 * 
 	 * @param m  a matrix to resize
