@@ -160,6 +160,8 @@ public class Matrices
 		{
 			for(int j = 0; j < cols; j++)
 			{
+				// Separate check depends on whether the
+				// old or the new matrix is the larger one.
 				if(i < m.Rows() && j < m.Columns())
 				{
 					n.set(m.get(i, j), i, j);
