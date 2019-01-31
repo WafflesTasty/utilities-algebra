@@ -19,20 +19,21 @@ import zeno.util.tools.Floats;
  * E is a matrix of singular values, and V is an orthogonal matrix.
  * 
  * This algorithm is an implementation of the Demmel & Kahan zero-shift downward sweep.
- * During every iteration Givens iterations are applied to the subdiagonal from top to bottom. 
+ * It is a simplified version from the proposal in the paper, using only one algorithm and convergence type.
+ * During every iteration Givens iterations are applied to the subdiagonal from top to bottom.
  *
  * @author Zeno
  * @since Jul 10, 2018
  * @version 1.0 
  * 
  * 
+ * @see <a href="https://epubs.siam.org/doi/abs/10.1137/0911052">James Demmel & William Kahan, "Accurate singular values of bidiagonal matrices."</a>
  * @see LeastSquares
  * @see FCTSingular
  */
 public class LSQSVD implements FCTSingular, LeastSquares
 {
 	private static final int MAX_SWEEPS = 1000;
-	private static final int ERROR_MULT = 4;
 	private static final int ULPS = 3;
 	
 	
@@ -143,25 +144,39 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		
 		int iCount = 0;
 		// As long as the target matrix is not diagonalized...
-		while(!c.is(Diagonal.Type(), iError * ERROR_MULT))
+		while(!c.is(Diagonal.Type()))
 		{
 			int size = c.Rows();
+			
 			// For every row/column in the target matrix...
 			for(int i = 0; i < size - 1; i++)
 			{
-				// Create the right Givens matrix.
-				Matrix rg = Matrices.rightGivens(c, i, i + 1);
-				// Right rotate the target matrix.
-				c = c.times(rg); v = v.times(rg);
-
+				// If the right offdiagonal is close enough to zero...
+				if(Floats.isZero(c.get(i, i + 1), iError))
+					// Set it to zero entirely.
+					c.set(0f, i, i + 1);
+				else
+				{
+					// Create the right Givens matrix.
+					Matrix rg = Matrices.rightGivens(c, i, i + 1);
+					// Right rotate the target matrix.
+					c = c.times(rg); v = v.times(rg);
+				}
 				
-				// Create the left Givens matrix.
-				Matrix lg = Matrices.leftGivens(c, i + 1, i);
-				// Left rotate the target matrix.
-				c = lg.times(c); u = u.times(lg.transpose());
+				
+				// If the left offdiagonal is close enough to zero...
+				if(Floats.isZero(c.get(i + 1, i), iError))
+					// Set it to zero entirely.
+					c.set(0f, i + 1, i);
+				else
+				{
+					// Create the left Givens matrix.
+					Matrix lg = Matrices.leftGivens(c, i + 1, i);
+					// Left rotate the target matrix.
+					c = lg.times(c); u = u.times(lg.transpose());
+				}
 			}
-			
-			
+						
 			iCount++;
 			// Prevent an infinite loop.
 			if(iCount > MAX_SWEEPS)
