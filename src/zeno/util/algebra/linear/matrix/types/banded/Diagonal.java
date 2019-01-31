@@ -64,7 +64,20 @@ public interface Diagonal extends LowerBidiagonal, UpperBidiagonal, Symmetric
 	@Override
 	public default Matrix pseudoinverse()
 	{
-		return inverse();
+		int rows = Operable().Rows();
+		int cols = Operable().Columns();
+		
+		Matrix inv = Matrices.create(rows, cols);
+		for(int i = 0; i < rows; i++)
+		{
+			float val = Operable().get(i, i);
+			if(!Floats.isZero(val, 3))
+			{
+				inv.set(1f / val, i, i);
+			}
+		}
+		
+		return inv;
 	}
 	
 	@Override
