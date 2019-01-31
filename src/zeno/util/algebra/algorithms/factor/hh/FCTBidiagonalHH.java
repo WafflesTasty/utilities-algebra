@@ -10,11 +10,13 @@ import zeno.util.algebra.linear.matrix.types.orthogonal.Identity;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
 import zeno.util.algebra.linear.vector.Vector;
+import zeno.util.tools.Floats;
 import zeno.util.tools.Integers;
 
 /**
  * The {@code FCTBidiagonalHH} class performs a {@code Bidiagonal} factorization.
  * This algorithm applies {@code Householder} transformations to induce zeroes in a matrix.
+ * This is known as the Golub-Kahan Bidiagonalization.
  * 
  * @author Zeno
  * @since Jul 10, 2018
@@ -93,8 +95,8 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 		// Assign the type of matrices U, V.
 		u.setOperator(Identity.Type());
 		v.setOperator(Identity.Type());
-		
-		
+
+
 		// For every row/column in the target matrix...
 		for(int k = 0; k < Integers.min(rows, cols); k++)
 		{
@@ -108,11 +110,15 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 					uk.set(0f, i);
 				}
 				
-				// Create the column reflection matrix.
-				Matrix uhh = Matrices.houseHolder(uk, k);
-				// Column reflect the target matrix.
-				c = uhh.times(c);
-				u = u.times(uhh);
+				// If the reflection is feasible...
+				if(!Floats.isZero(uk.normSqr(), iError))
+				{
+					// Create the column reflection matrix.
+					Matrix uhh = Matrices.houseHolder(uk, k);
+					// Column reflect the target matrix.
+					c = uhh.times(c);
+					u = u.times(uhh);
+				}
 			}
 			
 			// If the superdiagonal is not finished...
@@ -125,11 +131,15 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 					vk.set(0f, i);
 				}
 				
-				// Create the row reflection matrix.
-				Matrix vhh = Matrices.houseHolder(vk, k + 1);
-				// Row reflect the target matrix.
-				c = c.times(vhh);
-				v = v.times(vhh);
+				// If the reflection is feasible...
+				if(!Floats.isZero(vk.normSqr(), iError))
+				{
+					// Create the row reflection matrix.
+					Matrix vhh = Matrices.houseHolder(vk, k + 1);
+					// Row reflect the target matrix.
+					c = c.times(vhh);
+					v = v.times(vhh);
+				}
 			}
 		}
 	}
@@ -160,7 +170,7 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 			v.setOperator(Identity.Type());
 			return;
 		}
-		
+
 		// Otherwise, perform Householder's method.
 		houseHolder();
 	}
