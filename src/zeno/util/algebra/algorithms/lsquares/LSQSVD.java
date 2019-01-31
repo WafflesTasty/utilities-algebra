@@ -126,7 +126,7 @@ public class LSQSVD implements FCTSingular, LeastSquares
 	{
 		c = e = u = v = inv = null;
 	}
-
+	
 	private void decompose()
 	{
 		// If the matrix is not tall...
@@ -146,13 +146,20 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		// As long as the target matrix is not diagonalized...
 		while(!c.is(Diagonal.Type()))
 		{
-			int size = c.Rows();
-			
+			float lErr = 0f, rErr = 0f;
 			// For every row/column in the target matrix...
-			for(int i = 0; i < size - 1; i++)
+			for(int i = 0; i < c.Rows() - 1; i++)
 			{
-				// If the right offdiagonal is close enough to zero...
-				if(Floats.isZero(c.get(i, i + 1), iError))
+				float rVal = c.get(i, i + 1);
+				// Calculate the error margin for the right offdiagonal.
+				if(i != 0)
+					rErr = Floats.abs(c.get(i, i)) * rErr / (rErr + rVal);
+				else
+					rErr = Floats.abs(c.get(i, i));
+				
+				
+				// If it is close enough to zero...
+				if(Floats.isZero(rVal / rErr, iError))
 					// Set it to zero entirely.
 					c.set(0f, i, i + 1);
 				else
@@ -164,7 +171,15 @@ public class LSQSVD implements FCTSingular, LeastSquares
 				}
 				
 				
-				// If the left offdiagonal is close enough to zero...
+				float lVal = c.get(i + 1, i);
+				// Calculate the error margin for the left offdiagonal.
+				if(i != 0)
+					lErr = Floats.abs(c.get(i, i)) * lErr / (lErr + lVal);
+				else
+					lErr = Floats.abs(c.get(i, i));
+				
+				
+				// If it is close enough to zero...
 				if(Floats.isZero(c.get(i + 1, i), iError))
 					// Set it to zero entirely.
 					c.set(0f, i + 1, i);
