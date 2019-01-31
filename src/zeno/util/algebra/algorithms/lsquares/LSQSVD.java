@@ -3,7 +3,6 @@ package zeno.util.algebra.algorithms.lsquares;
 import zeno.util.algebra.algorithms.LeastSquares;
 import zeno.util.algebra.algorithms.factor.FCTSingular;
 import zeno.util.algebra.algorithms.factor.hh.FCTBidiagonalHH;
-import zeno.util.algebra.algorithms.solvers.SLVTriangular;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.Square;
@@ -97,7 +96,7 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		
 		// Compute the result through substitution.
 		Matrix x = U().transpose().times(b);
-		x = new SLVTriangular(E()).solve(x);
+		x = E().pseudoinverse().times(x);
 		return (M) V().times(x);
 	}
 	
