@@ -361,6 +361,34 @@ public class Matrices
 		return dia;
 	}
 	
+	/**
+	 * Prints a {@code Matrix} to console.
+	 * 
+	 * @param m  a matrix to print
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static void print(Matrix m)
+	{
+		for(int i = 0; i < m.Rows(); i++)
+		{
+			System.out.print("[");
+			for(int j = 0; j < m.Columns(); j++)
+			{
+				System.out.print(" " + parse(m.get(i, j)));
+				if(j < m.Columns() - 1)
+				{
+					System.out.print(",");
+				}
+			}
+			
+			System.out.println("]");
+		}
+		
+		System.out.println();
+	}
+
 
 	static float[] rot(float a, float b)
 	{
@@ -400,5 +428,29 @@ public class Matrices
 		}
 
 		return new float[]{c, s, r};
+	}
+
+	static String parse(float val)
+	{
+		float round = Floats.round(val, 3);
+		String result = String.valueOf(round);
+		
+		if(round >= 0)
+		{
+			result = " " + result;
+		}
+		
+		if(Floats.abs(round) < 10)
+		{
+			result = " " + result;
+		}
+		
+		int length = result.length();
+		for(int i = 0; i < 10 - length; i++)
+		{
+			result += "0";
+		}
+
+		return result;
 	}
 }
