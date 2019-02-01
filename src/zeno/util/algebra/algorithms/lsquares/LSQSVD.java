@@ -20,6 +20,8 @@ import zeno.util.tools.Floats;
  * This algorithm is an implementation of the Demmel & Kahan zero-shift downward sweep.
  * It is a simplified version from the proposal in the paper, using only one algorithm and convergence type.
  * During every iteration Givens iterations are applied to the subdiagonal from top to bottom.
+ * 
+ * NOTE: The reason why this is limited to tall matrices is because {@link FCTBidiagonalHH} is limited similarly.
  *
  * @author Zeno
  * @since Jul 10, 2018

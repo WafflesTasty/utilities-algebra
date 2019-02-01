@@ -18,6 +18,10 @@ import zeno.util.tools.Integers;
  * This algorithm applies {@code Householder} transformations to induce zeroes in a matrix.
  * This is known as the Golub-Kahan Bidiagonalization.
  * 
+ * NOTE: The reason why this is limited to tall matrices is because of how the bidiagonal matrix gets resized.
+ * If worked on a wide matrix, the bidiagonal matrix can never be square (you have one additional superdiagonal element).
+ * Therefore, if factorisation of wide matrices is needed, consider using its transpose as input instead.
+ * 
  * @author Zeno
  * @since Jul 10, 2018
  * @version 1.0 
