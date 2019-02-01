@@ -20,8 +20,6 @@ import zeno.util.tools.Floats;
  * This algorithm is an implementation of the Demmel & Kahan zero-shift downward sweep.
  * It is a simplified version from the proposal in the paper, using only one algorithm and convergence type.
  * During every iteration Givens iterations are applied to the subdiagonal from top to bottom.
- * 
- * NOTE: The reason why this is limited to tall matrices is because {@link FCTBidiagonalHH} is limited similarly.
  *
  * @author Zeno
  * @since Jul 10, 2018
@@ -133,16 +131,18 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		// If the matrix is not tall...
 		if(!mat.is(Tall.Type()))
 		{
-			// An SVD factorization cannot be computed.
-			throw new Tensors.DimensionError("SVD factorization requires a tall matrix: ", mat);
+			// Perform bidiagonal factorization on the transpose.
+			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat.transpose(), iError);
+			u = bih.U(); c = bih.B(); v = bih.V();
+		}
+		else
+		{
+			// Perform bidiagonal factorization on the matrix.
+			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat, iError);
+			u = bih.U(); c = bih.B(); v = bih.V();
 		}
 		
-		
-		// Perform bidiagonal factorization on the matrix.
-		FCTBidiagonalHH bih = new FCTBidiagonalHH(mat, iError);
-		u = bih.U(); c = bih.B(); v = bih.V();
-		
-		
+				
 		int iCount = 0;
 		// As long as the target matrix is not diagonalized...
 		while(!c.is(Diagonal.Type()))
@@ -203,7 +203,7 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		
 		
 		// Matrix dimensions.
-		int size = mat.Columns();
+		int size = c.Columns();
 		// The singular values have to be positive.
 		Matrix mSign = Matrices.identity(size);
 		mSign.setOperator(Diagonal.Type());
@@ -217,6 +217,19 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		
 		c = c.times(mSign);
 		v = v.times(mSign);
+		
+		
+		// Assign the type of matrix U.
+		if(u.is(Square.Type()))
+		{
+			u.setOperator(Orthogonal.Type());
+		}
+		
+		// Assign the type of matrix V.
+		if(v.is(Square.Type()))
+		{
+			v.setOperator(Orthogonal.Type());
+		}
 	}
 	
 
@@ -264,12 +277,14 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		}
 		
 		
-		// Assign the type of matrix U.
-		if(u.is(Square.Type()))
+		// If the matrix is not tall...
+		if(!mat.is(Tall.Type()))
 		{
-			u.setOperator(Orthogonal.Type());
+			// Return the matrix V.
+			return v;
 		}
 		
+		// Return the matrix U.
 		return u;
 	}
 
@@ -284,12 +299,14 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		}
 		
 		
-		// Assign the type of matrix V.
-		if(v.is(Square.Type()))
+		// If the matrix is not tall...
+		if(!mat.is(Tall.Type()))
 		{
-			v.setOperator(Orthogonal.Type());
+			// Return the matrix U.
+			return u;
 		}
 		
+		// Return the matrix V.
 		return v;
 	}
 }
