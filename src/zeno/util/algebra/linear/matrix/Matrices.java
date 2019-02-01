@@ -224,6 +224,60 @@ public class Matrices
 	{
 		return Tensors.random(rows, cols);
 	}
+
+	/**
+	 * Creates a {@code Matrix} from the specified columns.
+	 * 
+	 * @param vecs  a list of column vectors
+	 * @return  a generated matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 * @see Vector
+	 */
+	public static <M extends Matrix> M fromCols(Vector... vecs)
+	{
+		int cols = vecs.length;
+		int rows = vecs[0].Size();
+		
+		Matrix m = create(rows, cols);
+		for(int c = 0; c < cols; c++)
+		{
+			for(int r = 0; r < rows; r++)
+			{
+				m.set(vecs[c].get(r), r, c);
+			}
+		}
+
+		return (M) m;
+	}
+	
+	/**
+	 * Creates a {@code Matrix} from the specified rows.
+	 * 
+	 * @param vecs  a list of row vectors
+	 * @return  a generated matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 * @see Vector
+	 */
+	public static <M extends Matrix> M fromRows(Vector... vecs)
+	{
+		int rows = vecs.length;
+		int cols = vecs[0].Size();
+		
+		Matrix m = create(rows, cols);
+		for(int c = 0; c < cols; c++)
+		{
+			for(int r = 0; r < rows; r++)
+			{
+				m.set(vecs[r].get(c), r, c);
+			}
+		}
+
+		return (M) m;
+	}
 	
 	/**
 	 * Creates an identity {@code Matrix} of the specified size.
@@ -238,7 +292,7 @@ public class Matrices
 	{
 		return Tensors.identity(size, 2);
 	}
-
+	
 
 	/**
 	 * Creates a right-hand side Givens rotation {@code Matrix}.
@@ -453,4 +507,5 @@ public class Matrices
 
 		return result;
 	}
+
 }
