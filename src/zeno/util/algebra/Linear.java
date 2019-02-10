@@ -1,5 +1,6 @@
 package zeno.util.algebra;
 
+import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.tools.patterns.properties.Copyable;
 
 /**
@@ -14,7 +15,45 @@ import zeno.util.tools.patterns.properties.Copyable;
  * @see Copyable
  */
 public interface Linear<L extends Linear<L>> extends Copyable<L>
-{			
+{		
+	/**
+	 * The {@code Map} interface defines a linear map.
+	 *
+	 * @author Zeno
+	 * @since Feb 10, 2019
+	 * @version 1.0
+	 * 
+	 *
+	 * @param <X>  a source type
+	 * @param <Y>  a target type
+	 * 
+	 * 
+	 * @see Function
+	 */
+	public static interface Map<X, Y> extends Function<X, Y>
+	{
+		/**
+		 * Returns the inverse of the {@code Linear Map}.
+		 * 
+		 * @return  a transformation inverse
+		 * 
+		 * 
+		 * @see Matrix
+		 */
+		public abstract Matrix Inverse();
+		
+		/**
+		 * Returns the matrix of the {@code Linear Map}.
+		 * 
+		 * @return  a transformation matrix
+		 * 
+		 * 
+		 * @see Matrix
+		 */
+		public abstract Matrix Matrix();
+	}
+	
+	
 	/**
 	 * Returns the {@code Linear}'s product with a scalar value.
 	 * 
