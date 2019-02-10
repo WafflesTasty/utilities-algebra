@@ -1,5 +1,7 @@
 package zeno.util.algebra;
 
+import zeno.util.tools.helper.Array;
+
 /**
  * The {@code Function} interface defines a functional map.
  *
@@ -13,6 +15,60 @@ package zeno.util.algebra;
  */
 public interface Function<X, Y>
 {	
+	/**
+	 * The {@code Composite} interface composes multiple {@code Functions}.
+	 *
+	 * @author Zeno
+	 * @since Feb 10, 2019
+	 * @version 1.0
+	 * 
+	 *
+	 * @param <X>  a source type
+	 * @param <Y>  a target type
+	 * 
+	 * 
+	 * @see Function
+	 */
+	@FunctionalInterface
+	public static interface Composite<X, Y> extends Function<X, Y>
+	{
+		/**
+		 * Returns the functions in the {@code Composite}.
+		 * 
+		 * @return  a set of functions
+		 * 
+		 * 
+		 * @see Function
+		 */
+		public abstract Function<?, ?>[] Functions();
+		
+		
+		@Override
+		public default X unmap(Y val)
+		{
+			Object x = val;
+			for(Function<?, ?> f : Array.reverse.of(Functions()))
+			{
+				x = Function.unmap(f, x);
+			}
+			
+			return (X) x;
+		}
+		
+		@Override
+		public default Y map(X val)
+		{
+			Object y = val;
+			for(Function<?, ?> f : Functions())
+			{
+				y = Function.map(f, y);
+			}
+			
+			return (Y) y;
+		}
+	}
+	
+	
 	/**
 	 * Maps a target to its source {@code Function} through static access.
 	 * This function is not type-safe, allowing dynamic casting to be used.
