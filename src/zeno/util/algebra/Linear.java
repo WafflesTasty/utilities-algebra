@@ -17,6 +17,43 @@ import zeno.util.tools.patterns.properties.Copyable;
 public interface Linear<L extends Linear<L>> extends Copyable<L>
 {		
 	/**
+	 * Returns the inverse of a {@code Linear Map}.
+	 * 
+	 * @param map  a map to invert
+	 * @return  an inverted map
+	 */
+	public static <X, Y> Linear.Map<X, Y> inverse(Linear.Map<Y, X> map)
+	{
+		return new Linear.Map<X, Y>()
+		{
+			@Override
+			public Matrix Inverse()
+			{
+				return map.Matrix();
+			}
+
+			@Override
+			public Matrix Matrix()
+			{
+				return map.Inverse();
+			}
+			
+			
+			@Override
+			public X unmap(Y val)
+			{
+				return map.map(val);
+			}
+
+			@Override
+			public Y map(X val)
+			{
+				return map.unmap(val);
+			}
+		};
+	}
+	
+	/**
 	 * The {@code Composite} interface composes multiple {@code Linear Maps}.
 	 *
 	 * @author Zeno

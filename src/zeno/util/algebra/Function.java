@@ -16,6 +16,30 @@ import zeno.util.tools.helper.Array;
 public interface Function<X, Y>
 {	
 	/**
+	 * Returns the inverse of a {@code Function}.
+	 * 
+	 * @param func  a function to invert
+	 * @return  an inverted function
+	 */
+	public static <X, Y> Function<X, Y> inverse(Function<Y, X> func)
+	{
+		return new Function<X, Y>()
+		{
+			@Override
+			public X unmap(Y val)
+			{
+				return func.map(val);
+			}
+
+			@Override
+			public Y map(X val)
+			{
+				return func.unmap(val);
+			}
+		};
+	}
+	
+	/**
 	 * The {@code Composite} interface composes multiple {@code Functions}.
 	 *
 	 * @author Zeno
@@ -67,7 +91,7 @@ public interface Function<X, Y>
 			return (Y) y;
 		}
 	}
-	
+		
 	
 	/**
 	 * Maps a target to its source {@code Function} through static access.
