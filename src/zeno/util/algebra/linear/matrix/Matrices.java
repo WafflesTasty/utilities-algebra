@@ -237,7 +237,7 @@ public class Matrices
 	 */
 	public static <M extends Matrix> M fromCols(Vector... vecs)
 	{
-		int cols = vecs.length;
+		int cols = vecs.length;		
 		int rows = vecs[0].Size();
 		
 		Matrix m = create(rows, cols);
@@ -291,6 +291,41 @@ public class Matrices
 	public static <M extends Matrix> M identity(int size)
 	{
 		return Tensors.identity(size, 2);
+	}
+
+	/**
+	 * Creates a concatenation of two {@code Matrices}.
+	 * 
+	 * @param m1  a first matrix to concatenate
+	 * @param m2  a second matrix to concatenate
+	 * @return  a concatenated matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static Matrix concat(Matrix m1, Matrix m2)
+	{
+		if(m1.Rows() != m2.Rows())
+		{
+			throw new Tensors.DimensionError("Concatenation requires equal row count: ", m1, m2);
+		}
+		
+		int rows = m1.Rows();
+		int cols = m1.Columns() + m2.Columns();
+		
+		Matrix m = create(rows, cols);
+		for(int r = 0; r < rows; r++)
+		{
+			for(int c = 0; c < cols; c++)
+			{
+				if(c >= m1.Columns())
+					m.set(m2.get(r, c - m1.Columns()), r, c);
+				else
+					m.set(m1.get(r, c), r, c);
+			}
+		}
+		
+		return m;
 	}
 	
 
