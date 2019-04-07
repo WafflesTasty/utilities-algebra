@@ -1,6 +1,8 @@
 package zeno.util.algebra.algorithms.lsquares;
 
 import zeno.util.algebra.algorithms.LeastSquares;
+import zeno.util.algebra.algorithms.LinearSpace;
+import zeno.util.algebra.algorithms.RankReveal;
 import zeno.util.algebra.algorithms.factor.FCTSingular;
 import zeno.util.algebra.algorithms.factor.hh.FCTBidiagonalHH;
 import zeno.util.algebra.linear.matrix.Matrices;
@@ -10,7 +12,9 @@ import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
 import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
+import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.tools.Floats;
+import zeno.util.tools.Integers;
 
 /**
  * The {@code LSQSVD} class solves least squares linear systems using {@code SVD factorization}.
@@ -28,16 +32,23 @@ import zeno.util.tools.Floats;
  * 
  * @see <a href="https://epubs.siam.org/doi/abs/10.1137/0911052">James Demmel & William Kahan, "Accurate singular values of bidiagonal matrices."</a>
  * @see LeastSquares
+ * @see LinearSpace
  * @see FCTSingular
+ * @see RankReveal
  */
-public class LSQSVD implements FCTSingular, LeastSquares
+public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankReveal
 {
 	private static final int MAX_SWEEPS = 1000;
 	private static final int ULPS = 3;
 	
 	
+	private Integer rank;
 	private Matrix mat, inv;
 	private Matrix c, e, u, v;
+	private Matrix colSpace;
+	private Matrix rowSpace;
+	private Matrix nulSpace;
+	private Matrix nulTrans;
 	private int iError;
 	
 	/**
@@ -231,6 +242,133 @@ public class LSQSVD implements FCTSingular, LeastSquares
 			v.setOperator(Orthogonal.Type());
 		}
 	}
+
+	
+	@Override
+	public Matrix RowSpace()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform SVD factorization.
+			decompose();
+		}
+		
+		// If the row space hasn't been computed yet...
+		if(rowSpace == null)
+		{
+			// Matrix dimensions.
+			int rows = V().Rows();			
+			
+			rowSpace = Matrices.create(rows, rank());
+			// Create the row space matrix.
+			for(int r = 0; r < rows; r++)
+			{
+				for(int c = 0; c < rank(); c++)
+				{
+					// It consists of the first r columns of V.
+					rowSpace.set(V().get(r, c), r, c);
+				}
+			}
+		}
+		
+		return rowSpace;
+	}
+
+	@Override
+	public Matrix ColumnSpace()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform SVD factorization.
+			decompose();
+		}
+		
+		// If the column space hasn't been computed yet...
+		if(colSpace == null)
+		{
+			// Matrix dimensions.
+			int rows = U().Rows();			
+			
+			colSpace = Matrices.create(rows, rank());
+			// Create the column space matrix.
+			for(int r = 0; r < rows; r++)
+			{
+				for(int c = 0; c < rank(); c++)
+				{
+					// It consists of the first r columns of U.
+					colSpace.set(U().get(r, c), r, c);
+				}
+			}
+		}
+		
+		return colSpace;
+	}
+
+	@Override
+	public Matrix NullTranspose()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform SVD factorization.
+			decompose();
+		}
+		
+		// If the null space hasn't been computed yet...
+		if(nulTrans == null)
+		{
+			// Matrix dimensions.
+			int cols = U().Columns();
+			int rows = U().Rows();
+			
+			nulTrans = Matrices.create(rows, cols - rank());
+			// Create the null space transpose.
+			for(int r = 0; r < rows; r++)
+			{
+				for(int c = rank(); c < cols; c++)
+				{
+					// It consists of the last c - r columns of U.
+					nulTrans.set(U().get(r, c), r, c - rank());
+				}
+			}
+		}
+		
+		return nulTrans;
+	}
+	
+	@Override
+	public Matrix NullSpace()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform SVD factorization.
+			decompose();
+		}
+		
+		// If the null space hasn't been computed yet...
+		if(nulSpace == null)
+		{
+			// Matrix dimensions.
+			int cols = V().Columns();
+			int rows = V().Rows();
+			
+			nulSpace = Matrices.create(rows, cols - rank());
+			// Create the null space matrix.
+			for(int r = 0; r < rows; r++)
+			{
+				for(int c = rank(); c < cols; c++)
+				{
+					// It consists of the last c - r columns of V.
+					nulSpace.set(V().get(r, c), r, c - rank());
+				}
+			}
+		}
+		
+		return nulSpace;
+	}
 	
 
 	@Override
@@ -308,5 +446,43 @@ public class LSQSVD implements FCTSingular, LeastSquares
 		
 		// Return the matrix V.
 		return v;
+	}
+
+	
+	@Override
+	public int rank()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform SVD factorization.
+			decompose();
+		}
+		
+		// If rank hasn't been computed yet...
+		if(rank == null)
+		{
+			// Matrix dimensions.
+			int cols = mat.Columns();
+			int rows = mat.Rows();
+			
+			// Calculate the singular value tolerance.
+			float eTol = Integers.max(rows, cols) * Floats.nextEps(condition());
+						
+			rank = 0;
+			// Loop over singular values to find rank.
+			Vector sv = SingularValues();
+			for(int i = 0; i < sv.Size(); i++)
+			{
+				if(Floats.isZero(sv.get(i), (int) eTol))
+				{
+					break;
+				}
+				
+				rank++;
+			}
+		}
+		
+		return rank;
 	}
 }

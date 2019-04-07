@@ -200,8 +200,7 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 				swapRows(rMax, i);
 				dVal = -dVal;
 			}	
-			
-			
+						
 			
 			// For each row below the diagonal...
 			for(int j = i + 1; j < rows; j++)
