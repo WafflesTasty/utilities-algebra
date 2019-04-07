@@ -1,7 +1,9 @@
-package zeno.util.algebra.algorithms.solvers;
+package zeno.util.algebra.algorithms.rankreveal;
 
 import zeno.util.algebra.algorithms.LinearSolver;
+import zeno.util.algebra.algorithms.RankReveal;
 import zeno.util.algebra.algorithms.factor.FCTTriangular;
+import zeno.util.algebra.algorithms.solvers.SLVTriangular;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.Square;
@@ -16,7 +18,7 @@ import zeno.util.tools.Floats;
 import zeno.util.tools.Integers;
 
 /**
- * The {@code SLVGauss} class solves exact linear systems using {@code Gauss's method} with complete pivoting.
+ * The {@code RRGauss} class solves exact linear systems using {@code Gauss's method} with complete pivoting.
  * This method is a variant of {@code Gauss elimination} that decomposes a matrix into {@code PMQ = LU},
  * where P, Q are permutation matrices, L a lower triangular matrix, and U an upper triangular matrix.
  * Note that non-square matrices can also be decomposed: one of L or U will not be square.
@@ -28,20 +30,23 @@ import zeno.util.tools.Integers;
  * 
  * @see FCTTriangular
  * @see LinearSolver
+ * @see RankReveal
  */
-public class SLVGauss implements FCTTriangular, LinearSolver
+public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 {
 	private static final int ULPS = 3;
 	
 	
 	private Float det;
+	private Integer rank;
 	private Matrix mat, c;
 	private Matrix inv, p, q, l, u;
 	private boolean swapRows, swapCols;
+	private boolean isInvertible;
 	private int iError;
 		
 	/**
-	 * Creates a new {@code SLVGauss}.
+	 * Creates a new {@code RRGauss}.
 	 * If it is used as a linear system solver, this algorithm requires a square matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
@@ -50,13 +55,13 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 	 * 
 	 * @see Matrix
 	 */
-	public SLVGauss(Matrix m)
+	public RRGauss(Matrix m)
 	{
 		this(m, ULPS);
 	}
 	
 	/**
-	 * Creates a new {@code SLVGauss}.
+	 * Creates a new {@code RRGauss}.
 	 * If it is used as a linear system solver, this algorithm requires a square matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
@@ -66,7 +71,7 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 	 * 
 	 * @see Matrix
 	 */
-	public SLVGauss(Matrix m, int ulps)
+	public RRGauss(Matrix m, int ulps)
 	{
 		iError = ulps;
 		mat = m;
@@ -86,20 +91,29 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 			throw new Tensors.DimensionError("Solving a linear system requires compatible dimensions: ", mat, b);
 		}
 		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// The linear system cannot be solved.
+			throw new Tensors.DimensionError("Solving a linear system requires a square matrix: ", mat);
+		}
+		
+		
 		// If no decomposition has been made yet...
 		if(needsUpdate())
-		{			
-			// If the matrix is not square...
-			if(!mat.is(Square.Type()))
-			{
-				// The linear system cannot be solved.
-				throw new Tensors.DimensionError("Solving a linear system requires a square matrix: ", mat);
-			}
-			
+		{	
 			// Perform Crout's method.
 			decompose();
 		}
 
+		// If the matrix is not invertible...
+		if(!isInvertible())
+		{
+			// ... linear systems cannot be solved.
+			throw new Matrices.InvertibleError(mat);
+		}
+		
+		
 		// Compute the result through substitution.
 		M x = (M) P().times(b);
 		x = new SLVTriangular(L(), iError).solve(x);
@@ -135,24 +149,6 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 		}
 	}
 
-	private void gaussSimplified()
-	{
-		// Matrix dimensions.
-		int rows = mat.Rows();
-		int cols = mat.Columns();
-		
-		// For each row in the matrix...
-		for(int i = 0; i < rows; i++)
-		{
-			float val = c.get(i, i);
-			// Divide the diagonal element.
-			for(int j = i + 1; j < cols; j++)
-			{
-				c.set(c.get(i, j) / val, i, j);
-			}
-		}
-	}
-	
 	private void gaussMethod()
 	{
 		// Matrix dimensions.
@@ -184,8 +180,11 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 			// If the next pivot is zero...
 			if(Floats.isZero(vMax, iError))
 			{
-				// ... the coëfficient matrix is not invertible.
-				throw new Matrices.InvertibleError(mat);
+				// Finalize the rank.
+				rank = i;
+				// Finalize invertibility.
+				isInvertible = false;
+				return;
 			}
 			
 			// Pivot the next column.
@@ -240,41 +239,15 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 			if(k < rows) c.set(k, k, cols);
 			if(k < cols) c.set(k, rows, k);
 		}
-		
+			
 		// Assume no swaps have occurred.
 		swapRows = swapCols = false;
+		// Assume matrix has a full rank.
+		rank = Integers.min(rows, cols);
+		isInvertible = true;
 		
-				
-		// If the matrix is lower triangular...
-		if(mat.is(LowerTriangular.Type(), iError))
-		{
-			double val = 1d;
-			// Calculate the determinant.
-			for(int i = 0; i < mat.Rows(); i++)
-			{
-				val *= mat.get(i, i);
-			}
-			det = (float) val;
-			return;
-		}
-		
-		// If the matrix is upper triangular...
-		if(mat.is(UpperTriangular.Type(), iError))
-		{
-			// Perform the simplified Gauss method.
-			gaussSimplified();
-			
-			double val = 1d;
-			// Calculate the determinant.
-			for(int i = 0; i < mat.Rows(); i++)
-			{
-				val *= mat.get(i, i);
-			}
-			det = (float) val;
-			return;
-		}
-		
-		// Otherwise, perform Gauss's method.
+		// Don't simplify to retain rank.
+		// Perform Gauss's method.
 		gaussMethod();
 	}
 	
@@ -292,32 +265,52 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 	}
 
 	@Override
+	public boolean isInvertible()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{			
+			// Perform Gauss's method.
+			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// Invertibility cannot be determined.
+			return false;
+		}
+		
+		return isInvertible;
+	}
+	
+	@Override
 	public float determinant()
 	{
 		// If no decomposition has been made yet...
 		if(needsUpdate())
+		{			
+			// Perform Gauss's method.
+			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
 		{
-			// If the matrix is not square...
-			if(!mat.is(Square.Type()))
-			{
-				// A determinant cannot be calculated.
-				throw new Tensors.DimensionError("Computing the determinant requires a square matrix: ", mat);
-			}
-			
-			try
-			{
-				// Perform Crout's method.
-				decompose();
-			}
-			catch(Matrices.InvertibleError e)
-			{
-				det = 0f;
-			}
+			// A determinant cannot be calculated.
+			throw new Tensors.DimensionError("Computing the determinant requires a square matrix: ", mat);
+		}
+		
+		// If the matrix is not invertible...
+		if(!isInvertible())
+		{
+			// It has zero determinant.
+			return 0f;
 		}
 		
 		return det;
 	}
-	
+		
 	@Override
 	public Matrix inverse()
 	{
@@ -330,6 +323,19 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 		
 		return inv;
 	}
+
+	@Override
+	public int rank()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{			
+			// Perform Gauss's method.
+			decompose();
+		}
+		
+		return rank;
+	}
 	
 	
 	@Override
@@ -341,7 +347,7 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 			// Perform Gauss's method.
 			decompose();
 		}
-		
+				
 		// If P has not been computed yet...
 		if(p == null)
 		{
@@ -396,7 +402,7 @@ public class SLVGauss implements FCTTriangular, LinearSolver
 			if(!swapCols)
 			{
 				// Create an identity matrix Q.
-				q = Matrices.identity(rows);
+				q = Matrices.identity(cols);
 				// Assign the type of the matrix Q.
 				q.setOperator(Identity.Type());
 			}

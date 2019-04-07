@@ -239,6 +239,12 @@ public class SLVTriangular implements LinearSolver
 	}
 	
 	@Override
+	public boolean isInvertible()
+	{
+		return Floats.isZero(det, iError);
+	}
+	
+	@Override
 	public float determinant()
 	{
 		// If no determinant has been computed yet...

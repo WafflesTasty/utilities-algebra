@@ -4,6 +4,7 @@ import zeno.util.algebra.algorithms.LinearSolver;
 import zeno.util.algebra.algorithms.factor.FCTCholesky;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.matrix.types.banded.Diagonal;
 import zeno.util.algebra.linear.matrix.types.banded.upper.UpperTriangular;
 import zeno.util.algebra.linear.matrix.types.square.Symmetric;
@@ -33,6 +34,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 	private Float det;
 	private Matrix inv, u;
 	private Matrix mat, c;
+	private boolean isInvertible;
 	private int iError;
 		
 	/**
@@ -81,11 +83,26 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 			throw new Tensors.DimensionError("Solving a linear system requires compatible dimensions: ", mat, b);
 		}
 		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// The linear system cannot be solved.
+			throw new Tensors.DimensionError("Solving a linear system requires a square matrix: ", mat);
+		}
+		
+		
 		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{			
 			// Perform Cholesky factorization.
 			decompose();
+		}
+		
+		// If the matrix is not invertible...
+		if(!isInvertible())
+		{
+			// ... linear systems cannot be solved.
+			throw new Matrices.InvertibleError(mat);
 		}
 		
 		
@@ -110,6 +127,26 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 	}
 		
 	@Override
+	public boolean isInvertible()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{			
+			// Perform Gauss's method.
+			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// Invertibility cannot be determined.
+			return false;
+		}
+		
+		return isInvertible;
+	}
+	
+	@Override
 	public float determinant()
 	{
 		// If no decomposition has been made yet...
@@ -117,6 +154,20 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 		{
 			// Perform Cholesky's method.
 			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// A determinant cannot be calculated.
+			throw new Tensors.DimensionError("Computing the determinant requires a square matrix: ", mat);
+		}
+		
+		// If the matrix is not invertible...
+		if(!isInvertible())
+		{
+			// It has zero determinant.
+			return 0f;
 		}
 		
 		return det;
@@ -151,6 +202,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 			c.set(Floats.sqrt(c.get(i, i)), i, i);
 		}
 		
+		isInvertible = Doubles.isZero(dVal, iError);
 		det = (float) dVal;
 	}
 	
@@ -195,6 +247,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 			}
 		}
 		
+		isInvertible = Doubles.isZero(dVal, iError);
 		det = (float) dVal;
 	}
 	
@@ -207,7 +260,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 		// If the matrix is diagonal...
 		if(mat.is(Diagonal.Type(), iError))
 		{
-			// Perform the simplified crout method.
+			// Perform the simplified Cholesky method.
 			choleskySimplified();
 			return;
 		}
@@ -215,7 +268,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 		// If the matrix is symmetric...
 		if(mat.is(Symmetric.Type(), iError))
 		{
-			// Perform the full crout method.
+			// Perform the full Cholesky method.
 			choleskysMethod();
 			return;
 		}

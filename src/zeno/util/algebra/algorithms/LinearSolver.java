@@ -15,13 +15,20 @@ import zeno.util.tools.patterns.manipulators.Adaptable;
  * @see Adaptable
  */
 public interface LinearSolver extends Adaptable
-{	
+{		
 	/**
 	 * Computes the determinant in the {@code LinearSolver}.
 	 * 
 	 * @return  a matrix determinant
 	 */
 	public abstract float determinant();
+	
+	/**
+	 * Checks invertibility of a matrix in the {@code LinearSolver}.
+	 * 
+	 * @return  {@code true} if the matrix is invertible
+	 */
+	public abstract boolean isInvertible();
 	
 	/**
 	 * Solves an exact linear system in the {@code LinearSolver}.

@@ -38,6 +38,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 	private Float det;
 	private Matrix mat, c;
 	private Matrix inv, p, l, u;
+	private boolean isInvertible;
 	private int iError;
 		
 	/**
@@ -85,20 +86,29 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			// The linear system cannot be solved.
 			throw new Tensors.DimensionError("Solving a linear system requires compatible dimensions: ", mat, b);
 		}
+
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// The linear system cannot be solved.
+			throw new Tensors.DimensionError("Solving a linear system requires a square matrix: ", mat);
+		}
+		
 		
 		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{			
-			// If the matrix is not square...
-			if(!mat.is(Square.Type()))
-			{
-				// The linear system cannot be solved.
-				throw new Tensors.DimensionError("Solving a linear system requires a square matrix: ", mat);
-			}
-			
 			// Perform Crout's method.
 			decompose();
 		}
+		
+		// If the matrix is not invertible...
+		if(!isInvertible())
+		{
+			// ... linear systems cannot be solved.
+			throw new Matrices.InvertibleError(mat);
+		}
+		
 
 		// Compute the result through substitution.
 		M x = (M) P().times(b);
@@ -232,6 +242,8 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			{
 				val *= mat.get(i, i);
 			}
+			
+			isInvertible = Doubles.isZero(val, iError);
 			det = (float) val;
 			return;
 		}
@@ -248,6 +260,8 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			{
 				val *= mat.get(i, i);
 			}
+			
+			isInvertible = Doubles.isZero(val, iError);
 			det = (float) val;
 			return;
 		}
@@ -270,27 +284,47 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 	}
 
 	@Override
+	public boolean isInvertible()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{			
+			// Perform Gauss's method.
+			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// Invertibility cannot be determined.
+			return false;
+		}
+		
+		return isInvertible;
+	}
+	
+	@Override
 	public float determinant()
 	{
 		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{
-			// If the matrix is not square...
-			if(!mat.is(Square.Type()))
-			{
-				// A determinant cannot be calculated.
-				throw new Tensors.DimensionError("Computing the determinant requires a square matrix: ", mat);
-			}
-			
-			try
-			{
-				// Perform Crout's method.
-				decompose();
-			}
-			catch(Matrices.InvertibleError e)
-			{
-				det = 0f;
-			}
+			// Perform Crout's method.
+			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// A determinant cannot be calculated.
+			throw new Tensors.DimensionError("Computing the determinant requires a square matrix: ", mat);
+		}
+		
+		// If the matrix is not invertible...
+		if(!isInvertible())
+		{
+			// It has zero determinant.
+			return 0f;
 		}
 		
 		return det;
