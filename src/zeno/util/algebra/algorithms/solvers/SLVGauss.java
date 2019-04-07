@@ -9,18 +9,17 @@ import zeno.util.algebra.linear.matrix.types.banded.lower.LowerTriangular;
 import zeno.util.algebra.linear.matrix.types.banded.upper.UpperTriangular;
 import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
 import zeno.util.algebra.linear.matrix.types.dimensions.Wide;
+import zeno.util.algebra.linear.matrix.types.orthogonal.Identity;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
-import zeno.util.tools.Doubles;
 import zeno.util.tools.Floats;
 import zeno.util.tools.Integers;
 
 /**
- * The {@code SLVCrout} class solves exact linear systems using {@code Crout's method}.
- * This method is a variant of {@code Gauss elimination} that decomposes a matrix {@code M = PLU},
- * where P is a permutation matrix, L a lower triangular matrix, and U an upper triangular matrix.
+ * The {@code SLVGauss} class solves exact linear systems using {@code Gauss's method} with complete pivoting.
+ * This method is a variant of {@code Gauss elimination} that decomposes a matrix into {@code PMQ = LU},
+ * where P, Q are permutation matrices, L a lower triangular matrix, and U an upper triangular matrix.
  * Note that non-square matrices can also be decomposed: one of L or U will not be square.
- * {@code Crout's method} is designed to leave the matrix U with a unit diagonal.
  * 
  * @author Zeno
  * @since Jul 6, 2018
@@ -30,18 +29,19 @@ import zeno.util.tools.Integers;
  * @see FCTTriangular
  * @see LinearSolver
  */
-public class SLVCrout implements FCTTriangular, LinearSolver
+public class SLVGauss implements FCTTriangular, LinearSolver
 {
 	private static final int ULPS = 3;
 	
 	
 	private Float det;
 	private Matrix mat, c;
-	private Matrix inv, p, l, u;
+	private Matrix inv, p, q, l, u;
+	private boolean swapRows, swapCols;
 	private int iError;
 		
 	/**
-	 * Creates a new {@code SLVCrout}.
+	 * Creates a new {@code SLVGauss}.
 	 * If it is used as a linear system solver, this algorithm requires a square matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
@@ -50,13 +50,13 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 	 * 
 	 * @see Matrix
 	 */
-	public SLVCrout(Matrix m)
+	public SLVGauss(Matrix m)
 	{
 		this(m, ULPS);
 	}
 	
 	/**
-	 * Creates a new {@code SLVCrout}.
+	 * Creates a new {@code SLVGauss}.
 	 * If it is used as a linear system solver, this algorithm requires a square matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
@@ -66,7 +66,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 	 * 
 	 * @see Matrix
 	 */
-	public SLVCrout(Matrix m, int ulps)
+	public SLVGauss(Matrix m, int ulps)
 	{
 		iError = ulps;
 		mat = m;
@@ -104,12 +104,28 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		M x = (M) P().times(b);
 		x = new SLVTriangular(L(), iError).solve(x);
 		x = new SLVTriangular(U(), iError).solve(x);
+		x = (M) Q().times(x);
 		return x;
 	}
 	
 	
-	private void swap(int i, int j)
+	private void swapCols(int i, int j)
 	{
+		swapCols = true;
+		
+		// Swap the columns i and j.
+		for(int k = 0; k < c.Rows(); k++)
+		{
+			float cur = c.get(k, i);
+			c.set(c.get(k, j), k, i);
+			c.set(cur, k, j);
+		}
+	}
+	
+	private void swapRows(int i, int j)
+	{
+		swapRows = true;
+		
 		// Swap the rows i and j.
 		for(int k = 0; k < c.Columns(); k++)
 		{
@@ -119,7 +135,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		}
 	}
 
-	private void croutsSimplified()
+	private void gaussSimplified()
 	{
 		// Matrix dimensions.
 		int rows = mat.Rows();
@@ -137,7 +153,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		}
 	}
 	
-	private void croutsMethod()
+	private void gaussMethod()
 	{
 		// Matrix dimensions.
 		int rows = mat.Rows();
@@ -148,55 +164,57 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		// For each dimension in the matrix...
 		for(int i = 0; i < Integers.min(rows, cols); i++)
 		{
-			double vMax = 0; int iMax = i;
+			float vMax = 0; int cMax = i, rMax = i;
 			
-			// Eliminate a column of subdiagonal values.
-			for(int j = i; j < rows; j++)
+			// Check for a better pivot in remaining matrix.
+			for(int j = i; j < cols; j++)
 			{
-				double sum = 0;
-				for(int k = 0; k < i; k++)
+				for(int k = i; k < rows; k++)
 				{
-					sum += (double) c.get(j, k) * c.get(k, i);
-				}
-
-				sum =  c.get(j, i) - sum;
-				c.set((float) sum, j, i);
-				
-				// Leave the largest value as the next pivot.
-				if(Doubles.abs(sum) > vMax)
-				{
-					vMax = Doubles.abs(sum);
-					iMax = j;
+					float val = c.get(k, j);
+					if(Floats.abs(val) > vMax)
+					{
+						vMax = Floats.abs(val);
+						cMax = j; rMax = k;
+					}
 				}
 			}
 			
 			
 			// If the next pivot is zero...
-			if(Floats.isZero((float) vMax, iError))
+			if(Floats.isZero(vMax, iError))
 			{
 				// ... the coëfficient matrix is not invertible.
 				throw new Matrices.InvertibleError(mat);
 			}
 			
-			// Pivot the next row.
-			if(i != iMax)
+			// Pivot the next column.
+			if(cMax != i)
 			{
-				swap(i, iMax);
+				swapCols(cMax, i);
 				dVal = -dVal;
 			}
 			
-			
-			// Eliminate a row of superdiagonal values.
-			for(int j = i + 1; j < cols; j++)
+			// Pivot the next row.
+			if(rMax != i)
 			{
-				double sum = 0;
-				for(int t = 0; t < i; t++)
-				{
-					sum += (double) c.get(i, t) * c.get(t, j);
-				}
+				swapRows(rMax, i);
+				dVal = -dVal;
+			}	
+			
+			
+			
+			// For each row below the diagonal...
+			for(int j = i + 1; j < rows; j++)
+			{
+				// Divide the leading element.
+				c.set(c.get(j , i) / c.get(i, i), j, i);
 				
-				sum = (c.get(i, j) - sum) / c.get(i, i);
-				c.set((float) sum, i, j);
+				// Eliminate a row of superdiagonal values.
+				for(int k = i + 1; k < cols; k++)
+				{
+					c.set(c.get(j, k) - c.get(j, i) * c.get(i, k),  j, k);
+				}
 			}
 			
 			dVal *= c.get(i, i);
@@ -214,14 +232,18 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		// Matrix dimensions.
 		int rows = mat.Rows();
 		int cols = mat.Columns();
-		
-		// Extend the matrix with a permutation column.	
-		c = Matrices.resize(mat, rows, cols + 1);
-		for(int i = 0; i < rows; i++)
-		{
-			c.set(i, i, cols);
-		}
 				
+		// Extend the matrix with a permutation column/row.	
+		c = Matrices.resize(mat, rows + 1, cols + 1);
+		for(int k = 0; k < Integers.max(rows, cols); k++)
+		{
+			if(k < rows) c.set(k, k, cols);
+			if(k < cols) c.set(k, rows, k);
+		}
+		
+		// Assume no swaps have occurred.
+		swapRows = swapCols = false;
+		
 				
 		// If the matrix is lower triangular...
 		if(mat.is(LowerTriangular.Type(), iError))
@@ -239,8 +261,8 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		// If the matrix is upper triangular...
 		if(mat.is(UpperTriangular.Type(), iError))
 		{
-			// Perform the simplified Crout method.
-			croutsSimplified();
+			// Perform the simplified Gauss method.
+			gaussSimplified();
 			
 			double val = 1d;
 			// Calculate the determinant.
@@ -252,15 +274,15 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			return;
 		}
 		
-		// Otherwise, perform Crout's method.
-		croutsMethod();
+		// Otherwise, perform Gauss's method.
+		gaussMethod();
 	}
 	
 	
 	@Override
 	public void requestUpdate()
 	{
-		c = p = l = u = inv = null;
+		c = p = q = l = u = inv = null;
 	}
 	
 	@Override
@@ -309,14 +331,14 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		return inv;
 	}
 	
-		
+	
 	@Override
 	public Matrix P()
 	{
 		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{
-			// Perform Crout's method.
+			// Perform Gauss's method.
 			decompose();
 		}
 		
@@ -327,15 +349,26 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			int rows = mat.Rows();
 			int cols = mat.Columns();
 			
-			// Create the permutation matrix P.
-			p = Matrices.create(rows, rows);
-			// Assign the type of the matrix P.
-			p.setOperator(Orthogonal.Type());
-			
-			// Copy the elements from the decomposed matrix.
-			for(int i = 0; i < rows; i++)
+			// If no swaps have occurred...
+			if(!swapRows)
 			{
-				p.set(1f, i, (int) c.get(i, cols));
+				// Create an identity matrix P.
+				p = Matrices.identity(rows);
+				// Assign the type of the matrix P.
+				p.setOperator(Identity.Type());
+			}
+			else
+			{
+				// Create the permutation matrix P.
+				p = Matrices.create(rows, rows);
+				// Assign the type of the matrix P.
+				p.setOperator(Orthogonal.Type());
+				
+				// Copy the elements from the decomposed matrix.
+				for(int i = 0; i < rows; i++)
+				{
+					p.set(1f, i, (int) c.get(i, cols));
+				}
 			}
 		}
 		
@@ -345,7 +378,44 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 	@Override
 	public Matrix Q()
 	{
-		return Matrices.identity(mat.Columns());
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform Gauss's method.
+			decompose();
+		}
+		
+		// If Q has not been computed yet...
+		if(q == null)
+		{
+			// Matrix dimensions.
+			int rows = mat.Rows();
+			int cols = mat.Columns();
+			
+			// If no swaps have occurred...
+			if(!swapCols)
+			{
+				// Create an identity matrix Q.
+				q = Matrices.identity(rows);
+				// Assign the type of the matrix Q.
+				q.setOperator(Identity.Type());
+			}
+			else
+			{
+				// Create the permutation matrix Q.
+				q = Matrices.create(cols, cols);
+				// Assign the type of the matrix Q.
+				q.setOperator(Orthogonal.Type());
+				
+				// Copy the elements from the decomposed matrix.
+				for(int j = 0; j < cols; j++)
+				{
+					q.set(1f, (int) c.get(rows, j), j);
+				}
+			}
+		}
+		
+		return q;
 	}
 
 	@Override
@@ -354,7 +424,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{
-			// Perform Crout's method.
+			// Perform Gauss's method.
 			decompose();
 		}
 		
@@ -384,7 +454,10 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			{
 				for(int i = j; i < rows; i++)
 				{
-					l.set(c.get(i, j), i, j);
+					if(i != j)
+						l.set(c.get(i, j), i, j);
+					else
+						l.set(1f, i, j);
 				}
 			}
 		}
@@ -398,7 +471,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		// If no decomposition has been made yet...
 		if(needsUpdate())
 		{
-			// Perform Crout's method.
+			// Perform Gauss's method.
 			decompose();
 		}
 		
@@ -428,10 +501,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			{
 				for(int j = i; j < cols; j++)
 				{
-					if(i != j)
-						u.set(c.get(i, j), i, j);
-					else
-						u.set(1f, i, j);
+					u.set(c.get(i, j), i, j);
 				}
 			}
 		}

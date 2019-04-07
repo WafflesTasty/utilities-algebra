@@ -4,8 +4,8 @@ import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
- * The {@code FCTTriangular} interface defines an algorithm that performs PLU factorization.
- * Every matrix can be decomposed as {@code PM = LU} where P is a permutation matrix,
+ * The {@code FCTTriangular} interface defines an algorithm that performs PLUQ factorization.
+ * Every matrix can be decomposed as {@code PMQ = LU} where P, Q are permutation matrices,
  * L is a lower triangular matrix, and U an upper triangular matrix.
  *
  * @author Zeno
@@ -26,6 +26,16 @@ public interface FCTTriangular extends Adaptable
 	 * @see Matrix
 	 */
 	public abstract Matrix P();
+	
+	/**
+	 * Returns the permutation matrix Q from the {@code FCTTriangular}.
+	 * 
+	 * @return  the permutation matrix Q
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public abstract Matrix Q();
 	
 	/**
 	 * Returns the lower triangular matrix L from the {@code FCTTriangular}.
