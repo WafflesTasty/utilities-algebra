@@ -367,9 +367,9 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankRevea
 			}
 		}
 		
-		return nulSpace;
+		return rowSpace;
 	}
-	
+
 
 	@Override
 	public Matrix E()
@@ -447,7 +447,6 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankRevea
 		// Return the matrix V.
 		return v;
 	}
-
 	
 	@Override
 	public int rank()
