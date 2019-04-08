@@ -334,13 +334,14 @@ public class Matrices
 			int mRows = mats[i].Rows();
 			int mCols = mats[i].Columns();
 			// Otherwise, add its values to the target matrix.
-			for(int r = 0; r < mRows; r++)
+			for(int c = 0; c < mCols; c++)
 			{
-				for(int c = 0; c < mCols; c++)
+				for(int r = 0; r < mRows; r++)
 				{
 					m.set(mats[i].get(r, c), r, curr);
-					curr++;
 				}
+				
+				curr++;
 			}
 		}
 		
@@ -363,7 +364,7 @@ public class Matrices
 	 */
 	public static Matrix rightGivens(Matrix m, int i, int j)
 	{
-		Matrix gr = Matrices.identity(m.Rows());
+		Matrix gr = Matrices.identity(m.Columns());
 		gr.setOperator(Orthogonal.Type());
 		
 		float a = m.get(i, i);
@@ -393,7 +394,7 @@ public class Matrices
 	 */
 	public static Matrix leftGivens(Matrix m, int i, int j)
 	{
-		Matrix gr = Matrices.identity(m.Columns());
+		Matrix gr = Matrices.identity(m.Rows());
 		gr.setOperator(Orthogonal.Type());
 		
 		float a = m.get(j, j);
