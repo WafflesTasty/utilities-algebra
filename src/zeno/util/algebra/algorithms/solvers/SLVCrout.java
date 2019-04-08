@@ -191,7 +191,8 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			if(Floats.isZero((float) vMax, iError))
 			{
 				// ... the coëfficient matrix is not invertible.
-				throw new Matrices.InvertibleError(mat);
+				isInvertible = false;
+				return;
 			}
 			
 			// Pivot the next row.
@@ -221,6 +222,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		// Finalize the determinant.
 		if(mat.is(Square.Type()))
 		{
+			isInvertible = true;
 			det = (float) dVal;
 		}
 	}

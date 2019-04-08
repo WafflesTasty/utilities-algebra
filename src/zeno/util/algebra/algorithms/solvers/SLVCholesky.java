@@ -208,7 +208,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 			c.set(Floats.sqrt(c.get(i, i)), i, i);
 		}
 		
-		isInvertible = Doubles.isZero(dVal, iError);
+		isInvertible = !Doubles.isZero(dVal, iError);
 		det = (float) dVal;
 	}
 	
@@ -253,7 +253,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 			}
 		}
 		
-		isInvertible = Doubles.isZero(dVal, iError);
+		isInvertible = !Doubles.isZero(dVal, iError);
 		det = (float) dVal;
 	}
 	

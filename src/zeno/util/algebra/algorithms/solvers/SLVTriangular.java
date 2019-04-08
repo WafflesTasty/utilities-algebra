@@ -243,7 +243,7 @@ public class SLVTriangular implements LinearSolver
 	@Override
 	public boolean isInvertible()
 	{
-		return Floats.isZero(det, iError);
+		return Floats.isZero(determinant(), iError);
 	}
 	
 	@Override
