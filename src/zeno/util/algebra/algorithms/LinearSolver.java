@@ -31,6 +31,17 @@ public interface LinearSolver extends Adaptable
 	public abstract boolean isInvertible();
 	
 	/**
+	 * Checks if a matrix can be solved in the {@code LinearSolver}.
+	 * 
+	 * @param b  a matrix to check
+	 * @return  {@code true} if the system can be solved
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public abstract <M extends Matrix> boolean canSolve(M b);
+	
+	/**
 	 * Solves an exact linear system in the {@code LinearSolver}.
 	 * 
 	 * @param b  a right-hand side matrix

@@ -21,23 +21,7 @@ import zeno.util.tools.Floats;
  * @see LinearSolver
  */
 public class SLVTriangular implements LinearSolver
-{
-	/**
-	 * Checks if a matrix can be solved by a {@code SLVTriangular}.
-	 * 
-	 * @param m  a matrix to check
-	 * @param ulps  an error margin
-	 * @return  {@code true} if the matrix can be solved
-	 * 
-	 * 
-	 * @see Matrix
-	 */
-	public static boolean canSolve(Matrix m, int ulps)
-	{
-		return m.is(LowerTriangular.Type())
-			|| m.is(UpperTriangular.Type());
-	}
-	
+{	
 	private static final int ULPS = 3;
 	
 	
@@ -78,6 +62,24 @@ public class SLVTriangular implements LinearSolver
 		mat = m;
 	}
 		
+	@Override
+	public <M extends Matrix> boolean canSolve(M b)
+	{
+		// Matrix dimensions.
+		int mRows = mat.Rows();
+		int bRows = b.Rows();
+				
+		// If the right-hand side does not have the right dimensions...
+		if(mRows != bRows)
+		{
+			// The linear system cannot be solved.
+			throw new Tensors.DimensionError("Solving a linear system requires compatible dimensions: ", mat, b);
+		}
+		
+		return mat.is(LowerTriangular.Type())
+			|| mat.is(UpperTriangular.Type());
+	}
+	
 	@Override
 	public <M extends Matrix> M solve(M b)
 	{
@@ -251,7 +253,7 @@ public class SLVTriangular implements LinearSolver
 		if(det == null)
 		{
 			// If the matrix is not triangular...
-			if(!canSolve(mat, iError))
+			if(!canSolve(mat))
 			{
 				// The linear system cannot be solved.
 				throw new Matrices.TriangularError(mat);

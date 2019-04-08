@@ -34,6 +34,7 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 	private static final int ULPS = 3;
 	
 	
+	private Float det;
 	private Matrix mat, c;
 	private Matrix b, u, v;
 	private int iError;
@@ -70,6 +71,25 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 		mat = m;
 	}
 	
+	/**
+	 * Returns the sign of the determinant.
+	 * The original matrix has a determinant that
+	 * equals that of B multiplied by this sign.
+	 * 
+	 * @return  a determinant sign
+	 */
+	public float determinantSign()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform bidiagonal factorization.
+			decompose();
+		}
+		
+		return det;
+	}
+	
 	
 	@Override
 	public boolean needsUpdate()
@@ -101,6 +121,7 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 		v.setOperator(Identity.Type());
 
 
+		det = 1f;
 		// For every row/column in the target matrix...
 		for(int k = 0; k < Integers.min(rows, cols); k++)
 		{
@@ -122,6 +143,7 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 					// Column reflect the target matrix.
 					c = uhh.times(c);
 					u = u.times(uhh);
+					det = -det;
 				}
 			}
 			
@@ -143,6 +165,7 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 					// Row reflect the target matrix.
 					c = c.times(vhh);
 					v = v.times(vhh);
+					det = -det;
 				}
 			}
 		}

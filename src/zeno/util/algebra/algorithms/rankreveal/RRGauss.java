@@ -42,7 +42,7 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 	private Matrix mat, c;
 	private Matrix inv, p, q, l, u;
 	private boolean swapRows, swapCols;
-	private boolean isInvertible;
+	private boolean canInvert;
 	private int iError;
 		
 	/**
@@ -76,9 +76,9 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 		iError = ulps;
 		mat = m;
 	}
-	
+		
 	@Override
-	public <M extends Matrix> M solve(M b)
+	public <M extends Matrix> boolean canSolve(M b)
 	{
 		// Matrix dimensions.
 		int mRows = mat.Rows();
@@ -105,14 +105,20 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 			// Perform Crout's method.
 			decompose();
 		}
-
-		// If the matrix is not invertible...
-		if(!isInvertible())
+		
+		// Solvability depends on invertibility.
+		return isInvertible();
+	}
+	
+	@Override
+	public <M extends Matrix> M solve(M b)
+	{
+		// If the linear system cannot be solved...
+		if(!canSolve(b))
 		{
-			// ... linear systems cannot be solved.
+			// Throw an exception.
 			throw new Matrices.InvertibleError(mat);
 		}
-		
 		
 		// Compute the result through substitution.
 		M x = (M) P().times(b);
@@ -183,7 +189,7 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 				// Finalize the rank.
 				rank = i;
 				// Finalize invertibility.
-				isInvertible = false;
+				canInvert = false;
 				return;
 			}
 			
@@ -243,7 +249,7 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 		swapRows = swapCols = false;
 		// Assume matrix has a full rank.
 		rank = Integers.min(rows, cols);
-		isInvertible = true;
+		canInvert = true;
 		
 		// Don't simplify to retain rank.
 		// Perform Gauss's method.
@@ -277,10 +283,10 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 		if(!mat.is(Square.Type()))
 		{
 			// Invertibility cannot be determined.
-			return false;
+			throw new Tensors.DimensionError("Invertibility requires a square matrix: ", mat);
 		}
 		
-		return isInvertible;
+		return canInvert;
 	}
 	
 	@Override
@@ -513,4 +519,5 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 		
 		return u;
 	}
+
 }

@@ -68,10 +68,10 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 		iError = ulps;
 		mat = m;
 	}
-
+	
 	@Override
-	public <M extends Matrix> M solve(M b)
-	{		
+	public <M extends Matrix> boolean canSolve(M b)
+	{
 		// Matrix dimensions.
 		int mRows = mat.Rows();
 		int bRows = b.Rows();
@@ -98,13 +98,19 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 			decompose();
 		}
 		
-		// If the matrix is not invertible...
-		if(!isInvertible())
+		// Solvability requires invertibility.
+		return isInvertible();
+	}
+
+	@Override
+	public <M extends Matrix> M solve(M b)
+	{		
+		// If the linear system cannot be solved...
+		if(!canSolve(b))
 		{
-			// ... linear systems cannot be solved.
+			// Throw an exception.
 			throw new Matrices.InvertibleError(mat);
-		}
-		
+		}		
 		
 		// Compute the result through substitution.
 		M x = (M) b.copy();
@@ -112,7 +118,7 @@ public class SLVCholesky implements FCTCholesky, LinearSolver
 		x = new SLVTriangular(U(), iError).solve(x);
 		return x;
 	}
-
+	
 	
 	@Override
 	public void requestUpdate()

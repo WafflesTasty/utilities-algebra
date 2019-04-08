@@ -72,9 +72,9 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		iError = ulps;
 		mat = m;
 	}
-	
+		
 	@Override
-	public <M extends Matrix> M solve(M b)
+	public <M extends Matrix> boolean canSolve(M b)
 	{
 		// Matrix dimensions.
 		int mRows = mat.Rows();
@@ -102,13 +102,19 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 			decompose();
 		}
 		
-		// If the matrix is not invertible...
-		if(!isInvertible())
+		// Solvability requires invertibility.
+		return isInvertible();
+	}
+	
+	@Override
+	public <M extends Matrix> M solve(M b)
+	{
+		// If the linear system cannot be solved...
+		if(!canSolve(b))
 		{
-			// ... linear systems cannot be solved.
+			// Throw an exception.
 			throw new Matrices.InvertibleError(mat);
-		}
-		
+		}		
 
 		// Compute the result through substitution.
 		M x = (M) P().times(b);
@@ -297,7 +303,7 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		if(!mat.is(Square.Type()))
 		{
 			// Invertibility cannot be determined.
-			return false;
+			throw new Tensors.DimensionError("Invertibility requires a square matrix: ", mat);
 		}
 		
 		return isInvertible;

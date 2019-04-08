@@ -1,6 +1,7 @@
 package zeno.util.algebra.algorithms.lsquares;
 
 import zeno.util.algebra.algorithms.LeastSquares;
+import zeno.util.algebra.algorithms.LinearSolver;
 import zeno.util.algebra.algorithms.LinearSpace;
 import zeno.util.algebra.algorithms.RankReveal;
 import zeno.util.algebra.algorithms.factor.FCTSingular;
@@ -36,12 +37,13 @@ import zeno.util.tools.Integers;
  * @see FCTSingular
  * @see RankReveal
  */
-public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankReveal
+public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSolver, RankReveal
 {
 	private static final int MAX_SWEEPS = 1000;
 	private static final int ULPS = 3;
 	
 	
+	private Float det;
 	private Integer rank;
 	private Matrix mat, inv;
 	private Matrix c, e, u, v;
@@ -111,6 +113,31 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankRevea
 		return (M) V().times(x);
 	}
 	
+	@Override
+	public <M extends Matrix> boolean canSolve(M b)
+	{
+		// Matrix dimensions.
+		int rows = b.Rows();
+		int cols = b.Columns();
+		
+		
+		int eTol = iError * Integers.max(rows, cols);
+		// The system is solvable iff b is orthogonal to the null transpose.
+		Matrix x = b.transpose().times(NullTranspose());
+		return Floats.isZero(x.norm(), eTol);
+	}
+	
+	@Override
+	public <M extends Matrix> M solve(M b)
+	{
+		if(canSolve(b))
+		{
+			return approx(b);
+		}
+
+		return null;
+	}
+		
 			
 	@Override
 	public Matrix pseudoinverse()
@@ -145,12 +172,14 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankRevea
 			// Perform bidiagonal factorization on the transpose.
 			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat.transpose(), iError);
 			u = bih.U(); c = bih.B(); v = bih.V();
+			det = bih.determinantSign();
 		}
 		else
 		{
 			// Perform bidiagonal factorization on the matrix.
 			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat, iError);
 			u = bih.U(); c = bih.B(); v = bih.V();
+			det = bih.determinantSign();
 		}
 		
 				
@@ -215,11 +244,13 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankRevea
 		
 		// Matrix dimensions.
 		int size = c.Columns();
+		
 		// The singular values have to be positive.
 		Matrix mSign = Matrices.identity(size);
 		mSign.setOperator(Diagonal.Type());
 		for(int i = 0; i < size; i++)
 		{
+			det *= c.get(i, i);
 			if(c.get(i, i) < 0)
 			{
 				mSign.set(-1f, i, i);
@@ -243,6 +274,69 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, RankRevea
 		}
 	}
 
+	
+	@Override
+	public float determinant()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{
+			// Perform SVD factorization.
+			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// A determinant cannot be calculated.
+			throw new Tensors.DimensionError("Computing the determinant requires a square matrix: ", mat);
+		}
+		
+		// If the matrix is not invertible...
+		if(!isInvertible())
+		{
+			// It has zero determinant.
+			return 0f;
+		}
+		
+		return det;
+	}
+	
+	@Override
+	public boolean isInvertible()
+	{
+		// If no decomposition has been made yet...
+		if(needsUpdate())
+		{			
+			// Perform SVD factorization.
+			decompose();
+		}
+		
+		// If the matrix is not square...
+		if(!mat.is(Square.Type()))
+		{
+			// Invertibility cannot be determined.
+			throw new Tensors.DimensionError("Invertibility requires a square matrix: ", mat);
+		}
+		
+		
+		// Matrix dimensions.
+		int cols = mat.Columns();
+		// The matrix must be full rank.	
+		return cols == rank();
+	}
+	
+	@Override
+	public Matrix inverse()
+	{
+		if(isInvertible())
+		{
+			return pseudoinverse();
+		}
+
+		return null;
+	}
+	
 	
 	@Override
 	public Matrix RowSpace()
