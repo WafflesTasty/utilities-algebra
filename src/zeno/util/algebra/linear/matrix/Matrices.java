@@ -243,6 +243,12 @@ public class Matrices
 		Matrix m = create(rows, cols);
 		for(int c = 0; c < cols; c++)
 		{
+			if(vecs[c].Size() != rows)
+			{
+				throw new Tensors.DimensionError("Concatenation requires equal size: ", vecs);
+			}
+			
+			
 			for(int r = 0; r < rows; r++)
 			{
 				m.set(vecs[c].get(r), r, c);
@@ -294,34 +300,47 @@ public class Matrices
 	}
 
 	/**
-	 * Creates a concatenation of two {@code Matrices}.
+	 * Creates a concatenation of {@code Matrices}.
 	 * 
-	 * @param m1  a first matrix to concatenate
-	 * @param m2  a second matrix to concatenate
+	 * @param mats  an array of matrices to concatenate
 	 * @return  a concatenated matrix
 	 * 
 	 * 
 	 * @see Matrix
 	 */
-	public static Matrix concat(Matrix m1, Matrix m2)
+	public static Matrix concat(Matrix... mats)
 	{
-		if(m1.Rows() != m2.Rows())
+		// Determine the new matrix dimensions.
+		int cols = 0;
+		int rows = mats[0].Rows();
+		for(Matrix m : mats)
 		{
-			throw new Tensors.DimensionError("Concatenation requires equal row count: ", m1, m2);
+			cols += m.Columns();
 		}
 		
-		int rows = m1.Rows();
-		int cols = m1.Columns() + m2.Columns();
 		
+		int curr = 0;
 		Matrix m = create(rows, cols);
-		for(int r = 0; r < rows; r++)
+		for(int i = 0; i < mats.length; i++)
 		{
-			for(int c = 0; c < cols; c++)
+			// If a source matrix does not have equal rows...
+			if(mats[i].Rows() != rows)
 			{
-				if(c >= m1.Columns())
-					m.set(m2.get(r, c - m1.Columns()), r, c);
-				else
-					m.set(m1.get(r, c), r, c);
+				// Cancel the operation.
+				throw new Tensors.DimensionError("Concatenation requires equal row count: ", mats);
+			}
+			
+			
+			int mRows = mats[i].Rows();
+			int mCols = mats[i].Columns();
+			// Otherwise, add its values to the target matrix.
+			for(int r = 0; r < mRows; r++)
+			{
+				for(int c = 0; c < mCols; c++)
+				{
+					m.set(mats[i].get(r, c), r, curr);
+					curr++;
+				}
 			}
 		}
 		
