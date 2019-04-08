@@ -47,10 +47,9 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 	private Integer rank;
 	private Matrix mat, inv;
 	private Matrix c, e, u, v;
-	private Matrix colSpace;
-	private Matrix rowSpace;
-	private Matrix nulSpace;
-	private Matrix nulTrans;
+	private Matrix colSpace, rowSpace;
+	private Matrix nulSpace, nulTrans;
+	private boolean isReduced;
 	private int iError;
 	
 	/**
@@ -81,9 +80,44 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 	 */
 	public LSQSVD(Matrix m, int ulps)
 	{
+		this(m, true, ULPS);
+	}
+	
+	/**
+	 * Creates a new {@code LSQSVD}.
+	 * This algorithm requires a tall matrix.
+	 * Otherwise, an exception will be thrown during the process.
+	 * 
+	 * @param m  a coëfficient matrix
+	 * @param reduce  decides on reduced form
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public LSQSVD(Matrix m, boolean reduce)
+	{
+		this(m, reduce, ULPS);
+	}
+	
+	/**
+	 * Creates a new {@code LSQSVD}.
+	 * This algorithm requires a tall matrix.
+	 * Otherwise, an exception will be thrown during the process.
+	 * 
+	 * @param m  a coëfficient matrix
+	 * @param reduce  decides on reduced form
+	 * @param ulps  an error margin
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public LSQSVD(Matrix m, boolean reduce, int ulps)
+	{
+		isReduced = reduce;
 		iError = ulps;
 		mat = m;
 	}
+		
 	
 	@Override
 	public <M extends Matrix> M approx(M b)
@@ -107,24 +141,29 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 			decompose();
 		}
 		
+
 		// Compute the result through substitution.
-		Matrix x = U().transpose().times(b);
-		x = E().pseudoinverse().times(x);
+		Matrix x = U().transpose();
+		x = eInverse().times(x.times(b));
 		return (M) V().times(x);
 	}
 	
 	@Override
 	public <M extends Matrix> boolean canSolve(M b)
 	{
+		Matrix t = NullTranspose();
+		
 		// Matrix dimensions.
-		int rows = b.Rows();
-		int cols = b.Columns();
+		int bRows = b.Rows();
+		int bCols = b.Columns();
+		int nCols = t.Columns();
+		int nRows = t.Rows();
 		
-		
-		int eTol = iError * Integers.max(rows, cols);
+		// The tolerance depends on the matrix dimensions and the error given.
+		int eTol = Integers.max(bRows, bCols) * Integers.max(nRows, nCols) * iError;
 		// The system is solvable iff b is orthogonal to the null transpose.
-		Matrix x = b.transpose().times(NullTranspose());
-		return Floats.isZero(x.norm(), eTol);
+		float norm = b.transpose().times(t).norm();
+		return Floats.isZero(norm, eTol);
 	}
 	
 	@Override
@@ -138,6 +177,22 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 		return null;
 	}
 		
+	
+	private Matrix eInverse()
+	{
+		if(isReduced)
+		{
+			return E().pseudoinverse();
+		}
+		
+		Matrix inv = E().copy();
+		for(int i = 0; i < inv.Columns(); i++)
+		{
+			inv.set(1f / inv.get(i, i), i, i);
+		}
+		
+		return inv;
+	}
 			
 	@Override
 	public Matrix pseudoinverse()
@@ -170,14 +225,14 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 		if(!mat.is(Tall.Type()))
 		{
 			// Perform bidiagonal factorization on the transpose.
-			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat.transpose(), iError);
+			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat.transpose(), isReduced, iError);
 			u = bih.U(); c = bih.B(); v = bih.V();
 			det = bih.determinantSign();
 		}
 		else
 		{
 			// Perform bidiagonal factorization on the matrix.
-			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat, iError);
+			FCTBidiagonalHH bih = new FCTBidiagonalHH(mat, isReduced, iError);
 			u = bih.U(); c = bih.B(); v = bih.V();
 			det = bih.determinantSign();
 		}
@@ -189,7 +244,7 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 		{
 			float lErr = 0f, rErr = 0f;
 			// For every row/column in the target matrix...
-			for(int i = 0; i < c.Rows() - 1; i++)
+			for(int i = 0; i < c.Columns() - 1; i++)
 			{
 				float rVal = c.get(i, i + 1);
 				// Calculate the error margin for the right offdiagonal.
@@ -461,7 +516,7 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 			}
 		}
 		
-		return rowSpace;
+		return nulSpace;
 	}
 
 
@@ -481,11 +536,31 @@ public class LSQSVD implements FCTSingular, LeastSquares, LinearSpace, LinearSol
 		{
 			// Matrix dimensions.
 			int cols = c.Columns();
-						
-			// Create the diagonal matrix.
-			e = Matrices.create(cols, cols);
-			// Assign the type of matrix E.
-			e.setOperator(Diagonal.Type());
+			int rows = c.Rows();
+			
+			// If reduced form is needed...
+			if(isReduced)
+			{
+				// Create the diagonal matrix.
+				e = Matrices.create(cols, cols);
+				// Assign the type of matrix E.
+				e.setOperator(Diagonal.Type());
+			}
+			else
+			{
+				// If the matrix is not tall...
+				if(!mat.is(Tall.Type()))
+				{
+					// Create the non-diagonal matrix.
+					e = Matrices.create(cols, rows);
+				}
+				else
+				{
+					// Create the non-diagonal matrix.
+					e = Matrices.create(rows, cols);
+				}
+			}
+			
 			
 			// Copy the elements from the decomposed matrix.
 			for(int i = 0; i < cols; i++)

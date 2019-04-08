@@ -37,6 +37,7 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 	private Float det;
 	private Matrix mat, c;
 	private Matrix b, u, v;
+	private boolean isReduced;
 	private int iError;
 	
 	/**
@@ -67,6 +68,40 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 	 */
 	public FCTBidiagonalHH(Matrix m, int ulps)
 	{
+		this(m, true, ulps);
+	}
+	
+	/**
+	 * Creates a new {@code FCTBidiagonalHH}.
+	 * This algorithm requires a tall matrix.
+	 * Otherwise, an exception will be thrown during the process.
+	 * 
+	 * @param m  a coëfficient matrix
+	 * @param reduce  decides on reduced form
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public FCTBidiagonalHH(Matrix m, boolean reduce)
+	{
+		this(m, reduce, ULPS);
+	}
+	
+	/**
+	 * Creates a new {@code FCTBidiagonalHH}.
+	 * This algorithm requires a tall matrix.
+	 * Otherwise, an exception will be thrown during the process.
+	 * 
+	 * @param m  a coëfficient matrix
+	 * @param reduce  decides on reduced form
+	 * @param ulps  an error margin
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public FCTBidiagonalHH(Matrix m, boolean reduce, int ulps)
+	{
+		isReduced = reduce;
 		iError = ulps;
 		mat = m;
 	}
@@ -219,27 +254,49 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 			// Matrix dimensions.
 			int rows = mat.Rows();
 			int cols = mat.Columns();
-			// Reduce the matrix to square size.
-			int size = Integers.min(rows, cols);
 			
-			
-			// Create the bidiagonal matrix B.
-			b = Matrices.create(size, size);
-			// Assign the type of matrix B.
-			b.setOperator(UpperBidiagonal.Type());
-
-			
-			// Copy the elements from the decomposed matrix.
-			for(int i = 0; i < size; i++)
+			// If reduced form is needed...
+			if(isReduced)
 			{
-				int jMin = Integers.max(i, 0);
-				int jMax = Integers.min(i + 2, size);
+				// Reduce the matrix to square size.
+				int size = Integers.min(rows, cols);
 				
-				for(int j = jMin; j < jMax; j++)
+				// Create the bidiagonal matrix B.
+				b = Matrices.create(size, size);
+				// Assign the type of matrix B.
+				b.setOperator(UpperBidiagonal.Type());
+
+				
+				// Copy the elements from the decomposed matrix.
+				for(int i = 0; i < size; i++)
 				{
-					b.set(c.get(i, j), i, j);
+					int jMin = Integers.max(i, 0);
+					int jMax = Integers.min(i + 2, size);
+					
+					for(int j = jMin; j < jMax; j++)
+					{
+						b.set(c.get(i, j), i, j);
+					}
 				}
 			}
+			else
+			{
+				// Create the bidiagonal matrix B.
+				b = Matrices.create(rows, cols);
+				
+				// Copy the elements from the decomposed matrix.
+				for(int i = 0; i < rows; i++)
+				{
+					int jMin = Integers.max(i, 0);
+					int jMax = Integers.min(i + 2, cols);
+					
+					for(int j = jMin; j < jMax; j++)
+					{
+						b.set(c.get(i, j), i, j);
+					}
+				}
+			}
+
 		}
 		
 		return b;
@@ -261,14 +318,17 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 		int uCols = u.Columns();
 		int mCols = mat.Columns();
 		
-		// If U is not in reduced form...
-		if(uCols != mCols)
+		// If reduced form is needed...
+		if(isReduced)
 		{
-			// Reduce the orthogonal U matrix.
-			u = Matrices.resize(u, uRows, mCols);
+			// If U is not in reduced form...
+			if(uCols != mCols)
+			{
+				// Reduce the orthogonal U matrix.
+				u = Matrices.resize(u, uRows, mCols);
+			}
 		}
-
-
+		
 		// Assign the type of matrix Q.
 		if(u.is(Square.Type()))
 		{
