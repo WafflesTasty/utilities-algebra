@@ -236,7 +236,7 @@ public class Matrices
 	 * @see Vector
 	 */
 	public static <M extends Matrix> M fromCols(Vector... vecs)
-	{
+	{		
 		int cols = vecs.length;		
 		int rows = vecs[0].Size();
 		
