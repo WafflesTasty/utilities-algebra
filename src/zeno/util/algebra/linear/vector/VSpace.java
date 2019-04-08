@@ -189,7 +189,7 @@ public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
 	 */
 	public VSpace(Matrix m)
 	{
-		svd = new LSQSVD(m, ULPS);
+		svd = new LSQSVD(m, false, ULPS);
 		
 	}
 	
