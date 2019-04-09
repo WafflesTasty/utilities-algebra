@@ -563,4 +563,8 @@ public class Matrices
 		return result;
 	}
 
+	private Matrices()
+	{
+		// NOT APPLICABLE
+	}
 }

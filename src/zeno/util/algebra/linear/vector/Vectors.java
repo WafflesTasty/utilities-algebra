@@ -154,4 +154,10 @@ public class Vectors
 	{
 		return Tensors.random(size);
 	}
+
+	
+	private Vectors()
+	{
+		// NOT APPLICABLE
+	}
 }

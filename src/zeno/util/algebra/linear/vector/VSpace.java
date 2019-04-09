@@ -3,7 +3,6 @@ package zeno.util.algebra.linear.vector;
 import zeno.util.algebra.algorithms.lsquares.LSQSVD;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.Floats;
 import zeno.util.tools.patterns.properties.Copyable;
 import zeno.util.tools.patterns.properties.Inaccurate;
 
@@ -22,150 +21,6 @@ import zeno.util.tools.patterns.properties.Inaccurate;
  */
 public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
 {
-	/**
-	 * Defines a full vector space for static access.
-	 * 
-	 * @param dim  a vector coördinate dimension
-	 * @return  a full vector space
-	 */
-	public static final VSpace full(int dim)
-	{
-		return new Full(dim);
-	}
-	
-	/**
-	 * Defines the trivial vector space for static access.
-	 * 
-	 * @param dim  a vector coördinate dimension 
-	 * @return  a trivial vector space
-	 */
-	public static final VSpace trivial(int dim)
-	{
-		return new Trivial(dim);
-	}
-		
-	
-	private static class Trivial extends VSpace
-	{
-		private int dim;
-		
-		protected Trivial(int dim)
-		{
-			this.dim = dim;
-		}
-		
-		
-		@Override
-		public Matrix Span()
-		{
-			return Matrices.create(dim, 0);
-		}
-		
-		@Override
-		public Matrix Complement()
-		{
-			return Matrices.identity(dim);
-		}
-		
-		@Override
-		public VSpace intersect(VSpace s)
-		{
-			return this;
-		}
-		
-		@Override
-		public VSpace add(VSpace s)
-		{
-			return s;
-		}
-		
-		@Override
-		public int Dimension()
-		{
-			return 0;
-		}
-		
-		
-		@Override
-		public boolean contains(Vector v)
-		{
-			return Floats.isZero(v.norm(), ULPS * dim);
-		}
-		
-		@Override
-		public boolean intersects(VSpace s)
-		{
-			return false;
-		}
-		
-		@Override
-		public boolean contains(VSpace s)
-		{
-			return s.Dimension() == 0;
-		}
-	}
-	
-	private static class Full extends VSpace
-	{
-		private int dim;
-		
-		protected Full(int dim)
-		{
-			this.dim = dim;
-		}
-		
-		
-		@Override
-		public Matrix Span()
-		{
-			return Matrices.identity(dim);
-		}
-		
-		@Override
-		public Matrix Complement()
-		{
-			return Matrices.create(dim, 0);
-		}
-		
-		@Override
-		public VSpace intersect(VSpace s)
-		{
-			return s;
-		}
-		
-		@Override
-		public VSpace add(VSpace s)
-		{
-			return this;
-		}
-		
-		@Override
-		public int Dimension()
-		{
-			return dim;
-		}
-		
-		
-		@Override
-		public boolean contains(Vector v)
-		{
-			return true;
-		}
-		
-		@Override
-		public boolean intersects(VSpace s)
-		{
-			return true;
-		}
-		
-		@Override
-		public boolean contains(VSpace s)
-		{
-			return true;
-		}
-	}
-	
-
 	private static final int ULPS = 3;
 	
 	
@@ -249,10 +104,24 @@ public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
 	}
 	
 	/**
+	 * Returns a row complement for the {@code VSpace}.
+	 * Making use of SVD, the span vectors are orthonormal.
+	 * 
+	 * @return  a row vector complement
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public Matrix RowComplement()
+	{
+		return svd.NullSpace();
+	}
+	
+	/**
 	 * Returns an intersection of the {@code VSpace}.
 	 * 
 	 * @param s  a space to intersect with
-	 * @return  a space intersection
+	 * @return  an intersected space
 	 */
 	public VSpace intersect(VSpace s)
 	{
@@ -262,10 +131,22 @@ public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
 	}
 
 	/**
+	 * Returns vector coördinates in the {@code VSpace}.
+	 * These are relative to the space basis.
+	 * 
+	 * @param v  a vector to coördinate
+	 * @return  vector coördinates
+	 */
+	public Vector coordinates(Vector v)
+	{
+		return svd.solve(v);
+	}
+	
+	/**
 	 * Returns a direct sum with the {@code VSpace}.
 	 * 
 	 * @param s  a space to sum with
-	 * @return  a space sum
+	 * @return  an added space
 	 */
 	public VSpace add(VSpace s)
 	{
@@ -329,11 +210,6 @@ public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
 			&& Dimension() == s.Dimension();
 	}
 	
-	private Matrix RowComplement()
-	{
-		return svd.NullSpace();
-	}
-
 		
 	@Override
 	public VSpace instance()
