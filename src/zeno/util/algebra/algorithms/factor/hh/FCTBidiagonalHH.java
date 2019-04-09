@@ -230,6 +230,7 @@ public class FCTBidiagonalHH implements FCTBidiagonal
 			v = Matrices.identity(cols);
 			u.setOperator(Identity.Type());
 			v.setOperator(Identity.Type());
+			det = 1f;
 			return;
 		}
 
