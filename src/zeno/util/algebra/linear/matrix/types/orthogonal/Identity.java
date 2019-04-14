@@ -106,4 +106,10 @@ public interface Identity extends Orthogonal, Diagonal, Involutory
 	{
 		return Operable();
 	}
+
+	@Override
+	public default float trace()
+	{
+		return Operable().Columns();
+	}
 }
