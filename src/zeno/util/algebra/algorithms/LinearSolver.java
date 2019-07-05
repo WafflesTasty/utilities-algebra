@@ -1,7 +1,6 @@
 package zeno.util.algebra.algorithms;
 
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.manipulators.Adaptable;
 
 /**
  * The {@code LinearSolver} interface defines a solver for exact linear systems.
@@ -12,24 +11,10 @@ import zeno.util.tools.patterns.manipulators.Adaptable;
  * @version 1.0
  * 
  * 
- * @see Adaptable
+ * @see Determinant
  */
-public interface LinearSolver extends Adaptable
-{		
-	/**
-	 * Computes the determinant in the {@code LinearSolver}.
-	 * 
-	 * @return  a matrix determinant
-	 */
-	public abstract float determinant();
-	
-	/**
-	 * Checks invertibility of a matrix in the {@code LinearSolver}.
-	 * 
-	 * @return  {@code true} if the matrix is invertible
-	 */
-	public abstract boolean isInvertible();
-	
+public interface LinearSolver extends Determinant
+{			
 	/**
 	 * Checks if a matrix can be solved in the {@code LinearSolver}.
 	 * 

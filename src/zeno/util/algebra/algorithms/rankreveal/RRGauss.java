@@ -519,5 +519,4 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 		
 		return u;
 	}
-
 }
