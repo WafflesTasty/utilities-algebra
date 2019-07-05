@@ -6,6 +6,7 @@ import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.matrix.types.banded.upper.UpperBidiagonal;
+import zeno.util.algebra.linear.matrix.types.dimensions.Tall;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Identity;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.tensor.Tensors;
@@ -14,9 +15,13 @@ import zeno.util.tools.Floats;
 import zeno.util.tools.Integers;
 
 /**
- * The {@code FCTBidiagonalHH} class performs a {@code Bidiagonal} factorization.
+ * The {@code FCTRBidiagonalHH} class performs a reduced {@code Bidiagonal} factorization.
  * This algorithm applies {@code Householder} transformations to induce zeroes in a matrix.
  * This is known as the Golub-Kahan Bidiagonalization.
+ * 
+ * NOTE: The reason why this is limited to tall matrices is because of how the bidiagonal matrix gets resized.
+ * If worked on a wide matrix, the bidiagonal matrix can never be square (you have one additional superdiagonal element).
+ * Therefore, if factorisation of wide matrices is needed, consider using its transpose as input instead.
  * 
  * @author Zeno
  * @since Jul 10, 2018
@@ -26,7 +31,7 @@ import zeno.util.tools.Integers;
  * @see FCTBidiagonal
  * @see Determinant
  */
-public class FCTBidiagonalHH implements Determinant, FCTBidiagonal
+public class FCTRBidiagonalHH implements Determinant, FCTBidiagonal
 {
 	private static final int ULPS = 3;
 	
@@ -37,20 +42,26 @@ public class FCTBidiagonalHH implements Determinant, FCTBidiagonal
 	private int iError;
 	
 	/**
-	 * Creates a new {@code FCTBidiagonalHH}.
+	 * Creates a new {@code FCTRBidiagonalHH}.
+	 * 
+	 * This algorithm requires a tall matrix.
+	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
 	 * 
 	 * 
 	 * @see Matrix
 	 */
-	public FCTBidiagonalHH(Matrix m)
+	public FCTRBidiagonalHH(Matrix m)
 	{
 		this(m, ULPS);
 	}
 	
 	/**
-	 * Creates a new {@code FCTBidiagonalHH}.
+	 * Creates a new {@code FCTRBidiagonalHH}.
+	 * 
+	 * This algorithm requires a tall matrix.
+	 * Otherwise, an exception will be thrown during the process.
 	 * 
 	 * @param m  a coëfficient matrix
 	 * @param ulps  an error margin
@@ -58,13 +69,13 @@ public class FCTBidiagonalHH implements Determinant, FCTBidiagonal
 	 * 
 	 * @see Matrix
 	 */
-	public FCTBidiagonalHH(Matrix m, int ulps)
+	public FCTRBidiagonalHH(Matrix m, int ulps)
 	{
 		iError = ulps;
 		mat = m;
 	}
 	
-	
+
 	@Override
 	public float determinant()
 	{
@@ -194,6 +205,14 @@ public class FCTBidiagonalHH implements Determinant, FCTBidiagonal
 	
 	private void decompose()
 	{	
+		// If the matrix is not tall...
+		if(!mat.is(Tall.Type()))
+		{
+			// A bidiagonal factorization cannot be computed.
+			throw new Tensors.DimensionError("Bidiagonal factorization requires a tall matrix: ", mat);
+		}
+
+		
 		// Matrix dimensions.
 		int rows = mat.Rows();
 		int cols = mat.Columns();
@@ -248,21 +267,26 @@ public class FCTBidiagonalHH implements Determinant, FCTBidiagonal
 			int rows = mat.Rows();
 			int cols = mat.Columns();
 			
+			// Reduce the matrix to square size.
+			int size = Integers.min(rows, cols);
+			
 			// Create the bidiagonal matrix B.
-			b = Matrices.create(rows, cols);
+			b = Matrices.create(size, size);
+			// Assign the type of matrix B.
+			b.setOperator(UpperBidiagonal.Type());
+
 			
 			// Copy the elements from the decomposed matrix.
-			for(int i = 0; i < rows; i++)
+			for(int i = 0; i < size; i++)
 			{
 				int jMin = Integers.max(i, 0);
-				int jMax = Integers.min(i + 2, cols);
+				int jMax = Integers.min(i + 2, size);
 				
 				for(int j = jMin; j < jMax; j++)
 				{
 					b.set(c.get(i, j), i, j);
 				}
 			}
-
 		}
 		
 		return b;
@@ -278,7 +302,19 @@ public class FCTBidiagonalHH implements Determinant, FCTBidiagonal
 			decompose();
 		}
 
-
+		
+		// Matrix dimensions.
+		int uRows = u.Rows();
+		int uCols = u.Columns();
+		int mCols = mat.Columns();
+		
+		// If U is not in reduced form...
+		if(uCols != mCols)
+		{
+			// Reduce the orthogonal U matrix.
+			u = Matrices.resize(u, uRows, mCols);
+		}
+		
 		// Assign the type of matrix Q.
 		if(u.is(Square.Type()))
 		{
@@ -307,6 +343,4 @@ public class FCTBidiagonalHH implements Determinant, FCTBidiagonal
 		
 		return v;
 	}
-
-
 }

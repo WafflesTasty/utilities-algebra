@@ -2,6 +2,7 @@ package zeno.util.algebra.algorithms.factor;
 
 import zeno.util.algebra.algorithms.Spectral;
 import zeno.util.algebra.linear.matrix.Matrix;
+import zeno.util.algebra.linear.matrix.types.Square;
 import zeno.util.algebra.linear.matrix.types.orthogonal.Orthogonal;
 import zeno.util.algebra.linear.vector.Vector;
 
@@ -59,7 +60,11 @@ public interface FCTSingular extends Spectral
 	public default Matrix NearestOrthogonal()
 	{
 		Matrix o = U().times(V().transpose());
-		o.setOperator(Orthogonal.Type());
+		if(o.is(Square.Type()))
+		{
+			o.setOperator(Orthogonal.Type());
+		}
+		
 		return o;
 	}
 	

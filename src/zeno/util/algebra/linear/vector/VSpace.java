@@ -1,9 +1,8 @@
 package zeno.util.algebra.linear.vector;
 
-import zeno.util.algebra.algorithms.lsquares.LSQSVD;
+import zeno.util.algebra.algorithms.rankreveal.RRSVD;
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.tools.patterns.properties.Copyable;
 import zeno.util.tools.patterns.properties.Inaccurate;
 
 /**
@@ -17,22 +16,13 @@ import zeno.util.tools.patterns.properties.Inaccurate;
  * 
  * 
  * @see Inaccurate
- * @see Copyable
  */
-public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
+public class VSpace implements Inaccurate<VSpace>
 {
 	private static final int ULPS = 3;
 	
 	
-	private LSQSVD svd;
-	
-	/**
-	 * Creates a new {@code VSpace}.
-	 */
-	protected VSpace()
-	{
-		// NOT APPLICABLE
-	}
+	private RRSVD svd;
 	
 	/**
 	 * Creates a new {@code VSpace}.
@@ -44,7 +34,7 @@ public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
 	 */
 	public VSpace(Matrix m)
 	{
-		svd = new LSQSVD(m, false, ULPS);
+		svd = new RRSVD(m, ULPS);
 		
 	}
 	
@@ -208,20 +198,5 @@ public class VSpace implements Copyable<VSpace>, Inaccurate<VSpace>
 	{
 		return Dimension() == add(s).Dimension()
 			&& Dimension() == s.Dimension();
-	}
-	
-		
-	@Override
-	public VSpace instance()
-	{
-		return new VSpace();
-	}
-
-	@Override
-	public VSpace copy()
-	{
-		VSpace copy = Copyable.super.copy();
-		copy.svd = new LSQSVD(Span());
-		return copy;
 	}
 }
