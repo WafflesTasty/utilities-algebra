@@ -31,6 +31,7 @@ public class TrivialVSpace extends VSpace
 	 */
 	public TrivialVSpace(int dim)
 	{
+		super(Matrices.create(dim, 0));
 		this.dim = dim;
 	}
 	
