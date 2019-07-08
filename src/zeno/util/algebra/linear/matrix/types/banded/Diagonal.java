@@ -105,7 +105,7 @@ public interface Diagonal extends LowerBidiagonal, UpperBidiagonal, Symmetric
 	@Override
 	public default int LowerBand()
 	{
-		return 1;
+		return 0;
 	}
 	
 	@Override
