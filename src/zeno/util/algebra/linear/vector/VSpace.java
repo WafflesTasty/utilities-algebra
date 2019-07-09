@@ -80,6 +80,20 @@ public class VSpace implements Inaccurate<VSpace>
 	}
 	
 	/**
+	 * Returns a row span for the {@code VSpace}.
+	 * Making use of SVD, the span vectors are orthonormal.
+	 * 
+	 * @return  a row span
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public Matrix RowSpan()
+	{
+		return svd.RowSpace();
+	}
+	
+	/**
 	 * Returns a complement for the {@code VSpace}.
 	 * Making use of SVD, the span vectors are orthonormal.
 	 * 
@@ -115,7 +129,7 @@ public class VSpace implements Inaccurate<VSpace>
 	 */
 	public VSpace intersect(VSpace s)
 	{
-		Matrix m = new VSpace(Span(), s.Span()).RowComplement();
+		Matrix m = add(s).RowComplement();
 		m = Matrices.resize(m, Dimension(), m.Columns());
 		return new VSpace(Span().times(m));
 	}
