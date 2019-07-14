@@ -35,6 +35,29 @@ public final class VSpaces
 	{
 		return new TrivialVSpace(dim);
 	}
+
+	/**
+	 * Creates a vector space from static access.
+	 * 
+	 * @param mats  a matrix set to span
+	 * @return  a vector space
+	 * 
+	 * 
+	 * @see Matrix
+	 * @see VSpace
+	 */
+	public static VSpace create(Matrix... mats)
+	{
+		Matrix m = Matrices.concat(mats);
+		
+		int dim = m.Rows();
+		VSpace s = new VSpace(m);
+		if(s.Dimension() == 0)
+			return trivial(dim);
+		if(s.Dimension() == dim)
+			return full(dim);
+		return s;
+	}
 	
 	
 	/**
@@ -93,4 +116,5 @@ public final class VSpaces
 	{
 		// NOT APPLICABLE
 	}
+
 }

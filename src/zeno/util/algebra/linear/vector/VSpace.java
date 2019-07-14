@@ -35,7 +35,6 @@ public class VSpace implements Inaccurate<VSpace>
 	public VSpace(Matrix m)
 	{
 		svd = new RRSVD(m, ULPS);
-		
 	}
 	
 	/**
@@ -154,7 +153,7 @@ public class VSpace implements Inaccurate<VSpace>
 	 */
 	public VSpace add(VSpace s)
 	{
-		return new VSpace(Span(), s.Span());
+		return VSpaces.create(Span(), s.Span());
 	}
 	
 	/**
@@ -201,12 +200,10 @@ public class VSpace implements Inaccurate<VSpace>
 	 */
 	public boolean contains(VSpace s)
 	{
-		return Dimension() == add(s).Dimension()
-			&& Dimension() >= s.Dimension();
+		return Dimension() == add(s).Dimension();
 	}
 
 
-	
 	@Override
 	public boolean equals(VSpace s, int ulps)
 	{
