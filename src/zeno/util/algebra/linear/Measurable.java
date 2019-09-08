@@ -15,7 +15,7 @@ import zeno.util.tools.patterns.properties.Inaccurate;
  * @see Inaccurate
  * @see Spatial
  */
-public interface Measurable<M extends Measurable<M>> extends Inaccurate<M>, Spatial<M>
+public interface Measurable<M extends Measurable<M>> extends Spatial<M>
 {
 	/**
 	 * Returns the {@code Measurable}'s inner product with another element.

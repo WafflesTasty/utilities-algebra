@@ -8,6 +8,7 @@ import zeno.util.algebra.linear.tensor.types.TensorOps;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.tools.Integers;
+import zeno.util.tools.patterns.properties.Inaccurate;
 import zeno.util.tools.patterns.properties.operator.Operable;
 import zeno.util.tools.patterns.properties.operator.Operation;
 import zeno.util.tools.patterns.properties.operator.Operator;
@@ -23,11 +24,12 @@ import zeno.util.tools.patterns.properties.operator.Operator;
  * @version 1.0
  * 
  * 
+ * @see Inaccurate
  * @see Dimensional
  * @see Measurable
  * @see Operable
  */
-public class Tensor implements Dimensional, Measurable<Tensor>, Operable<Tensor>
+public class Tensor implements Dimensional, Inaccurate<Tensor>, Measurable<Tensor>, Operable<Tensor>
 {	
 	private Data data;
 	private Operator<Tensor> ops;
@@ -60,7 +62,7 @@ public class Tensor implements Dimensional, Measurable<Tensor>, Operable<Tensor>
 	/**
 	 * Returns a value in the {@code Tensor}.
 	 * 
-	 * @param coords  a tensor coördinate
+	 * @param coords  a tensor coï¿½rdinate
 	 * @return  a tensor value
 	 */
 	public float get(int... coords)
@@ -85,7 +87,7 @@ public class Tensor implements Dimensional, Measurable<Tensor>, Operable<Tensor>
 	 * Changes a value in the {@code Tensor}.
 	 * 
 	 * @param val  a tensor value
-	 * @param coords  a tensor coördinate
+	 * @param coords  a tensor coï¿½rdinate
 	 */
 	public void set(float val, int... coords)
 	{
