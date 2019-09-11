@@ -52,7 +52,7 @@ public abstract class Data implements Dimensional, Copyable<Data>
 	 * Changes a value represented in the {@code Data}.
 	 * 
 	 * @param val  a tensor value
-	 * @param coords  a tensor coördinate
+	 * @param coords  a tensor coÃ¶rdinate
 	 */
 	public void set(float val, int... coords)
 	{
@@ -67,7 +67,7 @@ public abstract class Data implements Dimensional, Copyable<Data>
 	/**
 	 * Returns a value represented in the {@code Data}.
 	 * 
-	 * @param coords  a tensor coördinate
+	 * @param coords  a tensor coï¿½rdinate
 	 * @return  a tensor value
 	 */
 	public float get(int... coords)
@@ -85,10 +85,10 @@ public abstract class Data implements Dimensional, Copyable<Data>
 	{
 		int count = coords.length;
 		
-		// Allow more coördinates than necessary...
+		// Allow more coï¿½rdinates than necessary...
 		if(count > Order())
 		{
-			// Only if the excess coördinates are zero.
+			// Only if the excess coï¿½rdinates are zero.
 			for(int i = Order(); i < count; i++)
 			{
 				if(coords[i] != 0)
@@ -98,7 +98,7 @@ public abstract class Data implements Dimensional, Copyable<Data>
 			}
 		}
 		
-		// Make sure the relevant coördinates are within range.
+		// Make sure the relevant coï¿½rdinates are within range.
 		for(int i = 0; i < Integers.min(count, Order()); i++)
 		{
 			if(coords[i] < 0 || order[i] <= coords[i])
