@@ -85,10 +85,10 @@ public abstract class Data implements Dimensional, Copyable<Data>
 	{
 		int count = coords.length;
 		
-		// Allow more coï¿½rdinates than necessary...
+		// Allow more coördinates than necessary...
 		if(count > Order())
 		{
-			// Only if the excess coï¿½rdinates are zero.
+			// Only if the excess coördinates are zero.
 			for(int i = Order(); i < count; i++)
 			{
 				if(coords[i] != 0)
@@ -98,7 +98,7 @@ public abstract class Data implements Dimensional, Copyable<Data>
 			}
 		}
 		
-		// Make sure the relevant coï¿½rdinates are within range.
+		// Make sure the relevant coördinates are within range.
 		for(int i = 0; i < Integers.min(count, Order()); i++)
 		{
 			if(coords[i] < 0 || order[i] <= coords[i])
