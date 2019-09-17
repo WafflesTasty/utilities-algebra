@@ -23,7 +23,7 @@ public interface Function<X, Y>
 	 */
 	public static <X, Y> Function<X, Y> inverse(Function<Y, X> func)
 	{
-		return new Function<X, Y>()
+		return new Function<>()
 		{
 			@Override
 			public X unmap(Y val)
