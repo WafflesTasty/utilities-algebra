@@ -74,10 +74,10 @@ public class Quaternion extends Vector4
 	/**
 	 * Creates a new {@code Quaternion}.
 	 * 
-	 * @param x  the quaternion's x-coördinate
-	 * @param y  the quaternion's y-coördinate
-	 * @param z  the quaternion's z-coördinate
-	 * @param w  the quaternion's w-coördinate
+	 * @param x  the quaternion's x-coÃ¶rdinate
+	 * @param y  the quaternion's y-coÃ¶rdinate
+	 * @param z  the quaternion's z-coÃ¶rdinate
+	 * @param w  the quaternion's w-coÃ¶rdinate
 	 */
 	public Quaternion(float x, float y, float z, float w)
 	{
@@ -104,23 +104,13 @@ public class Quaternion extends Vector4
         setZ(norm.Z() * sin);
         setW(cos);
     }
-		
-	/**
-	 * Creates a new {@code Quaternion}.
-	 * 
-	 * @param val  a coördinate value
-	 */
-	public Quaternion(float val)
-	{
-		super(val);
-	}
-	
+			
 	/**
 	 * Creates a new {@code Quaternion}.
 	 */
 	public Quaternion()
 	{
-		super();
+		this(0f, 0f, 0f, 1f);
 	}
 	
 	

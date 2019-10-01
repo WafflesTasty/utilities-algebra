@@ -135,7 +135,7 @@ public class Interval implements Comparable<Interval>
 		// If the interval's length is more than 2 * PI...
 		if(ival.length().isAbove(2 * Floats.PI))
 		{
-			// Repetition the full range.
+			// Return the full range.
 			return new Interval[]{Interval.RADIANS};
 		}
 		
