@@ -1,6 +1,7 @@
 package zeno.util.algebra.imaginary;
 
 import zeno.util.algebra.linear.matrix.fixed.Matrix3x3;
+import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.algebra.linear.vector.fixed.Vector3;
 import zeno.util.algebra.linear.vector.fixed.Vector4;
 import zeno.util.tools.Floats;
@@ -114,6 +115,28 @@ public class Quaternion extends Vector4
 	}
 	
 	
+	/**
+	 * Returns the {@code Quaternion} angle.
+	 * 
+	 * @return  a rotation angle
+	 */
+	public float Angle()
+	{
+		return 2 * Floats.acos(W());
+	}
+	
+	/**
+	 * Returns the {@code Quaternion} axis.
+	 * 
+	 * @return  a rotation axis
+	 * 
+	 * 
+	 * @see Vector3
+	 */
+	public Vector3 Axis()
+	{
+		return (Vector3) Vectors.resize(this, 3).normalize();
+	}
 	
 	/**
 	 * Returns a {@code Quaternion} conjugate.
