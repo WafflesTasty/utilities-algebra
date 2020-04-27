@@ -127,7 +127,56 @@ public class Matrices
 		}
 	}
 
+
 	
+	/**
+	 * Creates a concatenation of {@code Matrices}.
+	 * 
+	 * @param mats  an array of matrices to concatenate
+	 * @return  a concatenated matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static <M extends Matrix> M concat(Matrix... mats)
+	{
+		// Determine the new matrix dimensions.
+		int cols = 0;
+		int rows = mats[0].Rows();
+		for(Matrix m : mats)
+		{
+			cols += m.Columns();
+		}
+		
+		
+		int curr = 0;
+		Matrix m = create(rows, cols);
+		for(int i = 0; i < mats.length; i++)
+		{
+			// If a source matrix does not have equal rows...
+			if(mats[i].Rows() != rows)
+			{
+				// Cancel the operation.
+				throw new Tensors.DimensionError("Concatenation requires equal row count: ", mats);
+			}
+			
+			
+			int mRows = mats[i].Rows();
+			int mCols = mats[i].Columns();
+			// Otherwise, add its values to the target matrix.
+			for(int c = 0; c < mCols; c++)
+			{
+				for(int r = 0; r < mRows; r++)
+				{
+					m.set(mats[i].get(r, c), r, curr);
+				}
+				
+				curr++;
+			}
+		}
+		
+		return (M) m;
+	}
 	
 	/**
 	 * Calculates the elementwise multiplication {@code Matrix}.
@@ -299,54 +348,6 @@ public class Matrices
 		return Tensors.identity(size, 2);
 	}
 
-	/**
-	 * Creates a concatenation of {@code Matrices}.
-	 * 
-	 * @param mats  an array of matrices to concatenate
-	 * @return  a concatenated matrix
-	 * 
-	 * 
-	 * @see Matrix
-	 */
-	public static Matrix concat(Matrix... mats)
-	{
-		// Determine the new matrix dimensions.
-		int cols = 0;
-		int rows = mats[0].Rows();
-		for(Matrix m : mats)
-		{
-			cols += m.Columns();
-		}
-		
-		
-		int curr = 0;
-		Matrix m = create(rows, cols);
-		for(int i = 0; i < mats.length; i++)
-		{
-			// If a source matrix does not have equal rows...
-			if(mats[i].Rows() != rows)
-			{
-				// Cancel the operation.
-				throw new Tensors.DimensionError("Concatenation requires equal row count: ", mats);
-			}
-			
-			
-			int mRows = mats[i].Rows();
-			int mCols = mats[i].Columns();
-			// Otherwise, add its values to the target matrix.
-			for(int c = 0; c < mCols; c++)
-			{
-				for(int r = 0; r < mRows; r++)
-				{
-					m.set(mats[i].get(r, c), r, curr);
-				}
-				
-				curr++;
-			}
-		}
-		
-		return m;
-	}
 	
 
 	/**
@@ -468,6 +469,61 @@ public class Matrices
 		}
 		
 		return dia;
+	}
+	
+	
+	/**
+	 * Returns the maximum column sum of a {@code Matrix}.
+	 * This corresponds to the L-1 norm.
+	 * 
+	 * @param m  a target matrix
+	 * @return  a maximum col sum
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static float ColMax(Matrix m)
+	{
+		float val = 0f;
+		for(int c = 0; c < m.Columns(); c++)
+		{
+			float sum = 0f;
+			for(int r = 0; r < m.Rows(); r++)
+			{
+				sum += Floats.abs(m.get(r, c));
+			}
+			
+			val = Floats.max(val, sum);
+		}
+		
+		return val;
+	}
+	
+	/**
+	 * Returns the maximum row sum of a {@code Matrix}.
+	 * This corresponds to the L-Infty norm.
+	 * 
+	 * @param m  a target matrix
+	 * @return  a maximum row sum
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static float RowMax(Matrix m)
+	{
+		float val = 0f;
+		for(int r = 0; r < m.Rows(); r++)
+		{
+			float sum = 0f;
+			for(int c = 0; c < m.Columns(); c++)
+			{
+				sum += Floats.abs(m.get(r, c));
+			}
+			
+			val = Floats.max(val, sum);
+		}
+		
+		return val;
 	}
 	
 	/**

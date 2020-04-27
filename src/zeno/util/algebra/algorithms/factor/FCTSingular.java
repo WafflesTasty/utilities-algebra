@@ -1,5 +1,6 @@
 package zeno.util.algebra.algorithms.factor;
 
+import zeno.util.algebra.algorithms.Orthogonalize;
 import zeno.util.algebra.algorithms.Spectral;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.matrix.types.Square;
@@ -16,9 +17,10 @@ import zeno.util.algebra.linear.vector.Vector;
  * @version 1.0
  * 
  * 
+ * @see Orthogonalize
  * @see Spectral
  */
-public interface FCTSingular extends Spectral
+public interface FCTSingular extends Spectral, Orthogonalize
 {
 	/**
 	 * Returns the diagonal matrix E from the {@code FCTSingular}.
@@ -51,12 +53,7 @@ public interface FCTSingular extends Spectral
 	public abstract Matrix V();
 
 	
-	/**
-	 * Returns the nearest orthogonal matrix from the {@code FCTSingular}.
-	 * 
-	 * @return  the nearest orthogonal
-	 * @see Matrix
-	 */
+	@Override
 	public default Matrix NearestOrthogonal()
 	{
 		Matrix o = U().times(V().transpose());
