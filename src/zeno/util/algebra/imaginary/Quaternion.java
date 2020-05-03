@@ -122,7 +122,7 @@ public class Quaternion extends Vector4
 	 */
 	public float Angle()
 	{
-		return 2 * Floats.acos(W());
+		return Floats.normrad(2 * Floats.acos(W()));
 	}
 	
 	/**
