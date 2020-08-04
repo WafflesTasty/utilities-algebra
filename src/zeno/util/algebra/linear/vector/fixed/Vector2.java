@@ -29,8 +29,8 @@ public class Vector2 extends Vector
 	/**
 	 * Creates a new {@code Vector2}.
 	 * 
-	 * @param x  the vector's x-coördinate
-	 * @param y  the vector's y-coördinate
+	 * @param x  the vector's x-coï¿½rdinate
+	 * @param y  the vector's y-coï¿½rdinate
 	 */
 	public Vector2(float x, float y)
 	{
@@ -42,7 +42,7 @@ public class Vector2 extends Vector
 	/**
 	 * Creates a new {@code Vector2}.
 	 * 
-	 * @param val  a coördinate value
+	 * @param val  a coï¿½rdinate value
 	 */
 	public Vector2(float val)
 	{
@@ -59,9 +59,9 @@ public class Vector2 extends Vector
 		
 		
 	/**
-	 * Changes the x-coördinate of the {@code Vector2}.
+	 * Changes the x-coï¿½rdinate of the {@code Vector2}.
 	 * 
-	 * @param x  a new x-coördinate
+	 * @param x  a new x-coï¿½rdinate
 	 */
 	public void setX(float x)
 	{
@@ -69,9 +69,9 @@ public class Vector2 extends Vector
 	}
 	
 	/**
-	 * Changes the y-coördinate of the {@code Vector2}.
+	 * Changes the y-coï¿½rdinate of the {@code Vector2}.
 	 * 
-	 * @param y  a new y-coördinate
+	 * @param y  a new y-coï¿½rdinate
 	 */
 	public void setY(float y)
 	{
@@ -89,9 +89,9 @@ public class Vector2 extends Vector
 	}
 	
 	/**
-	 * Returns the x-coördinate of the {@code Vector2}.
+	 * Returns the x-coï¿½rdinate of the {@code Vector2}.
 	 * 
-	 * @return  the vector's x-coördinate
+	 * @return  the vector's x-coï¿½rdinate
 	 */
 	public float X()
 	{
@@ -99,9 +99,9 @@ public class Vector2 extends Vector
 	}
 	
 	/**
-	 * Returns the y-coördinate of the {@code Vector2}.
+	 * Returns the y-coï¿½rdinate of the {@code Vector2}.
 	 * 
-	 * @return  the vector's y-coördinate
+	 * @return  the vector's y-coï¿½rdinate
 	 */
 	public float Y()
 	{
@@ -111,7 +111,7 @@ public class Vector2 extends Vector
 	
 	/**
 	 * Returns the {@code Vector2}'s perpdot product.
-	 * This value equals the z-coördinate of the cross
+	 * This value equals the z-coï¿½rdinate of the cross
 	 * product between the two vectors.
 	 * 
 	 * @param v  a vector to perpdot
