@@ -50,7 +50,7 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 	 * If it is used as a linear system solver, this algorithm requires a square matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
-	 * @param m  a coëfficient matrix
+	 * @param m  a coï¿½fficient matrix
 	 * 
 	 * 
 	 * @see Matrix
@@ -65,7 +65,7 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 	 * If it is used as a linear system solver, this algorithm requires a square matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
-	 * @param m  a coëfficient matrix
+	 * @param m  a coï¿½fficient matrix
 	 * @param ulps  an error margin
 	 * 
 	 * 
@@ -76,7 +76,7 @@ public class RRGauss implements FCTTriangular, LinearSolver, RankReveal
 		iError = ulps;
 		mat = m;
 	}
-		
+	
 	@Override
 	public <M extends Matrix> boolean canSolve(M b)
 	{
