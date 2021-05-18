@@ -81,7 +81,7 @@ public final class Tensors
 	
 	/**
 	 * The {@code AccessError} class defines an error thrown when
-	 * requested tensor coördinates are out of bounds.
+	 * requested tensor coï¿½rdinates are out of bounds.
 	 *
 	 * @author Zeno
 	 * @since Jul 5, 2018
@@ -97,12 +97,12 @@ public final class Tensors
 		/**
 		 * Creates a new {@code AccessError}.
 		 * 
-		 * @param coords  the invalid coördinates
-		 * @param order  the valid coördinate bounds
+		 * @param coords  the invalid coï¿½rdinates
+		 * @param order  the valid coordinate bounds
 		 */
 		public AccessError(int[] coords, int[] order)
 		{
-			super("The coördinates " + Array.parse.of(coords) + " are out of bounds of " + Array.parse.of(order) + ".");
+			super("The coordinates " + Array.parse.of(coords) + " are out of bounds of " + Array.parse.of(order) + ".");
 		}
 	}
 	
