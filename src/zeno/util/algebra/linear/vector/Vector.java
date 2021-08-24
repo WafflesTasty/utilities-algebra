@@ -27,6 +27,23 @@ public class Vector extends Matrix
 		super(size, 1);
 	}
 
+	/**
+	 * Returns the absolute {@code Vector}.
+	 * 
+	 * @return  the vector absolute
+	 */
+	public Vector Absolute()
+	{
+		Vector abs = Vectors.create(Size());
+		for(int i = 0; i < Size(); i++)
+		{
+			float val = Floats.abs(get(i));
+			abs.set(val, i);
+		}
+		
+		return abs;
+	}
+	
 	
 	/**
 	 * Returns a value in the {@code Vector}.
@@ -51,22 +68,21 @@ public class Vector extends Matrix
 	}
 
 	/**
-	 * Returns the absolute {@code Vector}.
+	 * Returns the {@code Vector}'s 1-norm.
 	 * 
-	 * @return  the vector absolute
+	 * @return  a 1-norm
 	 */
-	public Vector Absolute()
+	public float norm1()
 	{
-		Vector abs = Vectors.create(Size());
+		float norm = 0f;
 		for(int i = 0; i < Size(); i++)
 		{
-			float val = Floats.abs(get(i));
-			abs.set(val, i);
+			norm += Floats.abs(get(i));
 		}
-		
-		return abs;
-	}
 
+		return norm;
+	}
+	
 	
 	@Override
 	public Vector normalize()

@@ -127,8 +127,7 @@ public class Matrices
 		}
 	}
 
-
-	
+		
 	/**
 	 * Creates a concatenation of {@code Matrices}.
 	 * 
@@ -189,6 +188,60 @@ public class Matrices
 	public static <M extends Matrix> M eMult(Matrix m1, Matrix m2)
 	{
 		return Tensors.eMult(m1, m2);
+	}
+	
+	/**
+	 * Drops a row from a {@code Matrix}.
+	 *  
+	 * @param m  a matrix to modify
+	 * @param index  a row index
+	 * @return  a modified matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static <M extends Matrix> M dropRow(Matrix m, int index)
+	{
+		Matrix n = create(m.Rows() - 1, m.Columns());
+		for(int c = 0; c < m.Columns(); c++)
+		{
+			for(int r = 0; r < m.Rows(); r++)
+			{
+				if(r > index)
+					n.set(m.get(r, c), r - 1, c);
+				if(r < index)
+					n.set(m.get(r, c), r + 0, c);
+			}
+		}
+		
+		return (M) n;
+	}
+	
+	/**
+	 * Drops a column from a {@code Matrix}.
+	 *  
+	 * @param m  a matrix to modify
+	 * @param index  a column index
+	 * @return  a modified matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static <M extends Matrix> M dropColumn(Matrix m, int index)
+	{
+		Matrix n = create(m.Rows(), m.Columns() - 1);
+		for(int c = 0; c < m.Columns(); c++)
+		{
+			for(int r = 0; r < m.Rows(); r++)
+			{
+				if(c > index)
+					n.set(m.get(r, c), r, c - 1);
+				if(c < index)
+					n.set(m.get(r, c), r, c + 0);
+			}
+		}
+		
+		return (M) n;
 	}
 	
 	/**
@@ -347,7 +400,6 @@ public class Matrices
 	{
 		return Tensors.identity(size, 2);
 	}
-
 	
 
 	/**

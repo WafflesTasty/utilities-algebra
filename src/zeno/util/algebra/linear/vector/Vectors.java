@@ -155,6 +155,50 @@ public class Vectors
 		return Tensors.random(size);
 	}
 
+	/**
+	 * Drops a single value from a {@code Vector}.
+	 * 
+	 * @param v  a vector to modify
+	 * @param index  an index to drop
+	 * @return  a modified vector
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public static <V extends Vector> V drop(Vector v, int index)
+	{
+		Vector w = Vectors.create(v.Size() - 1);
+		for(int i = 0; i < v.Size(); i++)
+		{
+			if(i > index)
+				w.set(v.get(i), i - 1);
+			if(i < index)
+				w.set(v.get(i), i + 0);
+		}
+		
+		return (V) w;
+	}
+	
+	/**
+	 * Shifts a {@code Vector} one dimension higher.
+	 * 
+	 * @param v  a vector to shift
+	 * @return   a shifted vector
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public static <V extends Vector> V shift(Vector v)
+	{
+		Vector w = Vectors.create(v.Size() + 1);
+		for(int i = 0; i < v.Size(); i++)
+		{
+			w.set(v.get(i), i + 1);
+		}
+		
+		return (V) w;
+	}
+	
 	
 	private Vectors()
 	{
