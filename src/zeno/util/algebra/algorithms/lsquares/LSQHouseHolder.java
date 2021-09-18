@@ -40,7 +40,7 @@ public class LSQHouseHolder implements FCTOrthogonal, LeastSquares
 	 * This algorithm requires a tall matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
-	 * @param m  a coëfficient matrix
+	 * @param m  a coï¿½fficient matrix
 	 * 
 	 * 
 	 * @see Matrix
@@ -55,7 +55,7 @@ public class LSQHouseHolder implements FCTOrthogonal, LeastSquares
 	 * This algorithm requires a tall matrix.
 	 * Otherwise, an exception will be thrown during the process.
 	 * 
-	 * @param m  a coëfficient matrix
+	 * @param m  a coï¿½fficient matrix
 	 * @param ulps  an error margin
 	 * 
 	 * 
@@ -94,6 +94,19 @@ public class LSQHouseHolder implements FCTOrthogonal, LeastSquares
 		M x = (M) Q().transpose().times(b);
 		x = new SLVTriangular(R(), iError).solve(x);
 		return x;
+	}
+	
+	/**
+	 * Returns the matrix of the {@code LSQHouseHolder}.
+	 * 
+	 * @return  a base matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public Matrix Matrix()
+	{
+		return mat;
 	}
 	
 	
