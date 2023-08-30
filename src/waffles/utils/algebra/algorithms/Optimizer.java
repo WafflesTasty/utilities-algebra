@@ -11,7 +11,7 @@ import waffles.utils.lang.enums.Extreme;
  * @since 27 Aug 2023
  * @version 1.0
  *
- *s
+ *
  * @param <T>  a tensor result type
  * @see Tensor
  */
