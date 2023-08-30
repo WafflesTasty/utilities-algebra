@@ -71,22 +71,7 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	{
 		Data().put(val, coords);
 	}
-		
-	/**
-	 * Checks if the {@code Tensor} allows an operation.
-	 * 
-	 * @param ops   a tensor operation
-	 * @param ulps  an error margin
-	 * @return  {@code true} if the operation is allowed
-	 * 
-	 * 
-	 * @see TensorOps
-	 */
-	public boolean allows(TensorOps ops, int ulps)
-	{
-		return Operator().allows(this, ulps);
-	}
-	
+
 	/**
 	 * Sets the destructibility of the {@code Tensor}.
 	 * 
