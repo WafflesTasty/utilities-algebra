@@ -1,4 +1,4 @@
-package waffles.utils.algebra.utilities.functions;
+package waffles.utils.algebra.functions;
 
 import waffles.utils.algebra.Function;
 

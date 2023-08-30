@@ -1,8 +1,7 @@
-package waffles.utils.algebra.utilities;
+package waffles.utils.algebra;
 
-import waffles.utils.algebra.Function;
-import waffles.utils.algebra.utilities.functions.Composite;
-import waffles.utils.algebra.utilities.functions.Inverse;
+import waffles.utils.algebra.functions.Composite;
+import waffles.utils.algebra.functions.Inverse;
 
 /**
  * The {@code Functions} class provides static utility methods to generate {@code Function} objects.
