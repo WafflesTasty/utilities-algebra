@@ -5,7 +5,7 @@ import waffles.utils.algebra.elements.linear.Affine.Factory;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 
 /**
- * A {@code LinearMap} defines a function expressed through a matrix multiplication.
+ * A {@code LinearMap2} defines a function expressed through a matrix multiplication.
  * The corresponding matrix is dimension-dependent, with the intent to allow
  * the map to handle input/output of a variable dimension as well.
  *
@@ -24,7 +24,7 @@ import waffles.utils.algebra.elements.linear.matrix.Matrix;
 public interface LinearMap<X extends Affine, Y extends Affine> extends Function<X, Y>
 {
 	/**
-	 * Returns the inverse matrix of the {@code LinearMap}.
+	 * Returns the inverse matrix of the {@code LinearMap2}.
 	 * 
 	 * @param dim  a matrix dimension
 	 * @return  a square matrix inverse
@@ -35,7 +35,7 @@ public interface LinearMap<X extends Affine, Y extends Affine> extends Function<
 	public abstract Matrix Inverse(int dim);
 	
 	/**
-	 * Returns the matrix of the {@code LinearMap}.
+	 * Returns the matrix of the {@code LinearMap2}.
 	 * 
 	 * @param dim  a matrix dimension
 	 * @return  a square matrix
@@ -47,22 +47,24 @@ public interface LinearMap<X extends Affine, Y extends Affine> extends Function<
 	
 	
 	@Override
+	@Deprecated
 	public default X unmap(Y val)
 	{
 		Matrix span = val.Span();
 		Factory fct = val.Factory();
-		
-		Matrix map = Inverse(span.Rows());
+		// The minus one spells some trouble.
+		Matrix map = Inverse(span.Rows()-1);
 		return (X) fct.create(map.times(span));
 	}
 	
 	@Override
+	@Deprecated
 	public default Y map(X val)
 	{
 		Matrix span = val.Span();
 		Factory fct = val.Factory();
-		
-		Matrix map = Matrix(span.Rows());
+		// The minus one spells some trouble.
+		Matrix map = Matrix(span.Rows()-1);
 		return (Y) fct.create(map.times(span));
 	}
 }
