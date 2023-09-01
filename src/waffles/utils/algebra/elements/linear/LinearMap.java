@@ -1,7 +1,7 @@
 package waffles.utils.algebra.elements.linear;
 
 import waffles.utils.algebra.Function;
-import waffles.utils.algebra.elements.linear.Linearizable.Factory;
+import waffles.utils.algebra.elements.linear.Affine.Factory;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 
 /**
@@ -18,10 +18,10 @@ import waffles.utils.algebra.elements.linear.matrix.Matrix;
  * @param <Y>  a map target type
  * 
  * 
- * @see Linearizable
  * @see Function
+ * @see Affine
  */
-public interface LinearMap<X extends Linearizable, Y extends Linearizable> extends Function<X, Y>
+public interface LinearMap<X extends Affine, Y extends Affine> extends Function<X, Y>
 {
 	/**
 	 * Returns the inverse matrix of the {@code LinearMap}.
