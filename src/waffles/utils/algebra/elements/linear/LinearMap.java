@@ -1,6 +1,7 @@
 package waffles.utils.algebra.elements.linear;
 
 import waffles.utils.algebra.Function;
+import waffles.utils.algebra.elements.linear.Linearizable.Factory;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 
 /**
@@ -49,15 +50,19 @@ public interface LinearMap<X extends Linearizable, Y extends Linearizable> exten
 	public default X unmap(Y val)
 	{
 		Matrix span = val.Span();
-		Matrix inv = Inverse(span.Rows());
-		return (X) val.instance(inv.times(span));
+		Factory fct = val.Factory();
+		
+		Matrix map = Inverse(span.Rows());
+		return (X) fct.create(map.times(span));
 	}
 	
 	@Override
 	public default Y map(X val)
 	{
 		Matrix span = val.Span();
-		Matrix mat = Matrix(span.Rows());
-		return (Y) val.instance(mat.times(span));
+		Factory fct = val.Factory();
+		
+		Matrix map = Matrix(span.Rows());
+		return (Y) fct.create(map.times(span));
 	}
 }
