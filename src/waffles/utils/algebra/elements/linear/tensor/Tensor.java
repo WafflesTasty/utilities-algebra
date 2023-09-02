@@ -120,7 +120,7 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	
 
 	@Override
-	public boolean equals(Tensor t, int ulps)
+	public Boolean equals(Tensor t, int ulps)
 	{
 		if(!Tensors.isomorph(this, t))
 		{
