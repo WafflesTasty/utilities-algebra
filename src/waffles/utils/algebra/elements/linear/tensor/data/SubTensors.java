@@ -1,8 +1,8 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
-import waffles.util.sets.utilities.iterators.IndexKeys;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.Tensors;
+import waffles.utils.sets.utilities.iterators.IndexKeys;
 import waffles.utils.tools.primitives.Array;
 import waffles.utils.tools.primitives.Floats;
 

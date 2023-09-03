@@ -2,10 +2,10 @@ package waffles.utils.algebra.utilities.iterators;
 
 import java.util.Iterator;
 
-import waffles.util.sets.trees.binary.BSNode;
 import waffles.utils.algebra.elements.interval.Cut;
 import waffles.utils.algebra.elements.interval.Interval;
 import waffles.utils.algebra.elements.interval.trees.DRTree;
+import waffles.utils.sets.trees.binary.BSNode;
 
 /**
  * A {@code DRIterator} iterates over the intervals of a {@code DRTree}.

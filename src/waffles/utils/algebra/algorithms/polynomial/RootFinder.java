@@ -2,10 +2,10 @@ package waffles.utils.algebra.algorithms.polynomial;
 
 import java.util.Iterator;
 
-import waffles.util.sets.queues.Queue;
-import waffles.util.sets.queues.delegate.JFIFOQueue;
 import waffles.utils.algebra.elements.complex.Complex;
 import waffles.utils.algebra.elements.poly.Polynomial;
+import waffles.utils.sets.queues.Queue;
+import waffles.utils.sets.queues.delegate.JFIFOQueue;
 import waffles.utils.tools.primitives.Array;
 import waffles.utils.tools.primitives.Doubles;
 

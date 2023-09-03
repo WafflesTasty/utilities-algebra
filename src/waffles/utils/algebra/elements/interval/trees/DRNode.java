@@ -1,11 +1,11 @@
 package waffles.utils.algebra.elements.interval.trees;
 
-import waffles.util.sets.trees.binary.BSNode;
 import waffles.utils.algebra.elements.interval.Cut;
 import waffles.utils.algebra.elements.interval.Interval;
 import waffles.utils.algebra.elements.interval.Intervals;
 import waffles.utils.algebra.elements.interval.format.FMTInterval;
 import waffles.utils.lang.enums.Extreme;
+import waffles.utils.sets.trees.binary.BSNode;
 
 /**
  * A {@code DRNode} defines a single node in a disjoint range tree.

@@ -1,7 +1,7 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
-import waffles.util.sets.indexed.mutable.ArrayIndex;
-import waffles.util.sets.utilities.iterators.IndexKeys;
+import waffles.utils.sets.indexed.mutable.ArrayIndex;
+import waffles.utils.sets.utilities.iterators.IndexKeys;
 
 /**
  * A {@code TensorArray} defines tensor data through an {@code ArrayIndex}.

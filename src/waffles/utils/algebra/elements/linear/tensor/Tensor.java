@@ -1,10 +1,10 @@
 package waffles.utils.algebra.elements.linear.tensor;
 
-import waffles.util.sets.DimensionalSet;
 import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.linear.Angular;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorArray;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
+import waffles.utils.sets.DimensionalSet;
 import waffles.utils.tools.patterns.operator.Operable;
 import waffles.utils.tools.patterns.operator.Operation;
 import waffles.utils.tools.patterns.semantics.Copyable;

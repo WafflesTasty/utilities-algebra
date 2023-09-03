@@ -1,8 +1,8 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
-import waffles.util.sets.indexed.MutableIndex;
-import waffles.util.sets.utilities.iterators.IndexKeys;
-import waffles.util.sets.utilities.iterators.IndexValues;
+import waffles.utils.sets.indexed.MutableIndex;
+import waffles.utils.sets.utilities.iterators.IndexKeys;
+import waffles.utils.sets.utilities.iterators.IndexValues;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
