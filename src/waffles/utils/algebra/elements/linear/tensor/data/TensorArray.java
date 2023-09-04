@@ -58,7 +58,7 @@ public class TensorArray implements TensorData
 	public Float get(int... coords)
 	{
 		int i = toIndex(Order.COL_MAJOR, coords);
-		
+
 		Float v = index.get(i);
 		if(v != null)
 			return v;
