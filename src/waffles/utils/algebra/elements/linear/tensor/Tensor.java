@@ -1,6 +1,7 @@
 package waffles.utils.algebra.elements.linear.tensor;
 
 import waffles.utils.algebra.Additive;
+import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.linear.Angular;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorArray;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
@@ -169,6 +170,12 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 		}
 		
 		return dot2.result();
+	}
+	
+	@Override
+	public Tensor minus(Abelian a)
+	{
+		return (Tensor) Angular.super.minus(a);
 	}
 	
 	@Override
