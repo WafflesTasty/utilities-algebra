@@ -164,6 +164,30 @@ public class Vectors
 	}
 	
 	/**
+	 * Creates a {@code Vector} as another vector with an index dropped.
+	 * 
+	 * @param v  a vector to resize
+	 * @param k  an index to drop
+	 * @return  a resized vector
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public static <V extends Vector> V drop(Vector v, int k)
+	{
+		Vector w = create(v.Size()-1);
+		for(int i = 0; i < v.Size()-1; i++)
+		{
+			if(k <= i)
+				w.set(v.get(i+1), i);
+			else
+				w.set(v.get(i+0), i);
+		}
+		
+		return (V) w;
+	}
+	
+	/**
 	 * Creates a random {@code Vector} of the given size.
 	 * 
 	 * @param s  a vector size
@@ -177,7 +201,7 @@ public class Vectors
 	{
 		return Matrices.random(s, 1);
 	}
-	
+		
 	
 	private Vectors()
 	{
