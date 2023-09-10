@@ -5,13 +5,13 @@ import waffles.utils.algebra.elements.linear.Affine.Factory;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 
 /**
- * A {@code LinearMap2} defines a function expressed through a matrix multiplication.
+ * A {@code LinearMap} defines a function expressed through a matrix multiplication.
  * The corresponding matrix is dimension-dependent, with the intent to allow
  * the map to handle input/output of a variable dimension as well.
  *
  * @author Waffles
  * @since Feb 10, 2019
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <X>  a map source type
@@ -44,27 +44,23 @@ public interface LinearMap<X extends Affine, Y extends Affine> extends Function<
 	 * @see Matrix
 	 */
 	public abstract Matrix Matrix(int dim);
-	
-	
+
+
 	@Override
-	@Deprecated
 	public default X unmap(Y val)
 	{
 		Matrix span = val.Span();
 		Factory fct = val.Factory();
-		// The minus one spells some trouble.
-		Matrix map = Inverse(span.Rows()-1);
+		Matrix map = Inverse(span.Rows());
 		return (X) fct.create(map.times(span));
 	}
 	
 	@Override
-	@Deprecated
 	public default Y map(X val)
 	{
 		Matrix span = val.Span();
 		Factory fct = val.Factory();
-		// The minus one spells some trouble.
-		Matrix map = Matrix(span.Rows()-1);
+		Matrix map = Matrix(span.Rows());
 		return (Y) fct.create(map.times(span));
 	}
 }
