@@ -3,6 +3,7 @@ package waffles.utils.algebra.elements.linear.tensor;
 import waffles.utils.algebra.elements.linear.tensor.ops.TensorAddition;
 import waffles.utils.algebra.elements.linear.tensor.ops.TensorDotProduct;
 import waffles.utils.algebra.elements.linear.tensor.ops.TensorEquality;
+import waffles.utils.algebra.elements.linear.tensor.ops.TensorHadamard;
 import waffles.utils.algebra.elements.linear.tensor.ops.TensorResize;
 import waffles.utils.algebra.elements.linear.tensor.ops.TensorScalar;
 import waffles.utils.tools.patterns.operator.Operation;
@@ -22,7 +23,7 @@ import waffles.utils.tools.patterns.operator.Operator;
  *
  * @author Waffles
  * @since Jul 15, 2018
- * @version 1.0
+ * @version 1.1
  * 
  *
  * @see Operator
@@ -90,6 +91,21 @@ public interface TensorOps extends Operator<Tensor>
 	public default Operation<Boolean> Equality(Tensor t, int iError)
 	{
 		return new TensorEquality(Operable(), t, iError);
+	}
+	
+	/**
+	 * Returns a tensor Hadamard product {@code Operation}.
+	 * 
+	 * @param t  a tensor to multiply
+	 * @return  a hadamard product operation
+	 * 
+	 * 
+	 * @see Operation
+	 * @see Tensor
+	 */
+	public default Operation<Tensor> Hadamard(Tensor t)
+	{
+		return new TensorHadamard(Operable(), t);
 	}
 	
 	/**

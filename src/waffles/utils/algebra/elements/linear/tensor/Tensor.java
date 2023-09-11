@@ -63,6 +63,30 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	
 	
 	/**
+	 * Computes an element-wise tensor product.
+	 * 
+	 * @param t  a tensor to multiply
+	 * @return  an element-wise product
+	 */
+	public Tensor eltimes(Tensor t)
+	{
+		if(!Tensors.isomorph(this, t))
+		{
+			throw new Tensors.DimensionError("Computing a Hadamard product requires equal dimensions: ", this, t);
+		}
+		
+		
+		Operation<Tensor> mul1 =   Operator().Hadamard(t);
+		Operation<Tensor> mul2 = t.Operator().Hadamard(this);
+		if(mul1.cost() < mul2.cost())
+		{
+			return mul1.result();
+		}
+		
+		return mul2.result();
+	}
+	
+	/**
 	 * Changes a single value in the {@code Tensor}.
 	 * 
 	 * @param val     a tensor value
@@ -84,7 +108,7 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	}
 	
 	/**
-	 * Changes the operator of the {@code Tensor}.
+	 * Changes the operator type of the {@code Tensor}.
 	 * 
 	 * @param ops  a tensor operator
 	 * 
