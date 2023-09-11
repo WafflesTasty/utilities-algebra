@@ -3,6 +3,7 @@ package waffles.utils.algebra.elements.linear.matrix.fixed;
 import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
+import waffles.utils.algebra.elements.linear.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.fixed.Vector3;
 
@@ -94,6 +95,12 @@ public class Matrix3x3 extends Matrix
 	public Matrix3x3 minus(Abelian a)
 	{
 		return (Matrix3x3) super.minus(a);
+	}
+	
+	@Override
+	public Matrix3x3 eltimes(Tensor t)
+	{
+		return (Matrix3x3) super.eltimes(t);
 	}
 	
 	@Override

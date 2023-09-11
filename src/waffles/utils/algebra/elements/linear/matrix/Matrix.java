@@ -174,13 +174,19 @@ public class Matrix extends Tensor implements Affine
 	{
 		return (MatrixOps) super.Operator();
 	}
-	
+		
 	@Override
 	public Matrix minus(Abelian a)
 	{
 		return (Matrix) super.minus(a);
 	}
 		
+	@Override
+	public Matrix eltimes(Tensor t)
+	{
+		return (Matrix) super.eltimes(t);
+	}
+	
 	@Override
 	public Matrix times(Float val)
 	{

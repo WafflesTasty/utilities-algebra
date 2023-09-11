@@ -2,6 +2,7 @@ package waffles.utils.algebra.elements.linear.vector.fixed;
 
 import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.Abelian;
+import waffles.utils.algebra.elements.linear.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.Vector;
 
@@ -176,6 +177,12 @@ public class Vector4 extends Vector
 	public Vector4 minus(Abelian a)
 	{
 		return (Vector4) super.minus(a);
+	}
+	
+	@Override
+	public Vector4 eltimes(Tensor t)
+	{
+		return (Vector4) super.eltimes(t);
 	}
 			
 	@Override
