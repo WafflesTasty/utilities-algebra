@@ -11,7 +11,7 @@ import waffles.utils.algebra.elements.linear.vector.fixed.Vector2;
  * 
  * @author Waffles
  * @since Mar 22, 2016
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Matrix
@@ -108,6 +108,12 @@ public class Matrix2x2 extends Matrix
 		return (Matrix2x2) super.normalize();
 	}
 			
+	@Override
+	public Matrix2x2 destroy()
+	{
+		return (Matrix2x2) super.destroy();
+	}
+	
 	@Override
 	public Matrix2x2 copy()
 	{

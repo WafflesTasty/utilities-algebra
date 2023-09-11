@@ -11,7 +11,7 @@ import waffles.utils.tools.primitives.Floats;
  *
  * @author Waffles
  * @since Jul 5, 2018
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Vector
@@ -161,6 +161,12 @@ public class Vector2 extends Vector
 	public Vector2 normalize()
 	{
 		return (Vector2) super.normalize();
+	}
+	
+	@Override
+	public Vector2 destroy()
+	{
+		return (Vector2) super.destroy();
 	}
 			
 	@Override

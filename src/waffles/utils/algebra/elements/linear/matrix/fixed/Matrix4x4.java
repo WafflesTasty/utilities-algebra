@@ -11,7 +11,7 @@ import waffles.utils.algebra.elements.linear.vector.fixed.Vector4;
  *
  * @author Waffles
  * @since Mar 22, 2016
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Matrix
@@ -108,6 +108,12 @@ public class Matrix4x4 extends Matrix
 		return (Matrix4x4) super.normalize();
 	}
 			
+	@Override
+	public Matrix4x4 destroy()
+	{
+		return (Matrix4x4) super.destroy();
+	}
+	
 	@Override
 	public Matrix4x4 copy()
 	{

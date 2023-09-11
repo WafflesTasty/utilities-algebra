@@ -11,7 +11,7 @@ import waffles.utils.algebra.elements.linear.vector.fixed.Vector3;
  *
  * @author Waffles
  * @since Mar 22, 2016
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Matrix
@@ -108,6 +108,12 @@ public class Matrix3x3 extends Matrix
 		return (Matrix3x3) super.normalize();
 	}
 			
+	@Override
+	public Matrix3x3 destroy()
+	{
+		return (Matrix3x3) super.destroy();
+	}
+	
 	@Override
 	public Matrix3x3 copy()
 	{

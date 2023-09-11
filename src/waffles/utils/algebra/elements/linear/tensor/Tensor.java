@@ -20,7 +20,7 @@ import waffles.utils.tools.primitives.Floats;
  *
  * @author Waffles
  * @since Jul 4, 2018
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see DimensionalSet
@@ -117,6 +117,23 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	public TensorData Data()
 	{
 		return data;
+	}
+	
+	/**
+	 * Destroys the {@code Tensor}.
+	 * The tensor is rendered destructible,
+	 * and then returned. This is useful
+	 * when chaining operations.
+	 * 
+	 * @return  the destroyed tensor
+	 * 
+	 * 
+	 * @see Tensor
+	 */
+	public Tensor destroy()
+	{
+		setDestructible(true);
+		return this;
 	}
 	
 

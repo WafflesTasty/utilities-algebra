@@ -16,7 +16,7 @@ import waffles.utils.tools.patterns.operator.Operation;
  * 
  * @author Waffles
  * @since Mar 16, 2016
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Affine
@@ -199,6 +199,12 @@ public class Matrix extends Tensor implements Affine
 		return (Matrix) super.normalize();
 	}
 
+	@Override
+	public Matrix destroy()
+	{
+		return (Matrix) super.destroy();
+	}
+	
 	@Override
 	public Matrix copy()
 	{

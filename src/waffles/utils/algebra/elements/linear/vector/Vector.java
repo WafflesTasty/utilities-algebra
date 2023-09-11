@@ -12,7 +12,7 @@ import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
  *
  * @author Waffles
  * @since Jul 5, 2018
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Matrix
@@ -151,6 +151,12 @@ public class Vector extends Matrix
 		return (Vector) super.normalize();
 	}
 		
+	@Override
+	public Vector destroy()
+	{
+		return (Vector) super.destroy();
+	}
+	
 	@Override
 	public Vector copy()
 	{

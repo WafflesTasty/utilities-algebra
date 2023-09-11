@@ -10,7 +10,7 @@ import waffles.utils.algebra.elements.linear.vector.Vector;
  *
  * @author Waffles
  * @since Mar 21, 2016
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Vector
@@ -188,6 +188,12 @@ public class Vector4 extends Vector
 	public Vector4 normalize()
 	{
 		return (Vector4) super.normalize();
+	}
+	
+	@Override
+	public Vector4 destroy()
+	{
+		return (Vector4) super.destroy();
 	}
 	
 	@Override
