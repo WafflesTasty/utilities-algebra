@@ -4,8 +4,8 @@ import waffles.utils.algebra.elements.linear.matrix.Matrix;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
 
 /**
- * An {@code UpperTriangular} matrix is assumed to have zeroes everywhere below the
- * diagonal. This is equivalent to having a lower band of 0.
+ * An {@code UpperTriangular} matrix is assumed to have zeroes everywhere
+ * below the diagonal. This is equivalent to having a lower band of 0.
  * 
  * @author Waffles
  * @since Jul 15, 2018
