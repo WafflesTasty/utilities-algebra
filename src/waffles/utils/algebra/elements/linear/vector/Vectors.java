@@ -148,6 +148,29 @@ public class Vectors
 	}
 	
 	/**
+	 * Creates a {@code Vector} as a resized copy of another vector.
+	 * 
+	 * @param v  a vector to resize
+	 * @param i  an initial index
+	 * @param s  a vector size
+	 * @return  a resized vector
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static <V extends Vector> V resize(Vector v, int i, int s)
+	{
+		Vector w = Vectors.create(s);
+		for(int k = 0; k < s; k++)
+		{
+			float val = v.get(i + k);
+			w.set(val, k);
+		}
+		
+		return (V) w;
+	}
+	
+	/**
 	 * Creates a random {@code Vector} of the given size.
 	 * 
 	 * @param rng  a value randomizer
