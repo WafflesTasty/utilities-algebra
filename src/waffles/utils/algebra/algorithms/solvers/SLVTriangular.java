@@ -1,6 +1,7 @@
 package waffles.utils.algebra.algorithms.solvers;
 
 import waffles.utils.algebra.algorithms.LinearSolver;
+import waffles.utils.algebra.algorithms.NullSpace;
 import waffles.utils.algebra.elements.linear.matrix.Matrices;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 import waffles.utils.algebra.elements.linear.matrix.types.banded.Diagonal;
@@ -16,14 +17,16 @@ import waffles.utils.tools.primitives.Floats;
  *
  * @author Waffles
  * @since Jul 9, 2018
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see LinearSolver
+ * @see NullSpace
  */
-public class SLVTriangular implements LinearSolver
+public class SLVTriangular implements LinearSolver, NullSpace
 {	
 	private Float det;
+	private Matrix spc, cmp;
 	private Matrix mat, inv;
 	
 	/**
@@ -73,7 +76,7 @@ public class SLVTriangular implements LinearSolver
 		
 		return x;
 	}
-
+	
 	private Matrix backward(Matrix b)
 	{
 		// Define dimensions.
@@ -147,6 +150,16 @@ public class SLVTriangular implements LinearSolver
 		return x;
 	}
 	
+	private Matrix complement()
+	{
+		return null;
+	}
+	
+	private Matrix space()
+	{
+		return null;
+	}
+	
 	
 	@Override
 	public <M extends Matrix> boolean canSolve(M b)
@@ -208,6 +221,28 @@ public class SLVTriangular implements LinearSolver
 		return null;
 	}
 
+	@Override
+	public Matrix ColComplement()
+	{
+		if(cmp != null)
+		{
+			cmp = complement();
+		}
+
+		return cmp;
+	}
+	
+	@Override
+	public Matrix ColSpace()
+	{
+		if(spc != null)
+		{
+			spc = space();
+		}
+
+		return spc;
+	}
+	
 	
 	@Override
 	public boolean canInvert()

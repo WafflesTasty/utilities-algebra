@@ -4,19 +4,21 @@ import waffles.utils.algebra.elements.linear.matrix.Matrix;
 
 /**
  * The {@code LinearSpace} interface defines a solver for matrix subspaces.
- * Each matrix defines a row space, column space, and null space for which a basis can be found.
- * The row space and null space are necessarily complementary vector spaces.
+ * In addition to a null space it also defines complementary row spaces.
  * 
  * @author Waffles
  * @since Apr 7, 2019
- * @version 1.0
+ * @version 1.1
+ * 
+ * 
+ * @see NullSpace
  */
-public interface LinearSpace
+public interface LinearSpace extends NullSpace
 {	
 	/**
 	 * Returns the row space of the {@code LinearSpace}.
 	 * 
-	 * @return  a vector row space
+	 * @return  a row space
 	 * 
 	 * 
 	 * @see Matrix
@@ -24,33 +26,12 @@ public interface LinearSpace
 	public abstract Matrix RowSpace();
 
 	/**
-	 * Returns the column space of the {@code LinearSpace}.
-	 * 
-	 * @return  a vector column space
-	 * 
-	 * 
-	 * @see Matrix
-	 */
-	public abstract Matrix ColSpace();
-	
-	
-	/**
 	 * Returns the row complement of the {@code LinearSpace}.
 	 * 
-	 * @return  a vector row complement
+	 * @return  a row space complement
 	 * 
 	 * 
 	 * @see Matrix
 	 */
 	public abstract Matrix RowComplement();
-
-	/**
-	 * Returns the column complement of the {@code LinearSpace}.
-	 * 
-	 * @return  a vector column complement
-	 * 
-	 * 
-	 * @see Matrix
-	 */
-	public abstract Matrix ColComplement();
 }

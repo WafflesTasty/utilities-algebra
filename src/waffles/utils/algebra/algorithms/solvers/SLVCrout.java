@@ -1,6 +1,7 @@
 package waffles.utils.algebra.algorithms.solvers;
 
 import waffles.utils.algebra.algorithms.LinearSolver;
+import waffles.utils.algebra.algorithms.NullSpace;
 import waffles.utils.algebra.algorithms.factoring.FCTTriangular;
 import waffles.utils.algebra.elements.linear.matrix.Matrices;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
@@ -24,16 +25,18 @@ import waffles.utils.tools.primitives.Integers;
  * 
  * @author Waffles
  * @since Jul 6, 2018
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see FCTTriangular
  * @see LinearSolver
+ * @see NullSpace
  */
-public class SLVCrout implements FCTTriangular, LinearSolver
+public class SLVCrout implements FCTTriangular, LinearSolver, NullSpace
 {
 	private Float det;
 	private Matrix p, l, u;
+	private Matrix spc, cmp;
 	private Matrix mat, inv;
 
 	private boolean canInvert;
@@ -264,6 +267,53 @@ public class SLVCrout implements FCTTriangular, LinearSolver
 		x = new SLVTriangular(L()).solve(x);
 		x = new SLVTriangular(U()).solve(x);
 		return x;
+	}
+	
+	@Override
+	public Matrix ColComplement()
+	{
+		// If no decomposition has been made yet...
+		if(mat == null)
+		{			
+			// Decompose the matrix.
+			decompose();
+		}
+		
+		// If no row space has been made yet...
+		if(cmp == null)
+		{
+			// The column space is determined by L.
+			SLVTriangular slv1 = new SLVTriangular(L());
+			SLVTriangular slv2 = new SLVTriangular(U());
+			
+			cmp = slv1.ColComplement();
+			cmp = slv2.inverse().times(cmp);
+		}
+
+		return cmp;
+	}
+	
+	@Override
+	public Matrix ColSpace()
+	{
+		// If no decomposition has been made yet...
+		if(mat == null)
+		{			
+			// Decompose the matrix.
+			decompose();
+		}
+		
+		// If no column space has been made yet...
+		if(spc == null)
+		{
+			// The column space is determined by L.
+			SLVTriangular slv = new SLVTriangular(L());
+
+			spc = slv.ColSpace();
+			spc = P().times(spc);
+		}
+
+		return spc;
 	}
 	
 	

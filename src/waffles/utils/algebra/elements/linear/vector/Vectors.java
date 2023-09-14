@@ -188,6 +188,23 @@ public class Vectors
 	}
 	
 	/**
+	 * Creates a {@code Vector} as a axis-aligned unit vector.
+	 * 
+	 * @param i  a unit index
+	 * @param dim  a vector size
+	 * @return  a unit vector
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public static <V extends Vector> V unit(int i, int dim)
+	{
+		Vector v = create(dim);
+		v.set(1f, dim);
+		return (V) v;
+	}
+	
+	/**
 	 * Creates a random {@code Vector} of the given size.
 	 * 
 	 * @param s  a vector size
