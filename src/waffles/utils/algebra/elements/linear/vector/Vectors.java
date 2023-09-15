@@ -13,10 +13,10 @@ import waffles.utils.tools.Randomizer;
  *
  * @author Waffles
  * @since Jul 15, 2018
- * @version 1.0
+ * @version 1.1
  */
 public class Vectors
-{
+{	
 	/**
 	 * Creates an empty {@code Vector} of the specified size.
 	 * 
@@ -228,6 +228,37 @@ public class Vectors
 	}
 	
 	/**
+	 * Creates a set of {@code Vectors} from an array of data.
+	 * 
+	 * @param dim   a vector dimension
+	 * @param vals  a float array
+	 * @return  a vector array
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public static Vector[] split(int dim, float... vals)
+	{
+		int count = (vals.length + dim-1) / dim;
+		Vector[] vecs = new Vector[count];
+		for(int i = 0; i < count; i++)
+		{
+			vecs[i] = create(dim);
+			
+			for(int j = 0; j < dim; j++)
+			{
+				int iVal = i * dim + j;
+				if(iVal < vals.length)
+				{
+					vecs[i].set(vals[iVal], j);
+				}
+			}
+		}
+		
+		return vecs;
+	}
+	
+	/**
 	 * Creates a random {@code Vector} of the given size.
 	 * 
 	 * @param s  a vector size
@@ -237,7 +268,7 @@ public class Vectors
 	 * @see Randomizer
 	 * @see Vector
 	 */
-	public static <M extends Matrix> M random(int s)
+	public static <V extends Vector> V random(int s)
 	{
 		return Matrices.random(s, 1);
 	}
