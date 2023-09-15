@@ -72,8 +72,8 @@ public class RRSVD implements FCTSingularVals, LinearSolver, LinearSpace, LeastS
 	}
 
 	/**
-	 * Approximates an inverted linear system in {@code RRSVD}.
-	 * This solves the min(xA - b) problem instead.
+	 * Approximates a transposed linear system in {@code RRSVD}.
+	 * This approximates b via x*A* instead.
 	 * 
 	 * @param b  a right-hand side matrix
 	 * @return   a matrix of unknowns
