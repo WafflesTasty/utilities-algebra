@@ -1,5 +1,6 @@
 package waffles.utils.algebra.elements.linear.matrix;
 
+import waffles.utils.algebra.elements.linear.matrix.ops.MatrixAbs;
 import waffles.utils.algebra.elements.linear.matrix.ops.MatrixProduct;
 import waffles.utils.algebra.elements.linear.matrix.ops.MatrixTranspose;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
@@ -73,6 +74,20 @@ public interface MatrixOps extends TensorOps
 		return obj.Operator() instanceof MatrixOps;
 	}
 	
+	
+	/**
+	 * Returns a matrix absolute {@code Operation}.
+	 * 
+	 * @return  an absolute operation
+	 * 
+	 * 
+	 * @see Operation
+	 * @see Matrix
+	 */
+	public default Operation<Matrix> Absolute()
+	{
+		return new MatrixAbs(Operable());
+	}
 	
 	/**
 	 * Returns a left multiplication {@code Operation}.

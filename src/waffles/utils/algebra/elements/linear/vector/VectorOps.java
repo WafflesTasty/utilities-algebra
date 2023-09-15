@@ -2,7 +2,6 @@ package waffles.utils.algebra.elements.linear.vector;
 
 import waffles.utils.algebra.elements.linear.matrix.types.Tall;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
-import waffles.utils.algebra.elements.linear.vector.ops.VectorAbs;
 import waffles.utils.algebra.elements.linear.vector.ops.VectorExclude;
 import waffles.utils.algebra.elements.linear.vector.ops.VectorNorm;
 import waffles.utils.tools.patterns.operator.Operation;
@@ -63,21 +62,7 @@ public interface VectorOps extends Tall
 		return obj.Operator() instanceof VectorOps;
 	}
 	
-	
-	/**
-	 * Returns a vector absolute {@code Operation}.
-	 * 
-	 * @return  an absolute operation
-	 * 
-	 * 
-	 * @see Operation
-	 * @see Vector
-	 */
-	public default Operation<Vector> Absolute()
-	{
-		return new VectorAbs(Operable());
-	}
-	
+		
 	/**
 	 * Returns a vector exclude {@code Operation}.
 	 * 

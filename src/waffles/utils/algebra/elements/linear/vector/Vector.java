@@ -76,17 +76,7 @@ public class Vector extends Matrix
 	{
 		return Operator().Exclude(i).result();
 	}
-	
-	/**
-	 * Returns an absolute valued {@code Vector}.
-	 * 
-	 * @return  an absolute vector
-	 */
-	public Vector absolute()
-	{
-		return Operator().Absolute().result();
-	}
-	
+		
 	/**
 	 * Returns a {@code Vector} 1-norm.
 	 * 
@@ -127,6 +117,12 @@ public class Vector extends Matrix
 		return new int[]{Size(), 1};
 	}
 	
+	
+	@Override
+	public Vector absolute()
+	{
+		return (Vector) super.absolute();
+	}
 	
 	@Override
 	public Vector minus(Abelian a)

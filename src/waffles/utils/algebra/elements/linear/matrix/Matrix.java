@@ -50,6 +50,16 @@ public class Matrix extends Tensor implements Affine
 
 	
 	/**
+	 * Returns an absolute valued {@code Matrix}.
+	 * 
+	 * @return  an absolute matrix
+	 */
+	public Matrix absolute()
+	{
+		return Operator().Absolute().result();
+	}
+	
+	/**
 	 * Returns the transpose of the {@code Matrix}.
 	 * 
 	 * @return  the matrix transpose
