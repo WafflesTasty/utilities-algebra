@@ -256,6 +256,12 @@ public class Matrices
 	 */
 	public static <M extends Matrix> M concat(Matrix... mats)
 	{
+		if(mats.length == 1)
+		{
+			return (M) mats[0];
+		}
+		
+		
 		int cols = 0;
 		int rows = mats[0].Rows();
 		for(Matrix m : mats)
