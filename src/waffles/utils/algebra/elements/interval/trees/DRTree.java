@@ -41,8 +41,8 @@ public class DRTree extends BSTree<Cut>
 		
 		
 		// Create nodes for the interval.
-		DRNode min = create(ival.Minimum(), Extreme.MAX);
-		DRNode max = create(ival.Maximum(), Extreme.MIN);
+		DRNode min = createNode(ival.Minimum(), Extreme.MAX);
+		DRNode max = createNode(ival.Maximum(), Extreme.MIN);
 	
 		// Find the surrounding nodes in the tree.
 		DRNode prev = strictLowerBound(ival.Minimum());
@@ -186,8 +186,8 @@ public class DRTree extends BSTree<Cut>
 		
 		
 		// Create nodes for the interval.
-		DRNode min = create(ival.Minimum(), Extreme.MIN);
-		DRNode max = create(ival.Maximum(), Extreme.MAX);
+		DRNode min = createNode(ival.Minimum(), Extreme.MIN);
+		DRNode max = createNode(ival.Maximum(), Extreme.MAX);
 
 		// If the tree is empty...
 		if(Root() == null)
@@ -582,7 +582,7 @@ public class DRTree extends BSTree<Cut>
 	}
 	
 	@Override
-	public DRNode create(Object... vals)
+	public DRNode createNode(Object... vals)
 	{
 		Cut cut = (Cut) vals[0];
 		Extreme ex = (Extreme) vals[1];

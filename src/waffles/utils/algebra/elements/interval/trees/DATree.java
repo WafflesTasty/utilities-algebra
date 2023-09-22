@@ -43,7 +43,7 @@ public class DATree extends DRTree
 	
 	
 	@Override
-	public DANode create(Object... vals)
+	public DANode createNode(Object... vals)
 	{
 		Cut cut = (Cut) vals[0];
 		Extreme ex = (Extreme) vals[1];
