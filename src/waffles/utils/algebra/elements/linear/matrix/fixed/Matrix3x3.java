@@ -98,9 +98,9 @@ public class Matrix3x3 extends Matrix
 	}
 	
 	@Override
-	public Matrix3x3 eltimes(Tensor t)
+	public Matrix3x3 ltimes(Tensor t)
 	{
-		return (Matrix3x3) super.eltimes(t);
+		return (Matrix3x3) super.ltimes(t);
 	}
 	
 	@Override

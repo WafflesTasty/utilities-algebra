@@ -131,9 +131,9 @@ public class Vector extends Matrix
 	}
 	
 	@Override
-	public Vector eltimes(Tensor t)
+	public Vector ltimes(Tensor t)
 	{
-		return (Vector) super.eltimes(t);
+		return (Vector) super.ltimes(t);
 	}
 	
 	@Override

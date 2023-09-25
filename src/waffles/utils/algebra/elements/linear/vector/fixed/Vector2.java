@@ -153,9 +153,9 @@ public class Vector2 extends Vector
 	}
 	
 	@Override
-	public Vector2 eltimes(Tensor t)
+	public Vector2 ltimes(Tensor t)
 	{
-		return (Vector2) super.eltimes(t);
+		return (Vector2) super.ltimes(t);
 	}
 	
 	@Override

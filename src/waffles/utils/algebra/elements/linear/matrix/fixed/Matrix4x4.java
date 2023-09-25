@@ -98,9 +98,9 @@ public class Matrix4x4 extends Matrix
 	}
 	
 	@Override
-	public Matrix4x4 eltimes(Tensor t)
+	public Matrix4x4 ltimes(Tensor t)
 	{
-		return (Matrix4x4) super.eltimes(t);
+		return (Matrix4x4) super.ltimes(t);
 	}
 	
 	@Override

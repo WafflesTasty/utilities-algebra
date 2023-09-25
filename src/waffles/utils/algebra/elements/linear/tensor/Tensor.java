@@ -68,7 +68,7 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	 * @param t  a tensor to multiply
 	 * @return  an element-wise product
 	 */
-	public Tensor eltimes(Tensor t)
+	public Tensor ltimes(Tensor t)
 	{
 		if(!Tensors.isomorph(this, t))
 		{

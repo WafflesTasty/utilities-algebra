@@ -192,9 +192,9 @@ public class Matrix extends Tensor implements Affine
 	}
 		
 	@Override
-	public Matrix eltimes(Tensor t)
+	public Matrix ltimes(Tensor t)
 	{
-		return (Matrix) super.eltimes(t);
+		return (Matrix) super.ltimes(t);
 	}
 	
 	@Override

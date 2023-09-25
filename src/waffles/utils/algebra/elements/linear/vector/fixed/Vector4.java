@@ -180,9 +180,9 @@ public class Vector4 extends Vector
 	}
 	
 	@Override
-	public Vector4 eltimes(Tensor t)
+	public Vector4 ltimes(Tensor t)
 	{
-		return (Vector4) super.eltimes(t);
+		return (Vector4) super.ltimes(t);
 	}
 			
 	@Override

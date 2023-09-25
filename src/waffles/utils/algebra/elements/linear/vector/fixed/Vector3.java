@@ -202,9 +202,9 @@ public class Vector3 extends Vector
 	}
 	
 	@Override
-	public Vector3 eltimes(Tensor t)
+	public Vector3 ltimes(Tensor t)
 	{
-		return (Vector3) super.eltimes(t);
+		return (Vector3) super.ltimes(t);
 	}
 			
 	@Override

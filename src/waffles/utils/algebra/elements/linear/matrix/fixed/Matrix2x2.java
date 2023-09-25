@@ -98,9 +98,9 @@ public class Matrix2x2 extends Matrix
 	}
 	
 	@Override
-	public Matrix2x2 eltimes(Tensor t)
+	public Matrix2x2 ltimes(Tensor t)
 	{
-		return (Matrix2x2) super.eltimes(t);
+		return (Matrix2x2) super.ltimes(t);
 	}
 	
 	@Override
