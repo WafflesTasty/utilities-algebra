@@ -11,7 +11,7 @@ import waffles.utils.tools.primitives.Floats;
  *
  * @author Waffles
  * @since 24 Aug 2023
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see TensorData
@@ -142,6 +142,12 @@ public class SubTensors implements TensorData
 	{
 		Tensor[] set = Array.copy.of(subset);
 		return new SubTensors(set, order, dims);
+	}
+	
+	@Override
+	public float[] Array()
+	{
+		return null;
 	}
 	
 	@Override

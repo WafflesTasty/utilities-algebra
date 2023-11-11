@@ -13,7 +13,7 @@ import waffles.utils.tools.primitives.Floats;
  *
  * @author Waffles
  * @since 24 Aug 2023
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see TensorData
@@ -209,6 +209,12 @@ public class Diagonals implements TensorData
 		return new Diagonals(copy, rows, cols);
 	}
 
+	@Override
+	public float[] Array()
+	{
+		return null;
+	}
+	
 	@Override
 	public int NZCount()
 	{

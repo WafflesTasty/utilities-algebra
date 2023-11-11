@@ -1,45 +1,24 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
+import waffles.utils.sets.countable.FloatArray;
 import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.utilities.iterators.IndexKeys;
 import waffles.utils.sets.utilities.iterators.IndexValues;
-import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
  * The {@code TensorData} interface defines a data object which backs a {@code Tensor}.
  *
  * @author Waffles
  * @since 24 Aug 2023
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see MutableIndex
- * @see Copyable
+ * @see FloatArray
  * @see Float
  */
-public interface TensorData extends MutableIndex<Float>, Copyable<TensorData>
+public interface TensorData extends FloatArray, MutableIndex<Float>
 {
-	/**
-	 * Returns a data array of the {@code TensorData}.
-	 * 
-	 * @return  a tensor array
-	 */
-	public default float[] Array()
-	{
-		float[] data = new float[Count()];
-		for(int[] coord : Index())
-		{
-			int i = toIndex(Order.COL_MAJOR, coord);
-			Float v = get(coord);
-			if(v != null)
-			{
-				data[i] = v;
-			}
-		}
-
-		return data;
-	}
-
 	/**
 	 * Iterates over the index in the {@code TensorData}.
 	 * This iterator should return exactly Count() elements.
@@ -86,4 +65,17 @@ public interface TensorData extends MutableIndex<Float>, Copyable<TensorData>
 	 * @return  a non-zero index count
 	 */
 	public abstract int NZCount();
+	
+	
+	@Override
+	public default TensorData copy()
+	{
+		return (TensorData) FloatArray.super.copy();
+	}
+	
+	@Override
+	public default int Count()
+	{
+		return FloatArray.super.Count();
+	}
 }
