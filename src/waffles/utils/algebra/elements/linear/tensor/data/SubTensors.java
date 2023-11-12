@@ -126,6 +126,18 @@ public class SubTensors implements TensorData
 	
 	
 	@Override
+	public float[] PArray()
+	{
+		return null;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
+	}
+	
+	@Override
 	public Iterable<int[]> NZIndex()
 	{
 		return () -> new IndexKeys(this);
@@ -143,13 +155,7 @@ public class SubTensors implements TensorData
 		Tensor[] set = Array.copy.of(subset);
 		return new SubTensors(set, order, dims);
 	}
-	
-	@Override
-	public float[] Array()
-	{
-		return null;
-	}
-	
+		
 	@Override
 	public int NZCount()
 	{

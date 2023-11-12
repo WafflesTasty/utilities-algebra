@@ -132,6 +132,18 @@ public class Diagonals implements TensorData
 	}
 	
 	
+	@Override
+	public float[] PArray()
+	{
+		return null;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return Order.COL_MAJOR;
+	}
+	
 	class NZValues implements Iterator<int[]>
 	{
 		private int diag, crd;
@@ -207,12 +219,6 @@ public class Diagonals implements TensorData
 	{
 		Vector[] copy = Array.copy.of(diags);
 		return new Diagonals(copy, rows, cols);
-	}
-
-	@Override
-	public float[] Array()
-	{
-		return null;
 	}
 	
 	@Override

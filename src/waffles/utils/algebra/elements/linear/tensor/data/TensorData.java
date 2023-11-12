@@ -1,6 +1,6 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
-import waffles.utils.sets.countable.FloatArray;
+import waffles.utils.sets.arrays.FloatArray;
 import waffles.utils.sets.utilities.iterators.IndexKeys;
 import waffles.utils.sets.utilities.iterators.IndexValues;
 
