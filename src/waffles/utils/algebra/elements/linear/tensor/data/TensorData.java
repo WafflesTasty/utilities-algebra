@@ -1,7 +1,6 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
 import waffles.utils.sets.countable.FloatArray;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.utilities.iterators.IndexKeys;
 import waffles.utils.sets.utilities.iterators.IndexValues;
 
@@ -13,11 +12,9 @@ import waffles.utils.sets.utilities.iterators.IndexValues;
  * @version 1.1
  * 
  * 
- * @see MutableIndex
  * @see FloatArray
- * @see Float
  */
-public interface TensorData extends FloatArray, MutableIndex<Float>
+public interface TensorData extends FloatArray
 {
 	/**
 	 * Iterates over the index in the {@code TensorData}.
