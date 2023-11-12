@@ -133,7 +133,7 @@ public class Diagonals implements TensorData
 	
 	
 	@Override
-	public float[] PArray()
+	public float[] Array()
 	{
 		return null;
 	}

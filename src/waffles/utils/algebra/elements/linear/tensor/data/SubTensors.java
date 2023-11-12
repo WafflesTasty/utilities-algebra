@@ -126,7 +126,7 @@ public class SubTensors implements TensorData
 	
 	
 	@Override
-	public float[] PArray()
+	public float[] Array()
 	{
 		return null;
 	}

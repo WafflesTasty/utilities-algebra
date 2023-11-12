@@ -32,7 +32,7 @@ public interface Spectral
 	public default float euclidian()
 	{
 		TensorData data = SingularValues().Data();
-		return Floats.max(data.PArray());
+		return Floats.max(data.Array());
 	}
 	
 	/**
@@ -54,8 +54,8 @@ public interface Spectral
 	public default float condition()
 	{
 		TensorData data = SingularValues().Data();
-		float eMin = Floats.min(data.PArray());
-		float eMax = Floats.max(data.PArray());
+		float eMin = Floats.min(data.Array());
+		float eMax = Floats.max(data.Array());
 		return eMax / eMin;
 	}
 }

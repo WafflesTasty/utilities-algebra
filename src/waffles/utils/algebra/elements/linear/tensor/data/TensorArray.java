@@ -26,8 +26,6 @@ public class TensorArray extends FloatIndex implements TensorData
 	public TensorArray(int... ord)
 	{
 		super(ord);
-//		order = ord;
-//		index = new ArrayIndex<>(Size());
 	}
 
 			

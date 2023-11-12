@@ -69,10 +69,4 @@ public interface TensorData extends FloatArray
 	{
 		return (TensorData) FloatArray.super.copy();
 	}
-	
-	@Override
-	public default int Count()
-	{
-		return FloatArray.super.Count();
-	}
 }
