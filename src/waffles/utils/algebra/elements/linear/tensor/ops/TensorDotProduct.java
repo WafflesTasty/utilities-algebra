@@ -40,7 +40,7 @@ public class TensorDotProduct implements Operation<Float>
 	public Float result()
 	{
 		double dot = 0d;
-		for(int[] coord : t1.Data().NZIndex())
+		for(int[] coord : t1.Data().NZKeys())
 		{
 			float v1 = t1.get(coord);
 			float v2 = t2.get(coord);

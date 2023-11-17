@@ -40,7 +40,7 @@ public class TensorScalar implements Operation<Tensor>
 	public Tensor result()
 	{
 		Tensor result = t.copy();
-		for(int[] coord : t.Data().NZIndex())
+		for(int[] coord : t.Data().NZKeys())
 		{
 			float val = mul * t.get(coord);
 			result.set(val, coord);

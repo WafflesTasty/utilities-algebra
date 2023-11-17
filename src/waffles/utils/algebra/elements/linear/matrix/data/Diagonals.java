@@ -203,7 +203,7 @@ public class Diagonals implements TensorData
 	}
 	
 	@Override
-	public Iterable<int[]> NZIndex()
+	public Iterable<int[]> NZKeys()
 	{
 		return () -> new NZValues();
 	}

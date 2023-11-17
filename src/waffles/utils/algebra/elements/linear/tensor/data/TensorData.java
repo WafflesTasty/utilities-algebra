@@ -1,8 +1,6 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
 import waffles.utils.sets.arrays.FloatArray;
-import waffles.utils.sets.utilities.iterators.IndexKeys;
-import waffles.utils.sets.utilities.iterators.IndexValues;
 
 /**
  * The {@code TensorData} interface defines a data object which backs a {@code Tensor}.
@@ -17,42 +15,14 @@ import waffles.utils.sets.utilities.iterators.IndexValues;
 public interface TensorData extends FloatArray
 {
 	/**
-	 * Iterates over the index in the {@code TensorData}.
-	 * This iterator should return exactly Count() elements.
+	 * Iterates over non-zero keys in the {@code TensorData}.
 	 * 
-	 * @return  an index iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 */
-	public default Iterable<int[]> Index()
-	{
-		return () -> new IndexKeys(this);
-	}
-	
-	/**
-	 * Iterates over the values in the {@code TensorData}.
-	 * This iterator should return exactly Count() elements.
-	 * 
-	 * @return  a value iterable
+	 * @return  an index key iterable
 	 * 
 	 * 
 	 * @see Iterable
 	 */
-	public default Iterable<Float> Values()
-	{
-		return () -> new IndexValues<>(this);
-	}
-	
-	/**
-	 * Iterates over non-zero indices in the {@code TensorData}.
-	 * 
-	 * @return  an index iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 */
-	public abstract Iterable<int[]> NZIndex();
+	public abstract Iterable<int[]> NZKeys();
 	
 	/**
 	 * Returns the non-zero index count of the {@code TensorData}.

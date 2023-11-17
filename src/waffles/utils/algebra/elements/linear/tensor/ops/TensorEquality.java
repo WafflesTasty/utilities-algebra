@@ -46,7 +46,7 @@ public class TensorEquality implements Operation<Boolean>
 	public Boolean result()
 	{
 		Tensor t3 = Tensors.create(t1.Dimensions());
-		for(int[] coord : t2.Data().NZIndex())
+		for(int[] coord : t2.Data().NZKeys())
 		{
 			float v1 = t1.get(coord);
 			float v2 = t2.get(coord);
@@ -54,7 +54,7 @@ public class TensorEquality implements Operation<Boolean>
 			t3.set(v1 - v2, coord);
 		}
 		
-		for(int[] coord : t3.Data().NZIndex())
+		for(int[] coord : t3.Data().NZKeys())
 		{
 			if(!Floats.isZero(t3.get(coord), iError))
 			{

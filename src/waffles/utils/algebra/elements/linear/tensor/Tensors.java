@@ -11,7 +11,7 @@ import waffles.utils.tools.primitives.Array;
  *
  * @author Waffles
  * @since Jul 15, 2018
- * @version 1.0
+ * @version 1.1
  */
 public final class Tensors
 {
@@ -122,6 +122,11 @@ public final class Tensors
 	 */
 	public static <T extends Tensor> T create(TensorData data)
 	{
+		if(data.Order() == 1)
+		{
+			return (T) Vectors.create(data);
+		}
+		
 		if(data.Order() == 2)
 		{
 			return (T) Matrices.create(data);
@@ -193,7 +198,7 @@ public final class Tensors
 	public static <T extends Tensor> T random(Randomizer rng, int... dims)
 	{
 		Tensor t = create(dims);
-		for(int[] coord : t.Data().Index())
+		for(int[] coord : t.Data().Keys())
 		{
 			t.set(rng.randomFloat(), coord);
 		}

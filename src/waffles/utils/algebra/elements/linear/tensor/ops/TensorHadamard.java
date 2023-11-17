@@ -41,7 +41,7 @@ public class TensorHadamard implements Operation<Tensor>
 	public Tensor result()
 	{
 		Tensor t3 = Tensors.create(t1.Dimensions());
-		for(int[] coord : t1.Data().NZIndex())
+		for(int[] coord : t1.Data().NZKeys())
 		{
 			float v1 = t1.get(coord);
 			float v2 = t2.get(coord);

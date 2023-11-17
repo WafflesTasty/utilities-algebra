@@ -11,7 +11,7 @@ import waffles.utils.tools.patterns.operator.Operation;
  *
  * @author Waffles
  * @since Jul 13, 2018
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see Operation
@@ -41,7 +41,7 @@ public class TensorAddition implements Operation<Tensor>
 	public Tensor result()
 	{
 		Tensor t3 = Tensors.create(t1.Dimensions());
-		for(int[] coord : t1.Data().Index())
+		for(int[] coord : t1.Data().Keys())
 		{
 			float v1 = t1.get(coord);
 			float v2 = t2.get(coord);

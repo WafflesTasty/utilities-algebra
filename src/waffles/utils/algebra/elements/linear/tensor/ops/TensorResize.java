@@ -46,7 +46,7 @@ public class TensorResize implements Operation<Tensor>
 		TensorData iData = t.Data();
 		TensorData oData = result.Data();
 		
-		for(int[] coord : iData.NZIndex())
+		for(int[] coord : iData.NZKeys())
 		{
 			if(oData.contains(coord))
 			{

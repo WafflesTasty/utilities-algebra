@@ -36,7 +36,7 @@ public class VectorNorm implements Operation<Float>
 	public Float result()
 	{
 		float result = 0f;
-		for(int[] coord : v.Data().NZIndex())
+		for(int[] coord : v.Data().NZKeys())
 		{
 			result += Floats.abs(v.get(coord));
 		}
