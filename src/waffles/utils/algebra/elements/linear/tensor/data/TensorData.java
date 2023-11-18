@@ -1,6 +1,6 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
-import waffles.utils.sets.arrays.FloatArray;
+import waffles.utils.sets.arrays.like.FloatArray;
 
 /**
  * The {@code TensorData} interface defines a data object which backs a {@code Tensor}.
