@@ -8,6 +8,7 @@ import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.sets.DimensionalSet;
 import waffles.utils.tools.patterns.operator.Operable;
 import waffles.utils.tools.patterns.operator.Operation;
+import waffles.utils.tools.patterns.persistence.Persistible;
 import waffles.utils.tools.patterns.semantics.Copyable;
 import waffles.utils.tools.patterns.semantics.Inaccurate;
 import waffles.utils.tools.primitives.Floats;
@@ -29,7 +30,7 @@ import waffles.utils.tools.primitives.Floats;
  * @see Angular
  * @see Tensor
  */
-public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>, Inaccurate<Tensor>, Operable<Tensor>
+public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>, Inaccurate<Tensor>, Operable<Tensor>, Persistible<TensorData>
 {	
 	private TensorData data;
 	private TensorOps operator;
@@ -129,20 +130,7 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	{
 		return isDestructible;
 	}
-	
-	/**
-	 * Returns the data of the {@code Tensor}.
-	 * 
-	 * @return  a data object
-	 * 
-	 * 
-	 * @see TensorData
-	 */
-	public TensorData Data()
-	{
-		return data;
-	}
-	
+
 	/**
 	 * Destroys the {@code Tensor}.
 	 * The tensor is rendered destructible,
@@ -192,6 +180,12 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 		return Data().Dimensions();
 	}
 	
+	
+	@Override
+	public TensorData Data()
+	{
+		return data;
+	}
 	
 	@Override
 	public float dot(Angular a)
