@@ -1,6 +1,7 @@
 package waffles.utils.algebra.elements.linear.tensor.data;
 
 import waffles.utils.sets.arrays.like.FloatArray;
+import waffles.utils.tools.patterns.persistence.Data;
 
 /**
  * The {@code TensorData} interface defines a data object which backs a {@code Tensor}.
@@ -11,8 +12,9 @@ import waffles.utils.sets.arrays.like.FloatArray;
  * 
  * 
  * @see FloatArray
+ * @see Data
  */
-public interface TensorData extends FloatArray
+public interface TensorData extends Data, FloatArray
 {
 	/**
 	 * Returns the non-zero count of the {@code TensorData}.
@@ -38,5 +40,11 @@ public interface TensorData extends FloatArray
 	public default TensorData copy()
 	{
 		return (TensorData) FloatArray.super.copy();
+	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Count();
 	}
 }
