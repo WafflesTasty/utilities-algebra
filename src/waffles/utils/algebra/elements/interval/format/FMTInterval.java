@@ -2,7 +2,7 @@ package waffles.utils.algebra.elements.interval.format;
 
 import waffles.utils.algebra.elements.interval.Cut;
 import waffles.utils.algebra.elements.interval.Interval;
-import waffles.utils.lang.Format;
+import waffles.utils.lang.format.ChunkFormat;
 import waffles.utils.tools.primitives.Floats;
 import waffles.utils.tools.primitives.Integers;
 
@@ -18,13 +18,13 @@ import waffles.utils.tools.primitives.Integers;
  * 
  * @author Waffles
  * @since 27 Aug 2023
- * @version 1.0
+ * @version 1.1
  *
  * 
- * @see Format
  * @see Interval
+ * @see ChunkFormat
  */
-public class FMTInterval extends Format<Interval>
+public class FMTInterval extends ChunkFormat<Interval>
 {
 	/**
 	 * Creates a new {@code FMTInterval}.

@@ -250,19 +250,10 @@ public class Interval implements Comparable<Interval>, Formattable<Interval>
 	}
 	
 
-	
 	@Override
-	public FMTInterval Formatter(String fmt, String delim)
+	public FMTInterval Formatter()
 	{
-		return new FMTInterval(fmt, delim);
-	}
-	
-	@Override
-	public int compareTo(Interval r)
-	{
-		if(max.compareTo(r.min) < 0) return -1;
-		if(min.compareTo(r.max) > 0) return  1;
-		return 0;
+		return new FMTInterval("§(§llllll§..§uuuuuu§)§", "§");
 	}
 	
 	@Override
@@ -276,11 +267,19 @@ public class Interval implements Comparable<Interval>, Formattable<Interval>
 		
 		return false;
 	}
-		
+	
+	@Override
+	public int compareTo(Interval r)
+	{
+		if(max.compareTo(r.min) < 0) return -1;
+		if(min.compareTo(r.max) > 0) return  1;
+		return 0;
+	}
+			
 	@Override
 	public String toString()
 	{
-		return Formatter("§(§llllll§..§uuuuuu§)§", "§").parse(this);
+		return Formatter().parse(this);
 	}
 	
 	@Override
