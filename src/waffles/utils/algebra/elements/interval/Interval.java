@@ -9,12 +9,13 @@ import waffles.utils.tools.primitives.Array;
  * 
  * @author Waffles
  * @since Apr 25, 2017
- * @version 1.0
+ * @version 1.1
  * 
  * 
+ * @see Formattable
  * @see Comparable
  */
-public class Interval implements Comparable<Interval>, Formattable<Interval>
+public class Interval implements Comparable<Interval>, Formattable
 {
 	private Cut min, max;
 		
