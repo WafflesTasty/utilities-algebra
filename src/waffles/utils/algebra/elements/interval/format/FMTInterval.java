@@ -2,6 +2,7 @@ package waffles.utils.algebra.elements.interval.format;
 
 import waffles.utils.algebra.elements.interval.Cut;
 import waffles.utils.algebra.elements.interval.Interval;
+import waffles.utils.lang.Format;
 import waffles.utils.lang.format.ChunkFormat;
 import waffles.utils.tools.primitives.Floats;
 import waffles.utils.tools.primitives.Integers;
@@ -41,7 +42,7 @@ public class FMTInterval extends ChunkFormat<Interval>
 	}
 	
 	@Override
-	public Chunk<Interval> create(String fmt)
+	public Format<Interval> create(String fmt)
 	{
 		if(fmt.equals("("))
 			return LowerCut();
@@ -56,7 +57,7 @@ public class FMTInterval extends ChunkFormat<Interval>
 	}
 
 		
-	Chunk<Interval> LowerVal(int size)
+	Format<Interval> LowerVal(int size)
 	{
 		return range ->
 		{
@@ -79,7 +80,7 @@ public class FMTInterval extends ChunkFormat<Interval>
 		};
 	}
 	
-	Chunk<Interval> UpperVal(int size)
+	Format<Interval> UpperVal(int size)
 	{
 		return range ->
 		{
@@ -102,7 +103,7 @@ public class FMTInterval extends ChunkFormat<Interval>
 		};
 	}
 	
-	Chunk<Interval> LowerCut()
+	Format<Interval> LowerCut()
 	{
 		return range ->
 		{	
@@ -114,7 +115,7 @@ public class FMTInterval extends ChunkFormat<Interval>
 		};
 	}
 	
-	Chunk<Interval> UpperCut()
+	Format<Interval> UpperCut()
 	{
 		return range ->
 		{	
