@@ -7,7 +7,7 @@ import waffles.utils.algebra.elements.Algebraic;
 import waffles.utils.algebra.elements.Linear;
 import waffles.utils.algebra.elements.complex.Complex;
 import waffles.utils.algebra.utilities.Evaluator;
-import waffles.utils.sets.keymaps.KeyPair;
+import waffles.utils.sets.keymaps.Pair;
 import waffles.utils.sets.keymaps.binary.BSMap;
 import waffles.utils.tools.patterns.semantics.Copyable;
 import waffles.utils.tools.primitives.Doubles;
@@ -204,7 +204,7 @@ public class Polynomial implements Copyable<Polynomial>, Evaluator<Double>, Line
 		Polynomial p = (Polynomial) a;
 		
 		Polynomial copy = copy();
-		for(KeyPair<Integer, Double> pair : p.values.Pairs())
+		for(Pair<Integer, Double> pair : p.values.Pairs())
 		{
 			int dOld = pair.Key();
 			double vOld = pair.Value();
@@ -237,12 +237,12 @@ public class Polynomial implements Copyable<Polynomial>, Evaluator<Double>, Line
 		Polynomial p = (Polynomial) a;
 		
 		Polynomial copy = instance();
-		for(KeyPair<Integer, Double> p1 : p.values.Pairs())
+		for(Pair<Integer, Double> p1 : p.values.Pairs())
 		{
 			int d1 = p1.Key();
 			double v1 = p1.Value();
 			
-			for(KeyPair<Integer, Double> p2 : values.Pairs())
+			for(Pair<Integer, Double> p2 : values.Pairs())
 			{
 				int d2 = p2.Key();
 				double v2 = p2.Value();
@@ -259,7 +259,7 @@ public class Polynomial implements Copyable<Polynomial>, Evaluator<Double>, Line
 	public Polynomial times(Double v)
 	{
 		Polynomial copy = copy();
-		for(KeyPair<Integer, Double> pair : values.Pairs())
+		for(Pair<Integer, Double> pair : values.Pairs())
 		{
 			int deg = pair.Key();
 			double val = pair.Value();
@@ -313,7 +313,7 @@ public class Polynomial implements Copyable<Polynomial>, Evaluator<Double>, Line
 	public Polynomial copy()
 	{
 		Polynomial copy = instance();
-		for(KeyPair<Integer, Double> pair : values.Pairs())
+		for(Pair<Integer, Double> pair : values.Pairs())
 		{
 			int deg = pair.Key();
 			double val = pair.Value();
