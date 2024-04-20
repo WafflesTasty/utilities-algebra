@@ -199,7 +199,7 @@ public class SLVTriangular implements LinearSolver, NullSpace
 	
 	@Override
 	public <M extends Matrix> M solve(M b)
-	{
+	{		
 		// Perform direct scaling on diagonal matrices.
 		if(mat.is(Diagonal.Type()))
 		{
@@ -216,6 +216,15 @@ public class SLVTriangular implements LinearSolver, NullSpace
 		if(mat.is(UpperTriangular.Type()))
 		{
 			return (M) backward(b);
+		}
+		
+		int rows = mat.Rows();
+		int cols = mat.Columns();
+		// Skip scalar matrices.
+		if(rows == 1 && cols == 1)
+		{
+			float val = mat.get(0, 0);
+			return (M) b.times(1f / val);
 		}
 		
 		return null;
