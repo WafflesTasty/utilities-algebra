@@ -11,7 +11,7 @@ import waffles.utils.tools.primitives.Floats;
  *
  * @author Waffles
  * @since 18 Aug 2023
- * @version 1.0
+ * @version 1.1
  *
  *
  * @see Distanced
