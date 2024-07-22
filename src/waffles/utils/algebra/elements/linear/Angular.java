@@ -47,7 +47,18 @@ public interface Angular extends Linear<Float>, Distanced, Normed
 		
 		return 2 * Floats.atan2(x, y);
 	}
-		
+	
+	/**
+	 * Returns the cosine with an object of a similar type.
+	 * 
+	 * @param a  an angular object
+	 * @return   a cosine
+	 */
+	public default float cosine(Angular a)
+	{
+		return dot(a) / (a.norm() * norm());
+	}
+	
 	/**
 	 * Returns a normalized object of the same angle.
 	 * 
