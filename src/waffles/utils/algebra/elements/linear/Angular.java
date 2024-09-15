@@ -56,7 +56,14 @@ public interface Angular extends Linear<Float>, Distanced, Normed
 	 */
 	public default float cosine(Angular a)
 	{
-		return dot(a) / (a.norm() * norm());
+		float nd = normSqr() * a.normSqr();
+		if(!Floats.isZero(nd, 9))
+		{
+			float cos = dot(a) / Floats.sqrt(nd);
+			return Floats.clamp(cos, -1f, 1f);
+		}
+		
+		return 0f;
 	}
 	
 	/**
