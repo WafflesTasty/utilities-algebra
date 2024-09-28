@@ -5,7 +5,7 @@ import waffles.utils.algebra.elements.interval.Interval;
 import waffles.utils.algebra.elements.interval.Intervals;
 import waffles.utils.algebra.elements.interval.format.FMTInterval;
 import waffles.utils.lang.enums.Extreme;
-import waffles.utils.sets.trees.binary.BSNode;
+import waffles.utils.sets.trees.binary.search.IONode;
 
 /**
  * A {@code DRNode} defines a single node in a disjoint range tree.
@@ -18,10 +18,10 @@ import waffles.utils.sets.trees.binary.BSNode;
  * @version 1.0
  * 
  * 
- * @see BSNode
+ * @see IONode
  * @see Cut
  */
-public class DRNode extends BSNode<Cut>
+public class DRNode extends IONode<Cut>
 {	
 	private Extreme extreme;
 	

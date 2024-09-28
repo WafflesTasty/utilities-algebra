@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 import waffles.utils.algebra.elements.interval.Cut;
 import waffles.utils.algebra.elements.interval.Interval;
+import waffles.utils.algebra.elements.interval.trees.DRNode;
 import waffles.utils.algebra.elements.interval.trees.DRTree;
-import waffles.utils.sets.trees.binary.BSNode;
 
 /**
  * A {@code DRIterator} iterates over the intervals of a {@code DRTree}.
@@ -20,7 +20,7 @@ import waffles.utils.sets.trees.binary.BSNode;
  */
 public class DRIterator implements Iterator<Interval>
 {
-	private Iterator<BSNode<Cut>> nodes;
+	private Iterator<DRNode> nodes;
 
 	/**
 	 * Creates a new {@code DRIterator}.
@@ -32,7 +32,8 @@ public class DRIterator implements Iterator<Interval>
 	 */
 	public DRIterator(DRTree tree)
 	{
-		nodes = tree.inorder().iterator();
+		Iterable<DRNode> order = tree.inorder();
+		nodes = order.iterator();
 	}
 
 	

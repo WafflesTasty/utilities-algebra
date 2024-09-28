@@ -4,8 +4,8 @@ import waffles.utils.algebra.elements.interval.Cut;
 import waffles.utils.algebra.elements.interval.Interval;
 import waffles.utils.algebra.utilities.iterators.DRIterator;
 import waffles.utils.lang.enums.Extreme;
-import waffles.utils.sets.trees.binary.BSNode;
-import waffles.utils.sets.trees.binary.BSTree;
+import waffles.utils.sets.trees.Nodal;
+import waffles.utils.sets.trees.binary.search.IOTree;
 
 /**
  * A {@code DRTree} defines a disjoint range tree.
@@ -17,10 +17,11 @@ import waffles.utils.sets.trees.binary.BSTree;
  * @version 1.0
  * 
  * 
- * @see BSTree
+ * @see IOTree
+ * @see DRNode
  * @see Cut
  */
-public class DRTree extends BSTree<Cut>
+public class DRTree extends IOTree<DRNode, Cut>
 {
 	/**
 	 * Deletes an interval from the {@code DRTree}.
@@ -54,8 +55,8 @@ public class DRTree extends BSTree<Cut>
 			// And the interval has no upper bound...
 			if(next == null)
 			{
-				// Clear the root.
-				setRoot(null);
+				// Clear the tree.
+				clear();
 				return;
 			}
 			
@@ -106,7 +107,7 @@ public class DRTree extends BSTree<Cut>
 				{
 					prev.setRChild(min);
 					min.setRChild(max);
-					onUpdate(this);
+					onInsert(min);
 					return;
 				}
 				
@@ -114,7 +115,7 @@ public class DRTree extends BSTree<Cut>
 				{
 					next.setLChild(max);
 					max.setLChild(min);
-					onUpdate(this);
+					onInsert(max);
 					return;
 				}
 				
@@ -192,7 +193,7 @@ public class DRTree extends BSTree<Cut>
 		// If the tree is empty...
 		if(Root() == null)
 		{
-			// Add the interval at the root.
+			// Add the interval at the root.			
 			min.setRChild(max);
 			setRoot(min);
 			return;
@@ -233,7 +234,7 @@ public class DRTree extends BSTree<Cut>
 				// Add the interval below the upper bound.
 				next.setLChild(min);
 				min.setRChild(max);
-				onUpdate(this);
+				onInsert(min);
 				return;
 			}
 			
@@ -262,7 +263,7 @@ public class DRTree extends BSTree<Cut>
 				// Add the interval above the lower bound.
 				prev.setRChild(max);
 				max.setLChild(min);
-				onUpdate(this);
+				onInsert(max);
 				return;
 			}
 			
@@ -328,7 +329,7 @@ public class DRTree extends BSTree<Cut>
 				{
 					prev.setRChild(min);
 					min.setRChild(max);
-					onUpdate(this);
+					onInsert(min);
 					return;
 				}
 				
@@ -336,7 +337,7 @@ public class DRTree extends BSTree<Cut>
 				{
 					next.setLChild(max);
 					max.setLChild(min);
-					onUpdate(this);
+					onInsert(max);
 					return;
 				}
 			}
@@ -576,6 +577,12 @@ public class DRTree extends BSTree<Cut>
 
 	
 	@Override
+	public DRNode Root()
+	{
+		return (DRNode) super.Root();
+	}
+	
+	@Override
 	public DRNode search(Cut cut)
 	{
 		return (DRNode) super.search(cut);
@@ -590,6 +597,18 @@ public class DRTree extends BSTree<Cut>
 	}
 	
 	@Override
+	public void setRoot(Nodal root)
+	{
+		// Fire the clear event,
+		// before firing the
+		// insert event.
+		
+		onClear();
+		super.setRoot(root);
+		onInsert((DRNode) root);
+	}
+	
+	@Override
 	public String toString()
 	{
 		if(Root() == null)
@@ -598,10 +617,11 @@ public class DRTree extends BSTree<Cut>
 		}
 		
 		String text = "";
-		for(BSNode<Cut> node : inorder())
+		Iterable<DRNode> order = inorder();
+		for(DRNode node : order)
 		{
 			text += node;
-			if(((DRNode) node).Extreme() == Extreme.MIN)
+			if(node.Extreme() == Extreme.MIN)
 			{
 				text += "..";
 			}
@@ -609,13 +629,7 @@ public class DRTree extends BSTree<Cut>
 		
 		return text;
 	}
-		
-	@Override
-	public DRNode Root()
-	{
-		return (DRNode) super.Root();
-	}
-	
+			
 	
 	void deleteBetween(DRNode min, DRNode max)
 	{
@@ -625,11 +639,15 @@ public class DRTree extends BSTree<Cut>
 		int dmax = max.Depth();
 
 		if(dmin < dmax)
+		{
 			max.setLChild(null);
+			onDelete(max);
+		}
 		else
+		{
 			min.setRChild(null);
-		
-		onUpdate(this);
+			onDelete(min);
+		}
 	}
 
 	void mergeBetween(DRNode min, DRNode max)
@@ -687,14 +705,14 @@ public class DRTree extends BSTree<Cut>
 	{
 		min.setRChild(null);
 		mergeAbove(min);
-		onUpdate(this);
+		onDelete(min);
 	}
 	
 	void deleteBelow(DRNode max)
 	{
 		max.setLChild(null);
 		mergeBelow(max);
-		onUpdate(this);
+		onDelete(max);
 	}
 	
 	
