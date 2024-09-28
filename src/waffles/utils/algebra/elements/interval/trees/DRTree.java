@@ -24,159 +24,14 @@ import waffles.utils.sets.trees.binary.search.IOTree;
 public class DRTree extends IOTree<DRNode, Cut>
 {
 	/**
-	 * Deletes an interval from the {@code DRTree}.
+	 * Adds an interval to the {@code DRTree}.
 	 * 
-	 * @param ival  an interval to delete
+	 * @param ival  an interval
 	 * 
 	 * 
 	 * @see Interval
 	 */
-	public void delete(Interval ival)
-	{
-		// If the interval is invalid, or the tree is empty...
-		if(ival == null || Root() == null)
-		{
-			// Do nothing.
-			return;
-		}
-		
-		
-		// Create nodes for the interval.
-		DRNode min = createNode(ival.Minimum(), Extreme.MAX);
-		DRNode max = createNode(ival.Maximum(), Extreme.MIN);
-	
-		// Find the surrounding nodes in the tree.
-		DRNode prev = strictLowerBound(ival.Minimum());
-		DRNode next = strictUpperBound(ival.Maximum());
-
-		// If the interval has no lower bound...
-		if(prev == null)
-		{
-			// And the interval has no upper bound...
-			if(next == null)
-			{
-				// Clear the tree.
-				clear();
-				return;
-			}
-			
-			// Delete below the upper bound.
-			deleteBelow(next);
-
-			// If the upper bound is a maximum...
-			if(next.Extreme() == Extreme.MAX)
-			{				
-				// Add the maximum node before the upper bound.
-				next.setLChild(max);
-				onInsert(max);
-			}
-
-			return;
-		}
-		
-		
-		// If the interval has no upper bound...
-		if(next == null)
-		{
-			// Delete above the lower bound.
-			deleteAbove(prev);
-
-			// If the lower bound is a minimum...
-			if(prev.Extreme() == Extreme.MIN)
-			{
-				// Add the minimum node after the lower bound.
-				prev.setRChild(min);
-				onInsert(min);
-			}
-			
-			return;
-		}
-		
-		
-		// Otherwise, delete between the bounds.
-		deleteBetween(prev, next);
-
-		// If the lower bound is a minimum...
-		if(prev.Extreme() == Extreme.MIN)
-		{
-			// And the upper bound is a maximum...
-			if(next.Extreme() == Extreme.MAX)
-			{
-				// Add the interval nodes between the bounds.
-				if(prev.RChild() == null)
-				{
-					prev.setRChild(min);
-					min.setRChild(max);
-					onInsert(min);
-					return;
-				}
-				
-				if(next.LChild() == null)
-				{
-					next.setLChild(max);
-					max.setLChild(min);
-					onInsert(max);
-					return;
-				}
-				
-				return;
-			}
-			
-			// And the upper bound is a minimum...
-			if(next.Extreme() == Extreme.MIN)
-			{
-				// Add the minimum node between the bounds.
-				if(prev.RChild() == null)
-				{
-					prev.setRChild(min);
-					onInsert(min);
-					return;
-				}
-				
-				if(next.LChild() == null)
-				{
-					next.setLChild(min);
-					onInsert(min);
-					return;
-				}
-			}
-			
-			return;
-		}
-
-		// If the lower bound is a maximum...
-		if(prev.Extreme() == Extreme.MAX)
-		{
-			// And the upper bound is a maximum...
-			if(next.Extreme() == Extreme.MAX)
-			{		
-				// Add the maximum node between the bounds.
-				if(prev.RChild() == null)
-				{
-					prev.setRChild(max);
-					onInsert(max);
-					return;
-				}
-				
-				if(next.LChild() == null)
-				{
-					next.setLChild(max);
-					onInsert(max);
-					return;
-				}
-			}
-			
-			return;
-		}
-	}
-	
-	/**
-	 * Inserts an interval into the {@code DRTree}.
-	 * 
-	 * @param ival  an interval to insert
-	 * @see Interval
-	 */
-	public void insert(Interval ival)
+	public void add(Interval ival)
 	{
 		// If the interval is invalid, or empty...
 		if(ival == null || ival.isEmpty())
@@ -346,6 +201,153 @@ public class DRTree extends IOTree<DRNode, Cut>
 		}
 	}
 	
+	/**
+	 * Removes an interval from the {@code DRTree}.
+	 * 
+	 * @param ival  an interval
+	 * 
+	 * 
+	 * @see Interval
+	 */
+	public void remove(Interval ival)
+	{
+		// If the interval is invalid, or the tree is empty...
+		if(ival == null || Root() == null)
+		{
+			// Do nothing.
+			return;
+		}
+		
+		
+		// Create nodes for the interval.
+		DRNode min = createNode(ival.Minimum(), Extreme.MAX);
+		DRNode max = createNode(ival.Maximum(), Extreme.MIN);
+	
+		// Find the surrounding nodes in the tree.
+		DRNode prev = strictLowerBound(ival.Minimum());
+		DRNode next = strictUpperBound(ival.Maximum());
+
+		// If the interval has no lower bound...
+		if(prev == null)
+		{
+			// And the interval has no upper bound...
+			if(next == null)
+			{
+				// Clear the tree.
+				clear();
+				return;
+			}
+			
+			// Delete below the upper bound.
+			deleteBelow(next);
+
+			// If the upper bound is a maximum...
+			if(next.Extreme() == Extreme.MAX)
+			{				
+				// Add the maximum node before the upper bound.
+				next.setLChild(max);
+				onInsert(max);
+			}
+
+			return;
+		}
+		
+		
+		// If the interval has no upper bound...
+		if(next == null)
+		{
+			// Delete above the lower bound.
+			deleteAbove(prev);
+
+			// If the lower bound is a minimum...
+			if(prev.Extreme() == Extreme.MIN)
+			{
+				// Add the minimum node after the lower bound.
+				prev.setRChild(min);
+				onInsert(min);
+			}
+			
+			return;
+		}
+		
+		
+		// Otherwise, delete between the bounds.
+		deleteBetween(prev, next);
+
+		// If the lower bound is a minimum...
+		if(prev.Extreme() == Extreme.MIN)
+		{
+			// And the upper bound is a maximum...
+			if(next.Extreme() == Extreme.MAX)
+			{
+				// Add the interval nodes between the bounds.
+				if(prev.RChild() == null)
+				{
+					prev.setRChild(min);
+					min.setRChild(max);
+					onInsert(min);
+					return;
+				}
+				
+				if(next.LChild() == null)
+				{
+					next.setLChild(max);
+					max.setLChild(min);
+					onInsert(max);
+					return;
+				}
+				
+				return;
+			}
+			
+			// And the upper bound is a minimum...
+			if(next.Extreme() == Extreme.MIN)
+			{
+				// Add the minimum node between the bounds.
+				if(prev.RChild() == null)
+				{
+					prev.setRChild(min);
+					onInsert(min);
+					return;
+				}
+				
+				if(next.LChild() == null)
+				{
+					next.setLChild(min);
+					onInsert(min);
+					return;
+				}
+			}
+			
+			return;
+		}
+
+		// If the lower bound is a maximum...
+		if(prev.Extreme() == Extreme.MAX)
+		{
+			// And the upper bound is a maximum...
+			if(next.Extreme() == Extreme.MAX)
+			{		
+				// Add the maximum node between the bounds.
+				if(prev.RChild() == null)
+				{
+					prev.setRChild(max);
+					onInsert(max);
+					return;
+				}
+				
+				if(next.LChild() == null)
+				{
+					next.setLChild(max);
+					onInsert(max);
+					return;
+				}
+			}
+			
+			return;
+		}
+	}
+		
 	
 	/**
 	 * Returns the intervals in the {@code DRTree}.

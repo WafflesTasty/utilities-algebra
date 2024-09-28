@@ -22,25 +22,25 @@ import waffles.utils.tools.primitives.Floats;
 public class DATree extends DRTree
 {	
 	@Override
-	public void delete(Interval ival)
+	public void add(Interval ival)
 	{
 		Interval[] ranges = Intervals.toRadians(ival);
 		for(Interval range : ranges)
 		{
-			super.delete(range);
+			super.add(range);
 		}
 	}
 	
 	@Override
-	public void insert(Interval ival)
+	public void remove(Interval ival)
 	{
 		Interval[] ranges = Intervals.toRadians(ival);
 		for(Interval range : ranges)
 		{
-			super.insert(range);
+			super.remove(range);
 		}
 	}
-	
+		
 	
 	@Override
 	public DANode createNode(Object... vals)
