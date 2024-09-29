@@ -4,7 +4,6 @@ import waffles.utils.algebra.elements.interval.Cut;
 import waffles.utils.algebra.elements.interval.Interval;
 import waffles.utils.algebra.utilities.iterators.DRIterator;
 import waffles.utils.lang.enums.Extreme;
-import waffles.utils.sets.trees.Nodal;
 import waffles.utils.sets.trees.binary.search.IOTree;
 
 /**
@@ -597,19 +596,7 @@ public class DRTree extends IOTree<DRNode, Cut>
 		Extreme ex = (Extreme) vals[1];
 		return new DRNode(this, cut, ex);
 	}
-	
-	@Override
-	public void setRoot(Nodal root)
-	{
-		// Fire the clear event,
-		// before firing the
-		// insert event.
-		
-		onClear();
-		super.setRoot(root);
-		onInsert((DRNode) root);
-	}
-	
+
 	@Override
 	public String toString()
 	{
