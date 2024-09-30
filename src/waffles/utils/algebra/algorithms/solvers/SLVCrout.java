@@ -202,11 +202,8 @@ public class SLVCrout implements FCTTriangular, LinearSolver, NullSpace
 		}
 		
 		// Finalize the determinant.
-		if(Square.Type().allows(mat, 0))
-		{
-			det = (float) dVal;
-			canInvert = true;
-		}
+		canInvert = !Doubles.isZero(dVal, 9);
+		det = (float) dVal;
 	}
 
 	private void croutLess()
