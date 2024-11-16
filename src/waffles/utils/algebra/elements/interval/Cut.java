@@ -1,5 +1,6 @@
 package waffles.utils.algebra.elements.interval;
 
+import waffles.utils.algebra.Partition;
 import waffles.utils.tools.primitives.Booleans;
 import waffles.utils.tools.primitives.Floats;
 
@@ -15,19 +16,20 @@ import waffles.utils.tools.primitives.Floats;
  * 
  * 
  * @see Comparable
+ * @see Partition
  */
-public abstract class Cut implements Comparable<Cut>
+public abstract class Cut implements Comparable<Cut>, Partition
 {
 	private float value;
 	
 	/**
 	 * Creates a new {@code Cut}.
 	 * 
-	 * @param value  a cut value
+	 * @param val  a cut value
 	 */
-	public Cut(float value)
+	public Cut(float val)
 	{
-		this.value = value;
+		value = val;
 	}
 
 	/**
@@ -86,34 +88,8 @@ public abstract class Cut implements Comparable<Cut>
 	{
 		return value;
 	}
-	
-		
-	/**
-	 * Checks if the {@code Cut} is above a value.
-	 * 
-	 * @param v  a real value
-	 * @return  {@code true} if the cut is above
-	 */
-	public abstract boolean isAbove(float v);
-	
-	/**
-	 * Checks if the {@code Cut} is below a value.
-	 * 
-	 * @param v  a real value
-	 * @return  {@code true} if the cut is below
-	 */
-	public abstract boolean isBelow(float v);
-		
-	/**
-	 * Compares the {@code Cut} to a value.
-	 * 
-	 * @param val  a value to compare
-	 * @return  a comparative integer
-	 */
-	public abstract int compareTo(float val);
-	
-	
-	
+
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -128,12 +104,12 @@ public abstract class Cut implements Comparable<Cut>
 	@Override
 	public int compareTo(Cut o)
 	{
-		return compareTo(o.value);
+		return compareTo(o.value());
 	}
 	
 	@Override
 	public int hashCode()
 	{
-		return 347 * Floats.hashCode(value) + 331 * Booleans.hashCode(isAbove(value));
+		return 347 * Floats.hashCode(value()) + 331 * Booleans.hashCode(isAbove(value()));
 	}
 }

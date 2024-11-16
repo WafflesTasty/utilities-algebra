@@ -1,6 +1,5 @@
 package waffles.utils.algebra.elements.linear.matrix;
 
-import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.linear.Affine;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
@@ -8,6 +7,7 @@ import waffles.utils.algebra.elements.linear.tensor.Tensors;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.Vector;
 import waffles.utils.algebra.elements.linear.vector.Vectors;
+import waffles.utils.algebra.utilities.elements.Additive;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**
@@ -23,7 +23,7 @@ import waffles.utils.tools.patterns.operator.Operation;
  * @see Tensor
  */
 public class Matrix extends Tensor implements Affine
-{	
+{		
 	/**
 	 * Creates a new {@code Matrix}.
 	 * 

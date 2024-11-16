@@ -1,10 +1,10 @@
 package waffles.utils.algebra.elements.linear.tensor;
 
-import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.linear.Angular;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorArray;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
+import waffles.utils.algebra.utilities.elements.Additive;
 import waffles.utils.sets.DimensionalSet;
 import waffles.utils.tools.patterns.operator.Operable;
 import waffles.utils.tools.patterns.operator.Operation;
@@ -31,7 +31,7 @@ import waffles.utils.tools.primitives.Floats;
  * @see Tensor
  */
 public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>, Inaccurate<Tensor>, Operable<Tensor>, Persistible<TensorData>
-{	
+{		
 	private TensorData data;
 	private TensorOps operator;
 	private boolean isDestructible;

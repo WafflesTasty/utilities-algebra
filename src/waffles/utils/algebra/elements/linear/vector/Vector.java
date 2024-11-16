@@ -1,11 +1,11 @@
 package waffles.utils.algebra.elements.linear.vector;
 
-import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.TensorOps;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
+import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
  * The {@code Vector} class defines an algebraic vector using the standard dot product.

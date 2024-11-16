@@ -25,19 +25,6 @@ public class AboveAll extends Cut
 
 
 	@Override
-	public boolean isAbove(float v)
-	{
-		return true;
-	}
-	
-	@Override
-	public boolean isBelow(float v)
-	{
-		return false;
-	}
-	
-	
-	@Override
 	public int compareTo(float val)
 	{
 		if(Floats.isFinite(val))

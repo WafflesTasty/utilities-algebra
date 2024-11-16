@@ -23,25 +23,12 @@ public class BelowValue extends Cut
 	{
 		super(value);
 	}
-	
 
-	@Override
-	public boolean isAbove(float v)
-	{
-		return v < value();
-	}
-	
-	@Override
-	public boolean isBelow(float v)
-	{
-		return v >= value();
-	}
-	
-	
+
 	@Override
 	public int compareTo(float val)
 	{
-		if(isAbove(val))
+		if(val < value())
 			return 1;
 		return -1;
 	}

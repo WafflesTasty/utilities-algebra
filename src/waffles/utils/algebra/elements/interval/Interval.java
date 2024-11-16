@@ -1,5 +1,6 @@
 package waffles.utils.algebra.elements.interval;
 
+import waffles.utils.algebra.Partition;
 import waffles.utils.algebra.elements.interval.format.FMTInterval;
 import waffles.utils.lang.Formattable;
 import waffles.utils.tools.primitives.Array;
@@ -14,9 +15,13 @@ import waffles.utils.tools.primitives.Array;
  * 
  * @see Formattable
  * @see Comparable
+ * @see Partition
  */
-public class Interval implements Comparable<Interval>, Formattable
+public class Interval implements Comparable<Interval>, Formattable, Partition
 {
+	// Partition
+	
+	
 	private Cut min, max;
 		
 	/**
@@ -166,23 +171,7 @@ public class Interval implements Comparable<Interval>, Formattable
 	{
 		return compareTo(val) == 0;
 	}
-	
-	/**
-	 * Compares a value relative to the {@code Interval}.
-	 * If -1, the value is higher than the range;
-	 * if 1, the value is lower than the range;
-	 * otherwise, the value is contained.
-	 * 
-	 * @param val  interval
-	 * @return  a comparison value
-	 */
-	public int compareTo(float val)
-	{
-		if(min.isAbove(val)) return  1;
-		if(max.isBelow(val)) return -1;
-		return 0;
-	}
-	
+
 	/**
 	 * Checks if the {@code Interval} is a singleton.
 	 * 
@@ -250,12 +239,6 @@ public class Interval implements Comparable<Interval>, Formattable
 		return max;
 	}
 	
-
-	@Override
-	public FMTInterval Formatter()
-	{
-		return new FMTInterval("§(§llllll§..§uuuuuu§)§", "§");
-	}
 	
 	@Override
 	public boolean equals(Object o)
@@ -276,7 +259,21 @@ public class Interval implements Comparable<Interval>, Formattable
 		if(min.compareTo(r.max) > 0) return  1;
 		return 0;
 	}
-			
+
+	@Override
+	public int compareTo(float val)
+	{
+		if(min.isAbove(val)) return  1;
+		if(max.isBelow(val)) return -1;
+		return 0;
+	}
+
+	@Override
+	public FMTInterval Formatter()
+	{
+		return new FMTInterval("§(§llllll§..§uuuuuu§)§", "§");
+	}
+	
 	@Override
 	public String toString()
 	{

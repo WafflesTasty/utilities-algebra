@@ -1,10 +1,10 @@
 package waffles.utils.algebra.elements.linear.vector.fixed;
 
-import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.Vector;
+import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
  * A {@code Vector3} defines a {@code Vector} in four dimensions.

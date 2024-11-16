@@ -1,11 +1,11 @@
 package waffles.utils.algebra.elements.linear.matrix.fixed;
 
-import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 import waffles.utils.algebra.elements.linear.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.fixed.Vector2;
+import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
  * A {@code Matrix2x2} defines a 2x2-dimensional {@code Matrix}.

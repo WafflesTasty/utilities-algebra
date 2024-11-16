@@ -2,8 +2,8 @@ package waffles.utils.algebra.elements.linear;
 
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.Linear;
-import waffles.utils.algebra.utilities.Distanced;
-import waffles.utils.algebra.utilities.Normed;
+import waffles.utils.algebra.utilities.measures.Distanced;
+import waffles.utils.algebra.utilities.measures.Normed;
 import waffles.utils.tools.primitives.Floats;
 
 /**

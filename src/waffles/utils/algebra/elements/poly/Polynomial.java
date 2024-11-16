@@ -1,12 +1,12 @@
 package waffles.utils.algebra.elements.poly;
 
-import waffles.utils.algebra.Additive;
 import waffles.utils.algebra.algorithms.polynomial.RootFinder;
 import waffles.utils.algebra.elements.Abelian;
 import waffles.utils.algebra.elements.Algebraic;
 import waffles.utils.algebra.elements.Linear;
 import waffles.utils.algebra.elements.complex.Complex;
-import waffles.utils.algebra.utilities.Evaluator;
+import waffles.utils.algebra.utilities.elements.Additive;
+import waffles.utils.algebra.utilities.measures.Evaluator;
 import waffles.utils.sets.keymaps.Pair;
 import waffles.utils.sets.keymaps.binary.BSMap;
 import waffles.utils.tools.patterns.semantics.Copyable;

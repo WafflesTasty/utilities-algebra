@@ -1,6 +1,6 @@
 package waffles.utils.algebra.elements;
 
-import waffles.utils.algebra.Additive;
+import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
  * An {@code Abelian} object is additive, and also defines an inverse subtraction operation.

@@ -1,4 +1,4 @@
-package waffles.utils.algebra.utilities;
+package waffles.utils.algebra.utilities.measures;
 
 /**
  * An {@code Evaluator} is capable of evaluating a value and returning a result.

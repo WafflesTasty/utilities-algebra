@@ -1,4 +1,4 @@
-package waffles.utils.algebra.utilities;
+package waffles.utils.algebra.utilities.matrix;
 
 import waffles.utils.algebra.elements.linear.matrix.Matrix;
 import waffles.utils.algebra.elements.linear.vector.Vector;

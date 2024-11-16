@@ -1,4 +1,4 @@
-package waffles.utils.algebra;
+package waffles.utils.algebra.utilities.elements;
 
 /**
  * An {@code Additive} object defines an additive operation with objects of similar types.

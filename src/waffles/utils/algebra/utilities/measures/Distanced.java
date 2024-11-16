@@ -1,4 +1,4 @@
-package waffles.utils.algebra.utilities;
+package waffles.utils.algebra.utilities.measures;
 
 import waffles.utils.tools.primitives.Floats;
 
