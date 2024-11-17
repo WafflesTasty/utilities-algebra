@@ -33,7 +33,7 @@ public abstract class Cut implements Comparable<Cut>, Partition
 	}
 
 	/**
-	 * Returns a multiple of the {@Cut}.
+	 * Multiplies a value to this {@Cut}.
 	 * If the given value is negative, the
 	 * cut will switch its bound beween
 	 * above and below.
@@ -48,6 +48,17 @@ public abstract class Cut implements Comparable<Cut>, Partition
 			 ? Cuts.Above(value * mul)
 			 : Cuts.Below(value * mul);
 	}
+	
+	/**
+	 * Subtracts from this {@code Cut}.
+	 * 
+	 * @param val  a real value
+	 * @return     a subtracted cut
+	 */
+	public Cut minus(float val)
+	{
+		return plus(-val);
+	}	
 	
 	/**
 	 * Returns a sum of the {@code Cut}.
