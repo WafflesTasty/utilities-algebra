@@ -160,17 +160,6 @@ public class Interval implements Comparable<Interval>, Formattable, Partition
 		return min.compareTo(range.min) <= 0
 			&& max.compareTo(range.max) >= 0;
 	}
-	
-	/**
-	 * Checks if the {@code Interval} contains a value.
-	 * 
-	 * @param val  a real value
-	 * @return  {@code true} if the value is contained
-	 */
-	public boolean contains(float val)
-	{
-		return compareTo(val) == 0;
-	}
 
 	/**
 	 * Checks if the {@code Interval} is a singleton.

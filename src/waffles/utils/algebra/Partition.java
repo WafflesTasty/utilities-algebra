@@ -33,6 +33,17 @@ public interface Partition
 	}
 
 	/**
+	 * Checks if the {@code Partition} contains a value.
+	 * 
+	 * @param val  a real value
+	 * @return  {@code true} if the partition contains
+	 */
+	public default boolean contains(float val)
+	{
+		return compareTo(val) == 0;
+	}
+	
+	/**
 	 * Compares the {@code Partition} to a value.
 	 * This should return -1, 0, or +1, as the partition
 	 * is below, around, or above the given value.
