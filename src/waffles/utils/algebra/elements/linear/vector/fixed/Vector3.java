@@ -187,7 +187,13 @@ public class Vector3 extends Vector
 	{
 		return get(2);
 	}
-		
+	
+	
+	@Override
+	public Vector3 absolute()
+	{
+		return (Vector3) super.absolute();
+	}
 	
 	@Override
 	public Vector3 plus(Additive a)

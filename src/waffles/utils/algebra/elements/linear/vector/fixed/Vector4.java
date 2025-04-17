@@ -168,6 +168,12 @@ public class Vector4 extends Vector
 
 
 	@Override
+	public Vector4 absolute()
+	{
+		return (Vector4) super.absolute();
+	}
+	
+	@Override
 	public Vector4 plus(Additive a)
 	{
 		return (Vector4) super.plus(a);

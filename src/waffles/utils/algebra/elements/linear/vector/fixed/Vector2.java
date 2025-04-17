@@ -139,6 +139,12 @@ public class Vector2 extends Vector
 		return get(1);
 	}
 
+	
+	@Override
+	public Vector2 absolute()
+	{
+		return (Vector2) super.absolute();
+	}
 
 	@Override
 	public Vector2 plus(Additive a)
