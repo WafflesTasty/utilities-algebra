@@ -1,13 +1,12 @@
-package waffles.utils.algebra.elements.linear.tensor.ops;
+package waffles.utils.alg.linear.measure.tensor.ops.angular;
 
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
-import waffles.utils.algebra.elements.linear.tensor.Tensors;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**
- * A {@code TensorAddition} computes the sum of two tensors the naive way.
- * The first given {@code Tensor} will be the one used for the iterative step, which
- * means the cost is given by its value count during iteration.
+ * A {@code TensorAddition} computes a sum {@code Tensor} the naive way.
+ * The first given {@code Tensor} will be used for the iterative step,
+ * which means its cost is determined by its non-zero value count.
  *
  * @author Waffles
  * @since Jul 13, 2018
@@ -24,8 +23,8 @@ public class TensorAddition implements Operation<Tensor>
 	/**
 	 * Creates a new {@code TensorAddition}.
 	 * 
-	 * @param t1  the  first tensor to add
-	 * @param t2  the second tensor to add
+	 * @param t1  a  first tensor to add
+	 * @param t2  a second tensor to add
 	 * 
 	 * 
 	 * @see Tensor
@@ -40,13 +39,13 @@ public class TensorAddition implements Operation<Tensor>
 	@Override
 	public Tensor result()
 	{
-		Tensor t3 = Tensors.create(t1.Dimensions());
-		for(int[] coord : t1.Data().Keys())
+		Tensor t3 = t1.copy();
+		for(int[] crd : t2.Data().NZKeys())
 		{
-			float v1 = t1.get(coord);
-			float v2 = t2.get(coord);
+			float v1 = t1.get(crd);
+			float v2 = t2.get(crd);
 			
-			t3.set(v1 + v2, coord);
+			t3.set(v1 + v2, crd);
 		}
 		
 		return t3;

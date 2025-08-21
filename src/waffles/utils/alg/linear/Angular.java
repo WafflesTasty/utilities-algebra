@@ -1,38 +1,41 @@
-package waffles.utils.algebra.elements.linear;
+package waffles.utils.alg.linear;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.Linear;
-import waffles.utils.algebra.utilities.measures.Distanced;
-import waffles.utils.algebra.utilities.measures.Normed;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.linear.measure.Distanced;
+import waffles.utils.alg.linear.measure.Normed;
+import waffles.utils.tools.primitives.Array;
 import waffles.utils.tools.primitives.Floats;
 
 /**
- * An {@code Angular} object exists in an inner product space and can compute angles with objects of similar type.
+ * An {@code Angular} exists in an inner product space.
+ * It can compute angles with objects of similar type.
  *
  * @author Waffles
  * @since 18 Aug 2023
  * @version 1.1
  *
  *
+ * @see Normed
  * @see Distanced
  * @see Linear
- * @see Normed
  */
 public interface Angular extends Linear<Float>, Distanced, Normed
 {	
 	/**
-	 * Returns the dot product with an object of a similar type.
+	 * Returns the dot with an {@code Angular}.
 	 * 
-	 * @param a  an angular object
+	 * @param a  an angular
 	 * @return   a dot product
 	 */
 	public abstract float dot(Angular a);
 
 	/**
-	 * Returns the angle with an object of a similar type.
+	 * Returns the angle with an {@code Angular}.
+	 * This angle is computed through a particular
+	 * algorithm for accuracy purposes.
 	 * 
-	 * @param a  an angular object
-	 * @return   an object angle
+	 * @param a  an angular
+	 * @return   an angle
 	 * 
 	 * 
 	 * @see <a href="https://people.eecs.berkeley.edu/~wkahan/Mindless.pdf">Prof. W. Kahan - Mindless Assessments of Roundoff in Floating-Point Computation</a>
@@ -49,17 +52,24 @@ public interface Angular extends Linear<Float>, Distanced, Normed
 	}
 	
 	/**
-	 * Returns the cosine with an object of a similar type.
+	 * Returns the cosine with an {@code Angular}.
 	 * 
-	 * @param a  an angular object
+	 * @param a  an angular
 	 * @return   a cosine
 	 */
 	public default float cosine(Angular a)
 	{
-		float nd = normSqr() * a.normSqr();
-		if(!Floats.isZero(nd, 9))
+		float n1 =   normSqr();
+		float n2 = a.normSqr();
+		
+		int p1 = Array.product.of(  Dimensions());
+		int p2 = Array.product.of(a.Dimensions());
+		
+		
+		float cos = n1 * n2;
+		if(!Floats.isZero(cos, p1 * p2))
 		{
-			float cos = dot(a) / Floats.sqrt(nd);
+			cos = dot(a) / Floats.sqrt(cos);
 			return Floats.clamp(cos, -1f, 1f);
 		}
 		
@@ -67,9 +77,9 @@ public interface Angular extends Linear<Float>, Distanced, Normed
 	}
 	
 	/**
-	 * Returns a normalized object of the same angle.
+	 * Returns a normalized {@code Angular}.
 	 * 
-	 * @return  a normalized object
+	 * @return  an normal angular
 	 */
 	public default Angular normalize()
 	{
@@ -80,8 +90,7 @@ public interface Angular extends Linear<Float>, Distanced, Normed
 	@Override
 	public default Angular minus(Abelian a)
 	{
-		Linear<Float> min = ((Angular) a).times(-1f);
-		return (Angular) plus(min);
+		return (Angular) plus(((Angular) a).times(-1f));
 	}
 
 	@Override

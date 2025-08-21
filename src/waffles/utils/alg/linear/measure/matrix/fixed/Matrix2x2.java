@@ -1,11 +1,11 @@
-package waffles.utils.algebra.elements.linear.matrix.fixed;
+package waffles.utils.alg.linear.measure.matrix.fixed;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.linear.matrix.Matrix;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.vector.fixed.Vector2;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
-import waffles.utils.algebra.elements.linear.vector.fixed.Vector2;
-import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
  * A {@code Matrix2x2} defines a 2x2-dimensional {@code Matrix}.
@@ -30,7 +30,7 @@ public class Matrix2x2 extends Matrix
 	/**
 	 * Creates a new {@code Matrix2x2}.
 	 * 
-	 * @param d  a data object
+	 * @param d  a data source
 	 * 
 	 * 
 	 * @see TensorData
@@ -40,12 +40,12 @@ public class Matrix2x2 extends Matrix
 		super(d);
 	}
 	
-		
+	
 	/**
-	 * Computes the product with a {@code Matrix2x2}.
+	 * Computes a {@code Matrix2x2} product.
 	 * 
-	 * @param m  a matrix to multiply
-	 * @return   a matrix product
+	 * @param m  a matrix
+	 * @return   a product
 	 */
 	public Matrix2x2 times(Matrix2x2 m)
 	{
@@ -53,10 +53,10 @@ public class Matrix2x2 extends Matrix
 	}
 	
 	/**
-	 * Computes the product with a {@code Vector2}.
+	 * Computes a {@code Matrix2x2} product.
 	 * 
-	 * @param v  a vector to multiply
-	 * @return   a vector product
+	 * @param v  a vector
+	 * @return   a product
 	 * 
 	 * 
 	 * @see Vector2
@@ -68,15 +68,15 @@ public class Matrix2x2 extends Matrix
 	
 	
 	@Override
-	public Vector2 Row(int i)
+	public Matrix2x2 Span()
 	{
-		return (Vector2) super.Row(i);
+		return (Matrix2x2) super.Span();
 	}
-	
+
 	@Override
-	public Vector2 Column(int j)
+	public Matrix2x2 absolute()
 	{
-		return (Vector2) super.Column(j);
+		return (Matrix2x2) super.absolute();
 	}
 	
 	@Override
@@ -86,11 +86,18 @@ public class Matrix2x2 extends Matrix
 	}
 	
 	@Override
-	public Matrix2x2 plus(Additive a)
+	public Vector2 Column(int c)
 	{
-		return (Matrix2x2) super.plus(a);
+		return (Vector2) super.Column(c);
 	}
 	
+	@Override
+	public Vector2 Row(int r)
+	{
+		return (Vector2) super.Row(r);
+	}
+
+		
 	@Override
 	public Matrix2x2 minus(Abelian a)
 	{
@@ -98,9 +105,15 @@ public class Matrix2x2 extends Matrix
 	}
 	
 	@Override
-	public Matrix2x2 ltimes(Tensor t)
+	public Matrix2x2 hadamard(Tensor t)
 	{
-		return (Matrix2x2) super.ltimes(t);
+		return (Matrix2x2) super.hadamard(t);
+	}
+	
+	@Override
+	public Matrix2x2 plus(Additive a)
+	{
+		return (Matrix2x2) super.plus(a);
 	}
 	
 	@Override
@@ -114,7 +127,7 @@ public class Matrix2x2 extends Matrix
 	{
 		return (Matrix2x2) super.normalize();
 	}
-			
+				
 	@Override
 	public Matrix2x2 destroy()
 	{

@@ -1,9 +1,7 @@
-package waffles.utils.algebra.elements;
-
-import waffles.utils.algebra.utilities.elements.Additive;
+package waffles.utils.alg;
 
 /**
- * An {@code Abelian} object is additive, and also defines an inverse subtraction operation.
+ * An {@code Abelian} is {@code Additive} and defines an inverse subtraction.
  *
  * @author Waffles
  * @since 30 Aug 2023
@@ -17,8 +15,8 @@ public interface Abelian extends Additive
 	/**
 	 * Substracts an abelian from this {@code Abelian}.
 	 * 
-	 * @param a  an abelian object
-	 * @return   a subtracted abelian
+	 * @param a  an abelian
+	 * @return   a subtraction
 	 */
 	public abstract Abelian minus(Abelian a);
 }

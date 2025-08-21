@@ -1,7 +1,7 @@
-package waffles.utils.algebra.utilities.measures;
+package waffles.utils.alg.linear.measure;
 
 /**
- * An {@code Evaluator} is capable of evaluating a value and returning a result.
+ * An {@code Evaluator} can evaluate a value and return a result.
  *
  * @author Waffles
  * @since 30 Aug 2023

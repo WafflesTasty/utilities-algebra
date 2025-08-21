@@ -1,18 +1,18 @@
-package waffles.utils.algebra.elements.linear.matrix;
+package waffles.utils.alg.linear.measure.matrix;
 
-import waffles.utils.algebra.elements.Abelian;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.Affine;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.algebra.elements.linear.matrix.MatrixOps;
 import waffles.utils.algebra.elements.linear.tensor.Tensors;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.Vector;
 import waffles.utils.algebra.elements.linear.vector.Vectors;
-import waffles.utils.algebra.utilities.elements.Additive;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**
- * The {@code Matrix} class defines a floating-point matrix derived from a {@code Tensor}.
- * The basic matrix operations are all delegated to a {@code MatrixOps} object.
+ * A {@code Matrix} is defined as a second order {@code Tensor}.
  * 
  * @author Waffles
  * @since Mar 16, 2016
@@ -40,17 +40,17 @@ public class Matrix extends Tensor implements Affine
 	/**
 	 * Creates a new {@code Matrix}.
 	 * 
-	 * @param rows  a row count
-	 * @param cols  a column count
+	 * @param r  a row count
+	 * @param c  a column count
 	 */
-	public Matrix(int rows, int cols)
+	public Matrix(int r, int c)
 	{
-		super(rows, cols); setOperator(MatrixOps.Type());
+		super(r, c); setOperator(MatrixOps.Type());
 	}
-
+	
 	
 	/**
-	 * Returns an absolute valued {@code Matrix}.
+	 * Returns an absolute {@code Matrix}.
 	 * 
 	 * @return  an absolute matrix
 	 */
@@ -60,7 +60,7 @@ public class Matrix extends Tensor implements Affine
 	}
 	
 	/**
-	 * Returns the transpose of the {@code Matrix}.
+	 * Returns a transpose {@code Matrix}.
 	 * 
 	 * @return  the matrix transpose
 	 */
@@ -69,8 +69,9 @@ public class Matrix extends Tensor implements Affine
 		return Operator().Transpose().result();
 	}
 	
+	
 	/**
-	 * Returns a vector product of the {@code Matrix}.
+	 * Returns a {@code Matrix} product.
 	 * 
 	 * @param v  a vector to multiply
 	 * @return   a matrix product
@@ -84,7 +85,7 @@ public class Matrix extends Tensor implements Affine
 	}
 	
 	/**
-	 * Returns a matrix product of the {@code Matrix}.
+	 * Returns a {@code Matrix} product.
 	 * 
 	 * @param m  a matrix to multiply
 	 * @return   a matrix product
@@ -110,44 +111,61 @@ public class Matrix extends Tensor implements Affine
 		return mul2.result();
 	}
 	
+	
 	/**
-	 * Returns a column vector in the {@code Matrix}.
+	 * Returns a resized {@code Matrix}.
 	 * 
-	 * @param j  a column index
-	 * @return  a matrix column
+	 * @param r  a row count
+	 * @param c  a column count
+	 * @return  a resized matrix
+	 */
+	public Matrix resize(int r, int c)
+	{
+		return (Matrix) super.resize(r, c);
+	}
+	
+	/**
+	 * Returns a {@code Matrix} column.
+	 * 
+	 * @param c  a column index
+	 * @return  a column vector
+	 * 
+	 * 
 	 * @see Vector
 	 */
-	public Vector Column(int j)
+	public Vector Column(int c)
 	{
 		Vector v = Vectors.create(Rows());
 		for(int i = 0; i < Rows(); i++)
 		{
-			v.set(get(i, j), i);
+			v.set(get(i, c), i);
 		}
 		
 		return v;
 	}
 	
 	/**
-	 * Returns a row vector in the {@code Matrix}.
+	 * Returns a {@code Matrix} row.
 	 * 
-	 * @param i  a row index
-	 * @return  a matrix row
+	 * @param r  a row index
+	 * @return  a row vector
+	 * 
+	 * 
 	 * @see Vector
 	 */
-	public Vector Row(int i)
+	public Vector Row(int r)
 	{
 		Vector v = Vectors.create(Columns());
 		for(int j = 0; j < Columns(); j++)
 		{
-			v.set(get(i, j), j);
+			v.set(get(r, j), j);
 		}
 		
 		return v;
 	}
 	
 	/**
-	 * Returns a column count of the {@code Matrix}.
+	 * Returns a column count.
 	 * 
 	 * @return  a column count
 	 */
@@ -157,7 +175,7 @@ public class Matrix extends Tensor implements Affine
 	}
 	
 	/**
-	 * Returns a row count of the {@code Matrix}.
+	 * Returns a row count.
 	 * 
 	 * @return  a row count
 	 */
@@ -192,21 +210,21 @@ public class Matrix extends Tensor implements Affine
 	}
 		
 	@Override
-	public Matrix ltimes(Tensor t)
+	public Matrix hadamard(Tensor t)
 	{
-		return (Matrix) super.ltimes(t);
+		return (Matrix) super.hadamard(t);
 	}
-	
-	@Override
-	public Matrix times(Float val)
-	{
-		return (Matrix) super.times(val);
-	}
-	
+		
 	@Override
 	public Matrix plus(Additive a)
 	{
 		return (Matrix) super.plus(a);
+	}
+	
+	@Override
+	public Matrix times(Float v)
+	{
+		return (Matrix) super.times(v);
 	}
 	
 	@Override

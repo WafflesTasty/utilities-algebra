@@ -1,4 +1,7 @@
-package waffles.utils.algebra.elements;
+package waffles.utils.alg.linear;
+
+import waffles.utils.alg.Abelian;
+import waffles.utils.sets.utilities.indexed.coords.Coordinator;
 
 /**
  * A {@code Linear} object defines an element in a linear vector space.
@@ -11,7 +14,7 @@ package waffles.utils.algebra.elements;
  * 
  * @param <S>  a scalar object type
  */
-public interface Linear<S> extends Abelian
+public interface Linear<S> extends Abelian, Coordinator
 {		
 	/**
 	 * Returns a scalar product with the {@code Linear}.

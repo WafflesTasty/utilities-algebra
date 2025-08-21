@@ -1,10 +1,10 @@
-package waffles.utils.algebra.elements.linear.vector.fixed;
+package waffles.utils.alg.linear.measure.vector.fixed;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.Vector;
-import waffles.utils.algebra.utilities.elements.Additive;
 import waffles.utils.tools.primitives.Floats;
 
 /**
@@ -36,7 +36,7 @@ public class Vector3 extends Vector
     /**
 	 * Creates a new {@code Vector3}.
 	 * 
-	 * @param d  a data object
+	 * @param d  a data source
 	 * 
 	 * 
 	 * @see TensorData
@@ -49,9 +49,9 @@ public class Vector3 extends Vector
     /**
 	 * Creates a new {@code Vector3}.
 	 * 
-	 * @param x  a vector x-coordinate
-	 * @param y  a vector y-coordinate
-	 * @param z  a vector z-coordinate
+	 * @param x  an x-coordinate
+	 * @param y  an y-coordinate
+	 * @param z  an z-coordinate
 	 */
 	public Vector3(float x, float y, float z)
 	{
@@ -65,7 +65,7 @@ public class Vector3 extends Vector
 	/**
 	 * Creates a new {@code Vector3}.
 	 * 
-	 * @param val  a vector value
+	 * @param val  a constant value
 	 */
 	public Vector3(float val)
 	{
@@ -82,10 +82,10 @@ public class Vector3 extends Vector
 		
 	
 	/**
-	 * Returns the cross product of two {@code Vector3}'s.
+	 * Returns the cross product with a {@code Vector3}.
 	 * 
-	 * @param v  a vector to multiply
-	 * @return   a vector cross product
+	 * @param v  a vector
+	 * @return   a cross product
 	 */
 	public Vector3 cross(Vector3 v)
 	{
@@ -101,7 +101,7 @@ public class Vector3 extends Vector
 	/**
 	 * Changes the x-coordinate of the {@code Vector3}.
 	 * 
-	 * @param x  a vector x-coordinate
+	 * @param x  an x-coordinate
 	 */
 	public void setX(float x)
 	{
@@ -111,7 +111,7 @@ public class Vector3 extends Vector
 	/**
 	 * Changes the y-coordinate of the {@code Vector3}.
 	 * 
-	 * @param y  a vector y-coordinate
+	 * @param y  a y-coordinate
 	 */
 	public void setY(float y)
 	{
@@ -121,7 +121,7 @@ public class Vector3 extends Vector
 	/**
 	 * Changes the z-coordinate of the {@code Vector3}.
 	 * 
-	 * @param z  a vector z-coordinate
+	 * @param z  a z-coordinate
 	 */
 	public void setZ(float z)
 	{
@@ -131,7 +131,7 @@ public class Vector3 extends Vector
 	/**
 	 * Returns the x-axis angle of the {@code Vector3}.
 	 * 
-	 * @return  a vector angle
+	 * @return  an angle
 	 */
 	public float XAngle()
 	{
@@ -141,7 +141,7 @@ public class Vector3 extends Vector
 	/**
 	 * Returns the y-axis angle of the {@code Vector3}.
 	 * 
-	 * @return  a vector angle
+	 * @return  an angle
 	 */
 	public float YAngle()
 	{
@@ -151,7 +151,7 @@ public class Vector3 extends Vector
 	/**
 	 * Returns the z-axis angle of the {@code Vector3}.
 	 * 
-	 * @return  a vector angle
+	 * @return  an angle
 	 */
 	public float ZAngle()
 	{
@@ -161,7 +161,7 @@ public class Vector3 extends Vector
 	/**
 	 * Returns the x-coordinate of the {@code Vector3}.
 	 * 
-	 * @return  a vector x-coordinate
+	 * @return  an x-coordinate
 	 */
 	public float X()
 	{
@@ -171,7 +171,7 @@ public class Vector3 extends Vector
 	/**
 	 * Returns the y-coordinate of the {@code Vector3}.
 	 * 
-	 * @return  a vector y-coordinate
+	 * @return  an y-coordinate
 	 */
 	public float Y()
 	{
@@ -181,7 +181,7 @@ public class Vector3 extends Vector
 	/**
 	 * Returns the z-coordinate of the {@code Vector3}.
 	 * 
-	 * @return  a vector z-coordinate
+	 * @return  an z-coordinate
 	 */
 	public float Z()
 	{
@@ -208,9 +208,9 @@ public class Vector3 extends Vector
 	}
 	
 	@Override
-	public Vector3 ltimes(Tensor t)
+	public Vector3 hadamard(Tensor t)
 	{
-		return (Vector3) super.ltimes(t);
+		return (Vector3) super.hadamard(t);
 	}
 			
 	@Override

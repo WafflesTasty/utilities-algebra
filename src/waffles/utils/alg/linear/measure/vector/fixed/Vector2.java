@@ -1,10 +1,10 @@
-package waffles.utils.algebra.elements.linear.vector.fixed;
+package waffles.utils.alg.linear.measure.vector.fixed;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.Vector;
-import waffles.utils.algebra.utilities.elements.Additive;
 import waffles.utils.tools.primitives.Floats;
 
 /**
@@ -33,7 +33,7 @@ public class Vector2 extends Vector
     /**
 	 * Creates a new {@code Vector2}.
 	 * 
-	 * @param d  a data object
+	 * @param d  a data source
 	 * 
 	 * 
 	 * @see TensorData
@@ -46,8 +46,8 @@ public class Vector2 extends Vector
 	/**
 	 * Creates a new {@code Vector2}.
 	 * 
-	 * @param x  a vector x-coordinate
-	 * @param y  a vector y-coordinate
+	 * @param x  an x-coordinate
+	 * @param y  an y-coordinate
 	 */
 	public Vector2(float x, float y)
 	{
@@ -60,7 +60,7 @@ public class Vector2 extends Vector
 	/**
 	 * Creates a new {@code Vector2}.
 	 * 
-	 * @param val  a vector value
+	 * @param val  a constant value
 	 */
 	public Vector2(float val)
 	{
@@ -77,12 +77,13 @@ public class Vector2 extends Vector
 		
 	
 	/**
-	 * Returns the perpdot product of two {@code Vector2}'s.
-	 * This value equals the z-coordinate of the cross product
-	 * between the two vectors in the plane z=0.
+	 * Returns the perpdot with a {@code Vector2}.
+	 * This value equals the z-coordinate of the
+	 * cross product between the vectors
+	 * in the plane {@code Z = 0}.
 	 * 
-	 * @param v  a vector to multiply
-	 * @return   a vector perpdot product
+	 * @param v  a vector
+	 * @return   a perpdot product
 	 */
 	public float perpdot(Vector2 v)
 	{
@@ -92,7 +93,7 @@ public class Vector2 extends Vector
 	/**
 	 * Changes the x-coordinate of the {@code Vector2}.
 	 * 
-	 * @param x  a vector x-coordinate
+	 * @param x  an x-coordinate
 	 */
 	public void setX(float x)
 	{
@@ -102,7 +103,7 @@ public class Vector2 extends Vector
 	/**
 	 * Changes the y-coordinate of the {@code Vector2}.
 	 * 
-	 * @param y  a vector y-coordinate
+	 * @param y  an y-coordinate
 	 */
 	public void setY(float y)
 	{
@@ -114,7 +115,7 @@ public class Vector2 extends Vector
 	 * 
 	 * @return  a vector angle
 	 */
-	public float XAngle()
+	public float Angle()
 	{
 		return Floats.atan2(X(), Y());
 	}
@@ -122,7 +123,7 @@ public class Vector2 extends Vector
 	/**
 	 * Returns the x-coordinate of the {@code Vector2}.
 	 * 
-	 * @return  a vector x-coordinate
+	 * @return  an x-coordinate
 	 */
 	public float X()
 	{
@@ -132,7 +133,7 @@ public class Vector2 extends Vector
 	/**
 	 * Returns the y-coordinate of the {@code Vector2}.
 	 * 
-	 * @return  a vector y-coordinate
+	 * @return  an y-coordinate
 	 */
 	public float Y()
 	{
@@ -159,9 +160,9 @@ public class Vector2 extends Vector
 	}
 	
 	@Override
-	public Vector2 ltimes(Tensor t)
+	public Vector2 hadamard(Tensor t)
 	{
-		return (Vector2) super.ltimes(t);
+		return (Vector2) super.hadamard(t);
 	}
 	
 	@Override

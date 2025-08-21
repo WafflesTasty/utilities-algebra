@@ -1,0 +1,57 @@
+package waffles.utils.alg.linear.measure.tensor.ops;
+
+import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.algebra.elements.linear.tensor.Tensors;
+import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
+import waffles.utils.tools.patterns.operator.Operation;
+
+/**
+ * A {@code TensorCopy} operation copies a {@code Tensor}.
+ * 
+ * @author Waffles
+ * @since Jul 13, 2018
+ * @version 1.0
+ * 
+ * 
+ * @see Operation
+ * @see Tensor
+ */
+public class TensorCopy implements Operation<Tensor>
+{
+	private Tensor t1;
+	
+	/**
+	 * Creates a new {@code TensorCopy}.
+	 * 
+	 * @param t1    a tensor
+	 * 
+	 * 
+	 * @see Tensor
+	 */
+	public TensorCopy(Tensor t1)
+	{
+		this.t1 = t1;
+	}
+	
+
+	@Override
+	public Tensor result()
+	{
+		TensorData data = t1.Data();
+		if(!t1.isDestructible())
+		{
+			data = data.copy();
+		}
+		
+		return Tensors.create(data);
+	}
+	
+	@Override
+	public int cost()
+	{
+		int c1 = t1.Data().NZCount();
+		if(!t1.isDestructible())
+			return c1;
+		return 0;
+	}
+}

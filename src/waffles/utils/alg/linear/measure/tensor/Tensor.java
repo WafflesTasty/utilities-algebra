@@ -1,23 +1,27 @@
-package waffles.utils.algebra.elements.linear.tensor;
+package waffles.utils.alg.linear.measure.tensor;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.linear.Angular;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.Angular;
+import waffles.utils.alg.utilities.Inaccurate;
+import waffles.utils.algebra.elements.linear.tensor.TensorOps;
+import waffles.utils.algebra.elements.linear.tensor.Tensors;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorArray;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
-import waffles.utils.algebra.utilities.elements.Additive;
 import waffles.utils.sets.DimensionalSet;
+import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.tools.patterns.operator.Operable;
 import waffles.utils.tools.patterns.operator.Operation;
-import waffles.utils.tools.patterns.persistence.Persistible;
-import waffles.utils.tools.patterns.semantics.Copyable;
-import waffles.utils.tools.patterns.semantics.Inaccurate;
+import waffles.utils.tools.patterns.properties.counters.data.Persistible;
+import waffles.utils.tools.patterns.properties.values.Copyable;
 import waffles.utils.tools.primitives.Floats;
 
 /**
  * The {@code Tensor} class defines an algebraic tensor using the standard dot product.
- * A tensor describes a multilinear transformation of any order and dimension. Its values
- * are stored in a {@code TensorData} object, which can be implemented densely or sparsely.
- * The basic tensor operations are all delegated to an {@code TensorOps} object.
+ * A tensor describes a multilinear transformation of any order and dimension. The tensor
+ * values are stored in an implementation of the {@code TensorData} interface. By default,
+ * a {@code TensorArray} is used. The algorithms for all basic operations are delegated
+ * to its accompanying {@code TensorOps} type implementation.
  *
  * @author Waffles
  * @since Jul 4, 2018
@@ -25,12 +29,13 @@ import waffles.utils.tools.primitives.Floats;
  * 
  * 
  * @see DimensionalSet
+ * @see Persistible
  * @see Inaccurate
+ * @see Copyable
  * @see Operable
  * @see Angular
- * @see Tensor
  */
-public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>, Inaccurate<Tensor>, Operable<Tensor>, Persistible<TensorData>
+public class Tensor implements Angular, Copyable<Tensor>, IndexedSet<Float>, Inaccurate<Tensor>, Operable<Tensor>, Persistible<TensorData>
 {		
 	private TensorData data;
 	private TensorOps operator;
@@ -39,7 +44,7 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	/**
 	 * Creates a new {@code Tensor}.
 	 * 
-	 * @param d  a data object
+	 * @param d  a data source
 	 * 
 	 * 
 	 * @see TensorData
@@ -52,10 +57,10 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	
 	/**
 	 * Creates a new {@code Tensor}.
-	 * This constructor assumes a default
-	 * dense data object.
+	 * This tensor stores its data in
+	 * a {@code TensorArray} instance.
 	 * 
-	 * @param order  the tensor order
+	 * @param order  a tensor order
 	 */
 	public Tensor(int... order)
 	{
@@ -64,12 +69,61 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	
 	
 	/**
-	 * Computes an element-wise tensor product.
+	 * Checks destructibility of the {@code Tensor}.
 	 * 
-	 * @param t  a tensor to multiply
-	 * @return  an element-wise product
+	 * @return  {@code true} if the tensor can be destroyed
 	 */
-	public Tensor ltimes(Tensor t)
+	public boolean isDestructible()
+	{
+		return isDestructible;
+	}
+	
+	/**
+	 * Changes a single value in the {@code Tensor}.
+	 * 
+	 * @param val   a tensor value
+	 * @param crds  a tensor coordinate
+	 */
+	public void set(float val, int... crds)
+	{
+		Data().put(val, crds);
+	}
+	
+	/**
+	 * Changes the operator of the {@code Tensor}.
+	 * 
+	 * @param ops  a tensor operator
+	 * 
+	 * 
+	 * @see TensorOps
+	 */
+	public void setOperator(TensorOps ops)
+	{
+		operator = ops;
+	}
+	
+	
+	/**
+	 * Creates a resized {@code Tensor}.
+	 * 
+	 * @param dims  a tensor dimension
+	 * @return  a resized tensor
+	 */
+	public Tensor resize(int... dims)
+	{
+		return Operator().Resize(dims).result();
+	}
+	
+	/**
+	 * Computes a Hadamard {@code Tensor}.
+	 * This is the element-wise product of
+	 * isomorph tensors, i.e. tensors
+	 * with equal dimensions.
+	 * 
+	 * @param t  a tensor
+	 * @return   a hadamard product
+	 */
+	public Tensor hadamard(Tensor t)
 	{
 		if(!Tensors.isomorph(this, t))
 		{
@@ -86,50 +140,6 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 		
 		return mul2.result();
 	}
-	
-	/**
-	 * Changes a single value in the {@code Tensor}.
-	 * 
-	 * @param val     a tensor value
-	 * @param coords  a tensor coordinate
-	 */
-	public void set(float val, int... coords)
-	{
-		Data().put(val, coords);
-	}
-
-	/**
-	 * Sets the destructibility of the {@code Tensor}.
-	 * 
-	 * @param destroy  a destructible state
-	 */
-	public void setDestructible(boolean destroy)
-	{
-		isDestructible = destroy;
-	}
-	
-	/**
-	 * Changes the operator type of the {@code Tensor}.
-	 * 
-	 * @param ops  a tensor operator
-	 * 
-	 * 
-	 * @see TensorOps
-	 */
-	public void setOperator(TensorOps ops)
-	{
-		operator = ops;
-	}
-	
-	/**
-	 * Checks destructibility of the {@code Tensor}.
-	 * 
-	 * @return  {@code true} if the data is obsolete
-	 */
-	public boolean isDestructible()
-	{
-		return isDestructible;
-	}
 
 	/**
 	 * Destroys the {@code Tensor}.
@@ -137,20 +147,26 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	 * and then returned. This is useful
 	 * when chaining operations.
 	 * 
-	 * @return  the destroyed tensor
+	 * @return  a destrucible tensor
 	 * 
 	 * 
 	 * @see Tensor
 	 */
 	public Tensor destroy()
 	{
-		setDestructible(true);
+		isDestructible = true;
 		return this;
 	}
 	
+	
+	@Override
+	public Float get(int... crds)
+	{
+		return Data().get(crds);
+	}
 
 	@Override
-	public Boolean equals(Tensor t, int ulps)
+	public Boolean equals(Tensor t, float e)
 	{
 		if(!Tensors.isomorph(this, t))
 		{
@@ -158,8 +174,8 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 		}
 		
 		
-		Operation<Boolean> eq1 =   Operator().Equality(   t, ulps);
-		Operation<Boolean> eq2 = t.Operator().Equality(this, ulps);
+		Operation<Boolean> eq1 =   Operator().Equality(   t, e);
+		Operation<Boolean> eq2 = t.Operator().Equality(this, e);
 		if(eq1.cost() < eq2.cost())
 		{
 			return eq1.result();
@@ -167,13 +183,7 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 		
 		return eq2.result();
 	}
-	
-	@Override
-	public Float get(int... coords)
-	{
-		return Data().get(coords);
-	}
-	
+		
 	@Override
 	public int[] Dimensions()
 	{
@@ -185,6 +195,12 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	public TensorData Data()
 	{
 		return data;
+	}
+	
+	@Override
+	public TensorOps Operator()
+	{
+		return (TensorOps) operator.instance(this);
 	}
 	
 	@Override
@@ -238,12 +254,6 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	{
 		return Operator().Multiply(v).result();
 	}
-
-	@Override
-	public TensorOps Operator()
-	{
-		return (TensorOps) operator.instance(this);
-	}
 	
 	@Override
 	public Tensor normalize()
@@ -267,12 +277,6 @@ public class Tensor implements Angular, Copyable<Tensor>, DimensionalSet<Float>,
 	@Override
 	public Tensor copy()
 	{
-		if(isDestructible())
-		{
-			return Tensors.create(data);
-		}
-
-		TensorData copy = data.copy();
-		return Tensors.create(copy);
+		return Operator().Copy().result();
 	}
 }

@@ -1,14 +1,15 @@
-package waffles.utils.algebra.utilities.measures;
+package waffles.utils.alg.linear.measure;
 
 import waffles.utils.tools.primitives.Floats;
 
 /**
- * A {@code Distanced} object can measure its distance to other objects of a similar type.
+ * A {@code Distanced} defines a distance operation.
  *
  * @author Waffles
  * @since Apr 28, 2018
  * @version 1.0
  */
+@FunctionalInterface
 public interface Distanced
 {	
 	/**

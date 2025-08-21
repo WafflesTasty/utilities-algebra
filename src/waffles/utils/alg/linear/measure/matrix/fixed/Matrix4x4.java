@@ -1,11 +1,11 @@
-package waffles.utils.algebra.elements.linear.matrix.fixed;
+package waffles.utils.alg.linear.measure.matrix.fixed;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.linear.matrix.Matrix;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.vector.fixed.Vector4;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
-import waffles.utils.algebra.elements.linear.vector.fixed.Vector4;
-import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
  * A {@code Matrix4x4} defines a 4x4-dimensional {@code Matrix}.
@@ -30,7 +30,7 @@ public class Matrix4x4 extends Matrix
 	/**
 	 * Creates a new {@code Matrix4x4}.
 	 * 
-	 * @param d  a data object
+	 * @param d  a data source
 	 * 
 	 * 
 	 * @see TensorData
@@ -42,10 +42,10 @@ public class Matrix4x4 extends Matrix
 	
 	
 	/**
-	 * Computes the product with a {@code Matrix4x4}.
+	 * Computes a {@code Matrix4x4} product.
 	 * 
-	 * @param m  a matrix to multiply
-	 * @return   a matrix product
+	 * @param m  a matrix
+	 * @return   a product
 	 */
 	public Matrix4x4 times(Matrix4x4 m)
 	{
@@ -53,10 +53,10 @@ public class Matrix4x4 extends Matrix
 	}
 	
 	/**
-	 * Computes the product with a {@code Vector4}.
+	 * Computes a {@code Matrix4x4} product.
 	 * 
-	 * @param v  a vector to multiply
-	 * @return   a vector product
+	 * @param v  a vector
+	 * @return   a product
 	 * 
 	 * 
 	 * @see Vector4
@@ -65,18 +65,18 @@ public class Matrix4x4 extends Matrix
 	{
 		return (Vector4) super.times(v);
 	}
-		
+	
 	
 	@Override
-	public Vector4 Row(int i)
+	public Matrix4x4 Span()
 	{
-		return (Vector4) super.Row(i);
+		return (Matrix4x4) super.Span();
 	}
 	
 	@Override
-	public Vector4 Column(int j)
+	public Matrix4x4 absolute()
 	{
-		return (Vector4) super.Column(j);
+		return (Matrix4x4) super.absolute();
 	}
 	
 	@Override
@@ -86,10 +86,18 @@ public class Matrix4x4 extends Matrix
 	}
 	
 	@Override
-	public Matrix4x4 plus(Additive m)
+	public Vector4 Column(int j)
 	{
-		return (Matrix4x4) super.plus(m);
+		return (Vector4) super.Column(j);
 	}
+	
+	@Override
+	public Vector4 Row(int i)
+	{
+		return (Vector4) super.Row(i);
+	}
+	
+
 	
 	@Override
 	public Matrix4x4 minus(Abelian m)
@@ -98,9 +106,15 @@ public class Matrix4x4 extends Matrix
 	}
 	
 	@Override
-	public Matrix4x4 ltimes(Tensor t)
+	public Matrix4x4 hadamard(Tensor t)
 	{
-		return (Matrix4x4) super.ltimes(t);
+		return (Matrix4x4) super.hadamard(t);
+	}
+	
+	@Override
+	public Matrix4x4 plus(Additive m)
+	{
+		return (Matrix4x4) super.plus(m);
 	}
 	
 	@Override

@@ -1,13 +1,13 @@
-package waffles.utils.algebra.elements.linear.vector.fixed;
+package waffles.utils.alg.linear.measure.vector.fixed;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.algebra.elements.linear.vector.Vector;
-import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
- * A {@code Vector3} defines a {@code Vector} in four dimensions.
+ * A {@code Vector4} defines a {@code Vector} in four dimensions.
  *
  * @author Waffles
  * @since Mar 21, 2016
@@ -186,9 +186,9 @@ public class Vector4 extends Vector
 	}
 	
 	@Override
-	public Vector4 ltimes(Tensor t)
+	public Vector4 hadamard(Tensor t)
 	{
-		return (Vector4) super.ltimes(t);
+		return (Vector4) super.hadamard(t);
 	}
 			
 	@Override

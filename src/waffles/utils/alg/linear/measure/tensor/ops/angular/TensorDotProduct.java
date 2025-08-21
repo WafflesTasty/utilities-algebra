@@ -1,12 +1,12 @@
-package waffles.utils.algebra.elements.linear.tensor.ops;
+package waffles.utils.alg.linear.measure.tensor.ops.angular;
 
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**
- * A {@code TensorDotProduct} computes the dot product of two tensors the naive way.
- * The first given {@code Tensor} will be the one used for the iterative step, which
- * means the cost is given by its value count during iteration.
+ * A {@code TensorDotProduct} computes a {@code Tensor} dot product the naive way.
+ * The first given {@code Tensor} will be the one used for the iterative step,
+ * which means the cost is determined by its non-zero value count.
  * 
  * @author Waffles
  * @since Jul 13, 2018
@@ -14,7 +14,6 @@ import waffles.utils.tools.patterns.operator.Operation;
  * 
  * 
  * @see Operation
- * @see Float
  */
 public class TensorDotProduct implements Operation<Float>
 {
@@ -23,8 +22,8 @@ public class TensorDotProduct implements Operation<Float>
 	/**
 	 * Creates a new {@code TensorDotProduct}.
 	 * 
-	 * @param t1  the  first tensor to multiply
-	 * @param t2  the second tensor to multiply
+	 * @param t1  a  first tensor
+	 * @param t2  a second tensor
 	 * 
 	 * 
 	 * @see Tensor

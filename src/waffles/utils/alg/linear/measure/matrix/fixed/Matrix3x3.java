@@ -1,11 +1,11 @@
-package waffles.utils.algebra.elements.linear.matrix.fixed;
+package waffles.utils.alg.linear.measure.matrix.fixed;
 
-import waffles.utils.algebra.elements.Abelian;
-import waffles.utils.algebra.elements.linear.matrix.Matrix;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
+import waffles.utils.alg.Abelian;
+import waffles.utils.alg.Additive;
+import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.vector.fixed.Vector3;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
-import waffles.utils.algebra.elements.linear.vector.fixed.Vector3;
-import waffles.utils.algebra.utilities.elements.Additive;
 
 /**
  * A {@code Matrix3x3} defines a 3x3-dimensional {@code Matrix}.
@@ -30,7 +30,7 @@ public class Matrix3x3 extends Matrix
 	/**
 	 * Creates a new {@code Matrix3x3}.
 	 * 
-	 * @param d  a data object
+	 * @param d  a data source
 	 * 
 	 * 
 	 * @see TensorData
@@ -42,10 +42,10 @@ public class Matrix3x3 extends Matrix
 	
 	
 	/**
-	 * Computes the product with a {@code Matrix3x3}.
+	 * Computes a {@code Matrix3x3} product.
 	 * 
-	 * @param m  a matrix to multiply
-	 * @return   a matrix product
+	 * @param m  a matrix
+	 * @return   a product
 	 */
 	public Matrix3x3 times(Matrix3x3 m)
 	{
@@ -53,10 +53,10 @@ public class Matrix3x3 extends Matrix
 	}
 	
 	/**
-	 * Computes the product with a {@code Vector3}.
+	 * Computes a {@code Matrix3x3} product.
 	 * 
-	 * @param v  a vector to multiply
-	 * @return   a vector product
+	 * @param v  a vector
+	 * @return   a product
 	 * 
 	 * 
 	 * @see Vector3
@@ -65,18 +65,18 @@ public class Matrix3x3 extends Matrix
 	{
 		return (Vector3) super.times(v);
 	}
-		
+
 	
 	@Override
-	public Vector3 Row(int i)
+	public Matrix3x3 Span()
 	{
-		return (Vector3) super.Row(i);
+		return (Matrix3x3) super.Span();
 	}
 	
 	@Override
-	public Vector3 Column(int j)
+	public Matrix3x3 absolute()
 	{
-		return (Vector3) super.Column(j);
+		return (Matrix3x3) super.absolute();
 	}
 	
 	@Override
@@ -84,13 +84,20 @@ public class Matrix3x3 extends Matrix
 	{
 		return (Matrix3x3) super.transpose();
 	}
-	
+		
 	@Override
-	public Matrix3x3 plus(Additive a)
+	public Vector3 Column(int c)
 	{
-		return (Matrix3x3) super.plus(a);
+		return (Vector3) super.Column(c);
 	}
 	
+	@Override
+	public Vector3 Row(int r)
+	{
+		return (Vector3) super.Row(r);
+	}
+	
+		
 	@Override
 	public Matrix3x3 minus(Abelian a)
 	{
@@ -98,9 +105,15 @@ public class Matrix3x3 extends Matrix
 	}
 	
 	@Override
-	public Matrix3x3 ltimes(Tensor t)
+	public Matrix3x3 hadamard(Tensor t)
 	{
-		return (Matrix3x3) super.ltimes(t);
+		return (Matrix3x3) super.hadamard(t);
+	}
+	
+	@Override
+	public Matrix3x3 plus(Additive a)
+	{
+		return (Matrix3x3) super.plus(a);
 	}
 	
 	@Override
