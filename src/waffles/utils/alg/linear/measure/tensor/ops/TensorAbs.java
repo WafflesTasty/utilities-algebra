@@ -1,12 +1,11 @@
 package waffles.utils.alg.linear.measure.tensor.ops;
 
 import waffles.utils.alg.linear.measure.tensor.Tensor;
-import waffles.utils.algebra.elements.linear.tensor.Tensors;
-import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.tools.patterns.operator.Operation;
+import waffles.utils.tools.primitives.Floats;
 
 /**
- * A {@code TensorCopy} operation copies a {@code Tensor}.
+ * A {@code TensorAbs} operation computes an absolute value {@code Tensor}.
  * 
  * @author Waffles
  * @since Jul 13, 2018
@@ -17,7 +16,7 @@ import waffles.utils.tools.patterns.operator.Operation;
  * @see Operation
  * @see Tensor
  */
-public class TensorCopy<T extends Tensor> implements Operation<T>
+public class TensorAbs<T extends Tensor> implements Operation<T>
 {
 	private Tensor t1;
 	
@@ -29,7 +28,7 @@ public class TensorCopy<T extends Tensor> implements Operation<T>
 	 * 
 	 * @see Tensor
 	 */
-	public TensorCopy(Tensor t1)
+	public TensorAbs(Tensor t1)
 	{
 		this.t1 = t1;
 	}
@@ -38,21 +37,19 @@ public class TensorCopy<T extends Tensor> implements Operation<T>
 	@Override
 	public T result()
 	{
-		TensorData data = t1.Data();
-		if(!t1.isDestructible())
+		Tensor t2 = t1.instance();
+		for(int[] crd : t1.Data().NZKeys())
 		{
-			data = data.copy();
+			float v1 = t1.get(crd);
+			t2.set(Floats.abs(v1), crd);
 		}
-		
-		return Tensors.create(data);
+
+		return (T) t2;
 	}
 	
 	@Override
 	public int cost()
 	{
-		int c1 = t1.Data().NZCount();
-		if(!t1.isDestructible())
-			return c1;
-		return 0;
+		return t1.Data().NZCount();
 	}
 }

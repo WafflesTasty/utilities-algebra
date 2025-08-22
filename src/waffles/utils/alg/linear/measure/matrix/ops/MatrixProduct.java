@@ -1,12 +1,12 @@
-package waffles.utils.algebra.elements.linear.matrix.ops;
+package waffles.utils.alg.linear.measure.matrix.ops;
 
+import waffles.utils.alg.linear.measure.matrix.Matrix;
 import waffles.utils.algebra.elements.linear.matrix.Matrices;
-import waffles.utils.algebra.elements.linear.matrix.Matrix;
 import waffles.utils.tools.patterns.operator.Operation;
 import waffles.utils.tools.primitives.Integers;
 
 /**
- * A {@code MatrixProduct} computes the product of two matrices the naive way.
+ * A {@code MatrixProduct} computes a product of matrices the naive way.
  *
  * @author Waffles
  * @since Jul 13, 2018
@@ -39,29 +39,29 @@ public class MatrixProduct implements Operation<Matrix>
 	@Override
 	public Matrix result()
 	{
-		int row1 = m1.Rows();		
-		int col1 = m1.Columns();
-		int col2 = m2.Columns();
+		int r1 = m1.Rows();		
+		int c1 = m1.Columns();
+		int c2 = m2.Columns();
 
 		
-		Matrix result = Matrices.create(row1, col2);
-		for(int r = 0; r < row1; r++)
+		Matrix m3 = Matrices.create(r1, c2);
+		for(int r = 0; r < r1; r++)
 		{
-			for(int c = 0; c < col2; c++)
+			for(int c = 0; c < c2; c++)
 			{
 				double val = 0;
-				for(int d = 0; d < col1; d++)
+				for(int d = 0; d < c1; d++)
 				{
 					double v1 = m1.get(r, d);
 					double v2 = m2.get(d, c);
 					val += v1 * v2;
 				}
 				
-				result.set((float) val, r, c);
+				m3.set((float) val, r, c);
 			}
 		}
 		
-		return result;
+		return m3;
 	}
 	
 	@Override

@@ -48,19 +48,9 @@ public class Matrix extends Tensor implements Affine
 		super(r, c); setOperator(MatrixOps.Type());
 	}
 	
-	
+		
 	/**
-	 * Returns an absolute {@code Matrix}.
-	 * 
-	 * @return  an absolute matrix
-	 */
-	public Matrix absolute()
-	{
-		return Operator().Absolute().result();
-	}
-	
-	/**
-	 * Returns a transpose {@code Matrix}.
+	 * Returns a transposed {@code Matrix}.
 	 * 
 	 * @return  the matrix transpose
 	 */
@@ -69,9 +59,8 @@ public class Matrix extends Tensor implements Affine
 		return Operator().Transpose().result();
 	}
 	
-	
 	/**
-	 * Returns a {@code Matrix} product.
+	 * Returns a {@code Matrix-Vector} product.
 	 * 
 	 * @param v  a vector to multiply
 	 * @return   a matrix product
@@ -233,6 +222,12 @@ public class Matrix extends Tensor implements Affine
 		return (Matrix) super.normalize();
 	}
 
+	@Override
+	public Matrix absolute()
+	{
+		return (Matrix) super.absolute();
+	}
+	
 	@Override
 	public Matrix destroy()
 	{

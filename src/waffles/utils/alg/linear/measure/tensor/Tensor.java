@@ -4,7 +4,6 @@ import waffles.utils.alg.Abelian;
 import waffles.utils.alg.Additive;
 import waffles.utils.alg.linear.Angular;
 import waffles.utils.alg.utilities.Inaccurate;
-import waffles.utils.algebra.elements.linear.tensor.TensorOps;
 import waffles.utils.algebra.elements.linear.tensor.Tensors;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorArray;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
@@ -141,6 +140,16 @@ public class Tensor implements Angular, Copyable<Tensor>, IndexedSet<Float>, Ina
 		return mul2.result();
 	}
 
+	/**
+	 * Returns an absolute {@code Tensor}.
+	 * 
+	 * @return  an absolute tensor
+	 */
+	public Tensor absolute()
+	{
+		return Operator().Absolute().result();
+	}
+	
 	/**
 	 * Destroys the {@code Tensor}.
 	 * The tensor is rendered destructible,
