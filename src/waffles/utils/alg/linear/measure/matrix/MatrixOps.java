@@ -1,12 +1,10 @@
-package waffles.utils.algebra.elements.linear.matrix;
+package waffles.utils.alg.linear.measure.matrix;
 
-import waffles.utils.algebra.elements.linear.matrix.ops.MatrixAbs;
-import waffles.utils.algebra.elements.linear.matrix.ops.MatrixProduct;
-import waffles.utils.algebra.elements.linear.matrix.ops.MatrixTranspose;
-import waffles.utils.algebra.elements.linear.tensor.Tensor;
-import waffles.utils.algebra.elements.linear.tensor.TensorOps;
+import waffles.utils.alg.linear.measure.matrix.ops.MatrixProduct;
+import waffles.utils.alg.linear.measure.matrix.ops.MatrixTranspose;
+import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.tensor.TensorOps;
 import waffles.utils.tools.patterns.operator.Operation;
-import waffles.utils.tools.patterns.operator.Operator;
 
 /**
  * The {@code MatrixOps} interface implements {@code Operations} for matrices.
@@ -25,39 +23,12 @@ import waffles.utils.tools.patterns.operator.Operator;
  * @version 1.0
  * 
  *
- * @see Operator
- * @see Tensor
+ * @see TensorOps
  */
 @FunctionalInterface
 public interface MatrixOps extends TensorOps
 {	
-	/**
-	 * Returns the abstract type of the {@code MatrixOps}.
-	 * 
-	 * @return  a type operator
-	 */
-	public static MatrixOps Type()
-	{
-		return () ->
-		{
-			return null;
-		};
-	}
-	
-	
-	@Override
-	public abstract Matrix Operable();
-	
-	@Override
-	public default MatrixOps instance(Tensor t)
-	{
-		return () ->
-		{
-			return (Matrix) t;
-		};
-	}	
-	
-	@Override
+	@Deprecated
 	public default boolean allows(Tensor obj, int ulps)
 	{
 		if(!matches(obj))
@@ -68,32 +39,28 @@ public interface MatrixOps extends TensorOps
 		return true;
 	}
 	
-	@Override
-	public default boolean matches(Tensor obj)
-	{
-		return obj.Operator() instanceof MatrixOps;
-	}
-	
 	
 	/**
-	 * Returns a matrix absolute {@code Operation}.
+	 * Returns the abstract type of the {@code MatrixOps}.
+	 * </br> The result of this method can be passed to a
+	 * {@code Tensor} object to verify compatibility.
 	 * 
-	 * @return  an absolute operation
-	 * 
-	 * 
-	 * @see Operation
-	 * @see Matrix
+	 * @return  a type operator
 	 */
-	public default Operation<Matrix> Absolute()
+	public static MatrixOps Type()
 	{
-		return new MatrixAbs(Operable());
+		return () ->
+		{
+			return null;
+		};
 	}
-	
+		
+		
 	/**
 	 * Returns a left multiplication {@code Operation}.
 	 * 
-	 * @param m  a matrix to left multiply
-	 * @return  a multiplication operation
+	 * @param m  a matrix to multiply
+	 * @return   a multiply operation
 	 * 
 	 * 
 	 * @see Operation
@@ -107,8 +74,8 @@ public interface MatrixOps extends TensorOps
 	/**
 	 * Returns a right multiplication {@code Operation}.
 	 * 
-	 * @param m  a matrix to right multiply
-	 * @return  a multiplication operation
+	 * @param m  a matrix to multiply
+	 * @return   a multiply operation
 	 * 
 	 * 
 	 * @see Operation
@@ -132,4 +99,20 @@ public interface MatrixOps extends TensorOps
 	{
 		return new MatrixTranspose(Operable());
 	}
+
+		
+	@Override
+	public default MatrixOps instance(Tensor t)
+	{
+		return () -> (Matrix) t;
+	}	
+	
+	@Override
+	public default boolean matches(Tensor t)
+	{
+		return t.Operator() instanceof MatrixOps;
+	}
+
+	@Override
+	public abstract Matrix Operable();
 }
