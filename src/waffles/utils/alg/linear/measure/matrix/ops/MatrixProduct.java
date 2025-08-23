@@ -1,7 +1,7 @@
 package waffles.utils.alg.linear.measure.matrix.ops;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
-import waffles.utils.algebra.elements.linear.matrix.Matrices;
+import waffles.utils.algebra.elements.linear.Matrices;
 import waffles.utils.tools.patterns.operator.Operation;
 import waffles.utils.tools.primitives.Integers;
 

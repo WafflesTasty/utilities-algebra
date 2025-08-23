@@ -4,10 +4,9 @@ import waffles.utils.alg.Abelian;
 import waffles.utils.alg.Additive;
 import waffles.utils.alg.linear.Angular;
 import waffles.utils.alg.utilities.Inaccurate;
-import waffles.utils.algebra.elements.linear.tensor.Tensors;
+import waffles.utils.algebra.elements.linear.Tensors;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorArray;
 import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
-import waffles.utils.sets.DimensionalSet;
 import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.tools.patterns.operator.Operable;
 import waffles.utils.tools.patterns.operator.Operation;
@@ -27,14 +26,14 @@ import waffles.utils.tools.primitives.Floats;
  * @version 1.1
  * 
  * 
- * @see DimensionalSet
- * @see Persistible
- * @see Inaccurate
  * @see Copyable
  * @see Operable
+ * @see Persistible
+ * @see Inaccurate
+ * @see IndexedSet
  * @see Angular
  */
-public class Tensor implements Angular, Copyable<Tensor>, IndexedSet<Float>, Inaccurate<Tensor>, Operable<Tensor>, Persistible<TensorData>
+public class Tensor implements Angular, Copyable<Tensor>, Inaccurate<Tensor>, IndexedSet<Float>, Operable<Tensor>, Persistible<TensorData>
 {		
 	private TensorData data;
 	private TensorOps operator;
@@ -76,7 +75,7 @@ public class Tensor implements Angular, Copyable<Tensor>, IndexedSet<Float>, Ina
 	{
 		return isDestructible;
 	}
-	
+		
 	/**
 	 * Changes a single value in the {@code Tensor}.
 	 * 
@@ -86,6 +85,22 @@ public class Tensor implements Angular, Copyable<Tensor>, IndexedSet<Float>, Ina
 	public void set(float val, int... crds)
 	{
 		Data().put(val, crds);
+	}
+	
+	/**
+	 * Checks a type operator for the {@code Tensor}.
+	 * 
+	 * @param ops  a type operator
+	 * @param e  an error margin
+	 * @return  {@code true} if the operator is allowed
+	 * 
+	 * 
+	 * @see TensorOps
+	 */
+	public boolean allows(TensorOps ops, float e)
+	{
+		// Check this one-liner the fuck out.
+		return ops.instance(this).Allows(e).result();
 	}
 	
 	/**

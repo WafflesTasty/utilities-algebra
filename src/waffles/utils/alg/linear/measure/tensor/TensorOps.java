@@ -11,7 +11,6 @@ import waffles.utils.alg.linear.measure.tensor.ops.angular.TensorHadamard;
 import waffles.utils.alg.linear.measure.tensor.ops.angular.TensorScalar;
 import waffles.utils.tools.patterns.operator.Operation;
 import waffles.utils.tools.patterns.operator.Operator;
-import waffles.utils.tools.primitives.Floats;
 
 /**
  * The {@code TensorOps} interface implements {@code Operations} for tensors.
@@ -35,13 +34,6 @@ import waffles.utils.tools.primitives.Floats;
  */
 public interface TensorOps extends Operator<Tensor>
 {		
-	@Deprecated
-	public default boolean allows(Tensor t, int ulps)
-	{
-		return Allows(Floats.EPSILON * ulps).result();
-	}
-	
-	
 	/**
 	 * Returns the abstract type of the {@code TensorOps}.
 	 * </br> The result of this method can be passed to a
@@ -94,7 +86,7 @@ public interface TensorOps extends Operator<Tensor>
 	 */
 	public default Operation<Boolean> Allows(float e)
 	{
-		return new TensorQualify(Operable(), e);
+		return new TensorQualify(this, e);
 	}
 	
 	/**
@@ -178,16 +170,16 @@ public interface TensorOps extends Operator<Tensor>
 	/**
 	 * Returns a scalar tensor product {@code Operation}.
 	 * 
-	 * @param val  a value to multiply
+	 * @param v  a value to multiply
 	 * @return  a tensor scalar
 	 * 
 	 * 
 	 * @see Operation
 	 * @see Tensor
 	 */
-	public default Operation<Tensor> Multiply(float val)
+	public default Operation<Tensor> Multiply(float v)
 	{
-		return new TensorScalar(Operable(), val);
+		return new TensorScalar(Operable(), v);
 	}
 
 				

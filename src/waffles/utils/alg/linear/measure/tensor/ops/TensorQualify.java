@@ -20,38 +20,65 @@ import waffles.utils.tools.patterns.operator.Operation;
 public class TensorQualify implements Operation<Boolean>
 {
 	private float err;
-	private Tensor t1;
+	private TensorOps o1;
 	
 	/**
 	 * Creates a new {@code TensorQualify}.
 	 * 
-	 * @param t1   a tensor
+	 * @param o1   a tensor operator
 	 * @param err  an error margin
+	 * 
+	 * 
+	 * @see TensorOps
+	 */
+	public TensorQualify(TensorOps o1, float err)
+	{
+		this.err = err;
+		this.o1 = o1;
+	}
+	
+	
+	/**
+	 * Returns the {@code TensorOps} operator.
+	 * 
+	 * @return  an operator
+	 * 
+	 * 
+	 * @see TensorOps
+	 */
+	public TensorOps Operator()
+	{
+		return o1;
+	}
+	
+	/**
+	 * Returns the base {@code Tensor}.
+	 * 
+	 * @return  a tensor
 	 * 
 	 * 
 	 * @see Tensor
 	 */
-	public TensorQualify(Tensor t1, float err)
+	public Tensor Tensor()
 	{
-		this.err = err;
-		this.t1 = t1;
+		return o1.Operable();
 	}
-	
 	
 	/**
 	 * Returns the error margin.
 	 * 
 	 * @return  an error margin
 	 */
-	protected float Error()
+	public float Error()
 	{
 		return err;
 	}
 
+
 	@Override
 	public Boolean result()
 	{
-		return t1.is(TensorOps.Type());
+		return Tensor().is(TensorOps.Type());
 	}
 	
 	@Override

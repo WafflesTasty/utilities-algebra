@@ -4,6 +4,7 @@ import waffles.utils.alg.linear.measure.matrix.ops.MatrixProduct;
 import waffles.utils.alg.linear.measure.matrix.ops.MatrixTranspose;
 import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.alg.linear.measure.tensor.TensorOps;
+import waffles.utils.alg.linear.measure.tensor.ops.TensorQualify;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**
@@ -28,18 +29,6 @@ import waffles.utils.tools.patterns.operator.Operation;
 @FunctionalInterface
 public interface MatrixOps extends TensorOps
 {	
-	@Deprecated
-	public default boolean allows(Tensor obj, int ulps)
-	{
-		if(!matches(obj))
-		{
-			return obj.Order() == 2;
-		}
-		
-		return true;
-	}
-	
-	
 	/**
 	 * Returns the abstract type of the {@code MatrixOps}.
 	 * </br> The result of this method can be passed to a
@@ -49,10 +38,62 @@ public interface MatrixOps extends TensorOps
 	 */
 	public static MatrixOps Type()
 	{
-		return () ->
+		return () -> null;
+	}
+	
+	/**
+	 * A {@code Qualify} operation qualifies a {@code Matrix}.
+	 * This operation is used to check if a matrix is allowed
+	 * to operate through a {@code MatrixOps} subtype.
+	 *
+	 * @author Waffles
+	 * @since 23 Aug 2025
+	 * @version 1.1
+	 *
+	 * 
+	 * @see TensorQualify
+	 */
+	public static class Qualify extends TensorQualify
+	{
+		/**
+		 * Creates a new {@code Qualify}.
+		 * 
+		 * @param o1   a matrix operator
+		 * @param err  an error margin
+		 * 
+		 * 
+		 * @see MatrixOps
+		 */
+		public Qualify(MatrixOps o1, float err)
 		{
-			return null;
-		};
+			super(o1, err);
+		}
+		
+		/**
+		 * Returns the base {@code Matrix}.
+		 * 
+		 * @return  a base matrix
+		 * 
+		 * 
+		 * @see Matrix
+		 */
+		public Matrix Matrix()
+		{
+			return Operator().Operable();
+		}
+		
+		
+		@Override
+		public MatrixOps Operator()
+		{
+			return (MatrixOps) super.Operator();
+		}
+		
+		@Override
+		public Boolean result()
+		{
+			return Matrix().is(MatrixOps.Type());
+		}
 	}
 		
 		
@@ -101,6 +142,12 @@ public interface MatrixOps extends TensorOps
 	}
 
 		
+	@Override
+	public default Operation<Boolean> Allows(float e)
+	{
+		return new Qualify(this, e);
+	}
+	
 	@Override
 	public default MatrixOps instance(Tensor t)
 	{

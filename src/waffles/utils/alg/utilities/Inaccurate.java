@@ -16,13 +16,6 @@ import waffles.utils.tools.primitives.Floats;
 @FunctionalInterface
 public interface Inaccurate<O>
 {
-	/**
-	 * Checks if two objects are approximately equal.
-	 * 
-	 * @param obj   an object to compare
-	 * @param ulps  an error margin
-	 * @return  {@code true} if the objects are equal within the margin of error
-	 */
 	@Deprecated
 	public default Boolean equals(O obj, int ulps)
 	{
