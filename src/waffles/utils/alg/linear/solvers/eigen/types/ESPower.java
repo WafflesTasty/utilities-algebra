@@ -1,16 +1,16 @@
-package waffles.utils.alg.linear.solvers.eigen;
+package waffles.utils.alg.linear.solvers.eigen.types;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
 import waffles.utils.alg.linear.measure.matrix.types.Square;
 import waffles.utils.alg.linear.measure.vector.Vector;
-import waffles.utils.alg.linear.solvers.factor.lu.LUCrout;
+import waffles.utils.alg.linear.solvers.eigen.EigenPair;
+import waffles.utils.alg.linear.solvers.eigen.EigenSolver;
 import waffles.utils.alg.utilities.matrix.Rayleigh;
-import waffles.utils.algebra.elements.linear.Matrices;
 import waffles.utils.tools.primitives.Doubles;
 import waffles.utils.tools.primitives.Floats;
 
 /**
- * The {@code ESPower} algorithm approximates eigenvectors through {@code Rayleigh} iteration.
+ * The {@code ESPower} algorithm approximates eigenvectors through power iteration.
  *
  * @author Waffles
  * @since Jul 14, 2018
@@ -19,54 +19,32 @@ import waffles.utils.tools.primitives.Floats;
  * 
  * @see EigenSolver
  */
-public class ESRayleigh implements EigenSolver
+public class ESPower implements EigenSolver
 {
-	/**
-	 * The {@code Hints} interface defines settings for an {@code ESRayleigh}.
-	 *
-	 * @author Waffles
-	 * @since 26 Aug 2025
-	 * @version 1.1
-	 *
-	 * 
-	 * @see EigenSolver
-	 */
-	@FunctionalInterface
-	public static interface Hints extends EigenSolver.Hints
-	{
-		@Override
-		public default double Error()
-		{
-			return Doubles.pow(2, -32);
-		}
-	}
-	
-	
 	private Hints hints;
-	private LUCrout slv;
 	
 	/**
-	 * Creates a new {@code ESRayleigh}.
+	 * Creates a new {@code EVInverse}.
 	 * 
 	 * @param h  solver hints
 	 * 
 	 * 
 	 * @see EigenSolver
 	 */
-	public ESRayleigh(Hints h)
+	public ESPower(Hints h)
 	{
 		hints = h;
 	}
 	
 	/**
-	 * Creates a new {@code ESRayleigh}.
+	 * Creates a new {@code EVInverse}.
 	 * 
 	 * @param m  a base matrix
 	 * 
 	 * 
 	 * @see EigenSolver
 	 */
-	public ESRayleigh(Matrix m)
+	public ESPower(Matrix m)
 	{
 		this(() ->
 		{
@@ -77,24 +55,6 @@ public class ESRayleigh implements EigenSolver
 		});
 	}
 
-	
-	LUCrout ShiftedCrout(Matrix s)
-	{
-		return new LUCrout(new LUCrout.Hints()
-		{
-			@Override
-			public Matrix Matrix()
-			{
-				return s;
-			}
-
-			@Override
-			public double Error()
-			{
-				return ESRayleigh.this.Hints().Error();
-			}
-		});
-	}
 	
 	@Override
 	public EigenPair approx(EigenPair est)
@@ -111,16 +71,12 @@ public class ESRayleigh implements EigenSolver
 			
 			
 			int loops = 0;
-			Matrix s = null;
 			Vector v = w.normalize();
 			double err = Doubles.pow(e, 4);
 			while(err < norm)
 			{
 				// Iterate the vector.
-				l = Rayleigh.coefficient(m, v);
-				s = Matrices.shift(m, -l);
-				slv = ShiftedCrout(s);
-				w = slv.solve(v);
+				w = m.times(v);
 				
 				// Calculate the error.
 				float dot = v.dot(w);
@@ -132,6 +88,7 @@ public class ESRayleigh implements EigenSolver
 					break;
 			}
 			
+			l = Rayleigh.coefficient(m, v);
 			return new EigenPair(v, l);
 		}
 

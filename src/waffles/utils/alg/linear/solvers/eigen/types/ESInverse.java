@@ -1,14 +1,17 @@
-package waffles.utils.alg.linear.solvers.eigen;
+package waffles.utils.alg.linear.solvers.eigen.types;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
 import waffles.utils.alg.linear.measure.matrix.types.Square;
 import waffles.utils.alg.linear.measure.vector.Vector;
-import waffles.utils.alg.utilities.matrix.Rayleigh;
+import waffles.utils.alg.linear.solvers.eigen.EigenPair;
+import waffles.utils.alg.linear.solvers.eigen.EigenSolver;
+import waffles.utils.alg.linear.solvers.factor.lu.LUCrout;
+import waffles.utils.algebra.elements.linear.Matrices;
 import waffles.utils.tools.primitives.Doubles;
 import waffles.utils.tools.primitives.Floats;
 
 /**
- * The {@code ESPower} algorithm approximates eigenvectors through power iteration.
+ * The {@code EVInverse} algorithm approximates eigenvectors through inverse iteration.
  *
  * @author Waffles
  * @since Jul 14, 2018
@@ -17,9 +20,10 @@ import waffles.utils.tools.primitives.Floats;
  * 
  * @see EigenSolver
  */
-public class ESPower implements EigenSolver
+public class ESInverse implements EigenSolver
 {
 	private Hints hints;
+	private LUCrout slv;
 	
 	/**
 	 * Creates a new {@code EVInverse}.
@@ -29,7 +33,7 @@ public class ESPower implements EigenSolver
 	 * 
 	 * @see EigenSolver
 	 */
-	public ESPower(Hints h)
+	public ESInverse(Hints h)
 	{
 		hints = h;
 	}
@@ -42,7 +46,7 @@ public class ESPower implements EigenSolver
 	 * 
 	 * @see EigenSolver
 	 */
-	public ESPower(Matrix m)
+	public ESInverse(Matrix m)
 	{
 		this(() ->
 		{
@@ -53,7 +57,7 @@ public class ESPower implements EigenSolver
 		});
 	}
 
-	
+
 	@Override
 	public EigenPair approx(EigenPair est)
 	{
@@ -65,7 +69,10 @@ public class ESPower implements EigenSolver
 			double e = Hints().Error();
 			Matrix m = Hints().Matrix();
 			int lMax = Hints().MaxLoops();
+			
+			Matrix s = Matrices.shift(m, -l);
 			float norm = Floats.MAX_VALUE;
+			slv = new LUCrout(s);
 			
 			
 			int loops = 0;
@@ -74,7 +81,7 @@ public class ESPower implements EigenSolver
 			while(err < norm)
 			{
 				// Iterate the vector.
-				w = m.times(v);
+				w = slv.solve(v);
 				
 				// Calculate the error.
 				float dot = v.dot(w);
@@ -86,7 +93,6 @@ public class ESPower implements EigenSolver
 					break;
 			}
 			
-			l = Rayleigh.coefficient(m, v);
 			return new EigenPair(v, l);
 		}
 
