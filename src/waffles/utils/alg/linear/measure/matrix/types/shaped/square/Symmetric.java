@@ -50,7 +50,7 @@ public interface Symmetric extends Square
 		 * 
 		 * @see Symmetric
 		 */
-		public Qualify(Symmetric o1, float err)
+		public Qualify(Symmetric o1, double err)
 		{
 			super(o1, err);
 		}
@@ -61,7 +61,7 @@ public interface Symmetric extends Square
 		{
 			if(super.result())
 			{
-				float err = Error();
+				double err = Error();
 				Matrix m1 = Matrix();
 				
 				int c1 = m1.Columns();
@@ -106,7 +106,7 @@ public interface Symmetric extends Square
 	}
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}

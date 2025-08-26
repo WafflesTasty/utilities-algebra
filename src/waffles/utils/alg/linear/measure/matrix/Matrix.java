@@ -3,11 +3,11 @@ package waffles.utils.alg.linear.measure.matrix;
 import waffles.utils.alg.Abelian;
 import waffles.utils.alg.Additive;
 import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.tensor.TensorData;
 import waffles.utils.alg.linear.measure.vector.Vector;
 import waffles.utils.algebra.elements.linear.Affine;
 import waffles.utils.algebra.elements.linear.Tensors;
 import waffles.utils.algebra.elements.linear.Vectors;
-import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**

@@ -19,7 +19,7 @@ import waffles.utils.tools.patterns.operator.Operation;
  */
 public class TensorQualify implements Operation<Boolean>
 {
-	private float err;
+	private double err;
 	private TensorOps o1;
 	
 	/**
@@ -31,7 +31,7 @@ public class TensorQualify implements Operation<Boolean>
 	 * 
 	 * @see TensorOps
 	 */
-	public TensorQualify(TensorOps o1, float err)
+	public TensorQualify(TensorOps o1, double err)
 	{
 		this.err = err;
 		this.o1 = o1;
@@ -69,7 +69,7 @@ public class TensorQualify implements Operation<Boolean>
 	 * 
 	 * @return  an error margin
 	 */
-	public float Error()
+	public double Error()
 	{
 		return err;
 	}

@@ -3,10 +3,9 @@ package waffles.utils.alg.linear.measure.tensor;
 import waffles.utils.alg.Abelian;
 import waffles.utils.alg.Additive;
 import waffles.utils.alg.linear.Angular;
+import waffles.utils.alg.linear.measure.tensor.data.TensorArray;
 import waffles.utils.alg.utilities.Inaccurate;
 import waffles.utils.algebra.elements.linear.Tensors;
-import waffles.utils.algebra.elements.linear.tensor.data.TensorArray;
-import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.tools.patterns.operator.Operable;
 import waffles.utils.tools.patterns.operator.Operation;
@@ -97,7 +96,7 @@ public class Tensor implements Angular, Copyable<Tensor>, Inaccurate<Tensor>, In
 	 * 
 	 * @see TensorOps
 	 */
-	public boolean allows(TensorOps ops, float e)
+	public boolean allows(TensorOps ops, double e)
 	{
 		// Check this one-liner the fuck out.
 		return ops.instance(this).Allows(e).result();

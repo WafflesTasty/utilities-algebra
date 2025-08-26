@@ -4,8 +4,8 @@ import waffles.utils.alg.Abelian;
 import waffles.utils.alg.Additive;
 import waffles.utils.alg.linear.measure.matrix.Matrix;
 import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.tensor.TensorData;
 import waffles.utils.alg.linear.measure.vector.fixed.Vector3;
-import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 
 /**
  * A {@code Matrix3x3} defines a 3x3-dimensional {@code Matrix}.

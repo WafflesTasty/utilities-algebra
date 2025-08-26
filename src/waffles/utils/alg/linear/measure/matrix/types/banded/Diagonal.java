@@ -74,7 +74,7 @@ public interface Diagonal extends LowerBidiagonal, UpperBidiagonal, Symmetric
 	}
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return LowerBidiagonal.super.Allows(e);
 	}

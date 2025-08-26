@@ -1,10 +1,11 @@
-package waffles.utils.algebra.elements.linear.tensor.data;
+package waffles.utils.alg.linear.measure.tensor;
 
-import waffles.utils.sets.arrays.like.FloatArray;
-import waffles.utils.tools.patterns.persistence.Data;
+import waffles.utils.alg.linear.measure.tensor.data.TensorArray;
+import waffles.utils.sets.indexed.array.like.FloatArray;
+import waffles.utils.tools.patterns.properties.counters.data.Data;
 
 /**
- * The {@code TensorData} interface defines a data object which backs a {@code Tensor}.
+ * The {@code TensorData} interface defines the value storage of a {@code Tensor}.
  *
  * @author Waffles
  * @since 24 Aug 2023
@@ -28,18 +29,30 @@ public interface TensorData extends Data, FloatArray
 	/**
 	 * Iterates over non-zero keys in the {@code TensorData}.
 	 * 
-	 * @return  an index key iterable
+	 * @return  an index iterable
 	 * 
 	 * 
 	 * @see Iterable
 	 */
 	public abstract Iterable<int[]> NZKeys();
-		
+	
+	
+	@Override
+	public default TensorData instance()
+	{
+		return new TensorArray(Dimensions());
+	}
 	
 	@Override
 	public default TensorData copy()
 	{
-		return (TensorData) FloatArray.super.copy();
+		TensorData copy = instance();
+		for(int[] crd : NZKeys())
+		{
+			copy.put(get(crd), crd);
+		}
+		
+		return copy;
 	}
 	
 	@Override

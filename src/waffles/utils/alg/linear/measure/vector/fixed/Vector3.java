@@ -3,8 +3,8 @@ package waffles.utils.alg.linear.measure.vector.fixed;
 import waffles.utils.alg.Abelian;
 import waffles.utils.alg.Additive;
 import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.tensor.TensorData;
 import waffles.utils.alg.linear.measure.vector.Vector;
-import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.tools.primitives.Floats;
 
 /**

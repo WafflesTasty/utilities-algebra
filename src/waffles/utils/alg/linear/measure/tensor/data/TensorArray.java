@@ -1,12 +1,13 @@
-package waffles.utils.algebra.elements.linear.tensor.data;
+package waffles.utils.alg.linear.measure.tensor.data;
 
-import waffles.utils.sets.indexed.mutable.primitive.FloatIndex;
-import waffles.utils.sets.utilities.iterators.IndexKeys;
+import waffles.utils.alg.linear.measure.tensor.TensorData;
+import waffles.utils.sets.indexed.array.index.FloatIndex;
+import waffles.utils.sets.utilities.indexed.iterators.IndexKeys;
 
 /**
- * A {@code TensorArray} defines tensor data through an {@code ArrayIndex}.
- * This is the most basic form of tensor data, leaving little in
- * the way of memory storage or access optimization.
+ * A {@code TensorArray} defines tensor data through an {@code ObjectIndex}.
+ * This is the most basic form of tensor data, leaving little
+ * in the way of storage or access optimization.
  *
  * @author Waffles
  * @since 24 Aug 2023

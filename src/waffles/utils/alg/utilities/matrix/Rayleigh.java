@@ -1,7 +1,7 @@
-package waffles.utils.algebra.utilities.matrix;
+package waffles.utils.alg.utilities.matrix;
 
-import waffles.utils.algebra.elements.linear.matrix.Matrix;
-import waffles.utils.algebra.elements.linear.vector.Vector;
+import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.linear.measure.vector.Vector;
 
 /**
  * The {@code Rayleigh} class generates Rayleigh coefficients.
@@ -10,15 +10,15 @@ import waffles.utils.algebra.elements.linear.vector.Vector;
  * @since 26 Aug 2023
  * @version 1.0
  */
-public class Rayleigh
+public final class Rayleigh
 {
 	/**
-	 * Computes the Rayleigh coefficient for a {@code Matrix}.
+	 * Computes a Rayleigh coefficient for a {@code Matrix}.
 	 * This defines the best approximation of an eigenvalue.
 	 * 
 	 * @param m  a base matrix
-	 * @param v  a possible eigenvector
-	 * @return   a rayleigh coefficient
+	 * @param v  an eigen vector
+	 * @return   an eigen value
 	 * 
 	 * 
 	 * @see Matrix

@@ -30,10 +30,7 @@ public interface VectorOps extends Tall
 	 */
 	public static VectorOps Type()
 	{
-		return () ->
-		{
-			return null;
-		};
+		return () -> null;
 	}
 	
 	/**
@@ -59,7 +56,7 @@ public interface VectorOps extends Tall
 		 * 
 		 * @see VectorOps
 		 */
-		public Qualify(VectorOps o1, float err)
+		public Qualify(VectorOps o1, double err)
 		{
 			super(o1, err);
 		}
@@ -89,7 +86,7 @@ public interface VectorOps extends Tall
 		{
 			return Vector().is(VectorOps.Type());
 		}
-	}	
+	}
 	
 
 	/**
@@ -107,7 +104,7 @@ public interface VectorOps extends Tall
 	
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}

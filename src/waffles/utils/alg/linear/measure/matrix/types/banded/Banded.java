@@ -7,6 +7,12 @@ import waffles.utils.alg.linear.measure.matrix.ops.square.banded.BandedLProduct;
 import waffles.utils.alg.linear.measure.matrix.ops.square.banded.BandedRProduct;
 import waffles.utils.alg.linear.measure.matrix.ops.square.banded.BandedScalar;
 import waffles.utils.alg.linear.measure.matrix.types.Square;
+import waffles.utils.alg.linear.measure.matrix.types.banded.lower.LowerBidiagonal;
+import waffles.utils.alg.linear.measure.matrix.types.banded.lower.LowerHessenberg;
+import waffles.utils.alg.linear.measure.matrix.types.banded.lower.LowerTriangular;
+import waffles.utils.alg.linear.measure.matrix.types.banded.upper.UpperBidiagonal;
+import waffles.utils.alg.linear.measure.matrix.types.banded.upper.UpperHessenberg;
+import waffles.utils.alg.linear.measure.matrix.types.banded.upper.UpperTriangular;
 import waffles.utils.alg.linear.measure.tensor.Tensor;
 import waffles.utils.tools.patterns.operator.Operation;
 import waffles.utils.tools.primitives.Floats;
@@ -27,101 +33,197 @@ import waffles.utils.tools.primitives.Integers;
 public interface Banded extends Square
 {
 	/**
-	 * Returns the abstract {@code Banded} type.
+	 * Returns an abstract {@code Banded} type.
 	 * 
-	 * @param bLower  a  lower band size
-	 * @param bUpper  an upper band size
+	 * @param m  a base matrix
+	 * @param e  an error margin
+	 * @return  a type operator
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static Banded Type(Matrix m, double e)
+	{
+		int lBand = getLowerBand(m, e);
+		int uBand = getUpperBand(m, e);
+		
+		return Type(lBand, uBand);
+	}
+	
+	/**
+	 * Returns an abstract {@code Banded} type.
+	 * 
+	 * @param lBand  a  lower band size
+	 * @param uBand  an upper band size
 	 * @return  a type operator
 	 */
-	public static Banded Type(int bLower, int bUpper)
+	public static Banded Type(int lBand, int uBand)
 	{
-		return new Banded()
+		switch(lBand)
 		{
-			@Override
-			public Matrix Operable()
+		case 0:
+		{
+			switch(uBand)
 			{
-				return null;
+			case 0:
+				return (Diagonal) () -> null;
+			case 1:
+				return (UpperBidiagonal) () -> null;
+			default:
+				return (UpperTriangular) () -> null;
 			}
-			
-			
-			@Override
-			public int LowerBand()
+		}
+		case 1:
+		{
+			switch(uBand)
 			{
-				return bLower;
+			case 0:
+				return (LowerBidiagonal) () -> null;
+			case 1:
+				return (Tridiagonal) () -> null;
+			default:
+				return (UpperHessenberg) () -> null;
 			}
-			
-			@Override
-			public int UpperBand()
+		}
+		default:
+		{
+			switch(uBand)
 			{
-				return bUpper;
+			case 0:
+				return (LowerTriangular) () -> null;
+			case 1:
+				return (LowerHessenberg) () -> null;
+			default:
+				return new Banded()
+				{
+					@Override
+					public Matrix Operable()
+					{
+						return null;
+					}
+					
+					
+					@Override
+					public int LowerBand()
+					{
+						return lBand;
+					}
+					
+					@Override
+					public int UpperBand()
+					{
+						return uBand;
+					}
+				};
 			}
-		};
+		}
+		}
 	}
+	
 	
 	/**
 	 * Computes the band size of a {@code Matrix} below the diagonal.
 	 * 
-	 * @param m    a base matrix
-	 * @param err  an error margin
+	 * @param m  a base matrix
+	 * @param e  an error margin
 	 * @return  a lower band size
 	 * 
 	 * 
 	 * @see Matrix
 	 */
-	public static int getLowerBand(Matrix m, float err)
+	public static int getLowerBand(Matrix m, double e)
 	{
-		int rows = m.Rows();
-		int cols = m.Columns();
+		return getLowerBand(m, e, 0);
+	}
+	
+	/**
+	 * Computes the band size of a {@code Matrix} below the diagonal.
+	 * 
+	 * @param m  a base matrix
+	 * @param e  an error margin
+	 * @param min  a minimum band
+	 * @return  a lower band size
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static int getLowerBand(Matrix m, double e, int min)
+	{
+		int r1 = m.Rows();
+		int c1 = m.Columns();
 		
-		int band = Integers.max(rows, cols) - 1;
-		for(int i = rows - 1; i > 0; i--)
+		int b = Integers.max(r1, c1) - 1;
+		for(int r = r1 - 1; r > 0; r--)
 		{
-			for(int j = 0; j < Integers.min(rows - i, cols); j++)
+			int cMax = Integers.min(r1 - r, c1);
+			for(int c = 0; c < cMax; c++)
 			{
-				if(Floats.abs(m.get(i + j, j)) > err)
+				float v = m.get(r + c, c);
+				if(e < Floats.abs(v))
 				{
-					return band;
+					return b;
 				}
 			}
 
-			band--;
+			if(--b <= min)
+				break;
 		}
 		
-		return 0;
+		return b;
 	}
 	
 	/**
 	 * Computes the band size of a {@code Matrix} above the diagonal.
 	 * 
-	 * @param m    a base matrix
-	 * @param err  an error margin
+	 * @param m  a base matrix
+	 * @param e  an error margin
+	 * @param min  a minimum band
 	 * @return  an upper band size
 	 * 
 	 * 
 	 * @see Matrix
 	 */
-	public static int getUpperBand(Matrix m, float err)
+	public static int getUpperBand(Matrix m, double e, int min)
 	{
-		int rows = m.Rows();
-		int cols = m.Columns();
+		int r1 = m.Rows();
+		int c1 = m.Columns();
 		
-		int band = Integers.max(rows, cols) - 1;
-		for(int i = cols - 1; i > 0; i--)
+		int b = Integers.max(r1, c1) - 1;
+		for(int c = c1 - 1; c > 0; c--)
 		{
-			for(int j = 0; j < Integers.min(cols - i, rows); j++)
+			int rMax = Integers.min(c1 - c, r1);
+			for(int r = 0; r < rMax; r++)
 			{
-				if(Floats.abs(m.get(j, i + j)) > err)
+				float v = m.get(r, r + c);
+				if(e < Floats.abs(v))
 				{
-					return band;
+					return b;
 				}
 			}
-			
-			band--;
+
+			if(--b <= min)
+				break;
 		}
 		
-		return 0;
+		return b;
 	}
 
+	/**
+	 * Computes the band size of a {@code Matrix} above the diagonal.
+	 * 
+	 * @param m  a base matrix
+	 * @param e  an error margin
+	 * @return  an upper band size
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public static int getUpperBand(Matrix m, double e)
+	{
+		return getUpperBand(m, e, 0);
+	}
+	
+	
 	/**
 	 * A {@code Qualify} operation checks if a matrix is {@code Banded}.
 	 *
@@ -143,7 +245,7 @@ public interface Banded extends Square
 		 * 
 		 * @see Banded
 		 */
-		public Qualify(Banded b1, float err)
+		public Qualify(Banded b1, double err)
 		{
 			super(b1, err);
 		}
@@ -164,12 +266,12 @@ public interface Banded extends Square
 			}
 			
 			
-			float e1 = Error();
-			Matrix m1 = Matrix();
+			double e = Error();
+			Matrix m = Matrix();
 			Banded b = Operator();
 
-			return Banded.getLowerBand(m1, e1) <= b.LowerBand()
-				&& Banded.getUpperBand(m1, e1) <= b.UpperBand();
+			return Banded.getLowerBand(m, e) <= b.LowerBand()
+				&& Banded.getUpperBand(m, e) <= b.UpperBand();
 		}
 		
 		@Override
@@ -221,7 +323,7 @@ public interface Banded extends Square
 	}
 
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}

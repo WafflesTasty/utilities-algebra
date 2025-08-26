@@ -55,7 +55,7 @@ public interface Orthogonal extends Square
 		 * 
 		 * @see Orthogonal
 		 */
-		public Qualify(Orthogonal o1, float err)
+		public Qualify(Orthogonal o1, double err)
 		{
 			super(o1, err);
 			
@@ -75,7 +75,7 @@ public interface Orthogonal extends Square
 		{
 			if(super.result())
 			{
-				float e = Error();
+				double e = Error();
 				Matrix m2 = mp.result();
 				MatrixOps o2 = ID.instance(m2);
 				
@@ -100,7 +100,7 @@ public interface Orthogonal extends Square
 	}
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}

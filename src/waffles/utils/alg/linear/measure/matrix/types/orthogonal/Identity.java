@@ -55,7 +55,7 @@ public interface Identity extends Orthogonal, Diagonal, Involutory
 		 * 
 		 * @see Identity
 		 */
-		public Qualify(Identity o1, float err)
+		public Qualify(Identity o1, double err)
 		{
 			super(o1, err);
 		}
@@ -66,7 +66,7 @@ public interface Identity extends Orthogonal, Diagonal, Involutory
 		{
 			if(super.result())
 			{
-				float err = Error();
+				double err = Error();
 				Matrix m2 = Matrix();
 				int c2 = m2.Columns();
 				int r2 = m2.Rows();
@@ -119,7 +119,7 @@ public interface Identity extends Orthogonal, Diagonal, Involutory
 	}
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}
@@ -136,6 +136,4 @@ public interface Identity extends Orthogonal, Diagonal, Involutory
 	{
 		return t.Operator() instanceof Identity;
 	}
-
-
 }

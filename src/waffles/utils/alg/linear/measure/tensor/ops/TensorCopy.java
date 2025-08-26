@@ -1,8 +1,8 @@
 package waffles.utils.alg.linear.measure.tensor.ops;
 
 import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.linear.measure.tensor.TensorData;
 import waffles.utils.algebra.elements.linear.Tensors;
-import waffles.utils.algebra.elements.linear.tensor.data.TensorData;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**

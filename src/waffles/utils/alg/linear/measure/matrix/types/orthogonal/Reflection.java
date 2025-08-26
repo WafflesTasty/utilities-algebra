@@ -85,7 +85,7 @@ public interface Reflection extends Involutory, Orthogonal, Symmetric
 		 * 
 		 * @see Reflection
 		 */
-		public Qualify(Reflection o1, float err)
+		public Qualify(Reflection o1, double err)
 		{
 			super(o1, err);
 			
@@ -101,7 +101,7 @@ public interface Reflection extends Involutory, Orthogonal, Symmetric
 		{
 			if(super.result())
 			{
-				float e = Error();
+				double e = Error();
 				Vector n = normal(Matrix());
 				Matrix m2 = n.times(n.transpose());
 				m2 = m2.times(2f).plus(Matrix());
@@ -136,7 +136,7 @@ public interface Reflection extends Involutory, Orthogonal, Symmetric
 	}
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}

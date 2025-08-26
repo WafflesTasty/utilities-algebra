@@ -1,7 +1,7 @@
 package waffles.utils.alg.linear.measure.matrix.ops.square;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
-import waffles.utils.algebra.algorithms.solvers.SLVCrout;
+import waffles.utils.alg.linear.solvers.factor.lu.LUCrout;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**
@@ -37,7 +37,7 @@ public class SquareInverse implements Operation<Matrix>
 	@Override
 	public Matrix result()
 	{
-		return new SLVCrout(m1).inverse();
+		return new LUCrout(m1).inverse();
 	}
 	
 	@Override

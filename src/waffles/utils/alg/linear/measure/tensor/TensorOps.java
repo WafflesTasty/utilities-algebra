@@ -84,7 +84,7 @@ public interface TensorOps extends Operator<Tensor>
 	 * 
 	 * @see Operation
 	 */
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new TensorQualify(this, e);
 	}

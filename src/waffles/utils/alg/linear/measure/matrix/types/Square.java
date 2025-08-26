@@ -53,7 +53,7 @@ public interface Square extends Tall, Wide
 		 * 
 		 * @see Square
 		 */
-		public Qualify(Square o1, float err)
+		public Qualify(Square o1, double err)
 		{
 			super(o1, err);
 		}
@@ -115,7 +115,7 @@ public interface Square extends Tall, Wide
 	}
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}

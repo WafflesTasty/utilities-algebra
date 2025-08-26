@@ -48,7 +48,7 @@ public interface Wide extends MatrixOps
 		 * 
 		 * @see Wide
 		 */
-		public Qualify(Wide o1, float err)
+		public Qualify(Wide o1, double err)
 		{
 			super(o1, err);
 		}
@@ -82,7 +82,7 @@ public interface Wide extends MatrixOps
 	}
 	
 	@Override
-	public default Operation<Boolean> Allows(float e)
+	public default Operation<Boolean> Allows(double e)
 	{
 		return new Qualify(this, e);
 	}
