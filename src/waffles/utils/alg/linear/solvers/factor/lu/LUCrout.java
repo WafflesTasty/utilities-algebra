@@ -123,12 +123,12 @@ public class LUCrout implements LinearSystem, PLUFactor
 	{
 		this(() ->
 		{
-			Matrix b = m.copy().destroy();
+			Matrix b = m.copy();
 			if(m.is(LowerTriangular.Type()))
 				b.setOperator(LowerTriangular.Type());
 			if(m.is(UpperTriangular.Type()))
 				b.setOperator(UpperTriangular.Type());
-			return b;
+			return b.destroy();
 		});
 	}
 

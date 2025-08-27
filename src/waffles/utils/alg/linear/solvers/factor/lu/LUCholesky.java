@@ -121,12 +121,12 @@ public class LUCholesky implements LinearSystem, LUFactor
 	{
 		this(() ->
 		{
-			Matrix b = m.copy().destroy();
+			Matrix b = m.copy();
 			if(m.is(Symmetric.Type()))
 				b.setOperator(Symmetric.Type());
 			if(m.is(Diagonal.Type()))
 				b.setOperator(Diagonal.Type());
-			return b;
+			return b.destroy();
 		});
 	}
 
