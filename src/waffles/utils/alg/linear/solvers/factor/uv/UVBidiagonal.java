@@ -10,8 +10,8 @@ import waffles.utils.alg.linear.measure.matrix.types.shaped.Tall;
 import waffles.utils.alg.linear.measure.vector.Vector;
 import waffles.utils.alg.linear.solvers.exact.Determinant;
 import waffles.utils.alg.linear.solvers.factor.UVFactor;
+import waffles.utils.alg.utilities.matrix.Householder;
 import waffles.utils.algebra.elements.linear.Matrices;
-import waffles.utils.algebra.utilities.matrix.Householder;
 import waffles.utils.tools.primitives.Doubles;
 import waffles.utils.tools.primitives.Integers;
 
@@ -19,7 +19,7 @@ import waffles.utils.tools.primitives.Integers;
  * The {@code UVBidiagonal} algorithm performs bidiagonal factorization using
  * {@code HouseHolder} transformations. This method decomposes a matrix
  * {@code M = UBV*}, where U, V are (reduced) {@code Orthogonal}
- * matrices, and B is an {@code UpperBidiagonal} matrix.
+ * matrices, and B is a {@code Bidiagonal} matrix.
  * 
  * The algorithm used is a simplified version of the Golub-Kahan-Lanczos algorithm.
  * It alternates between zeroeing the components of a row and a column by applying
@@ -133,6 +133,10 @@ public class UVBidiagonal implements UVFactor, Determinant
 
 	/**
 	 * Returns the B matrix of the {@code UVFactor}.
+	 * <ul>
+	 * 	<li>If M was {@code Tall}, B will be {@code UpperBidiagonal}.</li>
+	 *  <li>If M was {@code Wide}, B will be {@code LowerBidiagonal}.</li>
+	 * </ul>
 	 * 
 	 * @return  a bidiagonal matrix
 	 * 
@@ -216,7 +220,7 @@ public class UVBidiagonal implements UVFactor, Determinant
 				if(Hints().Error() < uk.normSqr())
 				{
 					// Create the column reflection matrix.
-					Matrix uhh = Householder.Matrix(uk, k+0);
+					Matrix uhh = Householder.reflect(uk, k+0);
 					
 					// Column reflect the target matrix.
 					b = uhh.times(b);
@@ -239,7 +243,7 @@ public class UVBidiagonal implements UVFactor, Determinant
 				if(Hints().Error() < vk.normSqr())
 				{
 					// Create the row reflection matrix.
-					Matrix vhh = Householder.Matrix(vk, k+1);
+					Matrix vhh = Householder.reflect(vk, k+1);
 					
 					// Row reflect the target matrix.
 					b = b.times(vhh);
@@ -293,7 +297,7 @@ public class UVBidiagonal implements UVFactor, Determinant
 				if(Hints().Error() < vk.normSqr())
 				{
 					// Create the row reflection matrix.
-					Matrix vhh = Householder.Matrix(vk, k+0);
+					Matrix vhh = Householder.reflect(vk, k+0);
 					
 					// Row reflect the target matrix.
 					b = b.times(vhh);
@@ -316,7 +320,7 @@ public class UVBidiagonal implements UVFactor, Determinant
 				if(Hints().Error() < uk.normSqr())
 				{
 					// Create the column reflection matrix.
-					Matrix uhh = Householder.Matrix(uk, k+1);
+					Matrix uhh = Householder.reflect(uk, k+1);
 					
 					// Column reflect the target matrix.
 					b = uhh.times(b);

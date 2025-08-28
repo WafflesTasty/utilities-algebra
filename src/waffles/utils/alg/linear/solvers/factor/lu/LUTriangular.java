@@ -76,7 +76,7 @@ public class LUTriangular implements LinearSystem, LUFactor
 		 */
 		INVALID,
 		/**
-		 * An indeterminate matrix is validated against the other types.
+		 * An indeterminate matrix is validated against other types.
 		 */
 		INDETERMINATE,
 		/**

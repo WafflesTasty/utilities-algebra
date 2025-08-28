@@ -1,8 +1,8 @@
-package waffles.utils.algebra.utilities.matrix;
+package waffles.utils.alg.utilities.matrix;
 
-import waffles.utils.algebra.elements.linear.matrix.Matrices;
-import waffles.utils.algebra.elements.linear.matrix.Matrix;
-import waffles.utils.algebra.elements.linear.vector.Vector;
+import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.linear.measure.vector.Vector;
+import waffles.utils.algebra.elements.linear.Matrices;
 
 /**
  * The {@code Householder} class generates Householder reflection matrices.
@@ -20,20 +20,21 @@ public class Householder
 	 * for one.
 	 * 
 	 * @param v  a vector to reflect
-	 * @param i  the component to keep
-	 * @return  a householder reflection
+	 * @param i  a component to keep
+	 * @return   a reflection matrix
 	 * 
 	 * 
 	 * @see Matrix
 	 * @see Vector
 	 */
-	public static Matrix Matrix(Vector v, int i)
+	public static Matrix reflect(Vector v, int i)
 	{
 		Vector x = v.copy();
 		float iErr = (x.get(i) < 0 ? -1 : 1);
 		x.set(x.get(i) + iErr * x.norm(), i);
 		return Matrices.reflection(x);
 	}
+	
 	
 	private Householder()
 	{
