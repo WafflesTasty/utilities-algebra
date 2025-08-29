@@ -66,6 +66,7 @@ public interface UVFactor extends Solver
 	 */
 	public abstract Matrix V();
 
+	
 	@Override
 	public abstract Hints Hints();
 }

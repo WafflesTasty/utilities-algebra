@@ -1,6 +1,7 @@
-package waffles.utils.alg.linear.solvers.factor.lu;
+package waffles.utils.alg.linear.solvers.exact.types;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.linear.measure.matrix.types.Square;
 import waffles.utils.alg.linear.measure.matrix.types.banded.Banded;
 import waffles.utils.alg.linear.measure.matrix.types.banded.Diagonal;
 import waffles.utils.alg.linear.measure.matrix.types.banded.lower.LowerTriangular;
@@ -134,12 +135,12 @@ public class LUCholesky implements LinearSystem, LUFactor
 	@Override
 	public <M extends Matrix> M solve(M b)
 	{
-		M x = (M) b;
+		Matrix x = b;
 		// Solve through substitution.
 		x = new LUTriangular(L()).solve(x);
 		x = new LUTriangular(U()).solve(x);
 		
-		return x;
+		return (M) x;
 	}
 	
 	@Override
@@ -332,15 +333,18 @@ public class LUCholesky implements LinearSystem, LUFactor
 		{
 			double e = Hints().Error();
 			Matrix a = Hints().Matrix();
-			Banded ops = Banded.Type(a, e);
 			
 			state = State.INVALID;
-			if(ops instanceof Diagonal)
-				state = State.SIMPLIFIED;
-			else
+			if(a.allows(Square.Type(), 0))
 			{
-				if(a.allows(Symmetric.Type(), e))
-					state = State.CHOLESKY;
+				Banded ops = Banded.Type(a, e);
+				if(ops instanceof Diagonal)
+					state = State.SIMPLIFIED;
+				else
+				{
+					if(a.allows(Symmetric.Type(), e))
+						state = State.CHOLESKY;
+				}
 			}
 		}
 

@@ -1,6 +1,7 @@
-package waffles.utils.alg.linear.solvers.factor.lu;
+package waffles.utils.alg.linear.solvers.exact.types;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.linear.measure.matrix.types.Square;
 import waffles.utils.alg.linear.measure.matrix.types.banded.Banded;
 import waffles.utils.alg.linear.measure.matrix.types.banded.Diagonal;
 import waffles.utils.alg.linear.measure.matrix.types.banded.lower.LowerTriangular;
@@ -373,15 +374,18 @@ public class LUTriangular implements LinearSystem, LUFactor
 		{
 			double e = Hints().Error();
 			Matrix a = Hints().Matrix();
-			Banded ops = Banded.Type(a, e);
 			
 			state = State.INVALID;
-			if(ops instanceof LowerTriangular)
-				state = State.LOWER_TRIANGULAR;
-			if(ops instanceof UpperTriangular)
-				state = State.UPPER_TRIANGULAR;
-			if(ops instanceof Diagonal)
-				state = State.DIAGONAL;
+			if(a.allows(Square.Type(), 0))
+			{
+				Banded ops = Banded.Type(a, e);
+				if(ops instanceof LowerTriangular)
+					state = State.LOWER_TRIANGULAR;
+				if(ops instanceof UpperTriangular)
+					state = State.UPPER_TRIANGULAR;
+				if(ops instanceof Diagonal)
+					state = State.DIAGONAL;
+			}
 		}
 
 		return state;

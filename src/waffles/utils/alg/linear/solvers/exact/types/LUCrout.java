@@ -1,4 +1,4 @@
-package waffles.utils.alg.linear.solvers.factor.lu;
+package waffles.utils.alg.linear.solvers.exact.types;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
 import waffles.utils.alg.linear.measure.matrix.types.Square;

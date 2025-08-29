@@ -5,7 +5,7 @@ import waffles.utils.alg.linear.measure.matrix.types.Square;
 import waffles.utils.alg.linear.measure.vector.Vector;
 import waffles.utils.alg.linear.solvers.eigen.EigenPair;
 import waffles.utils.alg.linear.solvers.eigen.EigenSolver;
-import waffles.utils.alg.linear.solvers.factor.lu.LUCrout;
+import waffles.utils.alg.linear.solvers.exact.types.LUCrout;
 import waffles.utils.alg.utilities.matrix.Rayleigh;
 import waffles.utils.algebra.elements.linear.Matrices;
 import waffles.utils.tools.primitives.Doubles;
