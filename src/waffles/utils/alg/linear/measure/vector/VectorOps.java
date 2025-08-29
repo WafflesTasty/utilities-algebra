@@ -89,19 +89,11 @@ public interface VectorOps extends Tall
 	}
 	
 
-	/**
-	 * Returns a vector 1-norm {@code Operation}.
-	 * 
-	 * @return  a norm operation
-	 * 
-	 * 
-	 * @see Operation
-	 */
+	@Override
 	public default Operation<Float> Norm1()
 	{
 		return new VectorNorm(Operable());
 	}
-	
 	
 	@Override
 	public default Operation<Boolean> Allows(double e)

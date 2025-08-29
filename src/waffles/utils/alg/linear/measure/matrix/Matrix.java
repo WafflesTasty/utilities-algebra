@@ -99,6 +99,16 @@ public class Matrix extends Tensor implements Affine
 		return mul2.result();
 	}
 	
+	/**
+	 * Returns a {@code Matrix} 1-norm.
+	 * 
+	 * @return  a 1-norm
+	 */
+	public float norm1()
+	{
+		return Operator().Norm1().result();
+	}
+	
 	
 	/**
 	 * Returns a resized {@code Matrix}.

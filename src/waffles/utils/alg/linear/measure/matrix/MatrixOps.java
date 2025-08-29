@@ -1,5 +1,6 @@
 package waffles.utils.alg.linear.measure.matrix;
 
+import waffles.utils.alg.linear.measure.matrix.ops.MatrixNorm;
 import waffles.utils.alg.linear.measure.matrix.ops.MatrixProduct;
 import waffles.utils.alg.linear.measure.matrix.ops.MatrixTranspose;
 import waffles.utils.alg.linear.measure.tensor.Tensor;
@@ -141,6 +142,19 @@ public interface MatrixOps extends TensorOps
 		return new MatrixTranspose(Operable());
 	}
 
+	/**
+	 * Returns a matrix 1-norm {@code Operation}.
+	 * 
+	 * @return  a norm operation
+	 * 
+	 * 
+	 * @see Operation
+	 */
+	public default Operation<Float> Norm1()
+	{
+		return new MatrixNorm(Operable());
+	}
+	
 		
 	@Override
 	public default Operation<Boolean> Allows(double e)

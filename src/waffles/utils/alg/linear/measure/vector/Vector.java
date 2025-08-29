@@ -76,16 +76,6 @@ public class Vector extends Matrix
 		return (Vector) super.resize(s, 1);
 	}
 	
-	/**
-	 * Returns a {@code Vector} 1-norm.
-	 * 
-	 * @return  a 1-norm
-	 */
-	public float norm1()
-	{
-		return Operator().Norm1().result();
-	}
-	
 	
 	@Override
 	public VectorOps Operator()
