@@ -1,7 +1,7 @@
 package waffles.utils.alg.linear.measure.matrix.ops.square;
 
 import waffles.utils.alg.linear.measure.matrix.Matrix;
-import waffles.utils.alg.linear.solvers.exact.types.LUCrout;
+import waffles.utils.alg.linear.solvers.matrix.exact.types.LUCrout;
 import waffles.utils.tools.patterns.operator.Operation;
 
 /**

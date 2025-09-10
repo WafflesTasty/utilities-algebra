@@ -1,11 +1,10 @@
 package waffles.utils.alg.linear.solvers;
 
-import waffles.utils.alg.linear.measure.matrix.Matrix;
 import waffles.utils.alg.utilities.Algorithmic;
 import waffles.utils.tools.primitives.Doubles;
 
 /**
- * The {@code Solver} interface defines a base for a linear algorithm.
+ * The {@code Solver} interface defines a base for an advanced algorithm.
  *
  * @author Waffles
  * @since 24 Aug 2025
@@ -31,17 +30,6 @@ public interface Solver
 	 */
 	public static interface Hints extends Algorithmic
 	{
-		/**
-		 * Returns the matrix of the {@code Hints}.
-		 * 
-		 * @return  a base matrix
-		 * 
-		 * 
-		 * @see Matrix
-		 */
-		public abstract Matrix Matrix();
-		
-		
 		@Override
 		public default double Error()
 		{

@@ -1,7 +1,5 @@
 package waffles.utils.alg.utilities;
 
-import waffles.utils.tools.primitives.Floats;
-
 /**
  * An {@code Inaccurate} object can be approximated.
  * </br> This interface can be used to compare numeric data to within an error margin.
@@ -16,12 +14,6 @@ import waffles.utils.tools.primitives.Floats;
 @FunctionalInterface
 public interface Inaccurate<O>
 {
-	@Deprecated
-	public default Boolean equals(O obj, int ulps)
-	{
-		return equals(obj, Floats.EPSILON * ulps);
-	}
-	
 	/**
 	 * Checks if two objects are approximately equal.
 	 * 
