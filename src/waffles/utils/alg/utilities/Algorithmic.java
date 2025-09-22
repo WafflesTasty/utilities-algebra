@@ -11,11 +11,6 @@ package waffles.utils.alg.utilities;
 public interface Algorithmic
 {
 	/**
-	 * Defines the default sweeps of the {@code Hints}.
-	 */
-	public static final int DEF_SWEEPS = 10000;
-
-	/**
 	 * The {@code Hints.Iterative} interface defines iterative hints.
 	 *
 	 * @author Waffles
@@ -28,13 +23,18 @@ public interface Algorithmic
 	public static interface Iterative extends Algorithmic
 	{
 		/**
-		 * Returns the maximum sweeps of the {@code Hints}.
+		 * Defines the default loops of the {@code Hints}.
+		 */
+		public static final int DEF_LOOPS = 10000;
+			
+		/**
+		 * Returns the maximum loops of the {@code Hints}.
 		 * 
-		 * @return  a sweep maximum
+		 * @return  a loop maximum
 		 */
 		public default int MaxLoops()
 		{
-			return DEF_SWEEPS;
+			return DEF_LOOPS;
 		}
 	}
 

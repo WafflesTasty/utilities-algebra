@@ -1,5 +1,7 @@
 package waffles.utils.alg;
 
+import waffles.utils.alg.utilities.groups.Multiplication;
+
 /**
  * An {@code Algebraic} is abelian and defines a product operation.
  *
@@ -10,13 +12,7 @@ package waffles.utils.alg;
  * 
  * @see Abelian
  */
-public interface Algebraic extends Abelian
+public interface Algebraic extends Abelian, Multiplication<Algebraic>
 {
-	/**
-	 * Multiplies an algebraic with this {@code Algebraic}.
-	 * 
-	 * @param a  an algebraic
-	 * @return   a multiplication
-	 */
-	public abstract Algebraic times(Algebraic a);
+	// NOT APPLICABLE
 }

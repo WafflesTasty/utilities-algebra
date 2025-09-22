@@ -1,6 +1,6 @@
 package waffles.utils.alg.utilities.errors;
 
-import waffles.utils.alg.linear.measure.tensor.Tensor;
+import waffles.utils.alg.lin.measure.tensor.Tensor;
 import waffles.utils.tools.primitives.Array;
 
 /**

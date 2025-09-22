@@ -1,9 +1,9 @@
 package waffles.utils.alg.utilities.matrix;
 
-import waffles.utils.alg.linear.measure.matrix.Matrix;
-import waffles.utils.alg.linear.measure.matrix.types.orthogonal.Orthogonal;
-import waffles.utils.alg.linear.measure.vector.fixed.Vector2;
-import waffles.utils.algebra.elements.linear.Matrices;
+import waffles.utils.alg.lin.measure.matrix.Matrices;
+import waffles.utils.alg.lin.measure.matrix.Matrix;
+import waffles.utils.alg.lin.measure.matrix.types.orthogonal.Orthogonal;
+import waffles.utils.alg.lin.measure.vector.fixed.Vector2;
 import waffles.utils.tools.primitives.Floats;
 
 /**

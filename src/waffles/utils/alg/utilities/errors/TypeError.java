@@ -1,6 +1,6 @@
 package waffles.utils.alg.utilities.errors;
 
-import waffles.utils.alg.linear.measure.tensor.TensorOps;
+import waffles.utils.alg.lin.measure.tensor.TensorOps;
 
 /**
  * A {@code TypeError} is thrown when a {@code Tensor}

@@ -1,8 +1,8 @@
 package waffles.utils.alg.utilities.matrix;
 
-import waffles.utils.alg.linear.measure.matrix.Matrix;
-import waffles.utils.alg.linear.measure.vector.Vector;
-import waffles.utils.algebra.elements.linear.Matrices;
+import waffles.utils.alg.lin.measure.matrix.Matrices;
+import waffles.utils.alg.lin.measure.matrix.Matrix;
+import waffles.utils.alg.lin.measure.vector.Vector;
 
 /**
  * The {@code Householder} class generates Householder reflection matrices.

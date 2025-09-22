@@ -1,6 +1,6 @@
 package waffles.utils.alg.utilities.matrix;
 
-import waffles.utils.alg.linear.measure.matrix.Matrix;
+import waffles.utils.alg.lin.measure.matrix.Matrix;
 import waffles.utils.tools.patterns.Computable;
 import waffles.utils.tools.patterns.properties.values.LazyValue;
 
