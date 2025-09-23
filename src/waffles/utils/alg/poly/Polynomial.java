@@ -1,4 +1,4 @@
-package waffles.utils.alg.poly;
+	package waffles.utils.alg.poly;
 
 import waffles.utils.alg.Abelian;
 import waffles.utils.alg.Algebraic;

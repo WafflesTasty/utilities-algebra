@@ -39,19 +39,19 @@ public abstract class Cut implements Partition, Subtraction<Cut>, Multiplication
 	/**
 	 * Defines a {@code Cut} before a real number.
 	 * 
-	 * @param val  a real value
+	 * @param v  a real value
 	 * @return  a cut below
 	 * 
 	 * 
 	 * @see Cut
 	 */
-	public static Cut Before(float val)
+	public static Cut Before(float v)
 	{
-		if(Floats.isFinite(val))
-			return new BelowValue(val);
-		if(val == Floats.NEG_INFINITY)
+		if(Floats.isFinite(v))
+			return new BelowValue(v);
+		if(v == Floats.NEG_INFINITY)
 			return BELOW_ALL;
-		if(val == Floats.POS_INFINITY)
+		if(v == Floats.POS_INFINITY)
 			return ABOVE_ALL;
 		return null;
 	}
@@ -59,19 +59,19 @@ public abstract class Cut implements Partition, Subtraction<Cut>, Multiplication
 	/**
 	 * Defines a {@code Cut} after a real number.
 	 * 
-	 * @param val  a real value
+	 * @param v  a real value
 	 * @return  a cut above
 	 * 
 	 * 
 	 * @see Cut
 	 */
-	public static Cut After(float val)
+	public static Cut After(float v)
 	{
-		if(Floats.isFinite(val))
-			return new AboveValue(val);		
-		if(val == Floats.NEG_INFINITY)
+		if(Floats.isFinite(v))
+			return new AboveValue(v);		
+		if(v == Floats.NEG_INFINITY)
 			return BELOW_ALL;
-		if(val == Floats.POS_INFINITY)
+		if(v == Floats.POS_INFINITY)
 			return ABOVE_ALL;
 		return null;
 	}

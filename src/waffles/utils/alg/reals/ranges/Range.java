@@ -3,6 +3,8 @@ package waffles.utils.alg.reals.ranges;
 import waffles.utils.alg.reals.Partition;
 import waffles.utils.alg.reals.cuts.Cut;
 import waffles.utils.alg.reals.ranges.format.RangeFormat;
+import waffles.utils.alg.utilities.groups.Multiplication;
+import waffles.utils.alg.utilities.groups.Subtraction;
 import waffles.utils.lang.tokens.Token;
 import waffles.utils.lang.tokens.format.Format;
 
@@ -15,10 +17,12 @@ import waffles.utils.lang.tokens.format.Format;
  * @version 1.1
  *
  * 
+ * @see Multiplication
+ * @see Subtraction
  * @see Partition
  * @see Token
  */
-public class Range implements Partition, Token
+public class Range implements Partition, Subtraction<Range>, Multiplication<Float>, Token
 {
 	/**
 	 * Defines a default format for a {@code Range}.
@@ -192,6 +196,24 @@ public class Range implements Partition, Token
 		return 0;
 	}
 		
+	@Override
+	public Range minus(Range r)
+	{
+		Cut c1 = Minimum().minus(r.Maximum());
+		Cut c2 = Maximum().minus(r.Minimum());
+		
+		return Ranges.create(c1, c2);
+	}
+	
+	@Override
+	public Range times(Float v)
+	{
+		Cut c1 = Minimum().times(v);
+		Cut c2 = Maximum().times(v);
+
+		return Ranges.create(c1, c2);
+	}
+	
 	String parse(float v)
 	{
 		return String.format("%1$"+ (6 + 4 + 1) +"." + 4 + "f", v);		
