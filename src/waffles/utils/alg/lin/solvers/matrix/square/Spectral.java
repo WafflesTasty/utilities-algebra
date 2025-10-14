@@ -2,7 +2,6 @@ package waffles.utils.alg.lin.solvers.matrix.square;
 
 import waffles.utils.alg.lin.measure.tensor.TensorData;
 import waffles.utils.alg.lin.measure.vector.Vector;
-import waffles.utils.alg.lin.solvers.matrix.MatrixSolver;
 import waffles.utils.tools.primitives.Floats;
 
 /**
@@ -11,8 +10,11 @@ import waffles.utils.tools.primitives.Floats;
  * @author Waffles
  * @since Jul 14, 2018
  * @version 1.0
+ * 
+ * 
+ * @see Conditioned
  */
-public interface Spectral extends MatrixSolver
+public interface Spectral extends Conditioned
 {	
 	/**
 	 * Computes a singular value {@code Vector}.
@@ -24,19 +26,6 @@ public interface Spectral extends MatrixSolver
 	 */
 	public abstract Vector SingularValues();
 
-	
-	/**
-	 * Computes a {@code Matrix} condition number.
-	 * 
-	 * @return  a condition number
-	 */
-	public default float condition()
-	{
-		TensorData data = SingularValues().Data();
-		float eMin = Floats.min(data.Array());
-		float eMax = Floats.max(data.Array());
-		return eMax / eMin;
-	}
 	
 	/**
 	 * Computes a {@code Matrix} euclidian norm.
@@ -57,5 +46,14 @@ public interface Spectral extends MatrixSolver
 	public default float frobenius()
 	{
 		return SingularValues().norm();
+	}
+	
+	@Override
+	public default float condition()
+	{
+		TensorData data = SingularValues().Data();
+		float eMin = Floats.min(data.Array());
+		float eMax = Floats.max(data.Array());
+		return eMax / eMin;
 	}
 }
