@@ -488,5 +488,4 @@ public class RRSVD implements UVFactor, LeastSquares, RankReveal, Spectral
 
 		return e;
 	}
-
 }
