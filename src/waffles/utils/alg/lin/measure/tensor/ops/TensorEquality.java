@@ -2,6 +2,7 @@ package waffles.utils.alg.lin.measure.tensor.ops;
 
 import waffles.utils.alg.lin.measure.tensor.Tensor;
 import waffles.utils.tools.patterns.operator.Operation;
+import waffles.utils.tools.primitives.Doubles;
 import waffles.utils.tools.primitives.Floats;
 
 /**
@@ -18,7 +19,7 @@ import waffles.utils.tools.primitives.Floats;
  */
 public class TensorEquality implements Operation<Boolean>
 {
-	private float err;
+	private double err;
 	private Tensor t1, t2;
 	
 	/**
@@ -31,9 +32,9 @@ public class TensorEquality implements Operation<Boolean>
 	 * 
 	 * @see Tensor
 	 */
-	public TensorEquality(Tensor t1, Tensor t2, float err)
+	public TensorEquality(Tensor t1, Tensor t2, double err)
 	{
-		this.err = Floats.abs(err);
+		this.err = Doubles.abs(err);
 		
 		this.t1 = t1;
 		this.t2 = t2;

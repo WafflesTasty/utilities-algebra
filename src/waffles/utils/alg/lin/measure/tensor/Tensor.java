@@ -188,7 +188,7 @@ public class Tensor implements Angular, Copyable<Tensor>, Inaccurate<Tensor>, In
 	}
 
 	@Override
-	public Boolean equals(Tensor t, float e)
+	public Boolean equals(Tensor t, double e)
 	{
 		if(!Tensors.isomorph(this, t))
 		{

@@ -21,5 +21,5 @@ public interface Inaccurate<O>
 	 * @param err  an error margin
 	 * @return  {@code true} if approximately equal
 	 */
-	public abstract Boolean equals(O obj, float err);
+	public abstract Boolean equals(O obj, double err);
 }

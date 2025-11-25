@@ -100,7 +100,7 @@ public interface TensorOps extends Operator<Tensor>
 	 * @see Operation
 	 * @see Tensor
 	 */
-	public default Operation<Boolean> Equality(Tensor t, float e)
+	public default Operation<Boolean> Equality(Tensor t, double e)
 	{
 		return new TensorEquality(Operable(), t, e);
 	}
