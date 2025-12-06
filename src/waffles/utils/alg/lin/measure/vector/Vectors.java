@@ -199,6 +199,24 @@ public class Vectors
 		return Tensors.omit(v, 0, k);
 	}
 	
+	/**
+	 * Creates a unit {@code Vector}.
+	 * 
+	 * @param <V>  a vector type
+	 * @param k    a unit index
+	 * @param n    a dimension
+	 * @return  a unit vector
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public static <V extends Vector> V unit(int k, int n)
+	{
+		Vector v = create(n);
+		v.set(1f, k);
+		return (V) v;
+	}
+	
 	
 	// VECTOR RANDOMIZATION.
 	
