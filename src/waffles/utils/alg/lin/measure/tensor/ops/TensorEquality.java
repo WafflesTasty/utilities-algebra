@@ -3,7 +3,6 @@ package waffles.utils.alg.lin.measure.tensor.ops;
 import waffles.utils.alg.lin.measure.tensor.Tensor;
 import waffles.utils.tools.patterns.operator.Operation;
 import waffles.utils.tools.primitives.Doubles;
-import waffles.utils.tools.primitives.Floats;
 
 /**
  * A {@code TensorEquality} operation performs {@code Tensor} comparison.
@@ -44,23 +43,12 @@ public class TensorEquality implements Operation<Boolean>
 	@Override
 	public Boolean result()
 	{
-		for(int[] crd : t1.Data().Keys())
-		{
-			float v1 = t1.get(crd);
-			float v2 = t2.get(crd);
-			
-			if(err < Floats.abs(v1 - v2))
-			{
-				return false;
-			}
-		}
-		
-		return true;
+		return t1.minus(t2).normSqr() < err;
 	}
 	
 	@Override
 	public int cost()
 	{
-		return t1.Size();
+		return 2 * t1.Size() + 1;
 	}
 }

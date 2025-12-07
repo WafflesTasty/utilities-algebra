@@ -10,7 +10,7 @@ import waffles.utils.alg.lin.measure.vector.Vector;
 import waffles.utils.alg.lin.measure.vector.Vectors;
 import waffles.utils.alg.lin.solvers.matrix.factor.UVFactor;
 import waffles.utils.alg.lin.solvers.matrix.factor.uv.UVBidiagonal;
-import waffles.utils.alg.lin.solvers.matrix.ranks.RankReveal;
+import waffles.utils.alg.lin.solvers.matrix.ranks.RRUVFactor;
 import waffles.utils.alg.lin.solvers.matrix.square.LeastSquares;
 import waffles.utils.alg.lin.solvers.matrix.square.Spectral;
 import waffles.utils.alg.utilities.Algorithmic.Iterative;
@@ -31,11 +31,10 @@ import waffles.utils.tools.primitives.Integers;
  * 
  * @see <a href="https://epubs.siam.org/doi/abs/10.1137/0911052">James Demmel & William Kahan, "Accurate singular values of bidiagonal matrices."</a>
  * @see LeastSquares
- * @see RankReveal
+ * @see RRUVFactor
  * @see Spectral
- * @see UVFactor
  */
-public class RRSVD implements UVFactor, LeastSquares, RankReveal, Spectral
+public class RRSVD implements RRUVFactor, LeastSquares, Spectral
 {
 	/**
 	 * The {@code Hints} interface defines hints for an {@code RRSVD}.
