@@ -65,7 +65,7 @@ public interface RRUVFactor extends RankReveal, UVFactor
 		for(int c = 0; c < rank(); c++)
 		{
 			// ...as the first rank columns of V.
-			for(int r = 0; r < r1; r++)
+			for(int r = 0; r < c1; r++)
 			{
 				float v = V().get(r, c);
 				b.set(v, r, c);
@@ -93,7 +93,7 @@ public interface RRUVFactor extends RankReveal, UVFactor
 		for(int c = rank(); c < c1; c++)
 		{
 			// ...as the last r - rank columns of V.
-			for(int r = 0; r < r1; r++)
+			for(int r = 0; r < c1; r++)
 			{
 				float v = V().get(r, c);
 				b.set(v, r, c - rank());
