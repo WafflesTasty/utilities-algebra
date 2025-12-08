@@ -130,9 +130,9 @@ public class Matrices
 			int r2 = set[k].Rows();
 			int c2 = set[k].Columns();
 			
-			for(int r = 0; r < r2; r++)
+			for(int c = 0; c < c2; c++)
 			{
-				for(int c = 0; c < c2; c++)
+				for(int r = 0; r < r2; r++)
 				{
 					float v = set[k].get(r, c);
 					m.set(v, r, curr);
