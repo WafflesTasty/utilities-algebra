@@ -39,7 +39,63 @@ public interface RRUVFactor extends RankReveal, UVFactor
 			// ...as the last r - rank columns of U.
 			for(int r = 0; r < r1; r++)
 			{
-				float v = U().get(r, c);
+				float u = U().get(r, c);
+				b.set(u, r, c - rank());
+			}
+		}
+		
+		return b;
+	}
+	
+	/**
+	 * Returns the cokernel of the {@code RRUVFactor}.
+	 * 
+	 * @return  a cokernel matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public default Matrix Cokernel()
+	{
+		int c1 = Hints().Matrix().Columns();
+		int r1 = Hints().Matrix().Rows();
+
+		// Create the kernel matrix...
+		Matrix b = Matrices.create(c1, rank());
+		for(int c = 0; c < rank(); c++)
+		{
+			// ...as the first rank columns of V.
+			for(int r = 0; r < r1; r++)
+			{
+				float v = V().get(r, c);
+				b.set(v, r, c);
+			}
+		}
+		
+		return b;
+	}	
+	
+	/**
+	 * Returns the kernel of the {@code RRUVFactor}.
+	 * 
+	 * @return  a kernel matrix
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public default Matrix Kernel()
+	{
+		int c1 = Hints().Matrix().Columns();
+		int r1 = Hints().Matrix().Rows();
+
+		// Create the kernel matrix...
+		Matrix b = Matrices.create(c1, c1 - rank());
+		for(int c = rank(); c < c1; c++)
+		{
+			// ...as the last r - rank columns of V.
+			for(int r = 0; r < r1; r++)
+			{
+				float v = V().get(r, c);
 				b.set(v, r, c - rank());
 			}
 		}
@@ -67,8 +123,8 @@ public interface RRUVFactor extends RankReveal, UVFactor
 			// ...as the first rank columns of U.
 			for(int r = 0; r < r1; r++)
 			{
-				float v = U().get(r, c);
-				b.set(v, r, c);
+				float u = U().get(r, c);
+				b.set(u, r, c);
 			}
 		}
 		

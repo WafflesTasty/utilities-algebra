@@ -71,7 +71,7 @@ public class RRSVD implements RRUVFactor, LeastSquares, Spectral
 		@Override
 		public default double Error()
 		{
-			return Doubles.pow(2, -16);
+			return Doubles.pow(2, -12);
 		}
 	}
 	
@@ -96,7 +96,8 @@ public class RRSVD implements RRUVFactor, LeastSquares, Spectral
 		@Override
 		public double Error()
 		{
-			return Hints().Error();
+			double e = Hints().Error();
+			return Doubles.pow(e, 6);
 		}
 	}
 			
@@ -263,21 +264,19 @@ public class RRSVD implements RRUVFactor, LeastSquares, Spectral
 	{
 		int r1 = e.Rows();
 		int c1 = e.Columns();
-
 		
+		int m = Integers.min(r1, c1);
 		Vector v = SingularValues();
-		for(int k = 0; k < Integers.min(r1, c1); k++)
+		for(int k = 0; k < m; k++)
 		{
-			rank++;
-
 			float s = Floats.abs(v.get(k));
 			if(s < Hints().Error())
 			{
-				return rank;
+				return k;
 			}
 		}
 		
-		return rank++;
+		return m;
 	}
 		
 	boolean isDiagonal()
