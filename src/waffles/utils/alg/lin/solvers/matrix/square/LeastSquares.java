@@ -2,6 +2,7 @@ package waffles.utils.alg.lin.solvers.matrix.square;
 
 import waffles.utils.alg.lin.measure.matrix.Matrices;
 import waffles.utils.alg.lin.measure.matrix.Matrix;
+import waffles.utils.alg.lin.measure.vector.Vectors;
 import waffles.utils.alg.lin.solvers.matrix.MatrixSolver;
 import waffles.utils.alg.utilities.errors.DimensionError;
 
@@ -49,7 +50,7 @@ public interface LeastSquares extends MatrixSolver
 		}
 	}
 	
-		
+	
 	/**
 	 * Computes a matrix solution in the {@code LeastSquares}.
 	 * 
@@ -62,7 +63,21 @@ public interface LeastSquares extends MatrixSolver
 	public abstract <M extends Matrix> M approx(M b);
 	
 	/**
-	 * Checks solvability of a matrix in the {@code LeastSquares}.
+	 * Computes a vector solution in the {@code LeastSquares}.
+	 * 
+	 * @param v  a right-hand side vector
+	 * @return   a matrix of unknowns
+	 * 
+	 * 
+	 * @see Matrix
+	 */
+	public default <M extends Matrix> M approx(float... v)
+	{
+		return (M) approx(Vectors.create(v));
+	}
+			
+	/**
+	 * Checks matrix solvability in the {@code LeastSquares}.
 	 * 
 	 * @param b  a right-hand side matrix
 	 * @return  {@code true} if the system can be solved
